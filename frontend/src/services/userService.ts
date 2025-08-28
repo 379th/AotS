@@ -145,7 +145,7 @@ export class UserService {
       const docRef = doc(db, this.collectionName, userId);
       await updateDoc(docRef, {
         'deck.selectedCards': selectedCards,
-        'deck.completedReadings': (await this.getUser(userId))?.deck.completedReadings + 1 || 1,
+        'deck.completedReadings': ((await this.getUser(userId))?.deck.completedReadings || 0) + 1,
         updatedAt: new Date()
       });
     } catch (error) {
