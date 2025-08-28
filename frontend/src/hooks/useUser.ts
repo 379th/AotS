@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { UserService, UserData } from '../services/userService';
+import { apiService, UserData } from '../services/apiService';
 
 export function useUser(userId?: string) {
   const [user, setUser] = useState<UserData | null>(null);
@@ -16,7 +16,7 @@ export function useUser(userId?: string) {
       try {
         setLoading(true);
         setError(null);
-        const userData = await UserService.getUser(userId);
+        const userData = await apiService.getUser(userId);
         setUser(userData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load user');
@@ -33,7 +33,7 @@ export function useUser(userId?: string) {
 
     try {
       setError(null);
-      await UserService.updateUser(userId, updates);
+      await apiService.updateUser(userId, updates);
       setUser(prev => prev ? { ...prev, ...updates, updatedAt: new Date() } : null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update user');
@@ -46,7 +46,7 @@ export function useUser(userId?: string) {
 
     try {
       setError(null);
-      await UserService.updateProgress(userId, day, completed);
+      await apiService.updateProgress(userId, day, completed);
       setUser(prev => prev ? {
         ...prev,
         progress: { ...prev.progress, [`day${day}`]: completed },
@@ -64,7 +64,7 @@ export function useUser(userId?: string) {
 
     try {
       setError(null);
-      await UserService.addJournalEntry(userId, entry);
+      await apiService.addJournalEntry(userId, entry);
       setUser(prev => prev ? {
         ...prev,
         journal: [...prev.journal, entry],
@@ -81,7 +81,7 @@ export function useUser(userId?: string) {
 
     try {
       setError(null);
-      await UserService.updateDeck(userId, selectedCards);
+      await apiService.updateDeck(userId, selectedCards);
       setUser(prev => prev ? {
         ...prev,
         deck: {

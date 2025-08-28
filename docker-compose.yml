@@ -1,37 +1,56 @@
 version: '3.8'
 
 services:
-  shadow-quest-app:
+  frontend:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./frontend
+      dockerfile: ../Dockerfile
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
-      - VITE_FIREBASE_AUTH_DOMAIN=${VITE_FIREBASE_AUTH_DOMAIN}
-      - VITE_FIREBASE_PROJECT_ID=${VITE_FIREBASE_PROJECT_ID}
-      - VITE_FIREBASE_STORAGE_BUCKET=${VITE_FIREBASE_STORAGE_BUCKET}
-      - VITE_FIREBASE_MESSAGING_SENDER_ID=${VITE_FIREBASE_MESSAGING_SENDER_ID}
-      - VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID}
+      - VITE_API_URL=${BACKEND_URL}
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - FRONTEND_URL=${FRONTEND_URL}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
 
-  # Опционально: Redis для кэширования (если понадобится)
+  # Опционально: PostgreSQL для постоянного хранения
+  # postgres:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_DB: shadow_quest
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+  # Опционально: Redis для кэширования
   # redis:
   #   image: redis:7-alpine
-  #   ports:
-  #     - "6379:6379"
   #   volumes:
   #     - redis_data:/data
   #   restart: unless-stopped
 
 # volumes:
+#   postgres_data:
 #   redis_data:

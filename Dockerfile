@@ -1,47 +1,38 @@
-# Используем официальный Node.js образ
-FROM node:18-alpine AS base
+FROM node:18-alpine
 
-# Устанавливаем зависимости только когда нужно
-FROM base AS deps
-# Проверяем https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine для понимания, почему libc6-compat
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Копируем файлы зависимостей
-COPY frontend/package.json frontend/package-lock.json* ./
+# Install system dependencies
+RUN apk add --no-cache curl
+
+# Copy root package files
+COPY package*.json ./
+
+# Install root dependencies
 RUN npm ci --only=production
 
-# Пересобираем исходный код только когда нужно
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY frontend/ .
+# Copy frontend
+COPY frontend/ ./frontend/
 
-# Собираем приложение
-RUN npm run build
+# Install and build frontend
+RUN cd frontend && npm ci --only=production && npm run build
 
-# Продакшн образ, копируем все файлы и запускаем next
-FROM base AS runner
-WORKDIR /app
+# Copy backend
+COPY backend/ ./backend/
 
-ENV NODE_ENV production
-# Создаем пользователя nextjs
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Install backend dependencies
+RUN cd backend && npm ci --only=production
 
-# Копируем собранное приложение
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/public ./public
+# Copy static files to backend
+RUN cp -r frontend/dist/* backend/public/ 2>/dev/null || mkdir -p backend/public && cp -r frontend/dist/* backend/public/
 
-# Меняем владельца файлов
-RUN chown -R nextjs:nodejs /app
+# Expose port
+EXPOSE 3001
 
-USER nextjs
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3001/health || exit 1
 
-EXPOSE 3000
-
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
-
-# Запускаем приложение
-CMD ["npm", "run", "preview"]
+# Start the backend
+WORKDIR /app/backend
+CMD ["npm", "start"]
