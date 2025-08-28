@@ -2,7 +2,16 @@ import { useState, useEffect } from 'react';
 import { IntroScreen } from './screens/IntroScreen';
 import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
-import { Day2Screen } from './screens/Day2Screen';
+import { Day2EchoScreen } from './screens/Day2EchoScreen';
+import { Day2LettersScreen } from './screens/Day2LettersScreen';
+import { Day3MirrorScreen } from './screens/Day3MirrorScreen';
+import { ArchetypeScreen } from './screens/ArchetypeScreen';
+import { Day3PartnerTaskScreen } from './screens/Day3PartnerTaskScreen';
+import { Day3ResourceScreen } from './screens/Day3ResourceScreen';
+import { Day4IntegrationScreen } from './screens/Day4IntegrationScreen';
+import { Day4TempleScreen } from './screens/Day4TempleScreen';
+import { CompletionScreen } from './screens/CompletionScreen';
+import { GuidanceScreen } from './screens/GuidanceScreen';
 import { ShadowScreen } from './screens/ShadowScreen';
 import { CreatorScreen } from './screens/CreatorScreen';
 import { QuestScreen } from './screens/QuestScreen';
@@ -54,11 +63,78 @@ function App() {
 
       case "day2":
         return (
-          <Day2Screen
+          <Day2EchoScreen
             onBack={() => setRoute("day1")}
-            onNext={() => setRoute("shadow")}
-            onOpenJournal={() => setRoute("journal")}
+            onNext={() => setRoute("day2Letters")}
           />
+        );
+
+      case "day2Letters":
+        return (
+          <Day2LettersScreen
+            onBack={() => setRoute("day2")}
+            onNext={() => setRoute("day3Mirror")}
+          />
+        );
+
+      case "day3Mirror":
+        return (
+          <Day3MirrorScreen
+            onBack={() => setRoute("day2Letters")}
+            onNext={() => setRoute("archetype")}
+          />
+        );
+
+      case "archetype":
+        return (
+          <ArchetypeScreen
+            onBack={() => setRoute("day3Mirror")}
+            onNext={() => setRoute("day3PartnerTask")}
+          />
+        );
+
+      case "day3PartnerTask":
+        return (
+          <Day3PartnerTaskScreen
+            onBack={() => setRoute("archetype")}
+            onNext={() => setRoute("day3Resource")}
+          />
+        );
+
+      case "day3Resource":
+        return (
+          <Day3ResourceScreen
+            onBack={() => setRoute("day3PartnerTask")}
+            onNext={() => setRoute("day4Integration")}
+          />
+        );
+
+      case "day4Integration":
+        return (
+          <Day4IntegrationScreen
+            onBack={() => setRoute("day3Resource")}
+            onNext={() => setRoute("day4Temple")}
+          />
+        );
+
+      case "day4Temple":
+        return (
+          <Day4TempleScreen
+            onBack={() => setRoute("day4Integration")}
+            onNext={() => setRoute("completion")}
+          />
+        );
+
+      case "completion":
+        return (
+          <CompletionScreen
+            onNext={() => setRoute("guidance")}
+          />
+        );
+
+      case "guidance":
+        return (
+          <GuidanceScreen onBackToHome={() => setRoute("intro")} />
         );
 
       case "shadow":
