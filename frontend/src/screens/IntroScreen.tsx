@@ -7,13 +7,15 @@ interface IntroScreenProps {
   onAboutCreator: () => void;
   onAboutQuest: () => void;
   onOpenFaq: () => void;
+  onOpenSettings: () => void;
 }
 
 export const IntroScreen: React.FC<IntroScreenProps> = ({
   onStart,
   onAboutCreator,
   onAboutQuest,
-  onOpenFaq
+  onOpenFaq,
+  onOpenSettings
 }) => {
   useEffect(() => {
     initTelegram();
@@ -43,14 +45,24 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
       </div>
 
       <div className="mx-auto mt-2 w-[92%]">
-                 <button 
-           onClick={() => { 
-             onOpenFaq?.(); 
-           }} 
-           className="w-full rounded-xl border border-amber-900/30 bg-white/60 px-3 py-2 text-sm font-medium text-amber-900 shadow-[0_3px_14px_rgba(0,0,0,.22)] backdrop-blur-sm active:translate-y-[1px]"
-         >
-           F.A.Q.
-         </button>
+        <div className="grid grid-cols-2 gap-2">
+          <button 
+            onClick={() => { 
+              onOpenFaq?.(); 
+            }} 
+            className="rounded-xl border border-amber-900/30 bg-white/60 px-3 py-2 text-sm font-medium text-amber-900 shadow-[0_3px_14px_rgba(0,0,0,.22)] backdrop-blur-sm active:translate-y-[1px]"
+          >
+            F.A.Q.
+          </button>
+          <button 
+            onClick={() => { 
+              onOpenSettings?.(); 
+            }} 
+            className="rounded-xl border border-amber-900/30 bg-white/60 px-3 py-2 text-sm font-medium text-amber-900 shadow-[0_3px_14px_rgba(0,0,0,.22)] backdrop-blur-sm active:translate-y-[1px]"
+          >
+            Настройки
+          </button>
+        </div>
       </div>
     </ScreenFrame>
   );

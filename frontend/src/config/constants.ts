@@ -2,12 +2,14 @@ export type RouteType =
   | "intro" 
   | "request" 
   | "day1" 
+  | "day2"
   | "shadow" 
   | "creator" 
   | "quest" 
   | "faq" 
   | "deck" 
-  | "journal";
+  | "journal"
+  | "settings";
 
 export const GRATITUDE = [
   "Спасибо, что ты здесь. Спасибо за доверие.",

@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { IntroScreen } from './screens/IntroScreen';
 import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
+import { Day2Screen } from './screens/Day2Screen';
 import { ShadowScreen } from './screens/ShadowScreen';
 import { CreatorScreen } from './screens/CreatorScreen';
 import { QuestScreen } from './screens/QuestScreen';
 import { FaqScreen } from './screens/FaqScreen';
 import { DeckScreen } from './screens/DeckScreen';
 import { JournalScreen } from './screens/JournalScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
 import { RouteType } from './config/constants';
 import { initTelegram } from './utils/telegram';
 
@@ -27,6 +29,7 @@ function App() {
             onAboutCreator={() => setRoute("creator")}
             onAboutQuest={() => setRoute("quest")}
             onOpenFaq={() => setRoute("faq")}
+            onOpenSettings={() => setRoute("settings")}
           />
         );
       
@@ -45,7 +48,16 @@ function App() {
         return (
           <Day1Screen
             onBackToRequest={() => setRoute("request")}
-            onAccept={() => setRoute("shadow")}
+            onAccept={() => setRoute("day2")}
+          />
+        );
+
+      case "day2":
+        return (
+          <Day2Screen
+            onBack={() => setRoute("day1")}
+            onNext={() => setRoute("shadow")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -71,6 +83,9 @@ function App() {
 
       case "journal":
         return <JournalScreen onBack={() => setRoute("request")} />;
+
+      case "settings":
+        return <SettingsScreen onBack={() => setRoute("intro")} />;
 
       default:
         return (
