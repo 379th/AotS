@@ -1,6 +1,16 @@
-# Shadow Quest - Принятие Тени
+# 🎭 Shadow Quest - Telegram Mini App
 
-Telegram Mini App для психологического квеста "Принятие Тени" - интерактивного путешествия по работе с архетипами и внутренними конфликтами.
+> **Интерактивный психологический квест "Принятие тени" для Telegram**
+
+[![Telegram Mini App](https://img.shields.io/badge/Telegram-Mini%20App-blue.svg)](https://core.telegram.org/bots/webapps)
+[![React](https://img.shields.io/badge/React-18.0+-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.0+-yellow.svg)](https://vitejs.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-10.0+-orange.svg)](https://firebase.google.com/)
+
+## 🌟 Обзор проекта
+
+**Shadow Quest** - это интерактивный Telegram Mini App, представляющий собой психологический квест "Принятие тени". Приложение помогает пользователям исследовать различные аспекты своей личности через систему карт и персонажей-архетипов, основанную на работах Карла Юнга.
 
 ## 🎭 О проекте
 

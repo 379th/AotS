@@ -14,6 +14,9 @@
   "dependencies": {
     "@telegram-apps/sdk-react": "^3.3.6",
     "@telegram-apps/telegram-ui": "^2.1.9",
+    "@tonconnect/ui-react": "^2.0.0",
+    "eruda": "^3.4.3",
+    "firebase": "^10.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",

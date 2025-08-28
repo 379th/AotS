@@ -1,3 +1,5 @@
+// Simple Telegram WebApp API wrapper
+
 declare global {
   interface Window {
     Telegram?: {
@@ -14,16 +16,22 @@ declare global {
   }
 }
 
-export function initTelegram() {
-  if (typeof window !== "undefined" && window.Telegram?.WebApp) {
-    try {
-      window.Telegram.WebApp?.ready?.();
-      window.Telegram.WebApp?.expand?.();
-      window.Telegram.WebApp?.setHeaderColor?.('#120a22');
-      window.Telegram.WebApp?.setBackgroundColor?.('#120a22');
-    } catch (error) {
-      console.log('Telegram WebApp not available:', error);
+export async function initTelegram() {
+
+  try {
+    // Legacy WebApp API fallback
+    if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+      try {
+        window.Telegram.WebApp?.ready?.();
+        window.Telegram.WebApp?.expand?.();
+        window.Telegram.WebApp?.setHeaderColor?.('#120a22');
+        window.Telegram.WebApp?.setBackgroundColor?.('#120a22');
+      } catch (error) {
+        console.log('Legacy Telegram WebApp not available:', error);
+      }
     }
+  } catch (error) {
+    console.error('Failed to initialize Telegram SDK:', error);
   }
 }
 
@@ -39,5 +47,25 @@ export function openTelegramLink(url: string) {
   } else {
     // Fallback for non-Telegram environment
     window.open(url, '_blank');
+  }
+}
+
+export function sendTelegramData(data: string) {
+  if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+    try {
+      window.Telegram.WebApp?.sendData?.(data);
+    } catch (error) {
+      console.log('Failed to send data to Telegram:', error);
+    }
+  }
+}
+
+export function closeTelegramApp() {
+  if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+    try {
+      window.Telegram.WebApp?.close?.();
+    } catch (error) {
+      console.log('Failed to close Telegram app:', error);
+    }
   }
 }
