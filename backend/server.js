@@ -23,16 +23,7 @@ app.use(limiter);
 
 app.use(express.json());
 
-// Serve static files from frontend build
-app.use(express.static('public'));
 
-// Serve React app for all non-API routes
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api/')) {
-    return res.status(404).json({ error: 'API route not found' });
-  }
-  res.sendFile('index.html', { root: 'public' });
-});
 
 // PostgreSQL connection
 const { Pool } = require('pg');
@@ -125,116 +116,166 @@ app.get('/api/users/:userId', async (req, res) => {
   }
 });
 
-app.put('/api/users/:userId', (req, res) => {
+app.put('/api/users/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
     const updates = req.body;
     
-    const user = users.get(userId);
-    if (!user) {
+    const result = await pool.query(`
+      UPDATE users 
+      SET 
+        current_day = COALESCE($1, current_day),
+        current_step = COALESCE($2, current_step),
+        progress = COALESCE($3, progress),
+        journal = COALESCE($4, journal),
+        deck = COALESCE($5, deck),
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $6
+      RETURNING *
+    `, [
+      updates.currentDay,
+      updates.currentStep,
+      updates.progress ? JSON.stringify(updates.progress) : null,
+      updates.journal ? JSON.stringify(updates.journal) : null,
+      updates.deck ? JSON.stringify(updates.deck) : null,
+      userId
+    ]);
+    
+    if (result.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    const updatedUser = { ...user, ...updates, updatedAt: new Date() };
-    users.set(userId, updatedUser);
-    
-    res.json(updatedUser);
+    res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error updating user:', error);
     res.status(500).json({ error: 'Failed to update user' });
   }
 });
 
 // Progress management
-app.post('/api/users/:userId/progress', (req, res) => {
+app.post('/api/users/:userId/progress', async (req, res) => {
   try {
     const { userId } = req.params;
     const { day, completed } = req.body;
     
-    const user = users.get(userId);
-    if (!user) {
+    // Get current user data
+    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+    if (userResult.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    user.progress[`day${day}`] = completed;
-    user.currentDay = Math.max(day + 1, 1);
-    user.updatedAt = new Date();
+    const user = userResult.rows[0];
+    const progress = user.progress || {};
+    progress[`day${day}`] = completed;
     
-    users.set(userId, user);
-    res.json(user);
+    const result = await pool.query(`
+      UPDATE users 
+      SET 
+        progress = $1,
+        current_day = $2,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $3
+      RETURNING *
+    `, [JSON.stringify(progress), Math.max(day + 1, 1), userId]);
+    
+    res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error updating progress:', error);
     res.status(500).json({ error: 'Failed to update progress' });
   }
 });
 
 // Journal management
-app.post('/api/users/:userId/journal', (req, res) => {
+app.post('/api/users/:userId/journal', async (req, res) => {
   try {
     const { userId } = req.params;
     const { entry } = req.body;
     
-    const user = users.get(userId);
-    if (!user) {
+    // Get current user data
+    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+    if (userResult.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    user.journal.push(entry);
-    user.updatedAt = new Date();
+    const user = userResult.rows[0];
+    const journal = user.journal || [];
+    journal.push(entry);
     
-    users.set(userId, user);
-    res.json(user);
+    const result = await pool.query(`
+      UPDATE users 
+      SET 
+        journal = $1,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $2
+      RETURNING *
+    `, [JSON.stringify(journal), userId]);
+    
+    res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error adding journal entry:', error);
     res.status(500).json({ error: 'Failed to add journal entry' });
   }
 });
 
 // Deck management
-app.post('/api/users/:userId/deck', (req, res) => {
+app.post('/api/users/:userId/deck', async (req, res) => {
   try {
     const { userId } = req.params;
     const { selectedCards } = req.body;
     
-    const user = users.get(userId);
-    if (!user) {
+    // Get current user data
+    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+    if (userResult.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    user.deck.selectedCards = selectedCards;
-    user.deck.completedReadings += 1;
-    user.updatedAt = new Date();
+    const user = userResult.rows[0];
+    const deck = user.deck || { selectedCards: [], completedReadings: 0 };
+    deck.selectedCards = selectedCards;
+    deck.completedReadings += 1;
     
-    users.set(userId, user);
-    res.json(user);
+    const result = await pool.query(`
+      UPDATE users 
+      SET 
+        deck = $1,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $2
+      RETURNING *
+    `, [JSON.stringify(deck), userId]);
+    
+    res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error updating deck:', error);
     res.status(500).json({ error: 'Failed to update deck' });
   }
 });
 
 // Session management
-app.post('/api/sessions', (req, res) => {
+app.post('/api/sessions', async (req, res) => {
   try {
     const { telegramId } = req.body;
     const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
     
-    sessions.set(sessionId, {
-      id: sessionId,
-      telegramId,
-      createdAt: new Date(),
-      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
-    });
+    const result = await pool.query(`
+      INSERT INTO sessions (id, telegram_id, expires_at)
+      VALUES ($1, $2, $3)
+      RETURNING *
+    `, [sessionId, telegramId, expiresAt]);
     
     res.json({ sessionId });
   } catch (error) {
+    console.error('Error creating session:', error);
     res.status(500).json({ error: 'Failed to create session' });
   }
 });
 
 // Cleanup old sessions (every hour)
-setInterval(() => {
-  const now = new Date();
-  for (const [sessionId, session] of sessions.entries()) {
-    if (session.expiresAt < now) {
-      sessions.delete(sessionId);
-    }
+setInterval(async () => {
+  try {
+    await pool.query('DELETE FROM sessions WHERE expires_at < NOW()');
+  } catch (error) {
+    console.error('Error cleaning up sessions:', error);
   }
 }, 60 * 60 * 1000);
 
@@ -244,9 +285,15 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+// Serve static files from frontend build
+app.use(express.static('public'));
+
+// Serve React app for all non-API routes
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API route not found' });
+  }
+  res.sendFile('index.html', { root: 'public' });
 });
 
 app.listen(PORT, () => {
