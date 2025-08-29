@@ -72,3 +72,33 @@ body {
   font-family: 'UnifrakturMaguntia', system-ui, ui-serif, Georgia, serif;
 }
 
+/* Скрытие элементов Telegram WebApp */
+.telegram-header {
+  display: none !important;
+}
+
+/* Скрытие заголовка Telegram WebApp */
+[data-testid="web-app-header"],
+[class*="header"],
+[class*="Header"] {
+  display: none !important;
+}
+
+/* Скрытие кнопок Telegram WebApp */
+[data-testid="web-app-button"],
+[class*="button"],
+[class*="Button"] {
+  display: none !important;
+}
+
+/* Дополнительные стили для скрытия элементов */
+.telegram-webapp-header,
+.telegram-webapp-buttons,
+.telegram-webapp-controls {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+

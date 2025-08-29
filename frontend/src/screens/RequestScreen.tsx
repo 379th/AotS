@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { ScreenFrame, TitleBar, RoundButton } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
-import { initTelegram } from '../utils/telegram';
+import { initTelegram, closeTelegramApp } from '../utils/telegram';
 import { BookOpen, Swords, Layers, NotebookPen, LogOut } from 'lucide-react';
 
 interface RequestScreenProps {
@@ -72,7 +72,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
               <RoundButton label="Квест" icon={Swords} tone="teal" onClick={onGoDay1} />
               <RoundButton label="Колода" icon={Layers} tone="sky" onClick={onOpenDeck} />
               <RoundButton label="Дневник" icon={NotebookPen} tone="slate" onClick={onOpenJournal} />
-              <RoundButton label="Выход" icon={LogOut} tone="rose" onClick={() => { try { window?.Telegram?.WebApp?.close?.(); } catch {} }} />
+              <RoundButton label="Выход" icon={LogOut} tone="rose" onClick={closeTelegramApp} />
             </div>
           </div>
         </div>

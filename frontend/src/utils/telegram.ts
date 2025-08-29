@@ -11,6 +11,18 @@ declare global {
         close?: () => void;
         sendData?: (data: string) => void;
         openTelegramLink?: (url: string) => void;
+        MainButton?: {
+          show?: () => void;
+          hide?: () => void;
+          setText?: (text: string) => void;
+        };
+        BackButton?: {
+          show?: () => void;
+          hide?: () => void;
+        };
+        HapticFeedback?: {
+          impactOccurred?: (style: string) => void;
+        };
       };
     };
   }
@@ -24,8 +36,24 @@ export async function initTelegram() {
       try {
         window.Telegram.WebApp?.ready?.();
         window.Telegram.WebApp?.expand?.();
+        
+        // Скрываем все элементы интерфейса Telegram
+        try { 
+          window.Telegram.WebApp?.MainButton?.hide?.(); 
+        } catch {}
+        
+        try { 
+          window.Telegram.WebApp?.BackButton?.hide?.(); 
+        } catch {}
+        
         // В версиях < 7.0 не поддерживаются смена цветов — вызываем только когда доступно и нет предупреждений
         try { window.Telegram.WebApp?.setBackgroundColor?.('#120a22'); } catch {}
+        
+        // Пытаемся установить прозрачный заголовок (если поддерживается)
+        try { 
+          window.Telegram.WebApp?.setHeaderColor?.('transparent'); 
+        } catch {}
+        
       } catch (error) {
         console.log('Legacy Telegram WebApp not available:', error);
       }
