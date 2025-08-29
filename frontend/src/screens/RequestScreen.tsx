@@ -30,9 +30,9 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col justify-end min-h-screen pb-40">
         {/* Основной контентный блок */}
-        <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
+        <div className="mx-auto mb-4 w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
           <div>
             <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
             <p className="mt-2 text-[15px] leading-relaxed opacity-95">
@@ -46,7 +46,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
         </div>
 
         {/* Поле ввода запроса */}
-        <div className="mx-auto mt-6 w-[92%] rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+        <div className="mx-auto mb-4 w-[92%] rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
           <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
           <input
             value={intent}
@@ -57,7 +57,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
         </div>
 
         {/* Кнопки навигации */}
-        <div className="mx-auto mt-auto mb-20 w-[92%] flex items-center justify-between gap-2">
+        <div className="mx-auto mb-4 w-[92%] flex items-center justify-between gap-2">
           <button 
             onClick={onBack} 
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
