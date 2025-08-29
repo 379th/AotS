@@ -30,46 +30,52 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      <div className="flex flex-col justify-end min-h-screen pb-40">
-        {/* Основной контентный блок */}
-        <div className="mx-auto mb-4 w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
-          <div>
-            <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
-            <p className="mt-2 text-[15px] leading-relaxed opacity-95">
-              Представляют собой непризнанные импульсы и желания, которые, подавляешь из опасения быть осуждённой(ым) или непринятой(ым).
-            </p>
-            <h3 className="mt-5 text-xl font-bold">Внутренние конфликты</h3>
-            <p className="mt-2 text-[15px] leading-relaxed opacity-95">
-              Непринятие себя такой(им), какая(ой) есть на самом деле, приводит к внутренним конфликтам, которые могут проявляться в негативных чувствах и поведении.
-            </p>
+      <div className="flex flex-col justify-between min-h-screen pb-40">
+        {/* Верхняя часть - пустое пространство */}
+        <div className="flex-1"></div>
+        
+        {/* Нижняя часть - контент */}
+        <div className="space-y-4">
+          {/* Основной контентный блок */}
+          <div className="mx-auto w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
+            <div>
+              <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
+              <p className="mt-2 text-[15px] leading-relaxed opacity-95">
+                Представляют собой непризнанные импульсы и желания, которые, подавляешь из опасения быть осуждённой(ым) или непринятой(ым).
+              </p>
+              <h3 className="mt-5 text-xl font-bold">Внутренние конфликты</h3>
+              <p className="mt-2 text-[15px] leading-relaxed opacity-95">
+                Непринятие себя такой(им), какая(ой) есть на самом деле, приводит к внутренним конфликтам, которые могут проявляться в негативных чувствах и поведении.
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Поле ввода запроса */}
-        <div className="mx-auto mb-4 w-[92%] rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-          <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
-          <input
-            value={intent}
-            onChange={(e) => setIntent(e.target.value.slice(0, 120))}
-            placeholder="Одна короткая фраза о том, что хочешь изменить"
-            className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
-          />
-        </div>
+          {/* Поле ввода запроса */}
+          <div className="mx-auto w-[92%] rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+            <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
+            <input
+              value={intent}
+              onChange={(e) => setIntent(e.target.value.slice(0, 120))}
+              placeholder="Одна короткая фраза о том, что хочешь изменить"
+              className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
+            />
+          </div>
 
-        {/* Кнопки навигации */}
-        <div className="mx-auto mb-4 w-[92%] flex items-center justify-between gap-2">
-          <button 
-            onClick={onBack} 
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
-          >
-            <ArrowLeft className="h-4 w-4" /> Назад
-          </button>
-          <button 
-            onClick={onGoDay1} 
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-3 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105"
-          >
-            Продолжить
-          </button>
+          {/* Кнопки навигации */}
+          <div className="mx-auto w-[92%] flex items-center justify-between gap-2">
+            <button 
+              onClick={onBack} 
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
+            >
+              <ArrowLeft className="h-4 w-4" /> Назад
+            </button>
+            <button 
+              onClick={onGoDay1} 
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-3 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105"
+            >
+              Продолжить
+            </button>
+          </div>
         </div>
       </div>
 
