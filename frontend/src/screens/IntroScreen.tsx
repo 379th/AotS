@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { ScreenFrame } from '../components/ui';
 import { initTelegram } from '../utils/telegram';
 
 interface IntroScreenProps {
@@ -23,46 +23,25 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="Принятие тени" />
-      
-      <div className="mx-auto mt-3 w-[92%] h-[73svh] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-2">
-        <div className="relative h-full overflow-hidden rounded-xl border border-teal-700/30 bg-[radial-gradient(circle_at_center,rgba(78,120,120,.35),transparent_70%)]">
-          <div className="flex h-full items-center justify-center">
-            <div className="text-center text-amber-200/70">
-              <div className="text-sm">Добро пожаловать в квест "Принятие тени"</div>
-              <div className="mt-1 text-xs">Готовы начать путешествие?</div>
-            </div>
-          </div>
-        </div>
+      {/* Верхняя плашка */}
+      <div className="mx-auto mt-3 w-[92%]">
+        <img src="/Sorce/AotS_begine.png" alt="AotS" className="w-full" />
       </div>
 
-      <div className="mx-auto mt-2 w-[92%]">
-        <div className="grid grid-cols-3 gap-2">
-          <Pill onClick={onAboutCreator}>О создателе</Pill>
-          <Pill onClick={onStart}>Начало</Pill>
-          <Pill onClick={onAboutQuest}>О квесте</Pill>
-        </div>
+      {/* Центральная картинка */}
+      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 overflow-hidden">
+        <img src="/Sorce/Screen_Start.png" alt="Start" className="w-full h-[64svh] object-cover" />
       </div>
 
-      <div className="mx-auto mt-2 w-[92%]">
-        <div className="grid grid-cols-2 gap-2">
-          <button 
-            onClick={() => { 
-              onOpenFaq?.(); 
-            }} 
-            className="rounded-xl border border-amber-900/30 bg-white/60 px-3 py-2 text-sm font-medium text-amber-900 shadow-[0_3px_14px_rgba(0,0,0,.22)] backdrop-blur-sm active:translate-y-[1px]"
-          >
-            F.A.Q.
-          </button>
-          <button 
-            onClick={() => { 
-              onOpenSettings?.(); 
-            }} 
-            className="rounded-xl border border-amber-900/30 bg-white/60 px-3 py-2 text-sm font-medium text-amber-900 shadow-[0_3px_14px_rgba(0,0,0,.22)] backdrop-blur-sm active:translate-y-[1px]"
-          >
-            Настройки
-          </button>
-        </div>
+      {/* Кнопки в 2 ряда */}
+      <div className="mx-auto mt-3 w-[92%] grid grid-cols-3 gap-2">
+        <button onClick={onAboutCreator}><img src="/Sorce/Creator.png" alt="О создателе" className="w-full" /></button>
+        <button onClick={onStart}><img src="/Sorce/Begine.png" alt="Начало" className="w-full" /></button>
+        <button onClick={onAboutQuest}><img src="/Sorce/Quest_boton.png" alt="О квесте" className="w-full" /></button>
+      </div>
+      <div className="mx-auto mt-2 w-[92%] grid grid-cols-2 gap-2">
+        <button onClick={onOpenFaq}><img src="/Sorce/F_A_Q.png" alt="F.A.Q." className="w-full" /></button>
+        <button onClick={onOpenSettings}><img src="/Sorce/Setings.png" alt="Настройки" className="w-full" /></button>
       </div>
     </ScreenFrame>
   );

@@ -30,24 +30,24 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]" style={{ marginBottom: 'calc(env(safe-area-inset-bottom) + 320px)' }}>
-        <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
-        <p className="mt-2 text-[15px] leading-relaxed opacity-95">
-          Представляют собой непризнанные импульсы и желания, которые, подавляешь из опасения быть осуждённой(ым) или непринятой(ым).
-        </p>
-        <h3 className="mt-5 text-xl font-bold">Внутренние конфликты</h3>
-        <p className="mt-2 text-[15px] leading-relaxed opacity-95">
-          Непринятие себя такой(им), какая(ой) есть на самом деле, приводит к внутренним конфликтам, которые могут проявляться в негативных чувствах и поведении.
-        </p>
-      </div>
-
-      <div className="absolute inset-x-0" style={{ bottom: 'calc(env(safe-area-inset-bottom) + 210px)' }}>
-        <div className="mx-auto w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
-          <label className="mb-1 block text-xs opacity-80">Запрос</label>
+      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)] flex flex-col" style={{ minHeight: 'calc(100vh - 300px)' }}>
+        <div>
+          <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
+          <p className="mt-2 text-[15px] leading-relaxed opacity-95">
+            Представляют собой непризнанные импульсы и желания, которые, подавляешь из опасения быть осуждённой(ым) или непринятой(ым).
+          </p>
+          <h3 className="mt-5 text-xl font-bold">Внутренние конфликты</h3>
+          <p className="mt-2 text-[15px] leading-relaxed opacity-95">
+            Непринятие себя такой(им), какая(ой) есть на самом деле, приводит к внутренним конфликтам, которые могут проявляться в негативных чувствах и поведении.
+          </p>
+        </div>
+        
+        <div className="mt-auto rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+          <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
           <input
             value={intent}
             onChange={(e) => setIntent(e.target.value.slice(0, 120))}
-            placeholder="Одна короткая фраза"
+            placeholder="Одна короткая фраза о том, что хочешь изменить"
             className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
           />
         </div>

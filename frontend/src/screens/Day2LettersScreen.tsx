@@ -15,8 +15,8 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({ onBack, on
     <ScreenFrame>
       <TitleBar text="День 2 — Письма" />
 
-      <div className="mx-auto mt-3 w-[92%] h-[73svh] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-3">
-        <div className="h-full overflow-y-auto rounded-xl border border-amber-900/30 bg-white/5 p-3 space-y-4">
+      <div className="mx-auto mt-3 w-[92%] h-[73svh] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-3">
+        <div className="h-full overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-3 space-y-4">
           <div>
             <div className="text-xs text-amber-200/80 mb-2">Напиши письмо от лица Тени.</div>
             <textarea

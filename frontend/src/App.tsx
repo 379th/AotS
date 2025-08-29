@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { IntroScreen } from './screens/IntroScreen';
 import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
+import { ShadowImageScreen } from './screens/ShadowImageScreen';
+import { Day1QuestionsScreen } from './screens/Day1QuestionsScreen';
 import { Day2EchoScreen } from './screens/Day2EchoScreen';
 import { Day2LettersScreen } from './screens/Day2LettersScreen';
 import { Day3MirrorScreen } from './screens/Day3MirrorScreen';
@@ -57,7 +59,23 @@ function App() {
         return (
           <Day1Screen
             onBackToRequest={() => setRoute("request")}
-            onAccept={() => setRoute("day2")}
+            onAccept={() => setRoute("shadowImage")}
+          />
+        );
+
+      case "shadowImage":
+        return (
+          <ShadowImageScreen
+            onBackToDay1={() => setRoute("day1")}
+            onContinue={() => setRoute("day1Questions")}
+          />
+        );
+
+      case "day1Questions":
+        return (
+          <Day1QuestionsScreen
+            onBack={() => setRoute("day1")}
+            onNext={() => setRoute("day2")}
           />
         );
 
@@ -165,7 +183,7 @@ function App() {
 
       default:
         return (
-          <div className="min-h-[100svh] bg-[#120a22] flex items-center justify-center">
+          <div className="min-h-[100svh] flex items-center justify-center">
             <div className="text-amber-50 text-center">
               <h1 className="text-2xl font-bold mb-4">Экран "{route}" в разработке</h1>
               <button 
@@ -181,7 +199,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-[100svh] bg-[#120a22]">
+    <div className="min-h-[100svh]">
       {renderScreen()}
     </div>
   );
