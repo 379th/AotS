@@ -72,7 +72,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       </div>
 
       {/* Нижняя панель навигации */}
-      <nav className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center" style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 8px)' }}>
+      <nav className="fixed inset-x-0 bottom-0 z-[9999] flex items-center justify-center" style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 8px)' }}>
         <div className="mx-auto mb-2 w-full max-w-[520px]">
           <div className="mx-3 rounded-2xl border border-amber-900/40 bg-button-gradient p-3 shadow-[0_-8px_30px_rgba(0,0,0,.35)]">
             <div className="flex items-center justify-between">
@@ -87,7 +87,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       </nav>
 
       {/* Отступ для нижней панели */}
-      <div className="h-32" />
+      <div className="h-40" />
     </ScreenFrame>
   );
 };

@@ -86,8 +86,8 @@ body {
 
 /* Скрытие кнопок Telegram WebApp */
 [data-testid="web-app-button"],
-[class*="button"],
-[class*="Button"] {
+[class*="telegram-button"],
+[class*="TelegramButton"] {
   display: none !important;
 }
 
