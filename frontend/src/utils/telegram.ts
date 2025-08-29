@@ -25,7 +25,6 @@ export async function initTelegram() {
         window.Telegram.WebApp?.ready?.();
         window.Telegram.WebApp?.expand?.();
         // В версиях < 7.0 не поддерживаются смена цветов — вызываем только когда доступно и нет предупреждений
-        try { window.Telegram.WebApp?.setHeaderColor?.('#120a22'); } catch {}
         try { window.Telegram.WebApp?.setBackgroundColor?.('#120a22'); } catch {}
       } catch (error) {
         console.log('Legacy Telegram WebApp not available:', error);
