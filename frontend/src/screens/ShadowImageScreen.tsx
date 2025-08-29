@@ -42,10 +42,10 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
 
       <div className="mx-auto mt-2 mb-2 w-[92%] flex items-center justify-between gap-2">
         <button onClick={onBackToDay1}
-          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-[#241b2f] px-3 py-2 font-semibold text-amber-200 shadow-[0_6px_20px_rgba(0,0,0,.25)] active:translate-y-[1px] flex-1">
+          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-[#241b2f] px-3 py-2 font-semibold text-amber-200 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105 flex-1">
           <ArrowLeft className="h-4 w-4" /> Назад
         </button>
-        <button onClick={onContinue} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-2 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] active:translate-y-[1px] flex-1">
+        <button onClick={onContinue} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-2 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105 flex-1">
           Продолжить
         </button>
       </div>

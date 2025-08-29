@@ -59,13 +59,13 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       <div className="mx-auto mt-6 w-[92%] flex items-center justify-between gap-2">
         <button 
           onClick={onBack} 
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm active:translate-y-[1px] font-semibold"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
         >
           <ArrowLeft className="h-4 w-4" /> Назад
         </button>
         <button 
           onClick={onGoDay1} 
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-3 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] active:translate-y-[1px]"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-3 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105"
         >
           Продолжить
         </button>

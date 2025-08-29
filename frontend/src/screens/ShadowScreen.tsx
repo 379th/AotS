@@ -41,10 +41,10 @@ export const ShadowScreen: React.FC<ShadowScreenProps> = ({
       </div>
 
       <div className="mx-auto mt-2 mb-2 w-[92%] flex items-center justify-between gap-2">
-        <button onClick={onBackToDay1} className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm active:translate-y-[1px]">
+        <button onClick={onBackToDay1} className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105">
           <ArrowLeft className="h-4 w-4" /> Назад
         </button>
-        <button onClick={onContinue} className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-2 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] active:translate-y-[1px]">
+        <button onClick={onContinue} className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-2 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105">
           Продолжить
         </button>
       </div>
