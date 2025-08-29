@@ -42,17 +42,17 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
             Непринятие себя такой(им), какая(ой) есть на самом деле, приводит к внутренним конфликтам, которые могут проявляться в негативных чувствах и поведении.
           </p>
         </div>
-        
-        {/* Поле ввода запроса */}
-        <div className="mt-6 rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-          <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
-          <input
-            value={intent}
-            onChange={(e) => setIntent(e.target.value.slice(0, 120))}
-            placeholder="Одна короткая фраза о том, что хочешь изменить"
-            className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
-          />
-        </div>
+      </div>
+
+      {/* Поле ввода запроса */}
+      <div className="mx-auto mt-6 w-[92%] rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+        <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
+        <input
+          value={intent}
+          onChange={(e) => setIntent(e.target.value.slice(0, 120))}
+          placeholder="Одна короткая фраза о том, что хочешь изменить"
+          className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
+        />
       </div>
 
       {/* Кнопки навигации */}
