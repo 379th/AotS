@@ -82,7 +82,7 @@ function App() {
       case "day1Questions":
         return (
           <Day1QuestionsScreen
-            onBack={() => setRoute("day1")}
+            onBack={() => setRoute("shadowImage")}
             onNext={() => setRoute("day2")}
             onAboutQuest={() => setRoute("quest")}
             onGoDay1={() => setRoute("day1")}
