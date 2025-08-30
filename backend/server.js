@@ -23,18 +23,23 @@ app.use(limiter);
 
 app.use(express.json());
 
-
-
-// PostgreSQL connection
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
+// PostgreSQL connection (only if DATABASE_URL is provided)
+let pool = null;
+if (process.env.DATABASE_URL) {
+  const { Pool } = require('pg');
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  });
+}
 
 // Initialize database tables
 async function initDatabase() {
+  if (!pool) {
+    console.log('⚠️  No DATABASE_URL provided, skipping database initialization');
+    return;
+  }
+
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -73,11 +78,19 @@ initDatabase();
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    database: pool ? 'connected' : 'not configured'
+  });
 });
 
 // User management
 app.post('/api/users', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { telegramId, username, firstName, lastName } = req.body;
     const userId = telegramId || `user_${Date.now()}`;
@@ -101,6 +114,10 @@ app.post('/api/users', async (req, res) => {
 });
 
 app.get('/api/users/:userId', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { userId } = req.params;
     const result = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
@@ -117,6 +134,10 @@ app.get('/api/users/:userId', async (req, res) => {
 });
 
 app.put('/api/users/:userId', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { userId } = req.params;
     const updates = req.body;
@@ -154,6 +175,10 @@ app.put('/api/users/:userId', async (req, res) => {
 
 // Progress management
 app.post('/api/users/:userId/progress', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { userId } = req.params;
     const { day, completed } = req.body;
@@ -187,6 +212,10 @@ app.post('/api/users/:userId/progress', async (req, res) => {
 
 // Journal management
 app.post('/api/users/:userId/journal', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { userId } = req.params;
     const { entry } = req.body;
@@ -219,6 +248,10 @@ app.post('/api/users/:userId/journal', async (req, res) => {
 
 // Deck management
 app.post('/api/users/:userId/deck', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { userId } = req.params;
     const { selectedCards } = req.body;
@@ -252,6 +285,10 @@ app.post('/api/users/:userId/deck', async (req, res) => {
 
 // Session management
 app.post('/api/sessions', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
   try {
     const { telegramId } = req.body;
     const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -271,13 +308,15 @@ app.post('/api/sessions', async (req, res) => {
 });
 
 // Cleanup old sessions (every hour)
-setInterval(async () => {
-  try {
-    await pool.query('DELETE FROM sessions WHERE expires_at < NOW()');
-  } catch (error) {
-    console.error('Error cleaning up sessions:', error);
-  }
-}, 60 * 60 * 1000);
+if (pool) {
+  setInterval(async () => {
+    try {
+      await pool.query('DELETE FROM sessions WHERE expires_at < NOW()');
+    } catch (error) {
+      console.error('Error cleaning up sessions:', error);
+    }
+  }, 60 * 60 * 1000);
+}
 
 // Error handling
 app.use((err, req, res, next) => {
@@ -299,4 +338,7 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Shadow Quest Backend running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
+  if (!pool) {
+    console.log('⚠️  Running without database - API endpoints will return 503');
+  }
 });
