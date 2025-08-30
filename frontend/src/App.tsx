@@ -131,18 +131,6 @@ function App() {
         return (
           <ArchetypeScreen
             onBack={() => setRoute("day3Mirror")}
-            onNext={() => setRoute("day3PartnerTask")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
-          />
-        );
-
-      case "day3PartnerTask":
-        return (
-          <Day3PartnerTaskScreen
-            onBack={() => setRoute("archetype")}
             onNext={() => setRoute("day3Resource")}
             onAboutQuest={() => setRoute("quest")}
             onGoDay1={() => setRoute("day1")}
@@ -154,7 +142,19 @@ function App() {
       case "day3Resource":
         return (
           <Day3ResourceScreen
-            onBack={() => setRoute("day3PartnerTask")}
+            onBack={() => setRoute("archetype")}
+            onNext={() => setRoute("day3PartnerTask")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
+          />
+        );
+
+      case "day3PartnerTask":
+        return (
+          <Day3PartnerTaskScreen
+            onBack={() => setRoute("day3Resource")}
             onNext={() => setRoute("day4Integration")}
             onAboutQuest={() => setRoute("quest")}
             onGoDay1={() => setRoute("day1")}
