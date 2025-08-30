@@ -31,17 +31,17 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       <TitleBar text="Запрос" />
 
       {/* Зафиксированный слой с контентом под плашкой Запрос */}
-      <div className="relative z-10 px-4 pb-4">
-        <div className="space-y-4">
-          {/* Основной контентный блок */}
-          <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
+      <div className="relative z-10 px-4 pb-4 mt-8">
+        <div className="space-y-6">
+          {/* Основной контентный блок - расширен и отсоединен */}
+          <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
             <div>
               <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
-              <p className="mt-2 text-[15px] leading-relaxed opacity-95">
+              <p className="mt-3 text-[15px] leading-relaxed opacity-95">
                 Представляют собой непризнанные импульсы и желания, которые, подавляешь из опасения быть осуждённой(ым) или непринятой(ым).
               </p>
-              <h3 className="mt-5 text-xl font-bold">Внутренние конфликты</h3>
-              <p className="mt-2 text-[15px] leading-relaxed opacity-95">
+              <h3 className="mt-6 text-xl font-bold">Внутренние конфликты</h3>
+              <p className="mt-3 text-[15px] leading-relaxed opacity-95">
                 Непринятие себя такой(им), какая(ой) есть на самом деле, приводит к внутренним конфликтам, которые могут проявляться в негативных чувствах и поведении.
               </p>
             </div>
