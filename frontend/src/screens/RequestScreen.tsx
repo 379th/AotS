@@ -55,6 +55,11 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                         <input
                           value={intent}
                           onChange={(e) => setIntent(e.target.value.slice(0, 120))}
+                          onFocus={(e) => {
+                            if (e.target.value === intent) {
+                              setIntent('');
+                            }
+                          }}
                           placeholder="Одна точная фраза"
                           className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
                         />
