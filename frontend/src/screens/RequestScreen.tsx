@@ -30,9 +30,9 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      {/* Основной контентный блок опущен ниже от Запрос и растянут до поля Твой запрос с отступом */}
-      <div className="absolute top-0 left-0 right-0 z-10 px-4 pt-28 pb-8 max-w-[520px] mx-auto">
-        <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)] h-full flex flex-col justify-center">
+      {/* Основной контентный блок между плашкой Запрос и полем Твой запрос */}
+      <div className="relative z-10 px-4 mt-4 mb-4">
+        <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
           <div>
             <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
             <p className="mt-3 text-[15px] leading-relaxed opacity-95">
