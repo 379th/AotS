@@ -1,22 +1,24 @@
 import React from 'react';
 import { ArrowLeft, Send } from 'lucide-react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
-import { GRATITUDE } from '../config/constants';
 import { openTelegramLink } from '../utils/telegram';
+import { useTranslation } from '../i18n';
 
 interface CreatorScreenProps {
   onBack: () => void;
 }
 
 export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
+  const { t } = useTranslation();
+  
   return (
     <ScreenFrame>
-      <TitleBar text="О создателе квеста" />
+      <TitleBar text={t.creator.title} />
       
-      <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <h3 className="text-base md:text-lg font-bold">Благодарности</h3>
-        <div className="mt-2 space-y-2 text-[14px] leading-relaxed max-h-[40vh] overflow-y-auto">
-          {GRATITUDE.map((line, i) => (
+      <div className="mx-auto mt-2 w-[92%] flex-1 flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+        <h3 className="text-base md:text-lg font-bold">{t.creator.acknowledgments}</h3>
+        <div className="flex-1 min-h-0 mt-2 space-y-2 text-[14px] leading-relaxed overflow-y-auto">
+          {t.creator.acknowledgmentsList.map((line, i) => (
             <div key={i} className="flex">
               {i === 0 ? (
                 <span>{line}</span>
@@ -39,7 +41,7 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
         </div>
       </div>
       
-      <div className="mx-auto mt-2 w-[92%] flex items-center justify-between">
+      <div className="mx-auto mt-2 w-[92%] flex items-center justify-between mb-4">
         <Pill onClick={() => openTelegramLink('https://t.me/SantoshaClub')}>
           <span className="inline-flex items-center gap-2">
             <Send className="h-4 w-4"/> @SantoshaClub
@@ -47,7 +49,7 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
         </Pill>
         <Pill onClick={onBack}>
           <span className="inline-flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4"/> Назад
+            <ArrowLeft className="h-4 w-4"/> {t.common.back}
           </span>
         </Pill>
       </div>
