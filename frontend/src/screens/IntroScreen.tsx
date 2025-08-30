@@ -8,9 +8,6 @@ interface IntroScreenProps {
   onAboutQuest: () => void;
   onOpenFaq: () => void;
   onOpenSettings: () => void;
-  onGoDay1: () => void;
-  onOpenDeck: () => void;
-  onOpenJournal: () => void;
 }
 
 export const IntroScreen: React.FC<IntroScreenProps> = ({
@@ -18,10 +15,7 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
   onAboutCreator,
   onAboutQuest,
   onOpenFaq,
-  onOpenSettings,
-  onGoDay1,
-  onOpenDeck,
-  onOpenJournal
+  onOpenSettings
 }) => {
   useEffect(() => {
     initTelegram();

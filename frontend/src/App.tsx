@@ -41,9 +41,6 @@ function App() {
             onAboutQuest={() => setRoute("quest")}
             onOpenFaq={() => setRoute("faq")}
             onOpenSettings={() => setRoute("settings")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
           />
         );
       
