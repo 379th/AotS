@@ -16,7 +16,7 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
       
       <div className="mx-auto mt-2 w-[92%] flex-1 flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
         <div className="flex-1 min-h-0 overflow-y-auto rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed text-[14px] md:text-[15px]">
-          <h2 className="text-lg font-bold mb-4">{t.faq.title}</h2>
+          <h2 className="text-lg font-bold mb-4">FAQ</h2>
           
           <h3 className="text-base font-bold mb-3">Техника безопасности!</h3>
           
