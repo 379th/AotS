@@ -30,8 +30,8 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      {/* Зафиксированный слой с контентом */}
-      <div className="fixed top-0 left-0 right-0 z-10 pt-20 px-4 pb-4">
+      {/* Зафиксированный слой с контентом под плашкой Запрос */}
+      <div className="relative z-10 px-4 pb-4">
         <div className="space-y-4">
           {/* Основной контентный блок */}
           <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
@@ -88,9 +88,6 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
           </div>
         </div>
       </div>
-
-      {/* Фон для заполнения экрана */}
-      <div className="min-h-screen bg-gradient-to-b from-amber-50/10 to-amber-900/20"></div>
     </ScreenFrame>
   );
 };
