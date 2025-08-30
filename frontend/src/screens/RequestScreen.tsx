@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { ScreenFrame, TitleBar, RoundButton } from '../components/ui';
+import { ScreenFrame, TitleBar, RoundButton, NavigationPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { initTelegram, closeTelegramApp } from '../utils/telegram';
 import { BookOpen, Swords, Layers, NotebookPen, LogOut } from 'lucide-react';
@@ -77,17 +77,12 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
           </div>
 
           {/* Панель навигации */}
-          <div className="mx-auto w-full max-w-[520px]">
-            <div className="rounded-2xl border border-amber-900/40 bg-button-gradient p-3 shadow-[0_8px_30px_rgba(0,0,0,.35)]">
-              <div className="flex items-center justify-between">
-                <RoundButton label="Обучение" icon={BookOpen} tone="amber" onClick={onAboutQuest} />
-                <RoundButton label="Квест" icon={Swords} tone="teal" onClick={onGoDay1} />
-                <RoundButton label="Колода" icon={Layers} tone="sky" onClick={onOpenDeck} />
-                <RoundButton label="Дневник" icon={NotebookPen} tone="slate" onClick={onOpenJournal} />
-                <RoundButton label="Выход" icon={LogOut} tone="rose" onClick={closeTelegramApp} />
-              </div>
-            </div>
-          </div>
+          <NavigationPanel
+            onAboutQuest={onAboutQuest}
+            onGoDay1={onGoDay1}
+            onOpenDeck={onOpenDeck}
+            onOpenJournal={onOpenJournal}
+          />
         </div>
       </div>
     </ScreenFrame>

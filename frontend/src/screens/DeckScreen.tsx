@@ -1,13 +1,23 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { ScreenFrame, TitleBar, Pill, NavigationPanel } from '../components/ui';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface DeckScreenProps {
   onBack: () => void;
+  onAboutQuest: () => void;
+  onGoDay1: () => void;
+  onOpenDeck: () => void;
+  onOpenJournal: () => void;
 }
 
-export const DeckScreen: React.FC<DeckScreenProps> = ({ onBack }) => {
+export const DeckScreen: React.FC<DeckScreenProps> = ({ 
+  onBack,
+  onAboutQuest,
+  onGoDay1,
+  onOpenDeck,
+  onOpenJournal
+}) => {
   const [slots] = useLocalStorage<string[]>('sq.deck.slots', Array(9).fill(''));
 
   return (
@@ -40,6 +50,16 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({ onBack }) => {
             <ArrowLeft className="h-4 w-4"/> Назад
           </span>
         </Pill>
+      </div>
+
+      {/* Панель навигации */}
+      <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
+        <NavigationPanel
+          onAboutQuest={onAboutQuest}
+          onGoDay1={onGoDay1}
+          onOpenDeck={onOpenDeck}
+          onOpenJournal={onOpenJournal}
+        />
       </div>
     </ScreenFrame>
   );
