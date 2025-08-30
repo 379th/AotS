@@ -171,4 +171,22 @@ export interface Translations {
     russian: string;
     english: string;
   };
+
+  // О квесте
+  aboutQuest: {
+    title: string;
+    whatIsShadow: string;
+    whatIsShadowDescription: string;
+    whyDoQuest: string;
+    whyDoQuestDescription: string;
+    whatYouGet: string;
+    whatYouGetList: string[];
+    howItGoes: string;
+    howItGoesList: string[];
+    whoIsFor: string;
+    whoIsForList: string[];
+    whatYouNeed: string;
+    whatYouNeedDescription: string;
+    timeDescription: string;
+  };
 }

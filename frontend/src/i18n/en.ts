@@ -235,5 +235,35 @@ export const en: Translations = {
     language: "Language",
     russian: "Русский",
     english: "English"
+  },
+  aboutQuest: {
+    title: "About Quest",
+    whatIsShadow: "What is «Shadow»?",
+    whatIsShadowDescription: "These are the qualities, feelings and desires that we usually hide: 'I won't be angry', 'I'm not afraid', 'it doesn't hurt me'. They don't disappear anywhere — they just go into the shadow and control us from under the surface.",
+    whyDoQuest: "Why go through the quest?",
+    whyDoQuestDescription: "Stop scolding yourself and become kinder to yourself. Understand why I react this way and learn to choose differently. Get more courage, calmness and clarity. Improve relationships with loved ones and with yourself. Return the energy that internal conflict takes away.",
+    whatYouGet: "What will you get as a result?",
+    whatYouGetList: [
+      "Awareness of your shadow (honest look, without shame).",
+      "Dialogue with it (ability to listen and hear, love yourself).",
+      "Support of archetype — strong light quality that helps.",
+      "Personal symbol of wholeness and action plan."
+    ],
+    howItGoes: "How does it go?",
+    howItGoesList: [
+      "Day 1 — Shadow Call: getting to know what is hiding.",
+      "Day 2 — Dialogue: letter from Shadow and answer from adult you.",
+      "Day 3 — Archetypal Choice: we take the resource of the light side.",
+      "Day 4 — Integration: symbol of wholeness and completion of the cycle."
+    ],
+    whoIsFor: "Who is it for?",
+    whoIsForList: [
+      "Those who experience strong emotions and want to understand themselves.",
+      "Those who often argue or are embarrassed by their feelings and want gentleness and strength.",
+      "Creative and curious: playful format with drawings and notes."
+    ],
+    whatYouNeed: "What do you need?",
+    whatYouNeedDescription: "Notebook/diary and pen; sometimes sheets for drawing (optional).",
+    timeDescription: "From 10 minutes to a day — choose according to your condition and depth of the day."
   }
 };
