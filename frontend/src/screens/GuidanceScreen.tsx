@@ -9,8 +9,8 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
   return (
     <ScreenFrame>
       <TitleBar text="Напутствие" />
-      <div className="mx-auto mt-3 w-[92%] h-[66svh] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-3">
-        <div className="h-full overflow-y-auto rounded-xl border border-amber-900/30 bg-white/5 p-4 text-amber-200/90 text-sm leading-6">
+      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-3">
+        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-white/5 p-4 text-amber-200/90 text-sm leading-6">
           <div className="mb-4">
             <strong>Надпись:</strong>
           </div>

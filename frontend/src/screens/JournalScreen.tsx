@@ -24,8 +24,8 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Дневник" />
       
-      <div className="mx-auto mt-2 w-[92%] overflow-hidden h-[66svh] flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <div className="flex-1 min-h-0 w-full overflow-auto space-y-4">
+      <div className="mx-auto mt-2 w-[92%] overflow-hidden flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+        <div className="h-[66svh] min-h-0 w-full overflow-auto space-y-4">
           <div className="rounded-xl border border-amber-900/30 bg-white/80 p-3">
             <label className="mb-1 block text-xs opacity-80">Заметки</label>
             <textarea 

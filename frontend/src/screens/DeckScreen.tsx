@@ -46,7 +46,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Колода" />
       
-      <div className="mx-auto mt-3 w-[92%] flex-1 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
         {/* Информация о странице */}
         <div className="mb-3 text-center">
           <p className="text-sm font-semibold">

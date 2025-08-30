@@ -25,8 +25,8 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="День 2 — Пещера Эха" />
 
-      <div className="mx-auto mt-3 w-[92%] h-[66svh] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-2">
-        <div className="relative h-full overflow-hidden rounded-xl border border-teal-700/30 bg-[#101820] p-3 flex flex-col">
+      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-2">
+        <div className="relative h-[66svh] overflow-hidden rounded-xl border border-teal-700/30 bg-[#101820] p-3 flex flex-col">
           <input
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}

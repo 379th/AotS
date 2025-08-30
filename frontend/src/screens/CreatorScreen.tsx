@@ -15,9 +15,9 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
     <ScreenFrame>
       <TitleBar text={t.creator.title} />
       
-      <div className="mx-auto mt-2 w-[92%] flex-1 flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+      <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
         <h3 className="text-base md:text-lg font-bold">{t.creator.acknowledgments}</h3>
-        <div className="flex-1 min-h-0 mt-2 space-y-2 text-[14px] leading-relaxed overflow-y-auto">
+        <div className="h-[66svh] mt-2 space-y-2 text-[14px] leading-relaxed overflow-y-auto">
           {t.creator.acknowledgmentsList.map((line, i) => (
             <div key={i} className="text-left">
               <span>{line}</span>

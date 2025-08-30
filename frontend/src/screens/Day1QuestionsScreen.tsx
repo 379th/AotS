@@ -27,8 +27,8 @@ export const Day1QuestionsScreen: React.FC<Day1QuestionsScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="День 1 — Вопросы" />
 
-      <div className="mx-auto mt-3 w-[92%] h-[66svh] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-3">
-        <div className="h-full overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-3 space-y-4">
+      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-3">
+        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-3 space-y-4">
           <div>
             <div className="text-xs text-amber-200/80 mb-1">Где в жизни ты это проявляешь?</div>
             <textarea

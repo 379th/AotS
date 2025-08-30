@@ -14,8 +14,8 @@ export const QuestScreen: React.FC<QuestScreenProps> = ({ onBack }) => {
     <ScreenFrame>
       <TitleBar text={t.aboutQuest.title} />
       
-      <div className="mx-auto mt-2 w-[92%] flex-1 flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <div className="flex-1 min-h-0 w-full overflow-auto rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed space-y-4">
+      <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+        <div className="h-[66svh] w-full overflow-auto rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed space-y-4">
           <h2 className="text-lg font-extrabold tracking-tight">{t.aboutQuest.whatIsShadow}</h2>
           <p className="mt-2 text-[14px] md:text-[15px]">
             {t.aboutQuest.whatIsShadowDescription}
