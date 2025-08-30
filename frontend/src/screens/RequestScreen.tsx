@@ -31,7 +31,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       <TitleBar text="Запрос" />
 
       {/* Зафиксированный слой с контентом под плашкой Запрос */}
-      <div className="relative z-10 px-4 pb-4 mt-8">
+      <div className="relative z-10 px-4 pb-4 mt-4">
         <div className="space-y-6">
           {/* Основной контентный блок - расширен и отсоединен */}
           <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
