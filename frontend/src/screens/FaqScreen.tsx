@@ -1,19 +1,22 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { useTranslation } from '../i18n';
 
 interface FaqScreenProps {
   onBack: () => void;
 }
 
 export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
+  const { t } = useTranslation();
+  
   return (
     <ScreenFrame>
-      <TitleBar text="FAQ" />
+      <TitleBar text={t.faq.title} />
       
-      <div className="mx-auto mt-2 w-[92%] h-[73svh] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <div className="h-full overflow-y-auto rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed text-[14px] md:text-[15px]">
-          <h2 className="text-lg font-bold mb-4">FAQ «Принятие Тени»</h2>
+      <div className="mx-auto mt-2 w-[92%] flex-1 flex flex-col min-h-0 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+        <div className="flex-1 min-h-0 overflow-y-auto rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed text-[14px] md:text-[15px]">
+          <h2 className="text-lg font-bold mb-4">{t.faq.title}</h2>
           
           <h3 className="text-base font-bold mb-3">Техника безопасности!</h3>
           
@@ -282,10 +285,10 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
         </div>
       </div>
       
-      <div className="mx-auto mt-2 w-[92%] text-right">
+      <div className="mx-auto mt-2 w-[92%] text-right mb-12">
         <Pill onClick={onBack}>
           <span className="inline-flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4"/> Назад
+            <ArrowLeft className="h-4 w-4"/> {t.common.back}
           </span>
         </Pill>
       </div>
