@@ -30,7 +30,7 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
 
       {/* Центральная картинка */}
       <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 overflow-hidden">
-        <img src="/Sorce/Screen_Start.png" alt="Start" className="w-full h-[64svh] object-cover" />
+        <img src="/Sorce/Screen_Start.png" alt="Start" className="w-full h-[60svh] object-cover" />
       </div>
 
       {/* Кнопки в 2 ряда */}
