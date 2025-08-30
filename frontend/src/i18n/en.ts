@@ -208,13 +208,17 @@ export const en: Translations = {
     acknowledgments: "Acknowledgments",
     acknowledgmentsList: [
       "I express gratitude to everyone and everything for love, faith, support!",
-      "• I thank the Universe for the opportunity to create and share.",
-      "• I thank my ancestors for wisdom and strength.",
-      "• I thank my teachers for knowledge and inspiration.",
-      "• I thank my friends for support and understanding.",
-      "• I thank my family for love and patience.",
-      "• I thank myself for courage and persistence.",
-      "• I thank everyone who decides to take this path."
+      "I thank the Creator for the opportunity to feel Joy, see beauty, live creatively.",
+      "I thank Mom for giving birth and investing time and effort in my development.",
+      "I thank Lera for accompanying me on the path to a mature, responsible position.",
+      "I thank Yanika for support and advice.",
+      "Bow and gratitude to Bhagavad Gita for wisdom.",
+      "I thank Carl Gustav Jung for science, for the language of archetypes - a tool for dialogue with the unconscious.",
+      "I thank Stephen Wolinsky — his approach helps to gently meet the shadow of the inner child and return the power of the observer.",
+      "I thank Chuck Spezzano for the MAC-deck «Archetypes and Shadows» and the clear path of working with the shadow.",
+      "I thank Gudakesha for inspiration, the reminder of victory over 'sleep' gave a powerful creative impulse.",
+      "I thank chatGPT for co-authorship and support at every step.",
+      "I thank myself for the completed work."
     ]
   },
   guidance: {

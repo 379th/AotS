@@ -19,15 +19,8 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
         <h3 className="text-base md:text-lg font-bold">{t.creator.acknowledgments}</h3>
         <div className="flex-1 min-h-0 mt-2 space-y-2 text-[14px] leading-relaxed overflow-y-auto">
           {t.creator.acknowledgmentsList.map((line, i) => (
-            <div key={i} className="flex">
-              {i === 0 ? (
-                <span>{line}</span>
-              ) : (
-                <>
-                  <span className="mr-2">•</span>
-                  <span>{line}</span>
-                </>
-              )}
+            <div key={i} className="text-left">
+              <span>{line}</span>
             </div>
           ))}
         </div>
