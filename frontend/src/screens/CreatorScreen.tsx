@@ -15,11 +15,14 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
       
       <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
         <h3 className="text-base md:text-lg font-bold">Благодарности</h3>
-        <ul className="mt-2 space-y-2 text-[14px] leading-relaxed list-disc pl-5 max-h-[40vh] overflow-y-auto">
+        <div className="mt-2 space-y-2 text-[14px] leading-relaxed max-h-[40vh] overflow-y-auto">
           {GRATITUDE.map((line, i) => (
-            <li key={i}>{line}</li>
+            <div key={i} className="flex">
+              <span className="mr-2">•</span>
+              <span>{line}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       
       <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
