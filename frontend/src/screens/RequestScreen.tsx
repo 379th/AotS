@@ -30,7 +30,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      <div className="flex flex-col min-h-screen pb-40 pt-4">
+      <div className="flex flex-col min-h-screen pt-4">
         {/* Контент - поднят к верхней плашке */}
         <div className="space-y-4 px-4">
           {/* Основной контентный блок */}
@@ -73,29 +73,24 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
               Продолжить
             </button>
           </div>
+
+          {/* Панель навигации - теперь на слое с контентом */}
+          <div className="mx-auto w-full max-w-[520px]">
+            <div className="rounded-2xl border border-amber-900/40 bg-button-gradient p-3 shadow-[0_8px_30px_rgba(0,0,0,.35)]">
+              <div className="flex items-center justify-between">
+                <RoundButton label="Обучение" icon={BookOpen} tone="amber" onClick={onAboutQuest} />
+                <RoundButton label="Квест" icon={Swords} tone="teal" onClick={onGoDay1} />
+                <RoundButton label="Колода" icon={Layers} tone="sky" onClick={onOpenDeck} />
+                <RoundButton label="Дневник" icon={NotebookPen} tone="slate" onClick={onOpenJournal} />
+                <RoundButton label="Выход" icon={LogOut} tone="rose" onClick={closeTelegramApp} />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Гибкое пространство для заполнения оставшейся высоты */}
         <div className="flex-1"></div>
       </div>
-
-      {/* Нижняя панель навигации */}
-      <nav className="fixed inset-x-0 bottom-0 z-[9999] flex items-center justify-center" style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 8px)' }}>
-        <div className="mx-auto mb-2 w-full max-w-[520px]">
-          <div className="mx-3 rounded-2xl border border-amber-900/40 bg-button-gradient p-3 shadow-[0_-8px_30px_rgba(0,0,0,.35)]">
-            <div className="flex items-center justify-between">
-              <RoundButton label="Обучение" icon={BookOpen} tone="amber" onClick={onAboutQuest} />
-              <RoundButton label="Квест" icon={Swords} tone="teal" onClick={onGoDay1} />
-              <RoundButton label="Колода" icon={Layers} tone="sky" onClick={onOpenDeck} />
-              <RoundButton label="Дневник" icon={NotebookPen} tone="slate" onClick={onOpenJournal} />
-              <RoundButton label="Выход" icon={LogOut} tone="rose" onClick={closeTelegramApp} />
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Отступ для нижней панели */}
-      <div className="h-40" />
     </ScreenFrame>
   );
 };
