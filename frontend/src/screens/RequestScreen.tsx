@@ -31,7 +31,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       <TitleBar text="Запрос" />
 
       {/* Растянутый основной контентный блок поднят к верхней плашке */}
-      <div className="relative z-10 px-4 mt-2 mb-4">
+      <div className="relative z-10 px-4 mt-2 mb-8">
         <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)] min-h-[60vh] flex flex-col justify-center">
           <div>
             <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
