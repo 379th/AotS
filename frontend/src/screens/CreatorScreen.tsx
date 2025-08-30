@@ -18,8 +18,14 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
         <div className="mt-2 space-y-2 text-[14px] leading-relaxed max-h-[40vh] overflow-y-auto">
           {GRATITUDE.map((line, i) => (
             <div key={i} className="flex">
-              <span className="mr-2">•</span>
-              <span>{line}</span>
+              {i === 0 ? (
+                <span>{line}</span>
+              ) : (
+                <>
+                  <span className="mr-2">•</span>
+                  <span>{line}</span>
+                </>
+              )}
             </div>
           ))}
         </div>
