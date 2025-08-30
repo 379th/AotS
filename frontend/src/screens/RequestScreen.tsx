@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { ScreenFrame, TitleBar, RoundButton, NavigationPanel } from '../components/ui';
+import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
-import { initTelegram, closeTelegramApp } from '../utils/telegram';
-import { BookOpen, Swords, Layers, NotebookPen, LogOut } from 'lucide-react';
+import { initTelegram } from '../utils/telegram';
 
 interface RequestScreenProps {
   onBack: () => void;
@@ -60,21 +58,11 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
             />
           </div>
 
-          {/* Кнопки навигации */}
-          <div className="mx-auto w-full flex items-center justify-between gap-2">
-            <button 
-              onClick={onBack} 
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
-            >
-              <ArrowLeft className="h-4 w-4" /> Назад
-            </button>
-            <button 
-              onClick={onGoDay1} 
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-3 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105"
-            >
-              Продолжить
-            </button>
-          </div>
+          {/* Панель кнопок */}
+          <BottomButtonPanel
+            onBack={onBack}
+            onContinue={onGoDay1}
+          />
 
           {/* Панель навигации */}
           <NavigationPanel

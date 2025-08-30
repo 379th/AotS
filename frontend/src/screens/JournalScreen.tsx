@@ -1,6 +1,5 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { ScreenFrame, TitleBar, Pill, NavigationPanel } from '../components/ui';
+import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 
 interface JournalScreenProps {
@@ -48,23 +47,25 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
           </div>
         </div>
       </div>
-      
-      <div className="mx-auto mt-2 w-[92%] text-right">
-        <Pill onClick={onBack}>
-          <span className="inline-flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4"/> Назад
-          </span>
-        </Pill>
-      </div>
 
-      {/* Панель навигации */}
+      {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
       <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
-        <NavigationPanel
-          onAboutQuest={onAboutQuest}
-          onGoDay1={onGoDay1}
-          onOpenDeck={onOpenDeck}
-          onOpenJournal={onOpenJournal}
-        />
+        <div className="space-y-4">
+          {/* Панель кнопок */}
+          <BottomButtonPanel
+            onBack={onBack}
+            onContinue={onBack}
+            continueText="Сохранить"
+          />
+
+          {/* Панель навигации */}
+          <NavigationPanel
+            onAboutQuest={onAboutQuest}
+            onGoDay1={onGoDay1}
+            onOpenDeck={onOpenDeck}
+            onOpenJournal={onOpenJournal}
+          />
+        </div>
       </div>
     </ScreenFrame>
   );
