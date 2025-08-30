@@ -30,14 +30,11 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Запрос" />
 
-      <div className="flex flex-col justify-between min-h-screen pb-40">
-        {/* Верхняя часть - пустое пространство */}
-        <div className="flex-1"></div>
-        
-        {/* Нижняя часть - контент */}
-        <div className="space-y-4">
+      <div className="flex flex-col min-h-screen pb-40 pt-4">
+        {/* Контент - поднят к верхней плашке */}
+        <div className="space-y-4 px-4">
           {/* Основной контентный блок */}
-          <div className="mx-auto w-[92%] rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
+          <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-4 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
             <div>
               <h2 className="text-2xl font-extrabold tracking-tight">Тени</h2>
               <p className="mt-2 text-[15px] leading-relaxed opacity-95">
@@ -51,7 +48,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
           </div>
 
           {/* Поле ввода запроса */}
-          <div className="mx-auto w-[92%] rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+          <div className="mx-auto w-full rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
             <label className="mb-2 block text-sm font-semibold opacity-90">Твой запрос</label>
             <input
               value={intent}
@@ -62,7 +59,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
           </div>
 
           {/* Кнопки навигации */}
-          <div className="mx-auto w-[92%] flex items-center justify-between gap-2">
+          <div className="mx-auto w-full flex items-center justify-between gap-2">
             <button 
               onClick={onBack} 
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
@@ -77,6 +74,9 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
             </button>
           </div>
         </div>
+
+        {/* Гибкое пространство для заполнения оставшейся высоты */}
+        <div className="flex-1"></div>
       </div>
 
       {/* Нижняя панель навигации */}
