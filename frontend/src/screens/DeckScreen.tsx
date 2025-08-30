@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface DeckScreenProps {
   onBack: () => void;
@@ -17,30 +18,114 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
   onOpenDeck,
   onOpenJournal
 }) => {
-  const [slots] = useLocalStorage<string[]>('sq.deck.slots', Array(9).fill(''));
+  const [currentPage, setCurrentPage] = useState(0);
+  const [slots] = useLocalStorage<string[]>('sq.deck.slots', Array(126).fill(''));
+  
+  // Настройки пагинации
+  const cardsPerPage = 9; // 3x3 сетка
+  const totalPages = Math.ceil(126 / cardsPerPage);
+  
+  // Получаем карты для текущей страницы
+  const startIndex = currentPage * cardsPerPage;
+  const endIndex = Math.min(startIndex + cardsPerPage, 126);
+  const currentPageCards = slots.slice(startIndex, endIndex);
+
+  const goToPreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <ScreenFrame>
       <TitleBar text="Колода" />
       
       <div className="mx-auto mt-3 w-[92%] flex-1 rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <div className="grid grid-cols-3 gap-3">
-          {slots.map((val, i) => (
-            <div 
-              key={i} 
-              className="aspect-square rounded-xl border border-amber-900/30 bg-white/80 flex items-center justify-center text-sm p-2"
-            >
-              {val ? (
-                <span>Карты: {val}</span>
-              ) : (
-                <span className="opacity-60">Пусто</span>
-              )}
-            </div>
-          ))}
+        {/* Информация о странице */}
+        <div className="mb-3 text-center">
+          <p className="text-sm font-semibold">
+            Страница {currentPage + 1} из {totalPages}
+          </p>
+          <p className="text-xs opacity-80">
+            Карты {startIndex + 1}-{endIndex} из 126
+          </p>
         </div>
-        <p className="col-span-3 mt-3 text-xs opacity-80 text-center">
-          Всего карт будет 126. Здесь будут появляться открытые карты по номерам.
-        </p>
+
+        {/* Сетка карт */}
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          {currentPageCards.map((val, i) => {
+            const cardNumber = startIndex + i + 1;
+            return (
+              <div 
+                key={cardNumber} 
+                className="aspect-square rounded-xl border border-amber-900/30 bg-white/80 flex flex-col items-center justify-center text-sm p-2"
+              >
+                <div className="text-xs font-bold mb-1">#{cardNumber}</div>
+                {val ? (
+                  <span className="text-center">{val}</span>
+                ) : (
+                  <span className="opacity-60 text-center">Пусто</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Кнопки навигации по страницам */}
+        <div className="flex items-center justify-between gap-2">
+          <button 
+            onClick={goToPreviousPage}
+            disabled={currentPage === 0}
+            className="flex items-center justify-center gap-1 rounded-xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            <span className="text-sm font-semibold">Предыдущая</span>
+          </button>
+          
+          <div className="flex gap-1">
+            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+              let pageIndex;
+              if (totalPages <= 5) {
+                pageIndex = i;
+              } else if (currentPage < 3) {
+                pageIndex = i;
+              } else if (currentPage >= totalPages - 3) {
+                pageIndex = totalPages - 5 + i;
+              } else {
+                pageIndex = currentPage - 2 + i;
+              }
+              
+              return (
+                <button
+                  key={pageIndex}
+                  onClick={() => setCurrentPage(pageIndex)}
+                  className={`w-8 h-8 rounded-lg border border-amber-900/30 text-xs font-semibold transition-all hover:scale-105 active:scale-95 ${
+                    currentPage === pageIndex
+                      ? 'bg-amber-600 text-white'
+                      : 'bg-white/70 text-amber-900'
+                  }`}
+                >
+                  {pageIndex + 1}
+                </button>
+              );
+            })}
+          </div>
+          
+          <button 
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages - 1}
+            className="flex items-center justify-center gap-1 rounded-xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+          >
+            <span className="text-sm font-semibold">Следующая</span>
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
       </div>
 
       {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
