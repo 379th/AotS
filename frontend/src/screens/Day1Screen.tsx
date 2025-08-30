@@ -47,9 +47,7 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
         </div>
       </div>
 
-      <div className="mx-auto mt-2 w-[92%] text-center text-[13px] opacity-85">
-        Ты входишь в лес, где тени шепчут правду.
-      </div>
+
 
       {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
       <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
