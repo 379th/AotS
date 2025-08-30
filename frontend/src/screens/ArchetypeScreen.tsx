@@ -25,7 +25,7 @@ export const ArchetypeScreen: React.FC<ArchetypeScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Архетип" />
 
-      <div className="mx-auto mt-3 w-[92%] h-[60svh] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-2">
+      <div className="mx-auto mt-3 w-[92%] h-[66svh] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-2">
         <div className="relative h-full overflow-hidden rounded-xl border border-teal-700/30 bg-[#101820] p-3 flex flex-col">
           <input
             value={imageUrl}
