@@ -26,11 +26,20 @@ app.use(express.json());
 // PostgreSQL connection (only if DATABASE_URL is provided)
 let pool = null;
 if (process.env.DATABASE_URL) {
+  console.log('🔗 DATABASE_URL found, attempting to connect...');
   const { Pool } = require('pg');
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
   });
+  
+  // Test the connection
+  pool.on('error', (err) => {
+    console.error('❌ Unexpected error on idle client', err);
+    pool = null;
+  });
+} else {
+  console.log('⚠️  No DATABASE_URL provided');
 }
 
 // Initialize database tables
@@ -41,6 +50,10 @@ async function initDatabase() {
   }
 
   try {
+    console.log('🔄 Testing database connection...');
+    await pool.query('SELECT NOW()');
+    console.log('✅ Database connection successful');
+    
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id VARCHAR(255) PRIMARY KEY,
@@ -70,6 +83,8 @@ async function initDatabase() {
     console.log('✅ Database initialized successfully');
   } catch (error) {
     console.error('❌ Database initialization failed:', error);
+    console.log('⚠️  Disabling database connection due to error');
+    pool = null;
   }
 }
 
