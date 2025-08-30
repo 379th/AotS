@@ -31,9 +31,9 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                   <TitleBar text={t.request.title} />
 
       {/* Основной контентный блок между плашкой Запрос и полем Твой запрос */}
-      <div className="relative z-10 px-4 mt-4 mb-4">
-                            <div className="mx-auto w-full rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
-                      <div>
+      <div className="relative z-10 px-4 mt-4 flex-1 flex flex-col min-h-0">
+                            <div className="mx-auto w-full flex-1 flex flex-col min-h-0 rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
+                      <div className="flex-1 min-h-0">
                         <h2 className="text-2xl font-extrabold tracking-tight">{t.request.shadows}</h2>
                         <p className="mt-3 text-[15px] leading-relaxed opacity-95">
                           {t.request.shadowsDescription}
@@ -55,7 +55,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                         <input
                           value={intent}
                           onChange={(e) => setIntent(e.target.value.slice(0, 120))}
-                          placeholder={t.request.requestPlaceholder}
+                          placeholder="Одна точная фраза"
                           className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
                         />
                       </div>
