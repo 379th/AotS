@@ -155,18 +155,6 @@ function App() {
         return (
           <Day3PartnerTaskScreen
             onBack={() => setRoute("day3Resource")}
-            onNext={() => setRoute("day4Integration")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
-          />
-        );
-
-      case "day4Integration":
-        return (
-          <Day4IntegrationScreen
-            onBack={() => setRoute("day3Resource")}
             onNext={() => setRoute("day4Temple")}
             onAboutQuest={() => setRoute("quest")}
             onGoDay1={() => setRoute("day1")}
@@ -178,7 +166,19 @@ function App() {
       case "day4Temple":
         return (
           <Day4TempleScreen
-            onBack={() => setRoute("day4Integration")}
+            onBack={() => setRoute("day3PartnerTask")}
+            onNext={() => setRoute("day4Integration")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
+          />
+        );
+
+      case "day4Integration":
+        return (
+          <Day4IntegrationScreen
+            onBack={() => setRoute("day4Temple")}
             onNext={() => setRoute("completion")}
             onAboutQuest={() => setRoute("quest")}
             onGoDay1={() => setRoute("day1")}
