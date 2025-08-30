@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ScreenFrame, NavigationPanel, BottomButtonPanel } from '../components/ui';
+import { ScreenFrame, NavigationPanel } from '../components/ui';
 import { initTelegram } from '../utils/telegram';
 
 interface IntroScreenProps {
@@ -50,26 +50,14 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
         <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Setings.png" alt="Настройки" className="w-full" /></button>
       </div>
 
-      {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
+      {/* Панель навигации */}
       <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
-        <div className="space-y-4">
-          {/* Панель кнопок */}
-          <BottomButtonPanel
-            onBack={() => {}}
-            onContinue={onStart}
-            backText="Настройки"
-            continueText="Начать"
-            showBack={false}
-          />
-
-          {/* Панель навигации */}
-          <NavigationPanel
-            onAboutQuest={onAboutQuest}
-            onGoDay1={onGoDay1}
-            onOpenDeck={onOpenDeck}
-            onOpenJournal={onOpenJournal}
-          />
-        </div>
+        <NavigationPanel
+          onAboutQuest={onAboutQuest}
+          onGoDay1={onGoDay1}
+          onOpenDeck={onOpenDeck}
+          onOpenJournal={onOpenJournal}
+        />
       </div>
     </ScreenFrame>
   );

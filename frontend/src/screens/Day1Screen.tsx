@@ -1,16 +1,23 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { ScreenFrame, TitleBar } from '../components/ui';
+import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 
 interface Day1ScreenProps {
   onBackToRequest: () => void;
   onAccept: () => void;
+  onAboutQuest: () => void;
+  onGoDay1: () => void;
+  onOpenDeck: () => void;
+  onOpenJournal: () => void;
 }
 
 export const Day1Screen: React.FC<Day1ScreenProps> = ({
   onBackToRequest,
-  onAccept
+  onAccept,
+  onAboutQuest,
+  onGoDay1,
+  onOpenDeck,
+  onOpenJournal
 }) => {
   const [imgUrl, setImgUrl] = useLocalStorageString("sq.day1.forest.url");
 
@@ -44,13 +51,24 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
         Ты входишь в лес, где тени шепчут правду.
       </div>
 
-      <div className="mx-auto mt-2 mb-2 w-[92%] flex items-center justify-between gap-2">
-        <button onClick={onBackToRequest} className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105">
-          <ArrowLeft className="h-4 w-4" /> Назад
-        </button>
-        <button onClick={onAccept} className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-2 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105">
-          Принять Тень
-        </button>
+      {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
+      <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
+        <div className="space-y-4">
+          {/* Панель кнопок */}
+          <BottomButtonPanel
+            onBack={onBackToRequest}
+            onContinue={onAccept}
+            continueText="Принять Тень"
+          />
+
+          {/* Панель навигации */}
+          <NavigationPanel
+            onAboutQuest={onAboutQuest}
+            onGoDay1={onGoDay1}
+            onOpenDeck={onOpenDeck}
+            onOpenJournal={onOpenJournal}
+          />
+        </div>
       </div>
     </ScreenFrame>
   );

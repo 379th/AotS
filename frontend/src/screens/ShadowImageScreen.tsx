@@ -1,16 +1,23 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { ScreenFrame, TitleBar } from '../components/ui';
+import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 
 interface ShadowImageScreenProps {
   onBackToDay1: () => void;
   onContinue: () => void;
+  onAboutQuest: () => void;
+  onGoDay1: () => void;
+  onOpenDeck: () => void;
+  onOpenJournal: () => void;
 }
 
 export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
   onBackToDay1,
-  onContinue
+  onContinue,
+  onAboutQuest,
+  onGoDay1,
+  onOpenDeck,
+  onOpenJournal
 }) => {
   const [imgUrl, setImgUrl] = useLocalStorageString("sq.shadow.image.url");
 
@@ -40,14 +47,23 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
         </div>
       </div>
 
-      <div className="mx-auto mt-2 mb-2 w-[92%] flex items-center justify-between gap-2">
-        <button onClick={onBackToDay1}
-          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-[#241b2f] px-3 py-2 font-semibold text-amber-200 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105 flex-1">
-          <ArrowLeft className="h-4 w-4" /> Назад
-        </button>
-        <button onClick={onContinue} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-2 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105 flex-1">
-          Продолжить
-        </button>
+      {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
+      <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
+        <div className="space-y-4">
+          {/* Панель кнопок */}
+          <BottomButtonPanel
+            onBack={onBackToDay1}
+            onContinue={onContinue}
+          />
+
+          {/* Панель навигации */}
+          <NavigationPanel
+            onAboutQuest={onAboutQuest}
+            onGoDay1={onGoDay1}
+            onOpenDeck={onOpenDeck}
+            onOpenJournal={onOpenJournal}
+          />
+        </div>
       </div>
     </ScreenFrame>
   );

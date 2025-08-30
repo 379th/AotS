@@ -63,6 +63,10 @@ function App() {
           <Day1Screen
             onBackToRequest={() => setRoute("request")}
             onAccept={() => setRoute("shadowImage")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -71,6 +75,10 @@ function App() {
           <ShadowImageScreen
             onBackToDay1={() => setRoute("day1")}
             onContinue={() => setRoute("day1Questions")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -79,6 +87,10 @@ function App() {
           <Day1QuestionsScreen
             onBack={() => setRoute("day1")}
             onNext={() => setRoute("day2")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -87,6 +99,10 @@ function App() {
           <Day2EchoScreen
             onBack={() => setRoute("day1")}
             onNext={() => setRoute("day2Letters")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -95,6 +111,10 @@ function App() {
           <Day2LettersScreen
             onBack={() => setRoute("day2")}
             onNext={() => setRoute("day3Mirror")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -103,6 +123,10 @@ function App() {
           <Day3MirrorScreen
             onBack={() => setRoute("day2Letters")}
             onNext={() => setRoute("archetype")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -111,6 +135,10 @@ function App() {
           <ArchetypeScreen
             onBack={() => setRoute("day3Mirror")}
             onNext={() => setRoute("day3PartnerTask")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -119,6 +147,10 @@ function App() {
           <Day3PartnerTaskScreen
             onBack={() => setRoute("archetype")}
             onNext={() => setRoute("day3Resource")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -127,6 +159,10 @@ function App() {
           <Day3ResourceScreen
             onBack={() => setRoute("day3PartnerTask")}
             onNext={() => setRoute("day4Integration")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -135,6 +171,10 @@ function App() {
           <Day4IntegrationScreen
             onBack={() => setRoute("day3Resource")}
             onNext={() => setRoute("day4Temple")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
@@ -143,6 +183,10 @@ function App() {
           <Day4TempleScreen
             onBack={() => setRoute("day4Integration")}
             onNext={() => setRoute("completion")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
 
