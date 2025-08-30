@@ -30,7 +30,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                     <ScreenFrame>
                   <TitleBar text={t.request.title} />
 
-      {/* Основной контентный блок между плашкой Запрос и полем Твой запрос */}
+      {/* Основной контентный блок с полем запроса внутри */}
             <div className="relative z-10 px-4 mt-4">
         <div className="mx-auto w-full h-[66svh] rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
           <div className="h-full overflow-y-auto">
@@ -42,28 +42,29 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                         <p className="mt-3 text-[15px] leading-relaxed opacity-95">
                           {t.request.innerConflictsDescription}
                         </p>
+                        
+                        {/* Поле ввода запроса внутри основного блока */}
+                        <div className="mt-6 rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+                          <label className="mb-2 block text-sm font-semibold opacity-90">{t.request.yourRequest}</label>
+                          <input
+                            value={intent}
+                            onChange={(e) => setIntent(e.target.value.slice(0, 120))}
+                            onFocus={(e) => {
+                              if (e.target.value === intent) {
+                                setIntent('');
+                              }
+                            }}
+                            placeholder="Одна точная фраза"
+                            className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
+                          />
+                        </div>
                       </div>
                     </div>
       </div>
 
-      {/* Зафиксированный слой с полем запроса и кнопками внизу страницы */}
+      {/* Зафиксированный слой с кнопками внизу страницы */}
       <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
         <div className="space-y-4">
-                                {/* Поле ввода запроса */}
-                      <div className="mx-auto w-full rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-                        <label className="mb-2 block text-sm font-semibold opacity-90">{t.request.yourRequest}</label>
-                        <input
-                          value={intent}
-                          onChange={(e) => setIntent(e.target.value.slice(0, 120))}
-                          onFocus={(e) => {
-                            if (e.target.value === intent) {
-                              setIntent('');
-                            }
-                          }}
-                          placeholder="Одна точная фраза"
-                          className="w-full rounded-lg border border-amber-900/30 bg-white/70 px-3 py-2 text-sm placeholder:text-amber-900/50 focus:outline-none focus:ring-2 focus:ring-amber-700/40"
-                        />
-                      </div>
 
           {/* Панель кнопок */}
           <BottomButtonPanel
