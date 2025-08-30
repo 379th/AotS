@@ -41,6 +41,9 @@ function App() {
             onAboutQuest={() => setRoute("quest")}
             onOpenFaq={() => setRoute("faq")}
             onOpenSettings={() => setRoute("settings")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
           />
         );
       
@@ -173,10 +176,26 @@ function App() {
         return <FaqScreen onBack={() => setRoute("intro")} />;
 
       case "deck":
-        return <DeckScreen onBack={() => setRoute("request")} />;
+        return (
+          <DeckScreen 
+            onBack={() => setRoute("request")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
+          />
+        );
 
       case "journal":
-        return <JournalScreen onBack={() => setRoute("request")} />;
+        return (
+          <JournalScreen 
+            onBack={() => setRoute("request")}
+            onAboutQuest={() => setRoute("quest")}
+            onGoDay1={() => setRoute("day1")}
+            onOpenDeck={() => setRoute("deck")}
+            onOpenJournal={() => setRoute("journal")}
+          />
+        );
 
       case "settings":
         return <SettingsScreen onBack={() => setRoute("intro")} />;
