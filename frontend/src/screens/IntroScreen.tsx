@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { ScreenFrame } from '../components/ui';
 import { initTelegram } from '../utils/telegram';
+import { useTranslation } from '../i18n';
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -17,6 +18,8 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
   onOpenFaq,
   onOpenSettings
 }) => {
+  const { t } = useTranslation();
+  
   useEffect(() => {
     initTelegram();
   }, []);
@@ -35,14 +38,14 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
 
       {/* Кнопки в 2 ряда */}
       <div className="mx-auto mt-3 w-[92%] grid grid-cols-3 gap-2">
-        <button onClick={onAboutCreator} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Creator.png" alt="О создателе" className="w-full" /></button>
-        <button onClick={onStart} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Begine.png" alt="Начало" className="w-full" /></button>
-        <button onClick={onAboutQuest} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Quest_boton.png" alt="О квесте" className="w-full" /></button>
+        <button onClick={onAboutCreator} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Creator.png" alt={t.intro.aboutCreator} className="w-full" /></button>
+        <button onClick={onStart} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Begine.png" alt={t.intro.start} className="w-full" /></button>
+        <button onClick={onAboutQuest} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Quest_boton.png" alt={t.intro.aboutQuest} className="w-full" /></button>
       </div>
       <div className="mx-auto mt-2 w-[92%] grid grid-cols-3 gap-2">
-        <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/F_A_Q.png" alt="F.A.Q." className="w-full" /></button>
+        <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/F_A_Q.png" alt={t.intro.faq} className="w-full" /></button>
         <div></div>
-        <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Setings.png" alt="Настройки" className="w-full" /></button>
+        <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Setings.png" alt={t.intro.settings} className="w-full" /></button>
       </div>
     </ScreenFrame>
   );

@@ -1,19 +1,21 @@
 import React from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useTranslation } from '../i18n';
 
 interface SettingsScreenProps {
   onBack: () => void;
 }
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
+  const { t, language, changeLanguage } = useTranslation();
   const [notifications, setNotifications] = useLocalStorage('notifications', true);
   const [soundEnabled, setSoundEnabled] = useLocalStorage('sound_enabled', false);
   const [theme, setTheme] = useLocalStorage('theme', 'dark');
 
   return (
     <ScreenFrame>
-      <TitleBar text="Настройки" />
+      <TitleBar text={t.settings.title} />
 
       <div className="mx-auto mt-3 w-[92%] h-[73svh] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-2">
         <div className="relative h-full overflow-hidden rounded-xl border border-teal-700/30 bg-[radial-gradient(circle_at_center,rgba(78,120,120,.35),transparent_70%)] p-4">
@@ -21,7 +23,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
           <div className="h-full flex flex-col">
             <div className="flex-1 space-y-4">
               <h2 className="text-lg font-semibold text-amber-200 mb-4">
-                Персональные настройки
+                {t.settings.title}
               </h2>
 
               {/* Уведомления */}
@@ -60,6 +62,33 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
                     <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
                       soundEnabled ? 'translate-x-6' : 'translate-x-1'
                     }`} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Язык */}
+              <div className="bg-white/5 rounded-lg p-3">
+                <h3 className="text-sm font-medium text-amber-200 mb-2">{t.settings.language}</h3>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => changeLanguage('ru')}
+                    className={`px-3 py-1 rounded text-xs transition-colors ${
+                      language === 'ru' 
+                        ? 'bg-amber-500 text-white' 
+                        : 'bg-white/10 text-amber-200'
+                    }`}
+                  >
+                    {t.settings.russian}
+                  </button>
+                  <button
+                    onClick={() => changeLanguage('en')}
+                    className={`px-3 py-1 rounded text-xs transition-colors ${
+                      language === 'en' 
+                        ? 'bg-amber-500 text-white' 
+                        : 'bg-white/10 text-amber-200'
+                    }`}
+                  >
+                    {t.settings.english}
                   </button>
                 </div>
               </div>
@@ -105,7 +134,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
             {/* Кнопка назад */}
             <div className="mt-4">
               <Pill onClick={onBack} className="w-full">
-                Назад
+                {t.common.back}
               </Pill>
             </div>
           </div>
