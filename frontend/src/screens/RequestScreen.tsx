@@ -33,7 +33,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
       {/* Основной контентный блок с полем запроса внутри */}
             <div className="relative z-10 px-4 mt-4">
         <div className="mx-auto w-full h-[66svh] rounded-2xl border border-teal-700/30 bg-content-gradient p-6 text-left text-amber-50 shadow-[0_6px_28px_rgba(0,0,0,.35)]">
-          <div className="h-full overflow-y-auto">
+          <div className="h-full overflow-y-auto flex flex-col">
                         <h2 className="text-2xl font-extrabold tracking-tight">{t.request.shadows}</h2>
                         <p className="mt-3 text-[15px] leading-relaxed opacity-95">
                           {t.request.shadowsDescription}
@@ -43,8 +43,8 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                           {t.request.innerConflictsDescription}
                         </p>
                         
-                        {/* Поле ввода запроса внутри основного блока */}
-                        <div className="mt-6 rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+                        {/* Поле ввода запроса внизу основного блока */}
+                        <div className="mt-auto pt-6 rounded-xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
                           <label className="mb-2 block text-sm font-semibold opacity-90">{t.request.yourRequest}</label>
                           <input
                             value={intent}
