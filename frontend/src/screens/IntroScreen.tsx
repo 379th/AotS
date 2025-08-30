@@ -39,9 +39,10 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
         <button onClick={onStart} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Begine.png" alt="Начало" className="w-full" /></button>
         <button onClick={onAboutQuest} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Quest_boton.png" alt="О квесте" className="w-full" /></button>
       </div>
-      <div className="mx-auto mt-2 w-[92%] grid grid-cols-2 gap-2">
-        <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105 scale-90"><img src="/Sorce/F_A_Q.png" alt="F.A.Q." className="w-full" /></button>
-        <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105 scale-90"><img src="/Sorce/Setings.png" alt="Настройки" className="w-full" /></button>
+      <div className="mx-auto mt-2 w-[92%] grid grid-cols-3 gap-2">
+        <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/F_A_Q.png" alt="F.A.Q." className="w-full" /></button>
+        <div></div>
+        <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Setings.png" alt="Настройки" className="w-full" /></button>
       </div>
     </ScreenFrame>
   );
