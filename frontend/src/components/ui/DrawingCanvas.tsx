@@ -14,8 +14,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  const [history, setHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [previousState, setPreviousState] = useState<string>('');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -37,49 +36,33 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       const img = new Image();
       img.onload = () => {
         ctx.drawImage(img, 0, 0);
-        // Добавляем в историю
-        const dataUrl = canvas.toDataURL('image/png');
-        setHistory([dataUrl]);
-        setHistoryIndex(0);
       };
       img.src = value;
-    } else {
-      // Инициализируем пустую историю
-      const dataUrl = canvas.toDataURL('image/png');
-      setHistory([dataUrl]);
-      setHistoryIndex(0);
     }
   }, [value]);
 
-  const saveToHistory = () => {
+  const saveCurrentState = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const dataUrl = canvas.toDataURL('image/png');
-    const newHistory = history.slice(0, historyIndex + 1);
-    newHistory.push(dataUrl);
+    if (!canvas) return '';
     
-    setHistory(newHistory);
-    setHistoryIndex(newHistory.length - 1);
+    return canvas.toDataURL('image/png');
   };
 
   const undo = () => {
-    if (historyIndex > 0) {
-      const newIndex = historyIndex - 1;
-      setHistoryIndex(newIndex);
-      
-      const canvas = canvasRef.current;
-      const ctx = context;
-      if (!canvas || !ctx) return;
+    if (!previousState) return;
+    
+    const canvas = canvasRef.current;
+    const ctx = context;
+    if (!canvas || !ctx) return;
 
-      const img = new Image();
-      img.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
-        onChange(history[newIndex]);
-      };
-      img.src = history[newIndex];
-    }
+    const img = new Image();
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+      onChange(previousState);
+      setPreviousState(''); // Сбрасываем предыдущее состояние после отмены
+    };
+    img.src = previousState;
   };
 
   const getMousePos = (e: React.MouseEvent | React.TouchEvent) => {
@@ -100,6 +83,9 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
     e.preventDefault();
     if (!context) return;
 
+    // Сохраняем текущее состояние перед началом рисования
+    setPreviousState(saveCurrentState());
+    
     setIsDrawing(true);
     const pos = getMousePos(e);
     context.beginPath();
@@ -120,8 +106,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
     
     setIsDrawing(false);
     
-    // Сохраняем в историю и обновляем значение
-    saveToHistory();
+    // Обновляем значение
     const canvas = canvasRef.current;
     if (canvas) {
       const dataUrl = canvas.toDataURL('image/png');
@@ -132,13 +117,11 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   const clearCanvas = () => {
     if (!context || !canvasRef.current) return;
     
+    // Сохраняем текущее состояние перед очисткой
+    setPreviousState(saveCurrentState());
+    
     context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     onChange('');
-    
-    // Сохраняем пустое состояние в историю
-    const dataUrl = canvasRef.current.toDataURL('image/png');
-    setHistory([dataUrl]);
-    setHistoryIndex(0);
   };
 
   return (
@@ -163,9 +146,9 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       <div className="absolute top-2 right-2 flex gap-1">
         <button
           onClick={undo}
-          disabled={historyIndex <= 0}
+          disabled={!previousState}
           className={`px-2 py-1 text-xs text-white rounded transition-colors ${
-            historyIndex > 0 
+            previousState 
               ? 'bg-amber-600/80 hover:bg-amber-600' 
               : 'bg-gray-500/50 cursor-not-allowed'
           }`}
