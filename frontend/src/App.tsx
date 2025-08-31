@@ -96,7 +96,7 @@ function App() {
           return (
             <Day1QuestionsScreen
               onBack={() => navigateTo("shadowImage")}
-              onNext={() => navigateTo("day2")}
+              onNext={() => navigateTo("timer1")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
               onOpenDeck={() => navigateTo("deck")}
@@ -104,10 +104,20 @@ function App() {
             />
           );
 
+        case "timer1":
+          return (
+            <TimerScreen
+              onBack={() => navigateTo("day1Questions")}
+              onContinue={() => navigateTo("day2")}
+              dayNumber={1}
+              dayTitle="День 1 - Призыв Тени"
+            />
+          );
+
         case "day2":
           return (
             <Day2EchoScreen
-              onBack={() => navigateTo("day1Questions")}
+              onBack={() => navigateTo("timer1")}
               onNext={() => navigateTo("day2Letters")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
