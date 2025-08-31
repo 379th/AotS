@@ -48,7 +48,7 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
               value={offering} 
               onChange={(e) => setOffering(e.target.value)} 
               placeholder="Вырази свою благодарность всем существам..."
-              className="w-full h-24 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200" 
+              className="w-full h-20 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200" 
             />
           </div>
         </div>
