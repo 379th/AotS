@@ -13,6 +13,7 @@ import { Day3ResourceScreen } from './screens/Day3ResourceScreen';
 import { Day4IntegrationScreen } from './screens/Day4IntegrationScreen';
 import { Day4TempleScreen } from './screens/Day4TempleScreen';
 import { CompletionScreen } from './screens/CompletionScreen';
+import { ProgressScreen } from './screens/ProgressScreen';
 import { GuidanceScreen } from './screens/GuidanceScreen';
 import { ShadowScreen } from './screens/ShadowScreen';
 import { CreatorScreen } from './screens/CreatorScreen';
@@ -26,10 +27,20 @@ import { initTelegram } from './utils/telegram';
 
 function App() {
   const [route, setRoute] = useState<RouteType>("intro");
+  const [previousRoute, setPreviousRoute] = useState<RouteType>("intro");
 
   useEffect(() => {
     initTelegram();
   }, []);
+
+  const navigateTo = (newRoute: RouteType) => {
+    setPreviousRoute(route);
+    setRoute(newRoute);
+  };
+
+  const goBack = () => {
+    setRoute(previousRoute);
+  };
 
   const renderScreen = () => {
     switch (route) {
@@ -94,7 +105,7 @@ function App() {
       case "day2":
         return (
           <Day2EchoScreen
-            onBack={() => setRoute("day1")}
+            onBack={() => setRoute("day1Questions")}
             onNext={() => setRoute("day2Letters")}
             onAboutQuest={() => setRoute("quest")}
             onGoDay1={() => setRoute("day1")}
@@ -191,6 +202,16 @@ function App() {
         return (
           <CompletionScreen
             onNext={() => setRoute("guidance")}
+            onOpenProgress={() => setRoute("progress")}
+            onOpenJournal={() => setRoute("journal")}
+          />
+        );
+
+      case "progress":
+        return (
+          <ProgressScreen
+            onBack={() => setRoute("completion")}
+            onNavigateToDay={(day) => setRoute(day as RouteType)}
           />
         );
 
@@ -211,7 +232,7 @@ function App() {
         return <CreatorScreen onBack={() => setRoute("intro")} />;
 
       case "quest":
-        return <QuestScreen onBack={() => setRoute("intro")} />;
+        return <QuestScreen onBack={goBack} />;
 
       case "faq":
         return <FaqScreen onBack={() => setRoute("intro")} />;

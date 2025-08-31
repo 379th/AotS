@@ -4,3 +4,4 @@ export { RoundButton } from './RoundButton';
 export { Pill } from './Pill';
 export { NavigationPanel } from './NavigationPanel';
 export { BottomButtonPanel } from './BottomButtonPanel';
+export { DrawingCanvas } from './DrawingCanvas';

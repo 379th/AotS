@@ -3,9 +3,15 @@ import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 
 interface CompletionScreenProps {
   onNext: () => void;
+  onOpenProgress: () => void;
+  onOpenJournal: () => void;
 }
 
-export const CompletionScreen: React.FC<CompletionScreenProps> = ({ onNext }) => {
+export const CompletionScreen: React.FC<CompletionScreenProps> = ({ 
+  onNext, 
+  onOpenProgress, 
+  onOpenJournal 
+}) => {
   return (
     <ScreenFrame>
       <TitleBar text="Завершение" />
@@ -13,8 +19,16 @@ export const CompletionScreen: React.FC<CompletionScreenProps> = ({ onNext }) =>
         <div className="h-[66svh] overflow-hidden rounded-xl border border-amber-900/30 bg-white/5 p-4 text-amber-200/80 text-sm">
           Круг пройден. Сохрани свои ответы в дневнике. Если хочешь, вернись к любому дню и дополни.
         </div>
-        <div className="mt-3">
-          <Pill onClick={onNext} className="w-full">К напутствию</Pill>
+        <div className="mt-3 space-y-2">
+          <Pill onClick={onOpenProgress} className="w-full">
+            Прогресс
+          </Pill>
+          <Pill onClick={onOpenJournal} className="w-full">
+            Дневник
+          </Pill>
+          <Pill onClick={onNext} className="w-full">
+            К напутствию
+          </Pill>
         </div>
       </div>
     </ScreenFrame>

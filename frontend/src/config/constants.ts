@@ -13,6 +13,7 @@ export type RouteType =
   | "day4Integration"
   | "day4Temple"
   | "completion"
+  | "progress"
   | "guidance"
   | "shadow" 
   | "creator" 
