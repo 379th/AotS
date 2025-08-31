@@ -14,7 +14,8 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  const [previousState, setPreviousState] = useState<string>('');
+  const [history, setHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,33 +37,51 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       const img = new Image();
       img.onload = () => {
         ctx.drawImage(img, 0, 0);
+        // Инициализируем историю с сохраненным рисунком
+        const dataUrl = canvas.toDataURL('image/png');
+        setHistory([dataUrl]);
+        setHistoryIndex(0);
       };
       img.src = value;
+    } else {
+      // Инициализируем пустую историю
+      const dataUrl = canvas.toDataURL('image/png');
+      setHistory([dataUrl]);
+      setHistoryIndex(0);
     }
   }, [value]);
 
-  const saveCurrentState = () => {
+  const saveToHistory = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return '';
+    if (!canvas) return;
+
+    const dataUrl = canvas.toDataURL('image/png');
     
-    return canvas.toDataURL('image/png');
+    // Удаляем все состояния после текущего индекса
+    const newHistory = history.slice(0, historyIndex + 1);
+    newHistory.push(dataUrl);
+    
+    setHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
   };
 
   const undo = () => {
-    if (!previousState) return;
-    
-    const canvas = canvasRef.current;
-    const ctx = context;
-    if (!canvas || !ctx) return;
+    if (historyIndex > 0) {
+      const newIndex = historyIndex - 1;
+      setHistoryIndex(newIndex);
+      
+      const canvas = canvasRef.current;
+      const ctx = context;
+      if (!canvas || !ctx) return;
 
-    const img = new Image();
-    img.onload = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
-      onChange(previousState);
-      setPreviousState(''); // Сбрасываем предыдущее состояние после отмены
-    };
-    img.src = previousState;
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        onChange(history[newIndex]);
+      };
+      img.src = history[newIndex];
+    }
   };
 
   const getMousePos = (e: React.MouseEvent | React.TouchEvent) => {
@@ -83,9 +102,6 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
     e.preventDefault();
     if (!context) return;
 
-    // Сохраняем текущее состояние перед началом рисования
-    setPreviousState(saveCurrentState());
-    
     setIsDrawing(true);
     const pos = getMousePos(e);
     context.beginPath();
@@ -106,7 +122,8 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
     
     setIsDrawing(false);
     
-    // Обновляем значение
+    // Сохраняем в историю и обновляем значение
+    saveToHistory();
     const canvas = canvasRef.current;
     if (canvas) {
       const dataUrl = canvas.toDataURL('image/png');
@@ -117,8 +134,8 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   const clearCanvas = () => {
     if (!context || !canvasRef.current) return;
     
-    // Сохраняем текущее состояние перед очисткой
-    setPreviousState(saveCurrentState());
+    // Сохраняем текущее состояние в историю перед очисткой
+    saveToHistory();
     
     context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     onChange('');
@@ -146,13 +163,13 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       <div className="absolute top-2 right-2 flex gap-1">
         <button
           onClick={undo}
-          disabled={!previousState}
+          disabled={historyIndex <= 0}
           className={`px-2 py-1 text-xs text-white rounded transition-colors ${
-            previousState 
+            historyIndex > 0 
               ? 'bg-amber-600/80 hover:bg-amber-600' 
               : 'bg-gray-500/50 cursor-not-allowed'
           }`}
-          title="Отменить последнее действие"
+          title={`Отменить последнее действие (${historyIndex} действий доступно)`}
         >
           ↩️
         </button>
