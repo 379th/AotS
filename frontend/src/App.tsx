@@ -189,7 +189,7 @@ function App() {
       case "day4Integration":
         return (
           <Day4IntegrationScreen
-            onBack={() => navigateTo("day4Temple")}
+            onBack={() => navigateTo("day3Mirror")}
             onNext={() => navigateTo("completion")}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}
