@@ -47,220 +47,220 @@ function App() {
       case "intro":
         return (
           <IntroScreen
-            onStart={() => setRoute("request")}
-            onAboutCreator={() => setRoute("creator")}
-            onAboutQuest={() => setRoute("quest")}
-            onOpenFaq={() => setRoute("faq")}
-            onOpenSettings={() => setRoute("settings")}
+            onStart={() => navigateTo("request")}
+            onAboutCreator={() => navigateTo("creator")}
+            onAboutQuest={() => navigateTo("quest")}
+            onOpenFaq={() => navigateTo("faq")}
+            onOpenSettings={() => navigateTo("settings")}
           />
         );
       
       case "request":
         return (
           <RequestScreen
-            onBack={() => setRoute("intro")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("intro")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day1":
         return (
           <Day1Screen
-            onBackToRequest={() => setRoute("request")}
-            onAccept={() => setRoute("shadowImage")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBackToRequest={() => navigateTo("request")}
+            onAccept={() => navigateTo("shadowImage")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "shadowImage":
         return (
           <ShadowImageScreen
-            onBackToDay1={() => setRoute("day1")}
-            onContinue={() => setRoute("day1Questions")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBackToDay1={() => navigateTo("day1")}
+            onContinue={() => navigateTo("day1Questions")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day1Questions":
         return (
           <Day1QuestionsScreen
-            onBack={() => setRoute("shadowImage")}
-            onNext={() => setRoute("day2")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("shadowImage")}
+            onNext={() => navigateTo("day2")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day2":
         return (
           <Day2EchoScreen
-            onBack={() => setRoute("day1Questions")}
-            onNext={() => setRoute("day2Letters")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day1Questions")}
+            onNext={() => navigateTo("day2Letters")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day2Letters":
         return (
           <Day2LettersScreen
-            onBack={() => setRoute("day2")}
-            onNext={() => setRoute("day3Mirror")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day2")}
+            onNext={() => navigateTo("day3Mirror")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day3Mirror":
         return (
           <Day3MirrorScreen
-            onBack={() => setRoute("day2Letters")}
-            onNext={() => setRoute("archetype")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day2Letters")}
+            onNext={() => navigateTo("archetype")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "archetype":
         return (
           <ArchetypeScreen
-            onBack={() => setRoute("day3Mirror")}
-            onNext={() => setRoute("day3Resource")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day3Mirror")}
+            onNext={() => navigateTo("day3Resource")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day3Resource":
         return (
           <Day3ResourceScreen
-            onBack={() => setRoute("archetype")}
-            onNext={() => setRoute("day3PartnerTask")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("archetype")}
+            onNext={() => navigateTo("day3PartnerTask")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day3PartnerTask":
         return (
           <Day3PartnerTaskScreen
-            onBack={() => setRoute("day3Resource")}
-            onNext={() => setRoute("day4Temple")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day3Resource")}
+            onNext={() => navigateTo("day4Temple")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day4Temple":
         return (
           <Day4TempleScreen
-            onBack={() => setRoute("day3PartnerTask")}
-            onNext={() => setRoute("day4Integration")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day3PartnerTask")}
+            onNext={() => navigateTo("day4Integration")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day4Integration":
         return (
           <Day4IntegrationScreen
-            onBack={() => setRoute("day4Temple")}
-            onNext={() => setRoute("completion")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("day4Temple")}
+            onNext={() => navigateTo("completion")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "completion":
         return (
           <CompletionScreen
-            onNext={() => setRoute("guidance")}
-            onOpenProgress={() => setRoute("progress")}
-            onOpenJournal={() => setRoute("journal")}
+            onNext={() => navigateTo("guidance")}
+            onOpenProgress={() => navigateTo("progress")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "progress":
         return (
           <ProgressScreen
-            onBack={() => setRoute("completion")}
-            onNavigateToDay={(day) => setRoute(day as RouteType)}
+            onBack={() => navigateTo("completion")}
+            onNavigateToDay={(day) => navigateTo(day as RouteType)}
           />
         );
 
       case "guidance":
         return (
-          <GuidanceScreen onBackToHome={() => setRoute("intro")} />
+          <GuidanceScreen onBackToHome={() => navigateTo("intro")} />
         );
 
       case "shadow":
         return (
           <ShadowScreen
-            onBackToDay1={() => setRoute("day1")}
-            onContinue={() => setRoute("intro")}
+            onBackToDay1={() => navigateTo("day1")}
+            onContinue={() => navigateTo("intro")}
           />
         );
 
       case "creator":
-        return <CreatorScreen onBack={() => setRoute("intro")} />;
+        return <CreatorScreen onBack={() => navigateTo("intro")} />;
 
       case "quest":
         return <QuestScreen onBack={goBack} />;
 
       case "faq":
-        return <FaqScreen onBack={() => setRoute("intro")} />;
+        return <FaqScreen onBack={() => navigateTo("intro")} />;
 
       case "deck":
         return (
           <DeckScreen 
-            onBack={() => setRoute("request")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("request")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "journal":
         return (
           <JournalScreen 
-            onBack={() => setRoute("request")}
-            onAboutQuest={() => setRoute("quest")}
-            onGoDay1={() => setRoute("day1")}
-            onOpenDeck={() => setRoute("deck")}
-            onOpenJournal={() => setRoute("journal")}
+            onBack={() => navigateTo("request")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "settings":
-        return <SettingsScreen onBack={() => setRoute("intro")} />;
+        return <SettingsScreen onBack={() => navigateTo("intro")} />;
 
       default:
         return (
@@ -268,7 +268,7 @@ function App() {
             <div className="text-amber-50 text-center">
               <h1 className="text-2xl font-bold mb-4">Экран "{route}" в разработке</h1>
               <button 
-                onClick={() => setRoute("intro")}
+                onClick={() => navigateTo("intro")}
                 className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700"
               >
                 Вернуться на главную
