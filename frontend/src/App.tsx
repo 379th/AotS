@@ -251,7 +251,7 @@ function App() {
       case "journal":
         return (
           <JournalScreen 
-            onBack={() => navigateTo("request")}
+            onBack={goBack}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}
             onOpenDeck={() => navigateTo("deck")}
