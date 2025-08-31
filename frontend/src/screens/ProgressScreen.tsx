@@ -20,7 +20,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
     { id: 'day1', title: 'День 1 - Призыв Тени', completed: !!day1Completed },
     { id: 'day2', title: 'День 2 - Пещера Эха', completed: !!day2Completed },
     { id: 'day3Mirror', title: 'День 3 - Зеркало Перехода', completed: !!day3Completed },
-    { id: 'day4Integration', title: 'День 4 - Интеграция', completed: !!day4Completed },
+    { id: 'day4Temple', title: 'День 4 - Храм Целостности', completed: !!day4Completed },
   ];
 
   const totalCompleted = days.filter(day => day.completed).length;
