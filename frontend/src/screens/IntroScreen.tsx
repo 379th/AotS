@@ -42,10 +42,9 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
         <button onClick={onStart} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Begine.png" alt={t.intro.start} className="w-full" /></button>
         <button onClick={onAboutQuest} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Quest_boton.png" alt={t.intro.aboutQuest} className="w-full" /></button>
       </div>
-      <div className="mx-auto mt-2 w-[92%] grid grid-cols-3 gap-2">
-        <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/F_A_Q.png" alt={t.intro.faq} className="w-full" /></button>
-        <div></div>
-        <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105"><img src="/Sorce/Setings.png" alt={t.intro.settings} className="w-full" /></button>
+      <div className="mx-auto mt-2 w-[92%] flex justify-center gap-2">
+        <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105 w-1/3 max-w-[120px]"><img src="/Sorce/F_A_Q.png" alt={t.intro.faq} className="w-full" /></button>
+        <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105 w-1/3 max-w-[120px]"><img src="/Sorce/Setings.png" alt={t.intro.settings} className="w-full" /></button>
       </div>
     </ScreenFrame>
   );
