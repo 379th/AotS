@@ -27,21 +27,23 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
       <TitleBar text="День 2 — Письма" />
 
       <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-3">
-        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-3 space-y-4">
-          <div>
-            <div className="text-xs text-amber-200/80 mb-2">Напиши письмо от лица Тени.</div>
+        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-4 space-y-6">
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Напиши письмо от лица Тени.</div>
             <textarea
               value={shadowLetter}
               onChange={(e) => setShadowLetter(e.target.value)}
-              className="w-full h-28 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              placeholder="Дорогой взрослый, я хочу сказать тебе..."
+              className="w-full h-40 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
-          <div>
-            <div className="text-xs text-amber-200/80 mb-2">Ответь на него от лица взрослого тебя. Заверши фразой: «Я вижу тебя. Я готов быть с тобой».</div>
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Ответь на него от лица взрослого тебя. Заверши фразой: «Я вижу тебя. Я готов быть с тобой».</div>
             <textarea
               value={adultReply}
               onChange={(e) => setAdultReply(e.target.value)}
-              className="w-full h-28 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              placeholder="Дорогая Тень, я слышу тебя..."
+              className="w-full h-40 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
         </div>
