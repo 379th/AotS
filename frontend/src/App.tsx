@@ -60,6 +60,7 @@ function App() {
           return (
             <RequestScreen
               onBack={() => navigateTo("intro")}
+              onNext={() => navigateTo("timer1")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
               onOpenDeck={() => navigateTo("deck")}
@@ -67,35 +68,21 @@ function App() {
             />
           );
 
-        case "day1":
-          return (
-            <Day1Screen
-              onBackToRequest={() => navigateTo("request")}
-              onAccept={() => navigateTo("shadowImage")}
-              onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
-              onOpenDeck={() => navigateTo("deck")}
-              onOpenJournal={() => navigateTo("journal")}
-            />
-          );
-
-        case "shadowImage":
-          return (
-            <ShadowImageScreen
-              onBackToDay1={() => navigateTo("day1")}
-              onContinue={() => navigateTo("day1Questions")}
-              onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
-              onOpenDeck={() => navigateTo("deck")}
-              onOpenJournal={() => navigateTo("journal")}
-            />
-          );
-
-      case "day1Questions":
+      case "timer1":
         return (
-          <Day1QuestionsScreen
-            onBack={() => navigateTo("shadowImage")}
-            onNext={() => navigateTo("timer1")}
+          <TimerScreen
+            onBack={() => navigateTo("request")}
+            onContinue={() => navigateTo("day1")}
+            dayNumber={0}
+            dayTitle="Подготовка к квесту"
+          />
+        );
+
+      case "day1":
+        return (
+          <Day1Screen
+            onBackToRequest={() => navigateTo("timer1")}
+            onAccept={() => navigateTo("shadowImage")}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}
             onOpenDeck={() => navigateTo("deck")}
@@ -103,20 +90,34 @@ function App() {
           />
         );
 
-      case "timer1":
+      case "shadowImage":
         return (
-          <TimerScreen
-            onBack={() => navigateTo("day1Questions")}
-            onContinue={() => navigateTo("day2")}
-            dayNumber={1}
-            dayTitle="День 1 - Призыв Тени"
+          <ShadowImageScreen
+            onBackToDay1={() => navigateTo("day1")}
+            onContinue={() => navigateTo("day1Questions")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
+          />
+        );
+
+      case "day1Questions":
+        return (
+          <Day1QuestionsScreen
+            onBack={() => navigateTo("shadowImage")}
+            onNext={() => navigateTo("day2")}
+            onAboutQuest={() => navigateTo("quest")}
+            onGoDay1={() => navigateTo("day1")}
+            onOpenDeck={() => navigateTo("deck")}
+            onOpenJournal={() => navigateTo("journal")}
           />
         );
 
       case "day2":
         return (
           <Day2EchoScreen
-            onBack={() => navigateTo("timer1")}
+            onBack={() => navigateTo("day1Questions")}
             onNext={() => navigateTo("day2Letters")}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}

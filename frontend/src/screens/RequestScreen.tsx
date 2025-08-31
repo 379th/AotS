@@ -6,6 +6,7 @@ import { useTranslation } from '../i18n';
 
 interface RequestScreenProps {
   onBack: () => void;
+  onNext: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
   onOpenDeck: () => void;
@@ -14,6 +15,7 @@ interface RequestScreenProps {
 
 export const RequestScreen: React.FC<RequestScreenProps> = ({
   onBack,
+  onNext,
   onAboutQuest,
   onGoDay1,
   onOpenDeck,
@@ -69,7 +71,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
           {/* Панель кнопок */}
           <BottomButtonPanel
             onBack={onBack}
-            onContinue={onGoDay1}
+            onContinue={onNext}
           />
 
           {/* Панель навигации */}
