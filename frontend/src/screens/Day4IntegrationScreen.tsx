@@ -27,27 +27,28 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
       <TitleBar text="День 4 — Интеграция" />
 
       <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-3">
-        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-white/5 p-3 space-y-4">
-          <div>
-            <div className="text-xs text-amber-200/80 mb-2">Нарисуй или опиши символ своей новой целостности</div>
+        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-white/5 p-4 space-y-6">
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Нарисуй или опиши символ своей новой целостности</div>
             <DrawingCanvas 
               value={symbol} 
               onChange={setSymbol}
-              className="mb-2"
+              className="mb-3"
             />
             <textarea 
               value={symbol.startsWith('data:image') ? '' : symbol} 
               onChange={(e) => setSymbol(e.target.value)} 
               placeholder="Или опиши символ текстом..."
-              className="w-full h-16 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none" 
+              className="w-full h-32 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200" 
             />
           </div>
-          <div>
-            <div className="text-xs text-amber-200/80 mb-2">Подношение: внутренне и/или письменно вырази благодарность всем существам во всех мирах</div>
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Подношение: внутренне и/или письменно вырази благодарность всем существам во всех мирах</div>
             <textarea 
               value={offering} 
               onChange={(e) => setOffering(e.target.value)} 
-              className="w-full h-32 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none" 
+              placeholder="Вырази свою благодарность всем существам..."
+              className="w-full h-32 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200" 
             />
           </div>
         </div>
