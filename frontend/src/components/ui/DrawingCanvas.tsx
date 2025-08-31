@@ -16,76 +16,89 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Инициализация canvas и истории
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || isInitialized) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Настройка контекста для лучшего рисования пальцем
-    ctx.strokeStyle = '#d97706'; // amber-600
-    ctx.lineWidth = 4; // Увеличил толщину для пальца
+    // Настройка контекста
+    ctx.strokeStyle = '#d97706';
+    ctx.lineWidth = 4;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
     setContext(ctx);
 
-    // Восстановление сохраненного рисунка
+    // Создаем начальное состояние
+    const initialDataUrl = canvas.toDataURL('image/png');
+    setHistory([initialDataUrl]);
+    setHistoryIndex(0);
+    setIsInitialized(true);
+    
+    console.log('Canvas инициализирован. Начальное состояние:', initialDataUrl.substring(0, 50) + '...');
+
+    // Если есть сохраненное значение, загружаем его
     if (value && value.startsWith('data:image')) {
       const img = new Image();
       img.onload = () => {
         ctx.drawImage(img, 0, 0);
-        // Инициализируем историю с сохраненным рисунком
         const dataUrl = canvas.toDataURL('image/png');
         setHistory([dataUrl]);
         setHistoryIndex(0);
-        console.log('История инициализирована с сохраненным рисунком:', dataUrl.substring(0, 50) + '...');
+        console.log('Загружен сохраненный рисунок');
       };
       img.src = value;
-    } else {
-      // Инициализируем пустую историю
-      const dataUrl = canvas.toDataURL('image/png');
-      setHistory([dataUrl]);
-      setHistoryIndex(0);
-      console.log('История инициализирована с пустым холстом:', dataUrl.substring(0, 50) + '...');
     }
-  }, [value]);
+  }, [value, isInitialized]);
 
   const saveToHistory = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !isInitialized) return;
 
     const dataUrl = canvas.toDataURL('image/png');
     
-    // Удаляем все состояния после текущего индекса
-    const newHistory = history.slice(0, historyIndex + 1);
-    newHistory.push(dataUrl);
+    setHistory(prevHistory => {
+      const newHistory = prevHistory.slice(0, historyIndex + 1);
+      newHistory.push(dataUrl);
+      console.log('Сохранено в историю. Новый размер:', newHistory.length);
+      return newHistory;
+    });
     
-    setHistory(newHistory);
-    setHistoryIndex(newHistory.length - 1);
-    
-    console.log('Сохранено в историю. Индекс:', newHistory.length - 1, 'Размер истории:', newHistory.length);
+    setHistoryIndex(prevIndex => {
+      const newIndex = prevIndex + 1;
+      console.log('Новый индекс истории:', newIndex);
+      return newIndex;
+    });
   };
 
   const undo = () => {
     console.log('Попытка отмены. Текущий индекс:', historyIndex, 'Размер истории:', history.length);
     
-    if (historyIndex > 0) {
+    if (historyIndex > 0 && history.length > 1) {
       const newIndex = historyIndex - 1;
-      setHistoryIndex(newIndex);
-      
       const canvas = canvasRef.current;
       const ctx = context;
-      if (!canvas || !ctx) return;
+      
+      if (!canvas || !ctx) {
+        console.log('Canvas или контекст недоступны');
+        return;
+      }
 
       const img = new Image();
       img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
+        setHistoryIndex(newIndex);
         onChange(history[newIndex]);
         console.log('Отменено действие. Новый индекс:', newIndex);
+      };
+      img.onerror = () => {
+        console.log('Ошибка загрузки изображения для отмены');
       };
       img.src = history[newIndex];
     } else {
@@ -109,7 +122,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
 
   const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-    if (!context) return;
+    if (!context || !isInitialized) return;
 
     setIsDrawing(true);
     const pos = getMousePos(e);
@@ -127,12 +140,14 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   };
 
   const stopDrawing = () => {
-    if (!isDrawing) return;
+    if (!isDrawing || !isInitialized) return;
     
     setIsDrawing(false);
     
-    // Сохраняем в историю и обновляем значение
+    // Сохраняем в историю
     saveToHistory();
+    
+    // Обновляем значение
     const canvas = canvasRef.current;
     if (canvas) {
       const dataUrl = canvas.toDataURL('image/png');
@@ -141,13 +156,14 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   };
 
   const clearCanvas = () => {
-    if (!context || !canvasRef.current) return;
+    if (!context || !canvasRef.current || !isInitialized) return;
     
-    // Сохраняем текущее состояние в историю перед очисткой
+    // Сохраняем текущее состояние перед очисткой
     saveToHistory();
     
     context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     onChange('');
+    console.log('Холст очищен');
   };
 
   return (
@@ -167,14 +183,14 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         onTouchStart={startDrawing}
         onTouchMove={draw}
         onTouchEnd={stopDrawing}
-        style={{ touchAction: 'none' }} // Отключаем стандартные жесты браузера
+        style={{ touchAction: 'none' }}
       />
       <div className="absolute top-2 right-2 flex gap-1">
         <button
           onClick={undo}
-          disabled={historyIndex <= 0}
+          disabled={historyIndex <= 0 || !isInitialized}
           className={`px-2 py-1 text-xs text-white rounded transition-colors ${
-            historyIndex > 0 
+            historyIndex > 0 && isInitialized
               ? 'bg-amber-600/80 hover:bg-amber-600' 
               : 'bg-gray-500/50 cursor-not-allowed'
           }`}
@@ -184,7 +200,12 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         </button>
         <button
           onClick={clearCanvas}
-          className="px-2 py-1 text-xs bg-amber-600/80 text-white rounded hover:bg-amber-600 transition-colors"
+          disabled={!isInitialized}
+          className={`px-2 py-1 text-xs text-white rounded transition-colors ${
+            isInitialized
+              ? 'bg-amber-600/80 hover:bg-amber-600'
+              : 'bg-gray-500/50 cursor-not-allowed'
+          }`}
           title="Очистить всё"
         >
           🗑️
@@ -192,7 +213,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       </div>
       {/* Отладочная информация */}
       <div className="text-xs text-amber-200/40 mt-1">
-        История: {historyIndex}/{history.length}
+        {isInitialized ? `История: ${historyIndex}/${history.length}` : 'Инициализация...'}
       </div>
     </div>
   );
