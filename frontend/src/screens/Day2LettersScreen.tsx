@@ -34,7 +34,7 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
               value={shadowLetter}
               onChange={(e) => setShadowLetter(e.target.value)}
               placeholder="Дорогой взрослый, я хочу сказать тебе..."
-              style={{ height: '180px' }}
+              style={{ height: '190px' }}
               className="w-full px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
@@ -44,7 +44,7 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
               value={adultReply}
               onChange={(e) => setAdultReply(e.target.value)}
               placeholder="Дорогая Тень, я слышу тебя..."
-              style={{ height: '180px' }}
+              style={{ height: '190px' }}
               className="w-full px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
