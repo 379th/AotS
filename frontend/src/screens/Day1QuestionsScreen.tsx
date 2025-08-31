@@ -28,31 +28,34 @@ export const Day1QuestionsScreen: React.FC<Day1QuestionsScreenProps> = ({
       <TitleBar text="День 1 — Вопросы" />
 
       <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[#1b1130] p-3">
-        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-3 space-y-4">
-          <div>
-            <div className="text-xs text-amber-200/80 mb-1">Где в жизни ты это проявляешь?</div>
+        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-[#241b2f] p-4 space-y-6">
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Где в жизни ты это проявляешь?</div>
             <textarea
               value={q1}
               onChange={(e) => setQ1(e.target.value)}
-              className="w-full h-24 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              placeholder="Опиши ситуации, где ты замечаешь это поведение..."
+              className="w-full h-32 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
 
-          <div>
-            <div className="text-xs text-amber-200/80 mb-1">Как это защищает тебя?</div>
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Как это защищает тебя?</div>
             <textarea
               value={q2}
               onChange={(e) => setQ2(e.target.value)}
-              className="w-full h-24 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              placeholder="Подумай о том, какую защиту даёт тебе это поведение..."
+              className="w-full h-32 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
 
-          <div>
-            <div className="text-xs text-amber-200/80 mb-1">Что чувствует твой внутренний ребёнок?</div>
+          <div className="flex-1 min-h-0">
+            <div className="text-sm font-medium text-amber-200/90 mb-3">Что чувствует твой внутренний ребёнок?</div>
             <textarea
               value={q3}
               onChange={(e) => setQ3(e.target.value)}
-              className="w-full h-24 px-3 py-2 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              placeholder="Прислушайся к чувствам своего внутреннего ребёнка..."
+              className="w-full h-32 px-4 py-3 text-sm bg-white/10 border border-amber-900/30 rounded-lg text-amber-200 placeholder-amber-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200"
             />
           </div>
         </div>
