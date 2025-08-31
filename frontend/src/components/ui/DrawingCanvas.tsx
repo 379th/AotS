@@ -41,6 +41,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         const dataUrl = canvas.toDataURL('image/png');
         setHistory([dataUrl]);
         setHistoryIndex(0);
+        console.log('История инициализирована с сохраненным рисунком:', dataUrl.substring(0, 50) + '...');
       };
       img.src = value;
     } else {
@@ -48,6 +49,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
       const dataUrl = canvas.toDataURL('image/png');
       setHistory([dataUrl]);
       setHistoryIndex(0);
+      console.log('История инициализирована с пустым холстом:', dataUrl.substring(0, 50) + '...');
     }
   }, [value]);
 
@@ -63,9 +65,13 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
     
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
+    
+    console.log('Сохранено в историю. Индекс:', newHistory.length - 1, 'Размер истории:', newHistory.length);
   };
 
   const undo = () => {
+    console.log('Попытка отмены. Текущий индекс:', historyIndex, 'Размер истории:', history.length);
+    
     if (historyIndex > 0) {
       const newIndex = historyIndex - 1;
       setHistoryIndex(newIndex);
@@ -79,8 +85,11 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
         onChange(history[newIndex]);
+        console.log('Отменено действие. Новый индекс:', newIndex);
       };
       img.src = history[newIndex];
+    } else {
+      console.log('Отмена невозможна - нет действий для отмены');
     }
   };
 
@@ -180,6 +189,10 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         >
           🗑️
         </button>
+      </div>
+      {/* Отладочная информация */}
+      <div className="text-xs text-amber-200/40 mt-1">
+        История: {historyIndex}/{history.length}
       </div>
     </div>
   );
