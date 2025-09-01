@@ -26,11 +26,22 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useLocalStorage<Theme>('theme', 'dark');
 
+  console.log('ThemeProvider: текущая тема из localStorage:', theme);
+
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    console.log('Переключение темы с', theme, 'на', newTheme);
+    setTheme(newTheme);
+  };
+
+  const handleSetTheme = (newTheme: Theme) => {
+    console.log('Установка темы:', newTheme, 'текущая:', theme);
+    setTheme(newTheme);
   };
 
   useEffect(() => {
+    console.log('ThemeProvider useEffect: тема изменилась на:', theme);
+    
     // Применяем тему к body для глобальных стилей
     document.body.className = theme;
     
@@ -42,6 +53,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       document.documentElement.style.setProperty('--text-secondary', '#d1d5db');
       document.documentElement.style.setProperty('--border-primary', 'rgba(216, 186, 144, 0.3)');
       document.documentElement.style.setProperty('--border-secondary', 'rgba(216, 186, 144, 0.2)');
+      console.log('Установлены CSS переменные для темной темы');
     } else {
       document.documentElement.style.setProperty('--bg-primary', '#f8fafc');
       document.documentElement.style.setProperty('--bg-secondary', '#f1f5f9');
@@ -49,11 +61,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       document.documentElement.style.setProperty('--text-secondary', '#475569');
       document.documentElement.style.setProperty('--border-primary', 'rgba(216, 186, 144, 0.5)');
       document.documentElement.style.setProperty('--border-secondary', 'rgba(216, 186, 144, 0.3)');
+      console.log('Установлены CSS переменные для светлой темы');
     }
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme: handleSetTheme }}>
       {children}
     </ThemeContext.Provider>
   );

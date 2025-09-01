@@ -103,7 +103,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
                     className={`px-3 py-1 rounded text-xs transition-colors ${
                       theme === 'dark' 
                         ? 'bg-amber-500 text-white' 
-                        : 'bg-white/10 text-amber-200'
+                        : 'bg-white/10 text-amber-200 hover:bg-white/20'
                     }`}
                   >
                     Темная
@@ -113,10 +113,22 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
                     className={`px-3 py-1 rounded text-xs transition-colors ${
                       theme === 'light' 
                         ? 'bg-amber-500 text-white' 
-                        : 'bg-white/10 text-amber-200'
+                        : 'bg-white/10 text-amber-200 hover:bg-white/20'
                     }`}
                   >
                     Светлая
+                  </button>
+                </div>
+                <div className="mt-2">
+                  <button
+                    onClick={() => {
+                      const newTheme = theme === 'dark' ? 'light' : 'dark';
+                      console.log('Тестовое переключение темы с', theme, 'на', newTheme);
+                      setTheme(newTheme);
+                    }}
+                    className="px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    Тест: Переключить тему
                   </button>
                 </div>
               </div>

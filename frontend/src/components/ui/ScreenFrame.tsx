@@ -8,6 +8,12 @@ interface ScreenFrameProps {
 export const ScreenFrame: React.FC<ScreenFrameProps> = ({ children }) => {
   const { theme } = useTheme();
   
+  // Отладка применения темы
+  React.useEffect(() => {
+    console.log('ScreenFrame: тема изменена на:', theme);
+    console.log('document.body.className:', document.body.className);
+  }, [theme]);
+  
   return (
     <div 
       className={`relative mx-auto min-h-[100svh] w-full max-w-[520px] overflow-hidden bg-transparent flex flex-col transition-colors duration-300 ${
