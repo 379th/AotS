@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ScreenFrame } from '../components/ui';
 import { initTelegram } from '../utils/telegram';
 import { useTranslation } from '../i18n';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -19,6 +20,7 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
   onOpenSettings
 }) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   
   useEffect(() => {
     initTelegram();
@@ -32,7 +34,11 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
       </div>
 
       {/* Центральная картинка */}
-      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 overflow-hidden">
+      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/30' 
+          : 'border-amber-900/50'
+      }`}>
         <img src="/Sorce/Screen_Start.png" alt="Start" className="w-full h-[60svh] object-cover" />
       </div>
 

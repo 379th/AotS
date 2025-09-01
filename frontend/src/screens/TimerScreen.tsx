@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface TimerScreenProps {
   onBack: () => void;
@@ -14,6 +15,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   dayNumber, 
   dayTitle 
 }) => {
+  const { theme } = useTheme();
   const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 часа в секундах
   const [isTestMode] = useState(true); // Тестовый режим
 
@@ -46,15 +48,27 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
     <ScreenFrame>
       <TitleBar text={`Таймер - ${dayTitle}`} />
       
-      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))] p-3">
-        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-white/5 p-4 space-y-6">
+      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))]' 
+          : 'border-amber-900/50 bg-gradient-to-b from-amber-100/80 to-amber-200/80'
+      }`}>
+        <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
+          theme === 'dark' 
+            ? 'border-amber-900/30 bg-white/5' 
+            : 'border-amber-900/40 bg-white/90'
+        }`}>
           
           {/* Заголовок */}
           <div className="text-center">
-            <div className="text-lg font-bold text-amber-200 mb-2">
+            <div className={`text-lg font-bold mb-2 transition-colors duration-300 ${
+              theme === 'dark' ? 'text-amber-200' : 'text-amber-800'
+            }`}>
               Время для интеграции
             </div>
-            <div className="text-sm text-amber-200/80">
+            <div className={`text-sm transition-colors duration-300 ${
+              theme === 'dark' ? 'text-amber-200/80' : 'text-amber-700'
+            }`}>
               День {dayNumber} завершен. Отдохните и подготовьтесь к следующему дню.
             </div>
           </div>
@@ -73,17 +87,25 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
               ></div>
             </div>
             
-            <div className="text-sm text-amber-200/80">
+            <div className={`text-sm transition-colors duration-300 ${
+              theme === 'dark' ? 'text-amber-200/80' : 'text-amber-700'
+            }`}>
               {isTestMode ? 'Тестовый режим' : `${progressPercentage.toFixed(1)}% времени прошло`}
             </div>
           </div>
 
           {/* Информация */}
-          <div className="bg-amber-900/20 rounded-lg p-4 space-y-3">
-            <div className="text-sm text-amber-200/90">
+          <div className={`rounded-lg p-4 space-y-3 transition-colors duration-300 ${
+            theme === 'dark' ? 'bg-amber-900/20' : 'bg-amber-900/10'
+          }`}>
+            <div className={`text-sm transition-colors duration-300 ${
+              theme === 'dark' ? 'text-amber-200/90' : 'text-amber-800'
+            }`}>
               <strong>Рекомендации:</strong>
             </div>
-            <ul className="text-sm text-amber-200/70 space-y-2 list-disc list-inside">
+            <ul className={`text-sm space-y-2 list-disc list-inside transition-colors duration-300 ${
+              theme === 'dark' ? 'text-amber-200/70' : 'text-amber-700'
+            }`}>
               <li>Отдохните и дайте время для интеграции опыта</li>
               <li>Практикуйте осознанность и медитацию</li>
               <li>Записывайте свои мысли и чувства</li>
@@ -123,3 +145,4 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
     </ScreenFrame>
   );
 };
+

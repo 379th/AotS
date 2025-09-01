@@ -3,6 +3,7 @@ import { ArrowLeft, Send } from 'lucide-react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { openTelegramLink } from '../utils/telegram';
 import { useTranslation } from '../i18n';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface CreatorScreenProps {
   onBack: () => void;
@@ -10,12 +11,17 @@ interface CreatorScreenProps {
 
 export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   
   return (
     <ScreenFrame>
       <TitleBar text={t.creator.title} />
       
-      <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+      <div className={`mx-auto mt-2 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/40 bg-input-gradient text-amber-900' 
+          : 'border-amber-900/60 bg-gradient-to-b from-amber-100/90 to-amber-200/90 text-amber-800'
+      }`}>
         <h3 className="text-base md:text-lg font-bold">{t.creator.acknowledgments}</h3>
         <div className="h-[66svh] mt-2 space-y-2 text-[14px] leading-relaxed overflow-y-auto">
           {t.creator.acknowledgmentsList.map((line, i) => (
@@ -26,8 +32,16 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
         </div>
       </div>
       
-      <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <div className="w-full rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed">
+      <div className={`mx-auto mt-2 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/40 bg-input-gradient text-amber-900' 
+          : 'border-amber-900/60 bg-gradient-to-b from-amber-100/90 to-amber-200/90 text-amber-800'
+      }`}>
+        <div className={`w-full rounded-xl border p-4 leading-relaxed transition-colors duration-300 ${
+          theme === 'dark' 
+            ? 'border-amber-900/30 bg-white/70' 
+            : 'border-amber-900/40 bg-white/95'
+        }`}>
           <p className="mt-2 text-[14px] md:text-[15px]">
             Vladimir Lakshman Das — практик пути «Радость. Осознанность. Баланс. Гармония.» Он соединяет игру и познание: от индийской традиции и «Лилы» до Юнга и современной психологии. Пишет и снимает, исследует человечество как социолог, учится у жизни как ученик, работает с архетипами как игропрактик, мыслит как философ, дышит и дисциплинируется как йогин, путешествует взглядом фотографа, а в цифровом мире держит осознанность как кибер-монах. Его цель — познакомить тебя с твоей изначальной личностью, научись быть наблюдателем себя, чтобы вернуться к целостности без насилия, через игру, внимание и тепло к себе.
           </p>

@@ -16,12 +16,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* CSS переменные для тем */
+  --bg-primary: #0f0f23;
+  --bg-secondary: #1a1a2e;
+  --text-primary: #f3f4f6;
+  --text-secondary: #d1d5db;
+  --border-primary: rgba(216, 186, 144, 0.3);
+  --border-secondary: rgba(216, 186, 144, 0.2);
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: #120a22 url('/Sorce/Background.png') center/cover no-repeat fixed;
+  transition: background-color 0.3s ease;
+}
+
+/* Стили для светлой темы */
+body.light {
+  background: #f8fafc url('/Sorce/Background.png') center/cover no-repeat fixed;
+}
+
+/* Стили для темной темы */
+body.dark {
   background: #120a22 url('/Sorce/Background.png') center/cover no-repeat fixed;
 }
 

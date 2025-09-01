@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface Day1ScreenProps {
   onBackToRequest: () => void;
@@ -19,14 +20,23 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
   onOpenDeck,
   onOpenJournal
 }) => {
+  const { theme } = useTheme();
   const [imgUrl, setImgUrl] = useLocalStorageString("sq.day1.forest.url");
 
   return (
     <ScreenFrame>
       <TitleBar text="День 1 — Призыв Тени" />
 
-      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.08),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.8),rgba(36,48,56,.8))] p-2">
-        <div className="relative h-[66svh] overflow-hidden rounded-xl border border-teal-700/30">
+      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.08),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.8),rgba(36,48,56,.8))]' 
+          : 'border-amber-900/50 bg-gradient-to-b from-amber-100/80 to-amber-200/80'
+      }`}>
+        <div className={`relative h-[66svh] overflow-hidden rounded-xl border transition-colors duration-300 ${
+          theme === 'dark' 
+            ? 'border-teal-700/30' 
+            : 'border-amber-900/40'
+        }`}>
           {imgUrl ? (
             <img 
               src={imgUrl} 
@@ -39,7 +49,11 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
                 const next = window.prompt("Укажи URL картинки для Дня 1", imgUrl || "");
                 if (next !== null) setImgUrl(next.trim());
               }} 
-              className="flex h-full w-full items-start justify-center pt-2 text-emerald-200/80 text-sm hover:text-emerald-200"
+              className={`flex h-full w-full items-start justify-center pt-2 text-sm hover:opacity-80 transition-colors duration-300 ${
+                theme === 'dark' 
+                  ? 'text-emerald-200/80 hover:text-emerald-200' 
+                  : 'text-amber-700/80 hover:text-amber-800'
+              }`}
             >
               (Укажи URL картинки)
             </button>

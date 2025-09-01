@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useTranslation } from '../i18n';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface SettingsScreenProps {
   onBack: () => void;
@@ -11,7 +12,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
   const { t, language, changeLanguage } = useTranslation();
   const [notifications, setNotifications] = useLocalStorage('notifications', true);
   const [soundEnabled, setSoundEnabled] = useLocalStorage('sound_enabled', false);
-  const [theme, setTheme] = useLocalStorage('theme', 'dark');
+  const { theme, setTheme } = useTheme();
 
   return (
     <ScreenFrame>

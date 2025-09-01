@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTranslation } from '../i18n';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface FaqScreenProps {
   onBack: () => void;
@@ -9,13 +10,22 @@ interface FaqScreenProps {
 
 export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   
   return (
     <ScreenFrame>
       <TitleBar text="FAQ" />
       
-      <div className="mx-auto mt-2 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
-        <div className="h-[66svh] overflow-y-auto rounded-xl border border-amber-900/30 bg-white/70 p-4 leading-relaxed text-[14px] md:text-[15px]">
+      <div className={`mx-auto mt-2 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/40 bg-input-gradient text-amber-900' 
+          : 'border-amber-900/60 bg-gradient-to-b from-amber-100/90 to-amber-200/90 text-amber-800'
+      }`}>
+        <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 leading-relaxed text-[14px] md:text-[15px] transition-colors duration-300 ${
+          theme === 'dark' 
+            ? 'border-amber-900/30 bg-white/70' 
+            : 'border-amber-900/40 bg-white/95'
+        }`}>
           <h2 className="text-lg font-bold mb-4">FAQ «Принятие Тени»</h2>
           
           <h3 className="text-base font-bold mb-3">Техника безопасности!</h3>

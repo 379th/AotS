@@ -25,6 +25,7 @@ import { SettingsScreen } from './screens/SettingsScreen';
 import { RouteType } from './config/constants';
 import { initTelegram } from './utils/telegram';
 import { TimerScreen } from './screens/TimerScreen';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   const [route, setRoute] = useState<RouteType>("intro");
@@ -312,9 +313,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-[100svh]">
-      {renderScreen()}
-    </div>
+    <ThemeProvider>
+      <div className="min-h-[100svh]">
+        {renderScreen()}
+      </div>
+    </ThemeProvider>
   );
 }
 

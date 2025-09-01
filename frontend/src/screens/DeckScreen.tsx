@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface DeckScreenProps {
   onBack: () => void;
@@ -18,6 +19,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
   onOpenDeck,
   onOpenJournal
 }) => {
+  const { theme } = useTheme();
   const [currentPage, setCurrentPage] = useState(0);
   const [slots] = useLocalStorage<string[]>('sq.deck.slots', Array(126).fill(''));
   
@@ -46,7 +48,11 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
     <ScreenFrame>
       <TitleBar text="Колода" />
       
-      <div className="mx-auto mt-3 w-[92%] rounded-2xl border border-amber-900/40 bg-input-gradient p-4 text-amber-900">
+      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'border-amber-900/40 bg-input-gradient text-amber-900' 
+          : 'border-amber-900/60 bg-gradient-to-b from-amber-100/90 to-amber-200/90 text-amber-800'
+      }`}>
         {/* Информация о странице */}
         <div className="mb-3 text-center">
           <p className="text-sm font-semibold">
@@ -64,7 +70,11 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             return (
               <div 
                 key={cardNumber} 
-                className="aspect-square rounded-xl border border-amber-900/30 bg-white/80 flex flex-col items-center justify-center text-sm p-2"
+                className={`aspect-square rounded-xl border flex flex-col items-center justify-center text-sm p-2 transition-colors duration-300 ${
+                  theme === 'dark' 
+                    ? 'border-amber-900/30 bg-white/80' 
+                    : 'border-amber-900/40 bg-white/95'
+                }`}
               >
                 <div className="text-xs font-bold mb-1">#{cardNumber}</div>
                 {val ? (
@@ -82,7 +92,11 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
           <button 
             onClick={goToPreviousPage}
             disabled={currentPage === 0}
-            className="flex items-center justify-center gap-1 rounded-xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+            className={`flex items-center justify-center gap-1 rounded-xl border px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
+              theme === 'dark' 
+                ? 'border-amber-900/40 bg-white/70 text-amber-900' 
+                : 'border-amber-900/50 bg-white/90 text-amber-800'
+            }`}
           >
             <ChevronLeft className="h-4 w-4" />
             <span className="text-sm font-semibold">Предыдущая</span>
