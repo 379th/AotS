@@ -6,6 +6,7 @@ export type RouteType =
   | "day1Questions"
   | "timer1"
   | "day2"
+  | "day2Screen"
   | "day2Letters"
   | "timer2"
   | "day3Mirror"

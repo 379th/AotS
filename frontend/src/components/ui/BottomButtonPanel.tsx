@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useTranslation } from '../../i18n';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface BottomButtonPanelProps {
   onBack: () => void;
@@ -20,6 +21,7 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
   showContinue = true
 }) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   
   const defaultBackText = backText || t.common.back;
   const defaultContinueText = continueText || t.common.continue;
@@ -29,7 +31,11 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
                         {showBack && (
                     <button 
                       onClick={onBack} 
-                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-white/70 px-3 py-3 text-amber-900 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold"
+                      className={`inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border px-3 py-3 backdrop-blur-sm transition-transform active:scale-95 hover:scale-105 font-semibold transition-colors duration-300 ${
+                        theme === 'dark' 
+                          ? 'border-white/20 bg-white/70 text-white' 
+                          : 'border-[#5c4032]/40 bg-white/70 text-amber-900'
+                      }`}
                     >
                       <ArrowLeft className="h-4 w-4" /> {defaultBackText}
                     </button>
@@ -37,7 +43,11 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
                   {showContinue && (
                     <button 
                       onClick={onContinue} 
-                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-amber-900/40 bg-button-gradient px-3 py-3 font-semibold text-amber-900 shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105"
+                      className={`inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border px-3 py-3 font-semibold shadow-[0_6px_20px_rgba(0,0,0,.25)] transition-transform active:scale-95 hover:scale-105 transition-colors duration-300 ${
+                        theme === 'dark' 
+                          ? 'border-white/20 bg-button-gradient text-white' 
+                          : 'border-[#5c4032]/40 bg-button-gradient text-amber-900'
+                      }`}
                     >
                       {defaultContinueText}
                     </button>

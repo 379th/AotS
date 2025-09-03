@@ -8,16 +8,10 @@ interface ScreenFrameProps {
 export const ScreenFrame: React.FC<ScreenFrameProps> = ({ children }) => {
   const { theme } = useTheme();
   
-  // Отладка применения темы
-  React.useEffect(() => {
-    console.log('ScreenFrame: тема изменена на:', theme);
-    console.log('document.body.className:', document.body.className);
-  }, [theme]);
-  
   return (
     <div 
       className={`relative mx-auto min-h-[100svh] w-full max-w-[520px] overflow-hidden bg-transparent flex flex-col transition-colors duration-300 ${
-        theme === 'dark' ? 'text-amber-50' : 'text-amber-900'
+        theme === 'dark' ? 'text-white' : 'text-amber-900'
       }`}
       style={{ 
         paddingTop: 'env(safe-area-inset-top)', 
@@ -26,7 +20,6 @@ export const ScreenFrame: React.FC<ScreenFrameProps> = ({ children }) => {
     >
       {/* Фон из Sorce */}
       <img src="/Sorce/Background.png" alt="bg" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" />
-      {/* Убрали декоративные полосы/линии */}
       {children}
     </div>
   );

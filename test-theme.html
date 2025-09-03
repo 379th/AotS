@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест тем</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark {
+            background-color: #0f0f23;
+            color: #f3f4f6;
+        }
+        
+        body.light {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .theme-buttons {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .dark-btn {
+            background-color: #374151;
+            color: white;
+        }
+        
+        .light-btn {
+            background-color: #fbbf24;
+            color: #1f2937;
+        }
+        
+        .current-theme {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        body.dark .current-theme {
+            background-color: #1f2937;
+            border: 1px solid #4b5563;
+        }
+        
+        body.light .current-theme {
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+        }
+    </style>
+</head>
+<body class="dark">
+    <div class="container">
+        <h1>Тест переключения тем</h1>
+        
+        <div class="theme-buttons">
+            <button class="dark-btn" onclick="setTheme('dark')">Темная тема</button>
+            <button class="light-btn" onclick="setTheme('light')">Светлая тема</button>
+        </div>
+        
+        <div class="current-theme">
+            <strong>Текущая тема:</strong> <span id="theme-display">dark</span>
+        </div>
+        
+        <div>
+            <h2>Описание</h2>
+            <p>Этот файл тестирует переключение тем. При нажатии на кнопки должна меняться тема страницы.</p>
+            <p>Тема также сохраняется в localStorage и восстанавливается при перезагрузке страницы.</p>
+        </div>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            console.log('Установка темы:', theme);
+            
+            // Убираем все классы тем
+            document.body.classList.remove('dark', 'light');
+            
+            // Добавляем новый класс темы
+            document.body.classList.add(theme);
+            
+            // Обновляем отображение
+            document.getElementById('theme-display').textContent = theme;
+            
+            // Сохраняем в localStorage
+            localStorage.setItem('theme', theme);
+            
+            console.log('Тема установлена:', theme);
+        }
+        
+        // Восстанавливаем тему при загрузке
+        window.addEventListener('load', function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            console.log('Восстановление темы из localStorage:', savedTheme);
+            setTheme(savedTheme);
+        });
+    </script>
+</body>
+</html>
+

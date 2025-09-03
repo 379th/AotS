@@ -28,14 +28,14 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
       
       <div className={`mx-auto mt-2 w-[92%] overflow-hidden flex flex-col min-h-0 rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'border-amber-900/40 bg-input-gradient text-amber-900' 
-          : 'border-amber-900/60 bg-gradient-to-b from-amber-100/90 to-amber-200/90 text-amber-800'
+          ? 'border-white/20 bg-[#1a0b2e] text-white' 
+                          : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
       }`}>
         <div className="h-[66svh] min-h-0 w-full overflow-auto space-y-4">
           <div className={`rounded-xl border p-3 transition-colors duration-300 ${
             theme === 'dark' 
-              ? 'border-amber-900/30 bg-white/80' 
-              : 'border-amber-900/40 bg-white/95'
+              ? 'border-white/20 bg-[#2d1b4e] text-white' 
+              : 'border-[#5c4032]/40 bg-[#f7f0e6]'
           }`}>
             <label className={`mb-1 block text-xs transition-colors duration-300 ${
               theme === 'dark' ? 'opacity-80' : 'opacity-70'
@@ -46,16 +46,16 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
               rows={6} 
               className={`w-full rounded-lg border p-3 text-sm resize-none transition-colors duration-300 ${
                 theme === 'dark' 
-                  ? 'border-amber-900/30 bg-white/95' 
-                  : 'border-amber-900/40 bg-white/98'
+                  ? 'border-white/20 bg-[#2d1b4e] text-white' 
+                  : 'border-[#5c4032]/40 bg-white text-amber-900'
               }`}
             />
           </div>
           
           <div className={`rounded-xl border p-3 transition-colors duration-300 ${
             theme === 'dark' 
-              ? 'border-amber-900/30 bg-white/80' 
-              : 'border-amber-900/40 bg-white/95'
+              ? 'border-white/20 bg-[#2d1b4e] text-white' 
+              : 'border-[#5c4032]/40 bg-[#f7f0e6]'
           }`}>
             <label className={`mb-1 block text-xs transition-colors duration-300 ${
               theme === 'dark' ? 'opacity-80' : 'opacity-70'
@@ -66,8 +66,8 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
               rows={10} 
               className={`w-full rounded-lg border p-3 text-sm resize-none transition-colors duration-300 ${
                 theme === 'dark' 
-                  ? 'border-amber-900/30 bg-white/95' 
-                  : 'border-amber-900/40 bg-white/98'
+                  ? 'border-white/20 bg-[#2d1b4e] text-white' 
+                  : 'border-[#5c4032]/40 bg-white text-amber-900'
               }`}
             />
           </div>

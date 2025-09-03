@@ -1,3 +1,11 @@
+// Типы для fetch API
+type RequestInit = {
+  method?: string;
+  headers?: Record<string, string>;
+  body?: string;
+  [key: string]: any;
+};
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export interface UserData {
@@ -29,7 +37,7 @@ class ApiService {
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers,
+        ...(options.headers as Record<string, string>),
       },
       ...options,
     };

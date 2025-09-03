@@ -13,13 +13,13 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
       <TitleBar text="Напутствие" />
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))]' 
-          : 'border-amber-900/50 bg-gradient-to-b from-amber-100/80 to-amber-200/80'
+          ? 'border-white/20 bg-[#1a0b2e]' 
+          : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
         <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 text-sm leading-6 transition-colors duration-300 ${
           theme === 'dark' 
-            ? 'border-amber-900/30 bg-white/5 text-amber-200/90' 
-            : 'border-amber-900/40 bg-white/90 text-amber-800/90'
+            ? 'border-white/20 bg-[#2d1b4e] text-white' 
+            : 'border-[#5c4032]/40 bg-[#f7f0e6] text-amber-900'
         }`}>
 
           <div className="mb-4">

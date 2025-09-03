@@ -40,19 +40,29 @@ export async function initTelegram() {
         // Скрываем все элементы интерфейса Telegram
         try { 
           window.Telegram.WebApp?.MainButton?.hide?.(); 
-        } catch {}
+        } catch (error) {
+          console.log('Failed to hide MainButton:', error);
+        }
         
         try { 
           window.Telegram.WebApp?.BackButton?.hide?.(); 
-        } catch {}
+        } catch (error) {
+          console.log('Failed to hide BackButton:', error);
+        }
         
         // В версиях < 7.0 не поддерживаются смена цветов — вызываем только когда доступно и нет предупреждений
-        try { window.Telegram.WebApp?.setBackgroundColor?.('#120a22'); } catch {}
+        try { 
+          window.Telegram.WebApp?.setBackgroundColor?.('#120a22'); 
+        } catch (error) {
+          console.log('Failed to set background color:', error);
+        }
         
         // Пытаемся установить прозрачный заголовок (если поддерживается)
         try { 
           window.Telegram.WebApp?.setHeaderColor?.('transparent'); 
-        } catch {}
+        } catch (error) {
+          console.log('Failed to set header color:', error);
+        }
         
       } catch (error) {
         console.log('Legacy Telegram WebApp not available:', error);

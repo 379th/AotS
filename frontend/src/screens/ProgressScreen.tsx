@@ -34,19 +34,19 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
       
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))]' 
-          : 'border-amber-900/50 bg-gradient-to-b from-amber-100/80 to-amber-200/80'
+          ? 'border-white/20 bg-[#1a0b2e]' 
+          : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
         <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 space-y-4 transition-colors duration-300 ${
           theme === 'dark' 
-            ? 'border-amber-900/30 bg-white/5' 
-            : 'border-amber-900/40 bg-white/90'
+            ? 'border-white/20 bg-[#2d1b4e]' 
+            : 'border-[#5c4032]/40 bg-[#f7f0e6]'
         }`}>
           
           {/* Общий прогресс */}
           <div className="text-center">
             <div className={`text-lg font-bold mb-2 transition-colors duration-300 ${
-              theme === 'dark' ? 'text-amber-200' : 'text-amber-800'
+                              theme === 'dark' ? 'text-white' : 'text-amber-900'
             }`}>
               Прогресс: {totalCompleted} из {days.length} дней
             </div>
@@ -57,7 +57,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
               ></div>
             </div>
             <div className={`text-sm transition-colors duration-300 ${
-              theme === 'dark' ? 'text-amber-200/80' : 'text-amber-700'
+                              theme === 'dark' ? 'text-white/80' : 'text-amber-900/70'
             }`}>
               {progressPercentage.toFixed(0)}% завершено
             </div>
@@ -72,25 +72,25 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
                   day.completed 
                     ? 'border-amber-600/50 bg-amber-600/10' 
                     : theme === 'dark' 
-                      ? 'border-amber-900/30 bg-white/5' 
-                      : 'border-amber-900/40 bg-white/70'
+                      ? 'border-white/20 bg-white/5' 
+                      : 'border-[#5c4032]/40 bg-[#f7f0e6]'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      day.completed 
-                        ? 'bg-amber-600 text-white' 
-                        : theme === 'dark'
-                          ? 'bg-amber-900/30 text-amber-200/50'
-                          : 'bg-amber-900/40 text-amber-700/70'
+                                          day.completed 
+                      ? 'bg-amber-600 text-white' 
+                      : theme === 'dark'
+                        ? 'bg-white/20 text-white/50'
+                        : 'bg-[#5c4032]/40 text-amber-900/70'
                     }`}>
                       {day.completed ? '✓' : index + 1}
                     </div>
                     <span className={`text-sm transition-colors duration-300 ${
                       day.completed 
-                        ? theme === 'dark' ? 'text-amber-200' : 'text-amber-800'
-                        : theme === 'dark' ? 'text-amber-200/70' : 'text-amber-700/80'
+                        ? theme === 'dark' ? 'text-white' : 'text-amber-900'
+                        : theme === 'dark' ? 'text-white/70' : 'text-amber-900/80'
                     }`}>
                       {day.title}
                     </span>

@@ -50,8 +50,8 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
       
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'border-amber-900/40 bg-input-gradient text-amber-900' 
-          : 'border-amber-900/60 bg-gradient-to-b from-amber-100/90 to-amber-200/90 text-amber-800'
+          ? 'border-white/20 bg-[#1a0b2e] text-white' 
+                                    : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
       }`}>
         {/* Информация о странице */}
         <div className="mb-3 text-center">
@@ -72,8 +72,8 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                 key={cardNumber} 
                 className={`aspect-square rounded-xl border flex flex-col items-center justify-center text-sm p-2 transition-colors duration-300 ${
                   theme === 'dark' 
-                    ? 'border-amber-900/30 bg-white/80' 
-                    : 'border-amber-900/40 bg-white/95'
+                    ? 'border-white/20 bg-[#2d1b4e] text-white' 
+                    : 'border-[#5c4032]/40 bg-[#f7f0e6]'
                 }`}
               >
                 <div className="text-xs font-bold mb-1">#{cardNumber}</div>
@@ -94,8 +94,8 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             disabled={currentPage === 0}
             className={`flex items-center justify-center gap-1 rounded-xl border px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
               theme === 'dark' 
-                ? 'border-amber-900/40 bg-white/70 text-amber-900' 
-                : 'border-amber-900/50 bg-white/90 text-amber-800'
+                                ? 'border-white/20 bg-white/70 text-white'
+                                                : 'border-[#5c4032]/50 bg-white/90 text-amber-900'
             }`}
           >
             <ChevronLeft className="h-4 w-4" />
@@ -122,7 +122,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                   className={`w-8 h-8 rounded-lg border border-amber-900/30 text-xs font-semibold transition-all hover:scale-105 active:scale-95 ${
                     currentPage === pageIndex
                       ? 'bg-amber-600 text-white'
-                      : 'bg-white/70 text-amber-900'
+                                                      : 'bg-white/70 text-amber-900'
                   }`}
                 >
                   {pageIndex + 1}
@@ -134,7 +134,11 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
           <button 
             onClick={goToNextPage}
             disabled={currentPage === totalPages - 1}
-            className="flex items-center justify-center gap-1 rounded-xl border border-amber-900/40 bg-white/70 px-3 py-2 text-amber-900 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+            className={`flex items-center justify-center gap-1 rounded-xl border px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
+                theme === 'dark' 
+                  ? 'border-white/20 bg-white/70 text-white' 
+                                            : 'border-[#5c4032]/40 bg-white/70 text-amber-900'
+              }`}
           >
             <span className="text-sm font-semibold">Следующая</span>
             <ChevronRight className="h-4 w-4" />

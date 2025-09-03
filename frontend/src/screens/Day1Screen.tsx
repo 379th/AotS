@@ -29,13 +29,13 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.08),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.8),rgba(36,48,56,.8))]' 
-          : 'border-amber-900/50 bg-gradient-to-b from-amber-100/80 to-amber-200/80'
+          ? 'border-white/20 bg-[#1a0b2e]' 
+          : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
         <div className={`relative h-[66svh] overflow-hidden rounded-xl border transition-colors duration-300 ${
           theme === 'dark' 
-            ? 'border-teal-700/30' 
-            : 'border-amber-900/40'
+            ? 'border-white/20' 
+            : 'border-[#5c4032]/40'
         }`}>
           {imgUrl ? (
             <img 
@@ -51,8 +51,8 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
               }} 
               className={`flex h-full w-full items-start justify-center pt-2 text-sm hover:opacity-80 transition-colors duration-300 ${
                 theme === 'dark' 
-                  ? 'text-emerald-200/80 hover:text-emerald-200' 
-                  : 'text-amber-700/80 hover:text-amber-800'
+                  ? 'text-white/80 hover:text-white' 
+                  : 'text-amber-900/80 hover:text-amber-900'
               }`}
             >
               (Укажи URL картинки)

@@ -4,6 +4,7 @@ import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
 import { ShadowImageScreen } from './screens/ShadowImageScreen';
 import { Day1QuestionsScreen } from './screens/Day1QuestionsScreen';
+import { Day2Screen } from './screens/Day2Screen';
 import { Day2EchoScreen } from './screens/Day2EchoScreen';
 import { Day2LettersScreen } from './screens/Day2LettersScreen';
 import { Day3MirrorScreen } from './screens/Day3MirrorScreen';
@@ -119,6 +120,18 @@ function App() {
           return (
             <Day2EchoScreen
               onBack={() => navigateTo("timer1")}
+              onNext={() => navigateTo("day2Screen")}
+              onAboutQuest={() => navigateTo("quest")}
+              onGoDay1={() => navigateTo("day1")}
+              onOpenDeck={() => navigateTo("deck")}
+              onOpenJournal={() => navigateTo("journal")}
+            />
+          );
+
+        case "day2Screen":
+          return (
+            <Day2Screen
+              onBack={() => navigateTo("day2")}
               onNext={() => navigateTo("day2Letters")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
@@ -130,7 +143,7 @@ function App() {
       case "day2Letters":
         return (
           <Day2LettersScreen
-            onBack={() => navigateTo("day2")}
+            onBack={() => navigateTo("day2Screen")}
             onNext={() => navigateTo("timer2")}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}
@@ -299,7 +312,7 @@ function App() {
           return (
             <div className="min-h-[100svh] flex items-center justify-center">
               <div className="text-amber-50 text-center">
-                <h1 className="text-2xl font-bold mb-4">Экран "{route}" в разработке</h1>
+                <h1 className="text-2xl font-bold mb-4">Экран &quot;{route}&quot; в разработке</h1>
                 <button 
                   onClick={() => navigateTo("intro")}
                   className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700"

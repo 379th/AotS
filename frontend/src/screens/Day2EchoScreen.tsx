@@ -26,21 +26,21 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'border-amber-900/30 bg-[#1b1130]' 
-          : 'border-amber-900/50 bg-gradient-to-b from-amber-100/90 to-amber-200/90'
+          ? 'border-white/20 bg-[#1a0b2e]' 
+          : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
         <div className={`relative h-[66svh] overflow-hidden rounded-xl border p-3 flex flex-col transition-colors duration-300 ${
           theme === 'dark' 
-            ? 'border-teal-700/30 bg-[#101820]' 
-            : 'border-amber-900/40 bg-white/95'
+            ? 'border-white/20 bg-[#2d1b4e]' 
+            : 'border-[#5c4032]/40 bg-[#f7f0e6]'
         }`}>
           <div className={`flex-1 rounded-lg border overflow-hidden flex items-center justify-center transition-colors duration-300 ${
             theme === 'dark' 
-              ? 'bg-black/20 border-teal-800/30' 
-              : 'bg-amber-50/80 border-amber-900/30'
+              ? 'bg-black/20 border-white/20' 
+              : 'bg-[#f7f0e6] border-[#5c4032]/30'
           }`}>
             <div className={`text-xs transition-colors duration-300 ${
-              theme === 'dark' ? 'text-amber-200/50' : 'text-amber-700/70'
+                              theme === 'dark' ? 'text-white/50' : 'text-amber-900/70'
             }`}>(Укажи URL картинки)</div>
           </div>
         </div>

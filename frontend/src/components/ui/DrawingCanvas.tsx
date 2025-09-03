@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface DrawingCanvasProps {
   value: string;
@@ -11,6 +12,7 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
   onChange, 
   className = "" 
 }) => {
+  const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
@@ -168,7 +170,11 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <div className="text-xs text-amber-200/60 mb-2 text-center">
+      <div className={`text-xs mb-2 text-center transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'text-amber-200/60' 
+          : 'text-amber-900/60'
+      }`}>
         👆 Рисуй пальцем или мышкой
       </div>
       <canvas
@@ -212,7 +218,11 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
         </button>
       </div>
       {/* Отладочная информация */}
-      <div className="text-xs text-amber-200/40 mt-1">
+      <div className={`text-xs mt-1 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'text-amber-200/40' 
+          : 'text-amber-900/40'
+      }`}>
         {isInitialized ? `История: ${historyIndex}/${history.length}` : 'Инициализация...'}
       </div>
     </div>
