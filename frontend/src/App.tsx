@@ -328,10 +328,12 @@ function App() {
   return (
     <ThemeProvider>
       <div 
-        className="min-h-[100svh] w-full"
+        className="min-h-[100svh] w-full relative"
         style={getBackgroundStyle(EXTERNAL_ASSETS.BACKGROUNDS.MAIN_BACKGROUND)}
       >
-        {renderScreen()}
+        <div className="max-w-[1280px] mx-auto">
+          {renderScreen()}
+        </div>
       </div>
     </ThemeProvider>
   );
