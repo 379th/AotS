@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
-import { EXTERNAL_ASSETS, getImageUrl } from '../../config/externalAssets';
 
 interface ScreenFrameProps {
   children: React.ReactNode;
