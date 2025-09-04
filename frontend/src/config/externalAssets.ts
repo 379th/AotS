@@ -11,14 +11,14 @@ export const EXTERNAL_ASSETS = {
     PANEL_BACKGROUND: '/images/buttons/button-panel-bg.png',
     
     // Фон для NavigationPanel
-    NAVIGATION_BACKGROUND: '/images/buttons/navigation-panel-bg.png',
+    NAVIGATION_BACKGROUND: '/images/navigation panel/back_navigation_panel.png',
     
     // Иконки для RoundButton
-    TRAINING_ICON: '/images/buttons/training-icon.png',
-    QUEST_ICON: '/images/buttons/quest-icon.png',
-    DECK_ICON: '/images/buttons/deck-icon.png',
-    JOURNAL_ICON: '/images/buttons/journal-icon.png',
-    EXIT_ICON: '/images/buttons/exit-icon.png',
+    TRAINING_ICON: '/images/navigation panel/01_Learning.png',
+    QUEST_ICON: '/images/navigation panel/02_Quest.png',
+    DECK_ICON: '/images/navigation panel/04_Deck.png',
+    JOURNAL_ICON: '/images/navigation panel/03_Diary.png',
+    EXIT_ICON: '/images/navigation panel/05_Exit.png',
     
     // Кнопки главного экрана (IntroScreen)
     ABOUT_CREATOR: '/images/buttons/About Creator.png',
