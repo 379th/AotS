@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTranslation } from '../i18n';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface FaqScreenProps {
@@ -14,7 +15,10 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
   
   return (
     <ScreenFrame>
-      <TitleBar text="FAQ" />
+      <TitleBar 
+        text="FAQ" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.FAQ_TITLE}
+      />
       
       <div className={`mx-auto mt-2 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 

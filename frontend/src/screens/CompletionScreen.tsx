@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface CompletionScreenProps {
   onNext: () => void;
@@ -16,7 +17,10 @@ export const CompletionScreen: React.FC<CompletionScreenProps> = ({
   const { theme } = useTheme();
   return (
     <ScreenFrame>
-      <TitleBar text="Завершение" />
+      <TitleBar 
+        text="Завершение" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.COMPLETION_TITLE}
+      />
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e]' 

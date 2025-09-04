@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface Day3PartnerTaskScreenProps {
   onBack: () => void;
@@ -27,7 +28,10 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="День 3 — Задание пары" />
+      <TitleBar 
+        text="День 3 — Задание пары" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.DAY3_PARTNER_TASK_TITLE}
+      />
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 

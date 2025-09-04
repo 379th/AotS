@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface GuidanceScreenProps {
   onBackToHome: () => void;
@@ -10,7 +11,10 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
   const { theme } = useTheme();
   return (
     <ScreenFrame>
-      <TitleBar text="Напутствие" />
+      <TitleBar 
+        text="Напутствие" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.GUIDANCE_TITLE}
+      />
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e]' 

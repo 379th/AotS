@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface ProgressScreenProps {
   onBack: () => void;
@@ -30,7 +31,10 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="Прогресс" />
+      <TitleBar 
+        text="Прогресс" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.PROGRESS_TITLE}
+      />
       
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 

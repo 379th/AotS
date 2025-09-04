@@ -1,13 +1,29 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { getImageUrl } from '../../config/externalAssets';
 
 interface TitleBarProps {
   text?: string;
+  imagePath?: string; // Путь к изображению TitleBar
 }
 
-export const TitleBar: React.FC<TitleBarProps> = ({ text = "ПРИНЯТИЕ ТЕНИ" }) => {
+export const TitleBar: React.FC<TitleBarProps> = ({ text = "ПРИНЯТИЕ ТЕНИ", imagePath }) => {
   const { theme } = useTheme();
   
+  // Если передан путь к изображению, отображаем изображение
+  if (imagePath) {
+    return (
+      <div className="mx-auto mt-3 w-[92%]">
+        <img 
+          src={getImageUrl(imagePath)} 
+          alt={text} 
+          className="w-full rounded-xl" 
+        />
+      </div>
+    );
+  }
+  
+  // Иначе отображаем текстовый TitleBar
   return (
     <div className={`mx-auto mt-3 w-[92%] rounded-xl border p-3 text-center shadow-[inset_0_2px_0_rgba(255,255,255,.35),0_10px_40px_rgba(0,0,0,.35)] transition-colors duration-300 ${
       theme === 'dark' 

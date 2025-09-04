@@ -23,7 +23,10 @@ export const Day4TempleScreen: React.FC<Day4TempleScreenProps> = ({
   const { theme } = useTheme();
   return (
     <ScreenFrame>
-      <TitleBar text="День 4 — Храм Целостности" />
+      <TitleBar 
+        text="День 4 — Храм Целостности" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.DAY4_TEMPLE}
+      />
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark' 

@@ -1,9 +1,7 @@
 // Конфигурация внешних ресурсов (изображения на ISPmanager)
 export const EXTERNAL_ASSETS = {
   // Базовый URL для изображений на ISPmanager
-  BASE_URL: process.env.NODE_ENV === 'production' 
-    ? (import.meta.env.VITE_EXTERNAL_ASSETS_BASE_URL || 'https://www.shadow-quest.online')
-    : '/images', // Для локальной разработки
+  BASE_URL: import.meta.env.VITE_EXTERNAL_ASSETS_BASE_URL || 'https://www.shadow-quest.online',
   
   // Изображения для кнопок и панелей
   BUTTONS: {
@@ -21,11 +19,11 @@ export const EXTERNAL_ASSETS = {
     EXIT_ICON: '/images/buttons/exit-icon.png',
     
     // Кнопки главного экрана (IntroScreen)
-    ABOUT_CREATOR: '/images/buttons/about-creator.png',
-    ABOUT_QUEST: '/images/buttons/about-quest.png',
-    FAQ: '/images/buttons/faq.png',
-    SETTINGS: '/images/buttons/settings.png',
-    START: '/images/buttons/start.png',
+    ABOUT_CREATOR: '/images/buttons/About Creator.png',
+    ABOUT_QUEST: '/images/buttons/About Quest.png',
+    FAQ: '/images/buttons/FAQ.png',
+    SETTINGS: '/images/buttons/Settings.png',
+    START: '/images/buttons/Start.png',
   },
   
   // Фоновые изображения для экранов
@@ -40,7 +38,7 @@ export const EXTERNAL_ASSETS = {
     INTRO: '/images/first screens/intro.png',
     DAY1_FOREST: '/images/first screens/day1Forest.png',
     DAY2_CAVE: '/images/first screens/day2Cave.png',
-    DAY2_ECHO: '/images/first screens/day2.png',
+    DAY2_ECHO: '/images/first screens/day2Cave.png',
     DAY3_MIRROR: '/images/first screens/day3Mirror.png',
     DAY4_TEMPLE: '/images/first screens/day4Temple.png',
   },
@@ -54,17 +52,31 @@ export const EXTERNAL_ASSETS = {
   
   // Навигационные плашки для TitleBar
   NAVIGATION: {
-    DAY1_TITLE: '/images/navigation/day1-title.png',
-    DAY2_TITLE: '/images/navigation/day2-title.png',
-    DAY2_LETTERS_TITLE: '/images/navigation/day2-letters-title.png',
-    SHADOW_TITLE: '/images/navigation/shadow-title.png',
-    ARCHETYPE_TITLE: '/images/navigation/archetype-title.png',
-    QUEST_TITLE: '/images/navigation/quest-title.png',
-    DECK_TITLE: '/images/navigation/deck-title.png',
-    JOURNAL_TITLE: '/images/navigation/journal-title.png',
-    FAQ_TITLE: '/images/navigation/faq-title.png',
-    SETTINGS_TITLE: '/images/navigation/settings-title.png',
-    CREATOR_TITLE: '/images/navigation/creator-title.png',
+    INTRO_TITLE: '/images/navigation/intro.png',
+    DAY1_TITLE: '/images/navigation/day1.png',
+    DAY1_QUESTIONS_TITLE: '/images/navigation/day1Questions.png',
+    DAY2_TITLE: '/images/navigation/day2.png',
+    DAY2_SCREEN_TITLE: '/images/navigation/day2Screen.png',
+    DAY2_ECHO_TITLE: '/images/navigation/day2.png',
+    DAY2_LETTERS_TITLE: '/images/navigation/day2Letters.png',
+    DAY3_MIRROR: '/images/navigation/day3Mirror.png',
+    DAY3_PARTNER_TASK_TITLE: '/images/navigation/day3PartnerTask.png',
+    DAY3_RESOURCE_TITLE: '/images/navigation/day3Resource.png',
+    DAY4_TEMPLE: '/images/navigation/day4Temple.png',
+    DAY4_INTEGRATION_TITLE: '/images/navigation/day4Integration.png',
+    REQUEST_TITLE: '/images/navigation/request.png',
+    PROGRESS_TITLE: '/images/navigation/progress.png',
+    GUIDANCE_TITLE: '/images/navigation/guidance.png',
+    COMPLETION_TITLE: '/images/navigation/completion.png',
+    TIMER_TITLE: '/images/navigation/timer1.png',
+    SHADOW_TITLE: '/images/navigation/shadowImage.png',
+    ARCHETYPE_TITLE: '/images/navigation/archetype.png',
+    QUEST_TITLE: '/images/navigation/quest.png',
+    DECK_TITLE: '/images/navigation/deck.png',
+    JOURNAL_TITLE: '/images/navigation/journal.png',
+    FAQ_TITLE: '/images/navigation/faq.png',
+    SETTINGS_TITLE: '/images/navigation/settings.png',
+    CREATOR_TITLE: '/images/navigation/creator.png',
   },
   
   // Пары изображений Тень/Архетип
@@ -75,24 +87,24 @@ export const EXTERNAL_ASSETS = {
       name: 'Пара 1: Тень и Архетип'
     },
     {
-      shadow: '/images/shadow-archetype/pair2-shadow.png',
-      archetype: '/images/shadow-archetype/pair2-archetype.png',
-      name: 'Пара 2: Тень и Архетип'
+      shadow: '/images/shadow-archetype/pair10-shadow.png',
+      archetype: '/images/shadow-archetype/pair10-archetype.png',
+      name: 'Пара 10: Тень и Архетип'
     },
     {
-      shadow: '/images/shadow-archetype/pair3-shadow.png',
-      archetype: '/images/shadow-archetype/pair3-archetype.png',
-      name: 'Пара 3: Тень и Архетип'
+      shadow: '/images/shadow-archetype/pair11-shadow.png',
+      archetype: '/images/shadow-archetype/pair11-archetype.png',
+      name: 'Пара 11: Тень и Архетип'
     },
     {
-      shadow: '/images/shadow-archetype/pair4-shadow.png',
-      archetype: '/images/shadow-archetype/pair4-archetype.png',
-      name: 'Пара 4: Тень и Архетип'
+      shadow: '/images/shadow-archetype/pair15-shadow.png',
+      archetype: '/images/shadow-archetype/pair15-archetype.png',
+      name: 'Пара 15: Тень и Архетип'
     },
     {
-      shadow: '/images/shadow-archetype/pair5-shadow.png',
-      archetype: '/images/shadow-archetype/pair5-archetype.png',
-      name: 'Пара 5: Тень и Архетип'
+      shadow: '/images/shadow-archetype/pair20-shadow.png',
+      archetype: '/images/shadow-archetype/pair20-archetype.png',
+      name: 'Пара 20: Тень и Архетип'
     }
   ]
 };
@@ -102,6 +114,14 @@ export const getImageUrl = (path: string): string => {
   if (path.startsWith('http')) {
     return path; // Уже полный URL
   }
+  
+  // Временное решение: используем локальные изображения для разработки
+  if (import.meta.env.DEV) {
+    // Заменяем пути на локальные
+    const localPath = path.replace('/images/', '/Sorce/');
+    return localPath;
+  }
+  
   return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
 };
 

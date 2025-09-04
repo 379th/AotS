@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
 import { useShadowArchetypePair } from '../hooks/useShadowArchetypePair';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface ShadowImageScreenProps {
   onBackToDay1: () => void;
@@ -37,7 +38,10 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="Тень" />
+      <TitleBar 
+        text="Тень" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.SHADOW_TITLE}
+      />
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark' 

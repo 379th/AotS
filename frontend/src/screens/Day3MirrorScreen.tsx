@@ -23,7 +23,10 @@ export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({
   const { theme } = useTheme();
   return (
     <ScreenFrame>
-      <TitleBar text="День 3 — Зеркало Перехода" />
+      <TitleBar 
+        text="День 3 — Зеркало Перехода" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.DAY3_MIRROR}
+      />
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark' 

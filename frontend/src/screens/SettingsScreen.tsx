@@ -3,6 +3,7 @@ import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useTranslation } from '../i18n';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface SettingsScreenProps {
   onBack: () => void;
@@ -16,7 +17,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
 
   return (
     <ScreenFrame>
-      <TitleBar text={t.settings.title} />
+      <TitleBar 
+        text={t.settings.title} 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.SETTINGS_TITLE}
+      />
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
+import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel, ScrollableScreen } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
 import { getImageUrl, EXTERNAL_ASSETS } from '../config/externalAssets';
 
@@ -23,35 +23,38 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
   const { theme } = useTheme();
   return (
     <ScreenFrame>
-      <TitleBar text="День 2 — Пещера Эха" />
+      <ScrollableScreen>
+        <TitleBar 
+          text="День 2 — Пещера Эха" 
+          imagePath={EXTERNAL_ASSETS.NAVIGATION.DAY2_ECHO_TITLE}
+        />
 
-      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
-        theme === 'dark' 
-          ? 'border-white/20 bg-[#1a0b2e]' 
-          : 'border-[#5c4032]/50 bg-[#e2d0b6]'
-      }`}>
-        <div className={`relative h-[66svh] overflow-hidden rounded-xl border p-3 flex flex-col transition-colors duration-300 ${
+        <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
           theme === 'dark' 
-            ? 'border-white/20 bg-[#2d1b4e]' 
-            : 'border-[#5c4032]/40 bg-[#f7f0e6]'
+            ? 'border-white/20 bg-[#1a0b2e]' 
+            : 'border-[#5c4032]/50 bg-[#e2d0b6]'
         }`}>
-          <div className={`flex-1 rounded-lg border overflow-hidden transition-colors duration-300 ${
+          <div className={`relative h-[66svh] overflow-hidden rounded-xl border p-3 flex flex-col transition-colors duration-300 ${
             theme === 'dark' 
-              ? 'bg-black/20 border-white/20' 
-              : 'bg-[#f7f0e6] border-[#5c4032]/30'
+              ? 'border-white/20 bg-[#2d1b4e]' 
+              : 'border-[#5c4032]/40 bg-[#f7f0e6]'
           }`}>
-            <img 
-              src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY2_ECHO)} 
-              alt="Пещера Эха" 
-              className="h-full w-full object-cover" 
-            />
+            <div className={`flex-1 rounded-lg border overflow-hidden transition-colors duration-300 ${
+              theme === 'dark' 
+                ? 'bg-black/20 border-white/20' 
+                : 'bg-[#f7f0e6] border-[#5c4032]/30'
+            }`}>
+              <img 
+                src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY2_ECHO)} 
+                alt="Пещера Эха" 
+                className="h-full w-full object-cover" 
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Зафиксированный слой с кнопками и панелью навигации внизу страницы */}
-      <div className="fixed bottom-0 left-0 right-0 z-10 px-4 pb-4 max-w-[520px] mx-auto">
-        <div className="space-y-4">
+        {/* Кнопки и панель навигации */}
+        <div className="mx-auto mt-6 w-[92%] space-y-4">
           {/* Панель кнопок */}
           <BottomButtonPanel
             onBack={onBack}
@@ -66,7 +69,7 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
             onOpenJournal={onOpenJournal}
           />
         </div>
-      </div>
+      </ScrollableScreen>
     </ScreenFrame>
   );
 };

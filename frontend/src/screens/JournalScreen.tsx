@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface JournalScreenProps {
   onBack: () => void;
@@ -24,7 +25,10 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="Дневник" />
+      <TitleBar 
+        text="Дневник" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.JOURNAL_TITLE}
+      />
       
       <div className={`mx-auto mt-2 w-[92%] overflow-hidden flex flex-col min-h-0 rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 

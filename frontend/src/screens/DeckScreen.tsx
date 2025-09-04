@@ -3,6 +3,7 @@ import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../co
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface DeckScreenProps {
   onBack: () => void;
@@ -46,7 +47,10 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="Колода" />
+      <TitleBar 
+        text="Колода" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.DECK_TITLE}
+      />
       
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 

@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface Day1QuestionsScreenProps {
   onBack: () => void;
@@ -27,7 +28,10 @@ export const Day1QuestionsScreen: React.FC<Day1QuestionsScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="День 1 — Вопросы" />
+      <TitleBar 
+        text="День 1 — Вопросы" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.DAY1_QUESTIONS_TITLE}
+      />
 
             <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 

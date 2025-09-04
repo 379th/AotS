@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface Day2LettersScreenProps {
   onBack: () => void;
@@ -26,7 +27,10 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="День 2 — Письма" />
+      <TitleBar 
+        text="День 2 — Письма" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.DAY2_LETTERS_TITLE}
+      />
 
             <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 

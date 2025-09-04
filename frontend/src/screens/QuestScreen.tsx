@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTranslation } from '../i18n';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface QuestScreenProps {
   onBack: () => void;
@@ -14,7 +15,10 @@ export const QuestScreen: React.FC<QuestScreenProps> = ({ onBack }) => {
   
   return (
     <ScreenFrame>
-      <TitleBar text={t.aboutQuest.title} />
+      <TitleBar 
+        text={t.aboutQuest.title} 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.QUEST_TITLE}
+      />
       
       <div className={`mx-auto mt-2 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 

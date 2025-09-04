@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface TimerScreenProps {
   onBack: () => void;
@@ -46,7 +47,10 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text={`Таймер - ${dayTitle}`} />
+      <TitleBar 
+        text={`Таймер - ${dayTitle}`} 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.TIMER_TITLE}
+      />
       
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 

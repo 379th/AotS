@@ -4,6 +4,7 @@ import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { initTelegram } from '../utils/telegram';
 import { useTranslation } from '../i18n';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface RequestScreenProps {
   onBack: () => void;
@@ -32,7 +33,10 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
 
   return (
                     <ScreenFrame>
-                  <TitleBar text={t.request.title} />
+                  <TitleBar 
+        text={t.request.title} 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.REQUEST_TITLE}
+      />
 
       {/* Основной контентный блок с полем запроса внутри */}
             <div className="relative z-10 px-4 mt-4">

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
 import { useShadowArchetypePair } from '../hooks/useShadowArchetypePair';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface ArchetypeScreenProps {
   onBack: () => void;
@@ -38,7 +39,10 @@ export const ArchetypeScreen: React.FC<ArchetypeScreenProps> = ({
 
   return (
     <ScreenFrame>
-      <TitleBar text="Архетип" />
+      <TitleBar 
+        text="Архетип" 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.ARCHETYPE_TITLE}
+      />
 
       <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark' 

@@ -2,7 +2,8 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useTranslation } from '../../i18n';
 import { useTheme } from '../../contexts/ThemeContext';
-import { getBackgroundImage, EXTERNAL_ASSETS } from '../../config/externalAssets';
+// Временно отключаем импорт для локальной разработки
+// import { getBackgroundImage, EXTERNAL_ASSETS } from '../../config/externalAssets';
 
 interface BottomButtonPanelProps {
   onBack: () => void;
@@ -31,9 +32,10 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
     <div 
       className="mx-auto w-full flex items-center justify-between gap-2 p-4 rounded-2xl"
       style={{
-        backgroundImage: getBackgroundImage(EXTERNAL_ASSETS.BUTTONS.PANEL_BACKGROUND),
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        // Временно отключаем фоновое изображение для локальной разработки
+        // backgroundImage: getBackgroundImage(EXTERNAL_ASSETS.BUTTONS.PANEL_BACKGROUND),
+        // backgroundSize: 'cover',
+        // backgroundPosition: 'center'
       }}
     >
                         {showBack && (

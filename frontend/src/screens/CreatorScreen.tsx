@@ -4,6 +4,7 @@ import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { openTelegramLink } from '../utils/telegram';
 import { useTranslation } from '../i18n';
 import { useTheme } from '../contexts/ThemeContext';
+import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface CreatorScreenProps {
   onBack: () => void;
@@ -15,7 +16,10 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
   
   return (
     <ScreenFrame>
-      <TitleBar text={t.creator.title} />
+      <TitleBar 
+        text={t.creator.title} 
+        imagePath={EXTERNAL_ASSETS.NAVIGATION.CREATOR_TITLE}
+      />
       
       <div className={`mx-auto mt-2 w-[92%] rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 
