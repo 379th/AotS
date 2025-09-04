@@ -95,24 +95,18 @@ export const getImageUrl = (path: string): string => {
     return path; // Уже полный URL
   }
   
-  // Временно используем локальные изображения для всех сред
-  // пока не загрузим все недостающие изображения на ISPmanager
-  const localPath = path.replace('/images/', '/Sorce/');
-  return localPath;
+  // Для локальной разработки используем локальные изображения
+  if (import.meta.env.DEV) {
+    const localPath = path.replace('/images/', '/Sorce/');
+    return localPath;
+  }
   
-  // TODO: После загрузки всех изображений на ISPmanager раскомментировать:
-  // // Для локальной разработки используем локальные изображения
-  // if (import.meta.env.DEV) {
-  //   const localPath = path.replace('/images/', '/Sorce/');
-  //   return localPath;
-  // }
-  // 
-  // // Для продакшена используем внешний хостинг
-  // if (import.meta.env.PROD) {
-  //   return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
-  // }
-  // 
-  // return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
+  // Для продакшена используем внешний хостинг
+  if (import.meta.env.PROD) {
+    return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
+  }
+  
+  return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
 };
 
 // Функция для получения фонового изображения
