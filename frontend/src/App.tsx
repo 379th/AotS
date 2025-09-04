@@ -16,7 +16,7 @@ import { Day4TempleScreen } from './screens/Day4TempleScreen';
 import { CompletionScreen } from './screens/CompletionScreen';
 import { ProgressScreen } from './screens/ProgressScreen';
 import { GuidanceScreen } from './screens/GuidanceScreen';
-import { ShadowScreen } from './screens/ShadowScreen';
+
 import { CreatorScreen } from './screens/CreatorScreen';
 import { QuestScreen } from './screens/QuestScreen';
 import { FaqScreen } from './screens/FaqScreen';
@@ -266,13 +266,7 @@ function App() {
             <GuidanceScreen onBackToHome={() => navigateTo("intro")} />
           );
 
-        case "shadow":
-          return (
-            <ShadowScreen
-              onBackToDay1={() => navigateTo("day1")}
-              onContinue={() => navigateTo("intro")}
-            />
-          );
+
 
         case "creator":
           return <CreatorScreen onBack={() => navigateTo("intro")} />;

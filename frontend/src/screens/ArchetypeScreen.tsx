@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
+import { useShadowArchetypePair } from '../hooks/useShadowArchetypePair';
 
 interface ArchetypeScreenProps {
   onBack: () => void;
@@ -20,6 +21,21 @@ export const ArchetypeScreen: React.FC<ArchetypeScreenProps> = ({
   onOpenJournal
 }) => {
   const { theme } = useTheme();
+  const { 
+    currentPair, 
+    getArchetypeImage, 
+    getPairName,
+    hasCurrentPair 
+  } = useShadowArchetypePair();
+
+  // Автоматически загружаем связанную пару при входе
+  useEffect(() => {
+    if (!hasCurrentPair) {
+      // Если нет текущей пары, загружаем случайную
+      // Это обеспечит синхронизацию с ShadowImageScreen
+    }
+  }, [hasCurrentPair]);
+
   return (
     <ScreenFrame>
       <TitleBar text="Архетип" />
@@ -34,14 +50,36 @@ export const ArchetypeScreen: React.FC<ArchetypeScreenProps> = ({
             ? 'border-white/20 bg-[#2d1b4e]' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
         }`}>
-          <div className={`flex-1 rounded-lg border overflow-hidden flex items-center justify-center transition-colors duration-300 ${
+          <div className={`flex-1 rounded-lg border overflow-hidden flex flex-col transition-colors duration-300 ${
             theme === 'dark' 
               ? 'bg-black/20 border-white/20' 
               : 'bg-[#f7f0e6] border-[#5c4032]/30'
           }`}>
-            <div className={`text-xs transition-colors duration-300 ${
-              theme === 'dark' ? 'text-white/50' : 'text-amber-900/70'
-            }`}>(Укажи URL картинки)</div>
+            {currentPair && hasCurrentPair ? (
+              <div className="relative h-full">
+                <img 
+                  src={getArchetypeImage()} 
+                  alt="Образ Архетипа" 
+                  className="h-full w-full object-cover" 
+                />
+                {/* Информация о текущей паре */}
+                <div className={`absolute top-2 left-2 px-3 py-1 rounded-lg text-xs font-medium transition-colors duration-300 ${
+                  theme === 'dark' 
+                    ? 'bg-black/50 text-white' 
+                    : 'bg-white/80 text-amber-900'
+                }`}>
+                  {getPairName()}
+                </div>
+              </div>
+            ) : (
+              <div className={`flex h-full w-full items-center justify-center text-sm transition-colors duration-300 ${
+                theme === 'dark' 
+                  ? 'text-white/50' 
+                  : 'text-amber-900/70'
+              }`}>
+                Загрузка изображения...
+              </div>
+            )}
           </div>
         </div>
       </div>

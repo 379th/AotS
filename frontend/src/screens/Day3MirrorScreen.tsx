@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
+import { getImageUrl, EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface Day3MirrorScreenProps {
   onBack: () => void;
@@ -34,14 +35,16 @@ export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({
             ? 'border-white/20 bg-[#2d1b4e]' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
         }`}>
-          <div className={`flex-1 rounded-lg border overflow-hidden flex items-center justify-center transition-colors duration-300 ${
+          <div className={`flex-1 rounded-lg border overflow-hidden transition-colors duration-300 ${
             theme === 'dark' 
               ? 'bg-black/20 border-white/20' 
               : 'bg-[#f7f0e6] border-[#5c4032]/30'
           }`}>
-            <div className={`text-xs transition-colors duration-300 ${
-              theme === 'dark' ? 'text-white/50' : 'text-amber-900/70'
-            }`}>(Укажи URL картинки)</div>
+            <img 
+              src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY3_MIRROR)} 
+              alt="Зеркало Перехода" 
+              className="h-full w-full object-cover" 
+            />
           </div>
         </div>
       </div>

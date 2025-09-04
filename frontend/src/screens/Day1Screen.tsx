@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
-import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { getImageUrl, EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface Day1ScreenProps {
   onBackToRequest: () => void;
@@ -21,7 +21,6 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
   onOpenJournal
 }) => {
   const { theme } = useTheme();
-  const [imgUrl, setImgUrl] = useLocalStorageString("sq.day1.forest.url");
 
   return (
     <ScreenFrame>
@@ -37,27 +36,11 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
             ? 'border-white/20' 
             : 'border-[#5c4032]/40'
         }`}>
-          {imgUrl ? (
-            <img 
-              src={imgUrl} 
-              alt="Лес, где шепчут тени" 
-              className="h-full w-full object-cover" 
-            />
-          ) : (
-            <button 
-              onClick={() => {
-                const next = window.prompt("Укажи URL картинки для Дня 1", imgUrl || "");
-                if (next !== null) setImgUrl(next.trim());
-              }} 
-              className={`flex h-full w-full items-start justify-center pt-2 text-sm hover:opacity-80 transition-colors duration-300 ${
-                theme === 'dark' 
-                  ? 'text-white/80 hover:text-white' 
-                  : 'text-amber-900/80 hover:text-amber-900'
-              }`}
-            >
-              (Укажи URL картинки)
-            </button>
-          )}
+          <img 
+            src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY1_FOREST)} 
+            alt="Лес, где шепчут тени" 
+            className="h-full w-full object-cover" 
+          />
         </div>
       </div>
 

@@ -19,7 +19,7 @@ export type RouteType =
   | "completion"
   | "progress"
   | "guidance"
-  | "shadow" 
+
   | "creator" 
   | "quest" 
   | "faq" 

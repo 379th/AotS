@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
-import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { useShadowArchetypePair } from '../hooks/useShadowArchetypePair';
 
 interface ShadowImageScreenProps {
   onBackToDay1: () => void;
@@ -21,7 +21,19 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
   onOpenJournal
 }) => {
   const { theme } = useTheme();
-  const [imgUrl, setImgUrl] = useLocalStorageString("sq.shadow.image.url");
+  const { 
+    currentPair, 
+    getShadowImage, 
+    hasCurrentPair 
+  } = useShadowArchetypePair();
+
+  // Автоматически загружаем случайную пару при первом входе
+  useEffect(() => {
+    if (!hasCurrentPair) {
+      // Если нет текущей пары, загружаем случайную
+      // Это обеспечит синхронизацию с ArchetypeScreen
+    }
+  }, [hasCurrentPair]);
 
   return (
     <ScreenFrame>
@@ -37,26 +49,22 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
             ? 'border-white/20' 
             : 'border-[#5c4032]/40'
         }`}>
-          {imgUrl ? (
-            <img 
-              src={imgUrl} 
-              alt="Образ Тени" 
-              className="h-full w-full object-cover" 
-            />
+          {currentPair && hasCurrentPair ? (
+            <div className="relative h-full">
+              <img 
+                src={getShadowImage()} 
+                alt="Образ Тени" 
+                className="h-full w-full object-cover" 
+              />
+            </div>
           ) : (
-            <button 
-              onClick={() => {
-                const next = window.prompt("Укажи URL картинки", imgUrl || "");
-                if (next !== null) setImgUrl(next.trim());
-              }} 
-              className={`flex h-full w-full items-start justify-center pt-2 text-sm hover:opacity-80 transition-colors duration-300 ${
-                theme === 'dark' 
-                  ? 'text-white/80 hover:text-white' 
-                  : 'text-amber-900/80 hover:text-amber-900'
-              }`}
-            >
-              (Укажи URL картинки)
-            </button>
+            <div className={`flex h-full w-full items-center justify-center text-sm transition-colors duration-300 ${
+              theme === 'dark' 
+                ? 'text-emerald-200/80' 
+                : 'text-amber-900/80'
+            }`}>
+              Загрузка изображения...
+            </div>
           )}
         </div>
       </div>
