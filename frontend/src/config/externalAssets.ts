@@ -122,6 +122,11 @@ export const getImageUrl = (path: string): string => {
     return localPath;
   }
   
+  // Для продакшена используем внешний хостинг
+  if (import.meta.env.PROD) {
+    return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
+  }
+  
   return `${EXTERNAL_ASSETS.BASE_URL}${path}`;
 };
 
