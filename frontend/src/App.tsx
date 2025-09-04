@@ -328,7 +328,7 @@ function App() {
   return (
     <ThemeProvider>
       <div 
-        className="min-h-[100svh]"
+        className="min-h-[100svh] w-full"
         style={getBackgroundStyle(EXTERNAL_ASSETS.BACKGROUNDS.MAIN_BACKGROUND)}
       >
         {renderScreen()}
