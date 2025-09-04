@@ -39,12 +39,11 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
         <button 
           onClick={onBack} 
           className="transition-transform duration-200 hover:scale-105 active:scale-95"
-          style={{ height: '120px', width: '160px' }}
         >
           <img 
             src="/Sorce/buttons/Back.png" 
             alt={defaultBackText}
-            className="w-full h-full object-contain"
+            className="object-contain"
           />
         </button>
       )}
@@ -52,12 +51,11 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
         <button 
           onClick={onContinue} 
           className="transition-transform duration-200 hover:scale-105 active:scale-95"
-          style={{ height: '120px', width: '160px' }}
         >
           <img 
             src="/Sorce/buttons/Continue.png" 
             alt={defaultContinueText}
-            className="w-full h-full object-contain"
+            className="object-contain"
           />
         </button>
       )}
