@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Конфигурация внешних ресурсов (изображения на ISPmanager)
 export const EXTERNAL_ASSETS = {
   // Базовый URL для изображений на ISPmanager
@@ -28,9 +30,9 @@ export const EXTERNAL_ASSETS = {
   
   // Фоновые изображения для экранов
   BACKGROUNDS: {
-    MAIN_BACKGROUND: '/images/main-bg.png',
-    DAY2_BACKGROUND: '/images/day2-bg.png',
-    PANEL_BACKGROUND: '/images/panel-bg.png',
+    MAIN_BACKGROUND: '/images/background/Background.png',
+    DAY2_BACKGROUND: '/images/background/Background.png',
+    PANEL_BACKGROUND: '/images/background/Background.png',
   },
   
   // Основные изображения экранов
@@ -93,7 +95,7 @@ export const getImageUrl = (path: string): string => {
     return path; // Уже полный URL
   }
   
-  // Временное решение: используем локальные изображения для разработки
+  // Для локальной разработки используем локальные изображения
   if (import.meta.env.DEV) {
     // Заменяем пути на локальные
     const localPath = path.replace('/images/', '/Sorce/');
@@ -111,6 +113,17 @@ export const getImageUrl = (path: string): string => {
 // Функция для получения фонового изображения
 export const getBackgroundImage = (path: string): string => {
   return `url(${getImageUrl(path)})`;
+};
+
+// Функция для получения CSS стиля фона
+export const getBackgroundStyle = (path: string): React.CSSProperties => {
+  return {
+    backgroundImage: getBackgroundImage(path),
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed'
+  };
 };
 
 // Функция для получения случайной пары изображений Тень/Архетип

@@ -30,18 +30,18 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #120a22 url('/Sorce/Background.png') center/cover no-repeat fixed;
+  background: #120a22;
   transition: background-color 0.3s ease;
 }
 
 /* Стили для светлой темы */
 body.light {
-  background: #f8fafc url('/Sorce/Background.png') center/cover no-repeat fixed;
+  background: #f8fafc;
 }
 
 /* Стили для темной темы */
 body.dark {
-  background: #120a22 url('/Sorce/Background.png') center/cover no-repeat fixed;
+  background: #120a22;
 }
 
 #root {

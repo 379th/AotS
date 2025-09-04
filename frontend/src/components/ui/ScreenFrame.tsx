@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { EXTERNAL_ASSETS, getImageUrl } from '../../config/externalAssets';
 
 interface ScreenFrameProps {
   children: React.ReactNode;
@@ -18,8 +19,12 @@ export const ScreenFrame: React.FC<ScreenFrameProps> = ({ children }) => {
         paddingBottom: 'max(12px, env(safe-area-inset-bottom))' 
       }}
     >
-      {/* Фон из Sorce */}
-      <img src="/Sorce/Background.png" alt="bg" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" />
+      {/* Фон из конфигурации */}
+      <img 
+        src={getImageUrl(EXTERNAL_ASSETS.BACKGROUNDS.MAIN_BACKGROUND)} 
+        alt="bg" 
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" 
+      />
       {children}
     </div>
   );

@@ -28,6 +28,7 @@ import { RouteType } from './config/constants';
 import { initTelegram } from './utils/telegram';
 import { TimerScreen } from './screens/TimerScreen';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { EXTERNAL_ASSETS, getBackgroundStyle } from './config/externalAssets';
 
 function App() {
   const [route, setRoute] = useState<RouteType>("intro");
@@ -326,7 +327,10 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-[100svh]">
+      <div 
+        className="min-h-[100svh]"
+        style={getBackgroundStyle(EXTERNAL_ASSETS.BACKGROUNDS.MAIN_BACKGROUND)}
+      >
         {renderScreen()}
       </div>
     </ThemeProvider>
