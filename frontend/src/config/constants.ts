@@ -3,6 +3,7 @@ export type RouteType =
   | "request" 
   | "day1" 
   | "shadowImage"
+  | "shadowDetails"
   | "day1Questions"
   | "timer1"
   | "day2"

@@ -4,6 +4,7 @@ import { IntroScreen } from './screens/IntroScreen';
 import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
 import { ShadowImageScreen } from './screens/ShadowImageScreen';
+import { ShadowDetailsScreen } from './screens/ShadowDetailsScreen';
 import { Day1QuestionsScreen } from './screens/Day1QuestionsScreen';
 import { Day2Screen } from './screens/Day2Screen';
 import { Day2EchoScreen } from './screens/Day2EchoScreen';
@@ -89,7 +90,19 @@ function App() {
           return (
             <ShadowImageScreen
               onBackToDay1={() => navigateTo("day1")}
-              onContinue={() => navigateTo("day1Questions")}
+              onContinue={() => navigateTo("shadowDetails")}
+              onAboutQuest={() => navigateTo("quest")}
+              onGoDay1={() => navigateTo("day1")}
+              onOpenDeck={() => navigateTo("deck")}
+              onOpenJournal={() => navigateTo("journal")}
+            />
+          );
+
+        case "shadowDetails":
+          return (
+            <ShadowDetailsScreen
+              onBack={() => navigateTo("shadowImage")}
+              onNext={() => navigateTo("day1Questions")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
               onOpenDeck={() => navigateTo("deck")}
@@ -100,7 +113,7 @@ function App() {
         case "day1Questions":
           return (
             <Day1QuestionsScreen
-              onBack={() => navigateTo("shadowImage")}
+              onBack={() => navigateTo("shadowDetails")}
               onNext={() => navigateTo("timer1")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}

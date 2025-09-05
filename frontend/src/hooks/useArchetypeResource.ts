@@ -4,14 +4,14 @@ import { getPairByNumber } from '../utils/cardsData';
 
 export const useArchetypeResource = () => {
   const { currentPairIndex, hasCurrentPair } = useShadowArchetypePair();
-  const [archetypeResource, setArchetypeResource] = useState<string>('');
+  const [archetypeData, setArchetypeData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadArchetypeResource = async () => {
+    const loadArchetypeData = async () => {
       if (!hasCurrentPair || currentPairIndex < 0) {
-        setArchetypeResource('');
+        setArchetypeData(null);
         return;
       }
 
@@ -21,33 +21,31 @@ export const useArchetypeResource = () => {
       try {
         // Получаем номер пары (currentPairIndex 0-indexed, CSV 1-indexed)
         const pairNumber = currentPairIndex + 1;
-        console.log('Загрузка ресурса архетипа для пары:', pairNumber);
+        console.log('Загрузка данных архетипа для пары:', pairNumber);
 
         const pair = await getPairByNumber(pairNumber);
         
         if (pair && pair.archetype) {
-          // Используем поле conflict_or_resource для архетипа как ресурс
-          const resource = pair.archetype.conflict_or_resource || '';
-          console.log('Найден ресурс архетипа:', resource);
-          setArchetypeResource(resource);
+          console.log('Найдены данные архетипа:', pair.archetype);
+          setArchetypeData(pair.archetype);
         } else {
-          console.log('Ресурс архетипа не найден для пары:', pairNumber);
-          setArchetypeResource('');
+          console.log('Данные архетипа не найдены для пары:', pairNumber);
+          setArchetypeData(null);
         }
       } catch (err) {
-        console.error('Ошибка загрузки ресурса архетипа:', err);
-        setError('Ошибка загрузки ресурса архетипа');
-        setArchetypeResource('');
+        console.error('Ошибка загрузки данных архетипа:', err);
+        setError('Ошибка загрузки данных архетипа');
+        setArchetypeData(null);
       } finally {
         setLoading(false);
       }
     };
 
-    loadArchetypeResource();
+    loadArchetypeData();
   }, [currentPairIndex, hasCurrentPair]);
 
   return {
-    archetypeResource,
+    archetypeData,
     loading,
     error,
     hasCurrentPair

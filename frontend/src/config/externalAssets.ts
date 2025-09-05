@@ -72,6 +72,7 @@ export const EXTERNAL_ASSETS = {
     COMPLETION_TITLE: '/images/navigation/completion.png',
     TIMER_TITLE: '/images/navigation/timer1.png',
     SHADOW_TITLE: '/images/navigation/shadowImage.png',
+    SHADOW_DETAILS_TITLE: '/images/navigation/shadowImage.png',
     ARCHETYPE_TITLE: '/images/navigation/archetype.png',
     QUEST_TITLE: '/images/navigation/quest.png',
     DECK_TITLE: '/images/navigation/deck.png',
