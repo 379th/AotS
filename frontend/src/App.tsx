@@ -7,6 +7,7 @@ import { ShadowImageScreen } from './screens/ShadowImageScreen';
 import { ShadowDetailsScreen } from './screens/ShadowDetailsScreen';
 import { Day1QuestionsScreen } from './screens/Day1QuestionsScreen';
 import { Day2EchoScreen } from './screens/Day2EchoScreen';
+import { Day2Screen } from './screens/Day2Screen';
 import { Day2LettersScreen } from './screens/Day2LettersScreen';
 import { Day3MirrorScreen } from './screens/Day3MirrorScreen';
 import { ArchetypeScreen } from './screens/ArchetypeScreen';
@@ -46,6 +47,18 @@ function App() {
     setRoute(previousRoute);
   };
 
+  // Функция для запуска таймера и перехода к следующему дню
+  const startTimerAndContinue = (dayNumber: number, nextRoute: RouteType) => {
+    // Запускаем таймер для указанного дня
+    const timerKey = `timer_start_day_${dayNumber}`;
+    const now = Date.now();
+    localStorage.setItem(timerKey, now.toString());
+    console.log(`Запуск таймера для дня ${dayNumber}:`, new Date(now).toLocaleTimeString());
+    
+    // Переходим к следующему экрану
+    navigateTo(nextRoute);
+  };
+
   const renderScreen = () => {
     switch (route) {
               case "intro":
@@ -75,7 +88,7 @@ function App() {
           return (
             <Day1Screen
               onBackToRequest={() => navigateTo("request")}
-              onAccept={() => navigateTo("shadowImage")}
+              onAccept={() => startTimerAndContinue(1, "shadowImage")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
               onOpenDeck={() => navigateTo("deck")}
@@ -133,7 +146,7 @@ function App() {
           return (
             <Day2EchoScreen
               onBack={() => navigateTo("timer1")}
-              onNext={() => navigateTo("day2Letters")}
+              onNext={() => navigateTo("day2Screen")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
               onOpenDeck={() => navigateTo("deck")}
@@ -141,18 +154,29 @@ function App() {
             />
           );
 
+        case "day2Screen":
+          return (
+            <Day2Screen
+              onBack={() => navigateTo("day2")}
+              onNext={() => startTimerAndContinue(2, "day2Letters")}
+              onAboutQuest={() => navigateTo("quest")}
+              onGoDay1={() => navigateTo("day1")}
+              onOpenDeck={() => navigateTo("deck")}
+              onOpenJournal={() => navigateTo("journal")}
+            />
+          );
 
-      case "day2Letters":
-        return (
-          <Day2LettersScreen
-            onBack={() => navigateTo("day2")}
-            onNext={() => navigateTo("timer2")}
-            onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("day1")}
-            onOpenDeck={() => navigateTo("deck")}
-            onOpenJournal={() => navigateTo("journal")}
-          />
-        );
+              case "day2Letters":
+          return (
+            <Day2LettersScreen
+              onBack={() => navigateTo("day2Screen")}
+              onNext={() => navigateTo("timer2")}
+              onAboutQuest={() => navigateTo("quest")}
+              onGoDay1={() => navigateTo("day1")}
+              onOpenDeck={() => navigateTo("deck")}
+              onOpenJournal={() => navigateTo("journal")}
+            />
+          );
 
       case "timer2":
         return (
@@ -168,7 +192,7 @@ function App() {
         return (
           <Day3MirrorScreen
             onBack={() => navigateTo("timer2")}
-            onNext={() => navigateTo("archetype")}
+            onNext={() => startTimerAndContinue(3, "archetype")}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}
             onOpenDeck={() => navigateTo("deck")}
@@ -200,17 +224,17 @@ function App() {
           />
         );
 
-      case "day3PartnerTask":
-        return (
-          <Day3PartnerTaskScreen
-            onBack={() => navigateTo("day3Resource")}
-            onNext={() => navigateTo("timer3")}
-            onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("day1")}
-            onOpenDeck={() => navigateTo("deck")}
-            onOpenJournal={() => navigateTo("journal")}
-          />
-        );
+              case "day3PartnerTask":
+          return (
+            <Day3PartnerTaskScreen
+              onBack={() => navigateTo("day3Resource")}
+              onNext={() => navigateTo("timer3")}
+              onAboutQuest={() => navigateTo("quest")}
+              onGoDay1={() => navigateTo("day1")}
+              onOpenDeck={() => navigateTo("deck")}
+              onOpenJournal={() => navigateTo("journal")}
+            />
+          );
 
       case "timer3":
         return (
