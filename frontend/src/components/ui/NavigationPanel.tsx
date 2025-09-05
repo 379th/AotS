@@ -19,7 +19,7 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   const { t } = useTranslation();
   
   return (
-    <div className="mx-auto w-full max-w-[540px]">
+    <div className="mx-auto w-full max-w-[560px]">
       <div 
         className="rounded-2xl border border-amber-900/40 p-3 py-4 shadow-[0_8px_30px_rgba(0,0,0,.35)] min-h-[110px]"
         style={{
