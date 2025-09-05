@@ -31,7 +31,7 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[95%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark'
               ? 'border-amber-900/30'
               : 'border-amber-900/50'
@@ -39,7 +39,7 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
             <img 
               src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY2_ECHO)} 
               alt="Пещера Эха" 
-              className="w-full h-[80svh] object-cover" 
+              className="w-full h-auto max-h-[80svh] object-contain" 
             />
           </div>
 

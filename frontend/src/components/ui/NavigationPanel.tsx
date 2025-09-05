@@ -17,7 +17,7 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
 }) => {
   
   return (
-    <div className="mx-auto w-full max-w-[560px]">
+    <div className="mx-auto w-full max-w-[580px]">
       <div 
         className="rounded-2xl p-3 py-4 h-[110px]"
         style={{

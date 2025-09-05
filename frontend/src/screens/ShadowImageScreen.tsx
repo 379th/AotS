@@ -48,17 +48,17 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[95%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark'
               ? 'border-amber-900/30'
               : 'border-amber-900/50'
           }`}>
-            <div className="relative h-[80svh] overflow-hidden">
+            <div className="relative min-h-[60svh] max-h-[85svh] overflow-hidden">
               {currentPair && hasCurrentPair ? (
                 <img 
                   src={getShadowImage()} 
                   alt="Образ Тени" 
-                  className="h-full w-full object-cover" 
+                  className="w-full h-auto max-h-[85svh] object-contain" 
                 />
               ) : (
                 <div className={`flex h-full w-full items-center justify-center text-sm transition-colors duration-300 ${

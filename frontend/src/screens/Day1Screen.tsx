@@ -32,7 +32,7 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[95%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-amber-900/30' 
               : 'border-amber-900/50'
@@ -40,7 +40,7 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
             <img 
               src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY1_FOREST)} 
               alt="Лес, где шепчут тени" 
-              className="w-full h-[75svh] object-cover object-top" 
+              className="w-full h-auto max-h-[80svh] object-contain" 
             />
           </div>
 

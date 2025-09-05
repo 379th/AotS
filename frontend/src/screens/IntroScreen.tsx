@@ -39,12 +39,16 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
           {/* Центральная картинка */}
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[95%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-amber-900/30' 
               : 'border-amber-900/50'
           }`}>
-            <img src={getImageUrl(EXTERNAL_ASSETS.SCREENS.INTRO)} alt="Start" className="w-full h-[70svh] object-cover object-top" />
+            <img 
+              src={getImageUrl(EXTERNAL_ASSETS.SCREENS.INTRO)} 
+              alt="Start" 
+              className="w-full h-auto max-h-[75svh] object-contain" 
+            />
           </div>
 
           {/* Кнопки в 2 ряда */}
