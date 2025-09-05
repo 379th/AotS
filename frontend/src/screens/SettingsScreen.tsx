@@ -34,7 +34,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
         }`}>
           
           <div className="h-full flex flex-col">
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 overflow-y-auto space-y-4 pr-2">
               <h2 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
                 theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
               }`}>
@@ -171,27 +171,27 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
                 </div>
               </div>
             </div>
-
-            {/* Кнопка назад */}
-            <div className="mt-4">
-              <button 
-                onClick={onBack}
-                className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105 w-full"
-                style={{
-                  backgroundImage: 'url(/Sorce/buttons/Back.png)',
-                  backgroundSize: 'contain',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  width: 'auto',
-                  height: 'auto',
-                  minWidth: '120px',
-                  minHeight: '60px'
-                }}
-              >
-              </button>
-            </div>
           </div>
         </div>
+      </div>
+
+      {/* Кнопка назад - внизу справа */}
+      <div className="absolute bottom-4 right-4">
+        <button 
+          onClick={onBack}
+          className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
+          style={{
+            backgroundImage: 'url(/Sorce/buttons/Back.png)',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            width: 'auto',
+            height: 'auto',
+            minWidth: '120px',
+            minHeight: '60px'
+          }}
+        >
+        </button>
       </div>
     </ScreenFrame>
   );

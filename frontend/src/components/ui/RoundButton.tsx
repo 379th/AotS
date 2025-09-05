@@ -25,7 +25,7 @@ export const RoundButton: React.FC<RoundButtonProps> = ({
     return (
       <button 
         onClick={onClick}
-        className="group relative flex h-22 w-22 md:h-24 md:w-24 rounded-full transition-transform active:scale-95 hover:scale-105 overflow-hidden"
+        className="group relative flex h-16 w-16 md:h-20 md:w-20 rounded-full transition-transform active:scale-95 hover:scale-105 overflow-hidden"
         style={{
           backgroundImage: `url(${imageSrc})`,
           backgroundSize: 'cover',
