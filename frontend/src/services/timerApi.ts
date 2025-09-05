@@ -5,23 +5,7 @@ export interface TimerData {
   lastUpdated: number;
 }
 
-// Расширяем глобальный объект Window для Telegram WebApp
-declare global {
-  interface Window {
-    Telegram?: {
-      WebApp?: {
-        initDataUnsafe?: {
-          user?: {
-            id?: number;
-            username?: string;
-            first_name?: string;
-            last_name?: string;
-          };
-        };
-      };
-    };
-  }
-}
+// Типы Telegram WebApp уже объявлены в utils/telegram.ts
 
 export class TimerApi {
   private static getUserId(): string {

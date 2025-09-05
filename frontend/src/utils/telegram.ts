@@ -11,6 +11,14 @@ declare global {
         close?: () => void;
         sendData?: (data: string) => void;
         openTelegramLink?: (url: string) => void;
+        initDataUnsafe?: {
+          user?: {
+            id?: number;
+            username?: string;
+            first_name?: string;
+            last_name?: string;
+          };
+        };
         MainButton?: {
           show?: () => void;
           hide?: () => void;
@@ -22,6 +30,8 @@ declare global {
         };
         HapticFeedback?: {
           impactOccurred?: (style: string) => void;
+          notificationOccurred?: (type: string) => void;
+          selectionChanged?: () => void;
         };
       };
     };
