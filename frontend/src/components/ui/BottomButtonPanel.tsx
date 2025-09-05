@@ -27,7 +27,7 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
   
   return (
     <div 
-      className="mx-auto w-full flex items-center justify-center gap-12 px-4 py-2 rounded-2xl"
+      className="mx-auto w-full flex items-center justify-center gap-16 px-6 py-3 rounded-2xl"
       style={{
         // Временно отключаем фоновое изображение для локальной разработки
         // backgroundImage: getBackgroundImage(EXTERNAL_ASSETS.BUTTONS.PANEL_BACKGROUND),
@@ -43,7 +43,7 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
           <img 
             src="/Sorce/buttons/Back.png" 
             alt={defaultBackText}
-            className="object-contain"
+            className="object-contain h-16 w-auto"
           />
         </button>
       )}
@@ -55,7 +55,7 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
           <img 
             src="/Sorce/buttons/Continue.png" 
             alt={defaultContinueText}
-            className="object-contain"
+            className="object-contain h-16 w-auto"
           />
         </button>
       )}

@@ -48,23 +48,23 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
           </div>
 
           {/* Кнопки в 2 ряда */}
-          <div className="mx-auto mt-3 w-[92%] grid grid-cols-3 gap-2">
+          <div className="mx-auto mt-4 w-[92%] grid grid-cols-3 gap-3">
             <button onClick={onAboutCreator} className="transition-transform active:scale-95 hover:scale-105">
-              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_CREATOR)} alt={t.intro.aboutCreator} className="w-full" />
+              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_CREATOR)} alt={t.intro.aboutCreator} className="w-full h-auto" />
             </button>
             <button onClick={onStart} className="transition-transform active:scale-95 hover:scale-105">
-              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.START)} alt={t.intro.start} className="w-full" />
+              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.START)} alt={t.intro.start} className="w-full h-auto" />
             </button>
             <button onClick={onAboutQuest} className="transition-transform active:scale-95 hover:scale-105">
-              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_QUEST)} alt={t.intro.aboutQuest} className="w-full" />
+              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_QUEST)} alt={t.intro.aboutQuest} className="w-full h-auto" />
             </button>
           </div>
-          <div className="mx-auto mt-2 w-[92%] grid grid-cols-2 gap-2 max-w-[60%]">
+          <div className="mx-auto mt-3 w-[92%] grid grid-cols-2 gap-3 max-w-[70%]">
             <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105">
-              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.FAQ)} alt={t.intro.faq} className="w-full" />
+              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.FAQ)} alt={t.intro.faq} className="w-full h-auto" />
             </button>
             <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105">
-              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.SETTINGS)} alt={t.intro.settings} className="w-full" />
+              <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.SETTINGS)} alt={t.intro.settings} className="w-full h-auto" />
             </button>
           </div>
           
