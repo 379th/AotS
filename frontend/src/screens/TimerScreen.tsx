@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface TimerScreenProps {
   onBack: () => void;
@@ -17,24 +18,46 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   dayTitle 
 }) => {
   const { theme } = useTheme();
-  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 часа в секундах
   const [isTestMode] = useState(import.meta.env.DEV); // Тестовый режим в разработке
+  
+  // Ключи для localStorage
+  const timerKey = `timer_day_${dayNumber}`;
+  const startTimeKey = `timer_start_day_${dayNumber}`;
+  
+  // Сохраняем время начала таймера и оставшееся время
+  const [startTime, setStartTime] = useLocalStorage<number>(startTimeKey, Date.now());
+  const [timeLeft, setTimeLeft] = useLocalStorage<number>(timerKey, 24 * 60 * 60);
 
   useEffect(() => {
     if (isTestMode) return; // В тестовом режиме таймер не работает
 
+    // Вычисляем оставшееся время на основе времени запуска
+    const calculateRemainingTime = () => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const remaining = Math.max(0, 24 * 60 * 60 - elapsed);
+      return remaining;
+    };
+
+    // Устанавливаем правильное время при загрузке
+    const initialTime = calculateRemainingTime();
+    setTimeLeft(initialTime);
+
+    // Если время истекло, сразу показываем 0
+    if (initialTime === 0) {
+      return;
+    }
+
     const timer = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prevTime - 1;
-      });
+      const remaining = calculateRemainingTime();
+      setTimeLeft(remaining);
+      
+      if (remaining === 0) {
+        clearInterval(timer);
+      }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isTestMode]);
+  }, [isTestMode, startTime, setTimeLeft]);
 
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
@@ -44,6 +67,18 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   };
 
   const progressPercentage = ((24 * 60 * 60 - timeLeft) / (24 * 60 * 60)) * 100;
+
+  // Функция для сброса таймера (вызывается при новом запросе)
+  const resetTimer = () => {
+    setStartTime(Date.now());
+    setTimeLeft(24 * 60 * 60);
+  };
+
+  // Экспортируем функцию сброса для использования в других компонентах
+  useEffect(() => {
+    // Сохраняем функцию сброса в глобальном объекте для доступа из других компонентов
+    (window as any)[`resetTimerDay${dayNumber}`] = resetTimer;
+  }, [dayNumber]);
 
   return (
     <ScreenFrame>
