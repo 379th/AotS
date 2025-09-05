@@ -87,7 +87,7 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onBack}
-              continueText="Сохранить"
+              showContinue={false}
             />
 
             {/* Панель навигации */}

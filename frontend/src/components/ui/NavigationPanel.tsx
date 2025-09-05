@@ -27,7 +27,7 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="flex items-center justify-between w-full px-2 -mt-2">
+        <div className="flex items-center justify-between w-full px-2 h-full">
           <RoundButton 
             label="" 
             imageSrc="/Sorce/navigation_panel/01_Learning.png" 

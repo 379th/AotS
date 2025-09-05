@@ -159,7 +159,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onBack}
-              continueText="Обновить"
+              showContinue={false}
             />
 
             {/* Панель навигации */}

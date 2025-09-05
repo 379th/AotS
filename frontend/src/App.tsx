@@ -309,7 +309,7 @@ function App() {
         case "deck":
           return (
             <DeckScreen 
-              onBack={() => navigateTo("request")}
+              onBack={goBack}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
               onOpenDeck={() => navigateTo("deck")}
