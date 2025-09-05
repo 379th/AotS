@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { getRandomShadowArchetypePair, getRelatedPair, EXTERNAL_ASSETS, getImageUrl } from '../config/externalAssets';
+import { clearAllJournalData } from '../utils/clearJournalData';
 
 export const useShadowArchetypePair = () => {
   // Сохраняем индекс текущей пары в localStorage
@@ -38,6 +39,8 @@ export const useShadowArchetypePair = () => {
 
   // Функция для сброса пары (при новом запросе)
   const resetPair = () => {
+    console.log('Сброс пары - очистка всех данных дневника');
+    clearAllJournalData(); // Очищаем все данные дневника
     setCurrentPairIndex(-1);
     setCurrentPair(null);
   };

@@ -2,6 +2,7 @@ import React from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { useLocalStorageString } from '../hooks/useLocalStorage';
 import { useTheme } from '../contexts/ThemeContext';
+import { useArchetypeResource } from '../hooks/useArchetypeResource';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface Day3ResourceScreenProps {
@@ -23,7 +24,9 @@ export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({
 }) => {
   const { theme } = useTheme();
   const [resourceDesc, setResourceDesc] = useLocalStorageString('day3_resource', '');
-  const [archetypeResource, setArchetypeResource] = useLocalStorageString('day3_archetype_resource', '');
+  
+  // Получаем ресурс архетипа из CSV
+  const { archetypeResource, loading, error, hasCurrentPair } = useArchetypeResource();
 
   return (
     <ScreenFrame>
@@ -65,16 +68,40 @@ export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({
                 <div className={`text-sm font-medium mb-3 transition-colors duration-300 ${
                   theme === 'dark' ? 'text-white' : 'text-amber-900'
                 }`}>Ресурс</div>
-                <textarea
-                  value={archetypeResource}
-                  onChange={(e) => setArchetypeResource(e.target.value)}
-                  placeholder="Информация о ресурсах архетипа будет добавлена позже..."
-                  className={`w-full h-32 px-4 py-3 text-sm border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200 ${
+                
+                {!hasCurrentPair ? (
+                  <div className={`w-full h-32 px-4 py-3 text-sm border rounded-lg flex items-center justify-center transition-colors duration-300 ${
                     theme === 'dark' 
-                      ? 'bg-white/10 border-white/20 text-white placeholder-white/50' 
-                      : 'bg-[#f7f0e6] border-[#5c4032]/40 text-amber-900 placeholder-amber-900/50'
-                  }`}
-                />
+                      ? 'bg-white/5 border-white/20 text-white/70' 
+                      : 'bg-[#f7f0e6]/50 border-[#5c4032]/40 text-amber-900/70'
+                  }`}>
+                    Сначала выберите пару на экранах Тень и Архетип
+                  </div>
+                ) : loading ? (
+                  <div className={`w-full h-32 px-4 py-3 text-sm border rounded-lg flex items-center justify-center transition-colors duration-300 ${
+                    theme === 'dark' 
+                      ? 'bg-white/5 border-white/20 text-white/70' 
+                      : 'bg-[#f7f0e6]/50 border-[#5c4032]/40 text-amber-900/70'
+                  }`}>
+                    Загрузка ресурса архетипа...
+                  </div>
+                ) : error ? (
+                  <div className={`w-full h-32 px-4 py-3 text-sm border rounded-lg flex items-center justify-center transition-colors duration-300 ${
+                    theme === 'dark' 
+                      ? 'bg-red-500/10 border-red-500/20 text-red-400' 
+                      : 'bg-red-100 border-red-300 text-red-700'
+                  }`}>
+                    Ошибка загрузки ресурса
+                  </div>
+                ) : (
+                  <div className={`w-full h-32 px-4 py-3 text-sm border rounded-lg overflow-y-auto transition-colors duration-300 ${
+                    theme === 'dark' 
+                      ? 'bg-white/5 border-white/20 text-white/90' 
+                      : 'bg-[#f7f0e6]/50 border-[#5c4032]/40 text-amber-900/90'
+                  }`}>
+                    {archetypeResource || 'Ресурс архетипа не найден'}
+                  </div>
+                )}
               </div>
             </div>
           </div>

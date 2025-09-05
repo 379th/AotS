@@ -6,3 +6,4 @@ export { NavigationPanel } from './NavigationPanel';
 export { BottomButtonPanel } from './BottomButtonPanel';
 export { DrawingCanvas } from './DrawingCanvas';
 export { ScrollableScreen } from './ScrollableScreen';
+export { DataExportImport } from './DataExportImport';
