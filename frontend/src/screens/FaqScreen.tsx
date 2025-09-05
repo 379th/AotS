@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScreenFrame, TitleBar, Pill } from '../components/ui';
-import { useTranslation } from '../i18n';
+import { ScreenFrame, TitleBar } from '../components/ui';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -9,7 +8,6 @@ interface FaqScreenProps {
 }
 
 export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
-  const { t } = useTranslation();
   const { theme } = useTheme();
   
   return (

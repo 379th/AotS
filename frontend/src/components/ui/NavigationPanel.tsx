@@ -1,7 +1,6 @@
 import React from 'react';
 import { RoundButton } from './RoundButton';
 import { closeTelegramApp } from '../../utils/telegram';
-import { useTranslation } from '../../i18n';
 
 interface NavigationPanelProps {
   onAboutQuest: () => void;
@@ -16,7 +15,6 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   onOpenDeck,
   onOpenJournal
 }) => {
-  const { t } = useTranslation();
   
   return (
     <div className="mx-auto w-full max-w-[560px]">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { ScreenFrame, TitleBar } from '../components/ui';
 import { useTranslation } from '../i18n';
 import { useTheme } from '../contexts/ThemeContext';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
