@@ -3,6 +3,7 @@ import { ScreenFrame, TitleBar, Pill } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { TimerApi } from '../services/timerApi';
 
 interface TimerScreenProps {
   onBack: () => void;
@@ -28,16 +29,55 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   const [startTime, setStartTime] = useLocalStorage<number>(startTimeKey, 0);
   const [timeLeft, setTimeLeft] = useLocalStorage<number>(timerKey, 24 * 60 * 60);
 
-  // Инициализируем время начала только если его еще нет
+  // Инициализируем таймер с сервера или localStorage
   useEffect(() => {
-    if (startTime === 0) {
-      const now = Date.now();
-      console.log(`Инициализация таймера для дня ${dayNumber}:`, new Date(now).toLocaleTimeString());
-      setStartTime(now);
-    } else {
-      console.log(`Восстановление таймера для дня ${dayNumber}:`, new Date(startTime).toLocaleTimeString());
-    }
-  }, [startTime, setStartTime, dayNumber]);
+    const initializeTimer = async () => {
+      try {
+        // Сначала пытаемся загрузить с сервера
+        const serverTimer = await TimerApi.loadTimer(dayNumber);
+        
+        if (serverTimer) {
+          // Используем данные с сервера
+          console.log(`Восстановление таймера с сервера для дня ${dayNumber}:`, new Date(serverTimer.startTime).toLocaleTimeString());
+          setStartTime(serverTimer.startTime);
+          
+          // Пересчитываем оставшееся время
+          const remaining = calculateTimeLeft(serverTimer.startTime);
+          setTimeLeft(remaining);
+        } else if (startTime === 0) {
+          // Если на сервере нет данных и в localStorage тоже нет, создаем новый таймер
+          const now = Date.now();
+          console.log(`Инициализация нового таймера для дня ${dayNumber}:`, new Date(now).toLocaleTimeString());
+          setStartTime(now);
+          setTimeLeft(24 * 60 * 60);
+          
+          // Сохраняем на сервер
+          await TimerApi.saveTimer(dayNumber, now);
+        } else {
+          // Используем данные из localStorage
+          console.log(`Восстановление таймера из localStorage для дня ${dayNumber}:`, new Date(startTime).toLocaleTimeString());
+          
+          // Пересчитываем оставшееся время
+          const remaining = calculateTimeLeft(startTime);
+          setTimeLeft(remaining);
+        }
+      } catch (error) {
+        console.error('Ошибка инициализации таймера:', error);
+        // Fallback к localStorage
+        if (startTime === 0) {
+          const now = Date.now();
+          setStartTime(now);
+          setTimeLeft(24 * 60 * 60);
+        } else {
+          // Пересчитываем оставшееся время из localStorage
+          const remaining = calculateTimeLeft(startTime);
+          setTimeLeft(remaining);
+        }
+      }
+    };
+
+    initializeTimer();
+  }, [dayNumber, startTime, setStartTime, setTimeLeft]);
 
   useEffect(() => {
     if (isTestMode || startTime === 0) return; // В тестовом режиме или до инициализации таймер не работает
@@ -79,10 +119,28 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
 
   const progressPercentage = ((24 * 60 * 60 - timeLeft) / (24 * 60 * 60)) * 100;
 
+  // Функция для пересчета оставшегося времени
+  const calculateTimeLeft = (startTime: number): number => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const remaining = Math.max(0, 24 * 60 * 60 - elapsed);
+    
+    console.log(`Пересчет времени для дня ${dayNumber}:`, {
+      startTime: new Date(startTime).toLocaleString(),
+      elapsed: `${Math.floor(elapsed / 3600)}ч ${Math.floor((elapsed % 3600) / 60)}м ${elapsed % 60}с`,
+      remaining: `${Math.floor(remaining / 3600)}ч ${Math.floor((remaining % 3600) / 60)}м ${remaining % 60}с`
+    });
+    
+    return remaining;
+  };
+
   // Функция для сброса таймера (вызывается при новом запросе)
-  const resetTimer = () => {
-    setStartTime(Date.now());
+  const resetTimer = async () => {
+    const now = Date.now();
+    setStartTime(now);
     setTimeLeft(24 * 60 * 60);
+    
+    // Сохраняем на сервер
+    await TimerApi.saveTimer(dayNumber, now);
   };
 
   // Экспортируем функцию сброса для использования в других компонентах

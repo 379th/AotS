@@ -10,9 +10,9 @@
   "scope": "/",
   "icons": [
     {
-      "src": "/vite.svg",
+      "src": "/Sorce/Preloader.png",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }

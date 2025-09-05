@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useShadowArchetypePair } from './hooks/useShadowArchetypePair';
+import { RouteType } from './config/constants';
+import { initTelegram } from './utils/telegram';
+import { TimerApi } from './services/timerApi';
 import { IntroScreen } from './screens/IntroScreen';
 import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
@@ -18,15 +21,12 @@ import { Day4TempleScreen } from './screens/Day4TempleScreen';
 import { CompletionScreen } from './screens/CompletionScreen';
 import { ProgressScreen } from './screens/ProgressScreen';
 import { GuidanceScreen } from './screens/GuidanceScreen';
-
 import { CreatorScreen } from './screens/CreatorScreen';
 import { QuestScreen } from './screens/QuestScreen';
 import { FaqScreen } from './screens/FaqScreen';
 import { DeckScreen } from './screens/DeckScreen';
 import { JournalScreen } from './screens/JournalScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
-import { RouteType } from './config/constants';
-import { initTelegram } from './utils/telegram';
 import { TimerScreen } from './screens/TimerScreen';
 
 function App() {
@@ -35,7 +35,21 @@ function App() {
   const { resetPair } = useShadowArchetypePair();
 
   useEffect(() => {
-    initTelegram();
+    const initializeApp = async () => {
+      try {
+        // Инициализация Telegram
+        await initTelegram();
+        
+        // Создаем пользователя на сервере
+        await TimerApi.createUser();
+        
+        console.log('Приложение инициализировано успешно');
+      } catch (error) {
+        console.error('Ошибка инициализации приложения:', error);
+      }
+    };
+
+    initializeApp();
   }, []);
 
   const navigateTo = (newRoute: RouteType) => {
@@ -283,7 +297,7 @@ function App() {
           return (
             <ProgressScreen
               onBack={() => navigateTo("completion")}
-              onNavigateToDay={(day) => navigateTo(day as RouteType)}
+              onNavigateToDay={(day: string) => navigateTo(day as RouteType)}
             />
           );
 
@@ -349,7 +363,7 @@ function App() {
   };
 
   return (
-    <div 
+    <div
       className="min-h-[100svh] w-full relative"
       style={{
         backgroundImage: 'url(/Sorce/background/Background.png)',

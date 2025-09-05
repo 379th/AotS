@@ -66,6 +66,7 @@ async function initDatabase() {
         progress JSONB DEFAULT '{"day1": false, "day2": false, "day3": false, "day4": false}',
         journal JSONB DEFAULT '[]',
         deck JSONB DEFAULT '{"selectedCards": [], "completedReadings": 0}',
+        timers JSONB DEFAULT '{}',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
@@ -165,8 +166,9 @@ app.put('/api/users/:userId', async (req, res) => {
         progress = COALESCE($3, progress),
         journal = COALESCE($4, journal),
         deck = COALESCE($5, deck),
+        timers = COALESCE($6, timers),
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $6
+      WHERE id = $7
       RETURNING *
     `, [
       updates.currentDay,
@@ -174,6 +176,7 @@ app.put('/api/users/:userId', async (req, res) => {
       updates.progress ? JSON.stringify(updates.progress) : null,
       updates.journal ? JSON.stringify(updates.journal) : null,
       updates.deck ? JSON.stringify(updates.deck) : null,
+      updates.timers ? JSON.stringify(updates.timers) : null,
       userId
     ]);
     
@@ -295,6 +298,72 @@ app.post('/api/users/:userId/deck', async (req, res) => {
   } catch (error) {
     console.error('Error updating deck:', error);
     res.status(500).json({ error: 'Failed to update deck' });
+  }
+});
+
+// Timer management
+app.post('/api/users/:userId/timer', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
+  try {
+    const { userId } = req.params;
+    const { dayNumber, startTime } = req.body;
+    
+    // Get current user data
+    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    const user = userResult.rows[0];
+    const timers = user.timers || {};
+    timers[`day${dayNumber}`] = {
+      startTime,
+      lastUpdated: Date.now()
+    };
+    
+    const result = await pool.query(`
+      UPDATE users 
+      SET 
+        timers = $1,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $2
+      RETURNING *
+    `, [JSON.stringify(timers), userId]);
+    
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error updating timer:', error);
+    res.status(500).json({ error: 'Failed to update timer' });
+  }
+});
+
+app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
+  if (!pool) {
+    return res.status(503).json({ error: 'Database not available' });
+  }
+
+  try {
+    const { userId, dayNumber } = req.params;
+    
+    const result = await pool.query('SELECT timers FROM users WHERE id = $1', [userId]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    const timers = result.rows[0].timers || {};
+    const timer = timers[`day${dayNumber}`];
+    
+    if (!timer) {
+      return res.status(404).json({ error: 'Timer not found' });
+    }
+    
+    res.json(timer);
+  } catch (error) {
+    console.error('Error getting timer:', error);
+    res.status(500).json({ error: 'Failed to get timer' });
   }
 });
 
