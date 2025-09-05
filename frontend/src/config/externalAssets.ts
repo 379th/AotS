@@ -3,7 +3,7 @@ import React from 'react';
 // Конфигурация внешних ресурсов (изображения на ISPmanager)
 export const EXTERNAL_ASSETS = {
   // Базовый URL для изображений на ISPmanager
-  BASE_URL: import.meta.env.VITE_EXTERNAL_ASSETS_BASE_URL || 'https://www.shadow-quest.online',
+  BASE_URL: import.meta.env.DEV ? '' : (import.meta.env.VITE_EXTERNAL_ASSETS_BASE_URL || 'https://www.shadow-quest.online'),
   
   // Изображения для кнопок и панелей
   BUTTONS: {

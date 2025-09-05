@@ -18,7 +18,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
 }) => {
   const { theme } = useTheme();
   const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 часа в секундах
-  const [isTestMode] = useState(true); // Тестовый режим
+  const [isTestMode] = useState(import.meta.env.DEV); // Тестовый режим в разработке
 
   useEffect(() => {
     if (isTestMode) return; // В тестовом режиме таймер не работает
@@ -98,7 +98,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             <div className={`text-sm transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/80' : 'text-amber-900/70'
             }`}>
-              {isTestMode ? 'Тестовый режим' : `${progressPercentage.toFixed(1)}% времени прошло`}
+              {isTestMode ? 'Тестовый режим (разработка)' : `${progressPercentage.toFixed(1)}% времени прошло`}
             </div>
           </div>
 

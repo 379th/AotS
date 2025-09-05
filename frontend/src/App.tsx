@@ -6,7 +6,6 @@ import { Day1Screen } from './screens/Day1Screen';
 import { ShadowImageScreen } from './screens/ShadowImageScreen';
 import { ShadowDetailsScreen } from './screens/ShadowDetailsScreen';
 import { Day1QuestionsScreen } from './screens/Day1QuestionsScreen';
-import { Day2Screen } from './screens/Day2Screen';
 import { Day2EchoScreen } from './screens/Day2EchoScreen';
 import { Day2LettersScreen } from './screens/Day2LettersScreen';
 import { Day3MirrorScreen } from './screens/Day3MirrorScreen';
@@ -28,8 +27,6 @@ import { SettingsScreen } from './screens/SettingsScreen';
 import { RouteType } from './config/constants';
 import { initTelegram } from './utils/telegram';
 import { TimerScreen } from './screens/TimerScreen';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { EXTERNAL_ASSETS, getBackgroundStyle } from './config/externalAssets';
 
 function App() {
   const [route, setRoute] = useState<RouteType>("intro");
@@ -136,18 +133,6 @@ function App() {
           return (
             <Day2EchoScreen
               onBack={() => navigateTo("timer1")}
-              onNext={() => navigateTo("day2Screen")}
-              onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
-              onOpenDeck={() => navigateTo("deck")}
-              onOpenJournal={() => navigateTo("journal")}
-            />
-          );
-
-        case "day2Screen":
-          return (
-            <Day2Screen
-              onBack={() => navigateTo("day2")}
               onNext={() => navigateTo("day2Letters")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("day1")}
@@ -156,10 +141,11 @@ function App() {
             />
           );
 
+
       case "day2Letters":
         return (
           <Day2LettersScreen
-            onBack={() => navigateTo("day2Screen")}
+            onBack={() => navigateTo("day2")}
             onNext={() => navigateTo("timer2")}
             onAboutQuest={() => navigateTo("quest")}
             onGoDay1={() => navigateTo("day1")}
@@ -339,16 +325,19 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <div 
-        className="min-h-[100svh] w-full relative"
-        style={getBackgroundStyle(EXTERNAL_ASSETS.BACKGROUNDS.MAIN_BACKGROUND)}
-      >
-        <div className="max-w-[1280px] mx-auto">
-          {renderScreen()}
-        </div>
+    <div 
+      className="min-h-[100svh] w-full relative"
+      style={{
+        backgroundImage: 'url(/Sorce/background/Background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="max-w-[1280px] mx-auto">
+        {renderScreen()}
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
 

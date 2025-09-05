@@ -33,6 +33,14 @@ const JOURNAL_DATA_KEYS = [
   'day2_completed',
   'day3_completed',
   'day4_completed',
+  
+  // Таймеры
+  'timer_day_1',
+  'timer_day_1_start',
+  'timer_day_2',
+  'timer_day_2_start',
+  'timer_day_3',
+  'timer_day_3_start',
 ];
 
 // Функция для очистки всех данных дневника
