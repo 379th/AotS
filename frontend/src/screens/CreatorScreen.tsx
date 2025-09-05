@@ -58,12 +58,21 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
             <Send className="h-4 w-4"/> @SantoshaClub
           </span>
         </Pill>
-        <Pill onClick={onBack}>
-          <span className="inline-flex items-center gap-2">
-            <img src="/Sorce/buttons/Back.png" alt={t.common.back} className="h-4 w-4 object-contain"/>
-            {t.common.back}
-          </span>
-        </Pill>
+        <button 
+          onClick={onBack}
+          className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
+          style={{
+            backgroundImage: 'url(/Sorce/buttons/Back.png)',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            width: 'auto',
+            height: 'auto',
+            minWidth: '120px',
+            minHeight: '60px'
+          }}
+        >
+        </button>
       </div>
     </ScreenFrame>
   );

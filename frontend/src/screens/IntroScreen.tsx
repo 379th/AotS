@@ -59,11 +59,11 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_QUEST)} alt={t.intro.aboutQuest} className="w-full h-auto" />
             </button>
           </div>
-          <div className="mx-auto mt-3 w-[92%] grid grid-cols-2 gap-3 max-w-[70%]">
-            <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105">
+          <div className="mx-auto mt-3 w-[92%] flex justify-center gap-3">
+            <button onClick={onOpenFaq} className="transition-transform active:scale-95 hover:scale-105 w-1/3">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.FAQ)} alt={t.intro.faq} className="w-full h-auto" />
             </button>
-            <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105">
+            <button onClick={onOpenSettings} className="transition-transform active:scale-95 hover:scale-105 w-1/3">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.SETTINGS)} alt={t.intro.settings} className="w-full h-auto" />
             </button>
           </div>

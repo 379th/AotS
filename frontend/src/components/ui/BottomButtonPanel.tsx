@@ -43,7 +43,7 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
           <img 
             src="/Sorce/buttons/Back.png" 
             alt={defaultBackText}
-            className="object-contain h-16 w-auto"
+            className="object-contain h-20 w-auto"
           />
         </button>
       )}
@@ -55,7 +55,7 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
           <img 
             src="/Sorce/buttons/Continue.png" 
             alt={defaultContinueText}
-            className="object-contain h-16 w-auto"
+            className="object-contain h-20 w-auto"
           />
         </button>
       )}
