@@ -23,21 +23,38 @@ app.use(limiter);
 
 app.use(express.json());
 
-// PostgreSQL connection (only if DATABASE_URL is provided)
+// MySQL connection (only if DATABASE_URL is provided)
 let pool = null;
 if (process.env.DATABASE_URL) {
-  console.log('🔗 DATABASE_URL found, attempting to connect...');
-  const { Pool } = require('pg');
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-  });
+  console.log('🔗 DATABASE_URL found, attempting to connect to MySQL...');
+  const mysql = require('mysql2/promise');
+  
+  // Parse DATABASE_URL for MySQL
+  const url = new URL(process.env.DATABASE_URL);
+  const config = {
+    host: url.hostname,
+    port: url.port || 3306,
+    user: url.username,
+    password: url.password,
+    database: url.pathname.slice(1), // Remove leading slash
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+  };
+  
+  pool = mysql.createPool(config);
   
   // Test the connection
-  pool.on('error', (err) => {
-    console.error('❌ Unexpected error on idle client', err);
-    pool = null;
-  });
+  pool.getConnection()
+    .then(connection => {
+      console.log('✅ MySQL connection successful');
+      connection.release();
+    })
+    .catch(err => {
+      console.error('❌ MySQL connection failed:', err);
+      pool = null;
+    });
 } else {
   console.log('⚠️  No DATABASE_URL provided');
 }
@@ -50,9 +67,9 @@ async function initDatabase() {
   }
 
   try {
-    console.log('🔄 Testing database connection...');
+    console.log('🔄 Testing MySQL connection...');
     await pool.query('SELECT NOW()');
-    console.log('✅ Database connection successful');
+    console.log('✅ MySQL connection successful');
     
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -63,12 +80,12 @@ async function initDatabase() {
         last_name VARCHAR(255),
         current_day INTEGER DEFAULT 1,
         current_step VARCHAR(50) DEFAULT 'intro',
-        progress JSONB DEFAULT '{"day1": false, "day2": false, "day3": false, "day4": false}',
-        journal JSONB DEFAULT '[]',
-        deck JSONB DEFAULT '{"selectedCards": [], "completedReadings": 0}',
-        timers JSONB DEFAULT '{}',
+        progress JSON DEFAULT ('{"day1": false, "day2": false, "day3": false, "day4": false}'),
+        journal JSON DEFAULT ('[]'),
+        deck JSON DEFAULT ('{"selectedCards": [], "completedReadings": 0}'),
+        timers JSON DEFAULT ('{}'),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
 
@@ -81,9 +98,9 @@ async function initDatabase() {
       )
     `);
 
-    console.log('✅ Database initialized successfully');
+    console.log('✅ MySQL database initialized successfully');
   } catch (error) {
-    console.error('❌ Database initialization failed:', error);
+    console.error('❌ MySQL database initialization failed:', error);
     console.log('⚠️  Disabling database connection due to error');
     pool = null;
   }
@@ -113,16 +130,18 @@ app.post('/api/users', async (req, res) => {
     
     const result = await pool.query(`
       INSERT INTO users (id, telegram_id, username, first_name, last_name)
-      VALUES ($1, $2, $3, $4, $5)
-      ON CONFLICT (telegram_id) DO UPDATE SET
-        username = EXCLUDED.username,
-        first_name = EXCLUDED.first_name,
-        last_name = EXCLUDED.last_name,
+      VALUES (?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE
+        username = VALUES(username),
+        first_name = VALUES(first_name),
+        last_name = VALUES(last_name),
         updated_at = CURRENT_TIMESTAMP
-      RETURNING *
     `, [userId, telegramId, username, firstName, lastName]);
     
-    res.status(201).json(result.rows[0]);
+    // Get the user data after insert/update
+    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    
+    res.status(201).json(userResult[0]);
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ error: 'Failed to create user' });
@@ -136,13 +155,13 @@ app.get('/api/users/:userId', async (req, res) => {
 
   try {
     const { userId } = req.params;
-    const result = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+    const [result] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
     
-    if (result.rows.length === 0) {
+    if (result.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    res.json(result.rows[0]);
+    res.json(result[0]);
   } catch (error) {
     console.error('Error getting user:', error);
     res.status(500).json({ error: 'Failed to get user' });
@@ -161,15 +180,14 @@ app.put('/api/users/:userId', async (req, res) => {
     const result = await pool.query(`
       UPDATE users 
       SET 
-        current_day = COALESCE($1, current_day),
-        current_step = COALESCE($2, current_step),
-        progress = COALESCE($3, progress),
-        journal = COALESCE($4, journal),
-        deck = COALESCE($5, deck),
-        timers = COALESCE($6, timers),
+        current_day = COALESCE(?, current_day),
+        current_step = COALESCE(?, current_step),
+        progress = COALESCE(?, progress),
+        journal = COALESCE(?, journal),
+        deck = COALESCE(?, deck),
+        timers = COALESCE(?, timers),
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $7
-      RETURNING *
+      WHERE id = ?
     `, [
       updates.currentDay,
       updates.currentStep,
@@ -180,11 +198,13 @@ app.put('/api/users/:userId', async (req, res) => {
       userId
     ]);
     
-    if (result.rows.length === 0) {
+    // Get updated user data
+    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    if (updatedUser.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    res.json(result.rows[0]);
+    res.json(updatedUser[0]);
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ error: 'Failed to update user' });
@@ -202,26 +222,28 @@ app.post('/api/users/:userId/progress', async (req, res) => {
     const { day, completed } = req.body;
     
     // Get current user data
-    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
-    if (userResult.rows.length === 0) {
+    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    if (userResult.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    const user = userResult.rows[0];
+    const user = userResult[0];
     const progress = user.progress || {};
     progress[`day${day}`] = completed;
     
     const result = await pool.query(`
       UPDATE users 
       SET 
-        progress = $1,
-        current_day = $2,
+        progress = ?,
+        current_day = ?,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $3
+      WHERE id = ?
       RETURNING *
     `, [JSON.stringify(progress), Math.max(day + 1, 1), userId]);
     
-    res.json(result.rows[0]);
+    // Get updated user data
+    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    res.json(updatedUser[0]);
   } catch (error) {
     console.error('Error updating progress:', error);
     res.status(500).json({ error: 'Failed to update progress' });
@@ -239,25 +261,27 @@ app.post('/api/users/:userId/journal', async (req, res) => {
     const { entry } = req.body;
     
     // Get current user data
-    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
-    if (userResult.rows.length === 0) {
+    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    if (userResult.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    const user = userResult.rows[0];
+    const user = userResult[0];
     const journal = user.journal || [];
     journal.push(entry);
     
     const result = await pool.query(`
       UPDATE users 
       SET 
-        journal = $1,
+        journal = ?,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $2
+      WHERE id = ?
       RETURNING *
     `, [JSON.stringify(journal), userId]);
     
-    res.json(result.rows[0]);
+    // Get updated user data
+    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    res.json(updatedUser[0]);
   } catch (error) {
     console.error('Error adding journal entry:', error);
     res.status(500).json({ error: 'Failed to add journal entry' });
@@ -275,12 +299,12 @@ app.post('/api/users/:userId/deck', async (req, res) => {
     const { selectedCards } = req.body;
     
     // Get current user data
-    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
-    if (userResult.rows.length === 0) {
+    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    if (userResult.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    const user = userResult.rows[0];
+    const user = userResult[0];
     const deck = user.deck || { selectedCards: [], completedReadings: 0 };
     deck.selectedCards = selectedCards;
     deck.completedReadings += 1;
@@ -288,13 +312,15 @@ app.post('/api/users/:userId/deck', async (req, res) => {
     const result = await pool.query(`
       UPDATE users 
       SET 
-        deck = $1,
+        deck = ?,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $2
+      WHERE id = ?
       RETURNING *
     `, [JSON.stringify(deck), userId]);
     
-    res.json(result.rows[0]);
+    // Get updated user data
+    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    res.json(updatedUser[0]);
   } catch (error) {
     console.error('Error updating deck:', error);
     res.status(500).json({ error: 'Failed to update deck' });
@@ -312,12 +338,12 @@ app.post('/api/users/:userId/timer', async (req, res) => {
     const { dayNumber, startTime } = req.body;
     
     // Get current user data
-    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
-    if (userResult.rows.length === 0) {
+    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    if (userResult.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    const user = userResult.rows[0];
+    const user = userResult[0];
     const timers = user.timers || {};
     timers[`day${dayNumber}`] = {
       startTime,
@@ -327,13 +353,15 @@ app.post('/api/users/:userId/timer', async (req, res) => {
     const result = await pool.query(`
       UPDATE users 
       SET 
-        timers = $1,
+        timers = ?,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $2
+      WHERE id = ?
       RETURNING *
     `, [JSON.stringify(timers), userId]);
     
-    res.json(result.rows[0]);
+    // Get updated user data
+    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    res.json(updatedUser[0]);
   } catch (error) {
     console.error('Error updating timer:', error);
     res.status(500).json({ error: 'Failed to update timer' });
@@ -348,12 +376,12 @@ app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
   try {
     const { userId, dayNumber } = req.params;
     
-    const result = await pool.query('SELECT timers FROM users WHERE id = $1', [userId]);
-    if (result.rows.length === 0) {
+    const [result] = await pool.query('SELECT timers FROM users WHERE id = ?', [userId]);
+    if (result.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    const timers = result.rows[0].timers || {};
+    const timers = result[0].timers || {};
     const timer = timers[`day${dayNumber}`];
     
     if (!timer) {
@@ -380,7 +408,7 @@ app.post('/api/sessions', async (req, res) => {
     
     const result = await pool.query(`
       INSERT INTO sessions (id, telegram_id, expires_at)
-      VALUES ($1, $2, $3)
+      VALUES (?, ?, ?)
       RETURNING *
     `, [sessionId, telegramId, expiresAt]);
     
