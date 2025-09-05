@@ -25,11 +25,22 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   const startTimeKey = `timer_start_day_${dayNumber}`;
   
   // Сохраняем время начала таймера и оставшееся время
-  const [startTime, setStartTime] = useLocalStorage<number>(startTimeKey, Date.now());
+  const [startTime, setStartTime] = useLocalStorage<number>(startTimeKey, 0);
   const [timeLeft, setTimeLeft] = useLocalStorage<number>(timerKey, 24 * 60 * 60);
 
+  // Инициализируем время начала только если его еще нет
   useEffect(() => {
-    if (isTestMode) return; // В тестовом режиме таймер не работает
+    if (startTime === 0) {
+      const now = Date.now();
+      console.log(`Инициализация таймера для дня ${dayNumber}:`, new Date(now).toLocaleTimeString());
+      setStartTime(now);
+    } else {
+      console.log(`Восстановление таймера для дня ${dayNumber}:`, new Date(startTime).toLocaleTimeString());
+    }
+  }, [startTime, setStartTime, dayNumber]);
+
+  useEffect(() => {
+    if (isTestMode || startTime === 0) return; // В тестовом режиме или до инициализации таймер не работает
 
     // Вычисляем оставшееся время на основе времени запуска
     const calculateRemainingTime = () => {
