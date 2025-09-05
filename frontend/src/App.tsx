@@ -62,12 +62,27 @@ function App() {
   };
 
   // Функция для запуска таймера и перехода к следующему дню
-  const startTimerAndContinue = (dayNumber: number, nextRoute: RouteType) => {
-    // Запускаем таймер для указанного дня
+  const startTimerAndContinue = async (dayNumber: number, nextRoute: RouteType) => {
+    // Проверяем, есть ли уже запущенный таймер
     const timerKey = `timer_start_day_${dayNumber}`;
-    const now = Date.now();
-    localStorage.setItem(timerKey, now.toString());
-    console.log(`Запуск таймера для дня ${dayNumber}:`, new Date(now).toLocaleTimeString());
+    const existingStartTime = localStorage.getItem(timerKey);
+    
+    if (!existingStartTime) {
+      // Запускаем таймер только если его еще нет
+      const now = Date.now();
+      localStorage.setItem(timerKey, now.toString());
+      console.log(`Запуск нового таймера для дня ${dayNumber}:`, new Date(now).toLocaleTimeString());
+      
+      // Сохраняем на сервер
+      try {
+        await TimerApi.saveTimer(dayNumber, now);
+        console.log(`Таймер для дня ${dayNumber} сохранен на сервер`);
+      } catch (error) {
+        console.error('Ошибка сохранения таймера на сервер:', error);
+      }
+    } else {
+      console.log(`Таймер для дня ${dayNumber} уже запущен:`, new Date(parseInt(existingStartTime)).toLocaleTimeString());
+    }
     
     // Переходим к следующему экрану
     navigateTo(nextRoute);

@@ -79,6 +79,8 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
     initializeTimer();
   }, [dayNumber, startTime, setStartTime, setTimeLeft]);
 
+  // Таймер НЕ сбрасывается при навигации - работает как настоящий таймер
+
   useEffect(() => {
     if (isTestMode || startTime === 0) return; // В тестовом режиме или до инициализации таймер не работает
 
@@ -204,6 +206,15 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             }`}>
               {isTestMode ? 'Тестовый режим (разработка)' : `${progressPercentage.toFixed(1)}% времени прошло`}
             </div>
+            
+            {/* Информация о времени запуска */}
+            {startTime > 0 && (
+              <div className={`text-xs transition-colors duration-300 ${
+                theme === 'dark' ? 'text-white/60' : 'text-amber-900/50'
+              }`}>
+                Таймер запущен: {new Date(startTime).toLocaleString()}
+              </div>
+            )}
           </div>
 
           {/* Информация */}
@@ -242,6 +253,16 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
                 className="w-full bg-amber-600/80 hover:bg-amber-600"
               >
                 Продолжить
+              </Pill>
+            )}
+            
+            {/* Кнопка сброса таймера только в тестовом режиме */}
+            {isTestMode && timeLeft > 0 && (
+              <Pill 
+                onClick={resetTimer}
+                className="w-full bg-red-600/80 hover:bg-red-600"
+              >
+                Сбросить таймер (тестовый режим)
               </Pill>
             )}
             
