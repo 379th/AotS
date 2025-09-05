@@ -39,7 +39,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
               ? 'border-white/20 bg-[#1a0b2e]'
               : 'border-[#5c4032]/50 bg-[#e2d0b6]'
           }`}>
-            <div className={`relative h-[55svh] overflow-hidden rounded-xl border p-4 transition-colors duration-300 ${
+            <div className={`relative h-[55svh] overflow-y-auto rounded-xl border p-4 transition-colors duration-300 ${
               theme === 'dark' 
                 ? 'border-white/20 bg-[#2d1b4e]'
                 : 'border-[#5c4032]/40 bg-[#f7f0e6]'
