@@ -20,7 +20,7 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
           ? 'border-white/20 bg-[#1a0b2e]' 
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
-        <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 text-sm leading-6 transition-colors duration-300 ${
+        <div className={`h-[50svh] overflow-y-auto rounded-xl border p-4 text-sm leading-6 transition-colors duration-300 ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e] text-white' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6] text-amber-900'

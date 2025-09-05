@@ -39,7 +39,7 @@ export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({
             <img 
               src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY3_MIRROR)} 
               alt="Зеркало Перехода" 
-              className="w-full h-[80svh] object-cover" 
+              className="w-full h-[65svh] object-cover" 
             />
           </div>
 

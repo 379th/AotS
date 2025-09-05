@@ -43,7 +43,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
         <div className="flex-1 flex flex-col">
           {/* Основной контентный блок с полем запроса внутри */}
           <div className="mx-auto mt-3 w-[92%]">
-            <div className={`h-[66svh] rounded-2xl border p-6 text-left shadow-[0_6px_28px_rgba(0,0,0,.35)] transition-colors duration-300 ${
+            <div className={`h-[55svh] rounded-2xl border p-6 text-left shadow-[0_6px_28px_rgba(0,0,0,.35)] transition-colors duration-300 ${
               theme === 'dark' 
                 ? 'border-white/20 bg-[#1a0b2e] text-white' 
                 : 'border-[#5c4032]/50 bg-[#e2d0b6] text-amber-900'

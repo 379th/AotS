@@ -39,7 +39,7 @@ export const Day4TempleScreen: React.FC<Day4TempleScreenProps> = ({
             <img 
               src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY4_TEMPLE)} 
               alt="Храм Целостности" 
-              className="w-full h-[80svh] object-cover" 
+              className="w-full h-[65svh] object-cover" 
             />
           </div>
 

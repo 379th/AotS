@@ -40,7 +40,7 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
             <img 
               src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY1_FOREST)} 
               alt="Лес, где шепчут тени" 
-              className="w-full h-[80svh] object-cover object-top" 
+              className="w-full h-[65svh] object-cover object-top" 
             />
           </div>
 
