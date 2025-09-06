@@ -234,6 +234,12 @@ app.get('/health', (req, res) => {
 
 // User management
 app.post('/api/users', async (req, res) => {
+  console.log('📝 POST /api/users called');
+  console.log('🔍 Pool status:', pool ? 'available' : 'null');
+  console.log('🔍 DATABASE_URL:', process.env.DATABASE_URL ? 'set' : 'not set');
+  console.log('🔍 NODE_ENV:', process.env.NODE_ENV);
+  console.log('🔍 RAILWAY_ENVIRONMENT:', process.env.RAILWAY_ENVIRONMENT);
+  
   if (!pool) {
     console.log('⚠️  Database not available, returning mock user data');
     // Возвращаем моковые данные пользователя для работы без базы данных
@@ -252,6 +258,7 @@ app.post('/api/users', async (req, res) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
+    console.log('✅ Returning mock user:', mockUser.id);
     return res.status(201).json(mockUser);
   }
 
@@ -259,20 +266,46 @@ app.post('/api/users', async (req, res) => {
     const { telegramId, username, firstName, lastName } = req.body;
     const userId = telegramId || `user_${Date.now()}`;
     
-    const result = await pool.query(`
-      INSERT INTO users (id, telegram_id, username, first_name, last_name)
-      VALUES (?, ?, ?, ?, ?)
-      ON DUPLICATE KEY UPDATE
-        username = VALUES(username),
-        first_name = VALUES(first_name),
-        last_name = VALUES(last_name),
-        updated_at = CURRENT_TIMESTAMP
-    `, [userId, telegramId, username, firstName, lastName]);
+    // Определяем тип базы данных для правильного SQL
+    const isPostgreSQL = process.env.DATABASE_URL && (
+      process.env.DATABASE_URL.includes('postgres') || 
+      process.env.DATABASE_URL.includes('postgresql')
+    );
     
-    // Get the user data after insert/update
-    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+    let result, userResult;
     
-    res.status(201).json(userResult[0]);
+    if (isPostgreSQL) {
+      // PostgreSQL синтаксис
+      result = await pool.query(`
+        INSERT INTO users (id, telegram_id, username, first_name, last_name)
+        VALUES ($1, $2, $3, $4, $5)
+        ON CONFLICT (id) DO UPDATE SET
+          username = EXCLUDED.username,
+          first_name = EXCLUDED.first_name,
+          last_name = EXCLUDED.last_name,
+          updated_at = CURRENT_TIMESTAMP
+        RETURNING *
+      `, [userId, telegramId, username, firstName, lastName]);
+      
+      userResult = result.rows[0];
+    } else {
+      // MySQL синтаксис
+      result = await pool.query(`
+        INSERT INTO users (id, telegram_id, username, first_name, last_name)
+        VALUES (?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+          username = VALUES(username),
+          first_name = VALUES(first_name),
+          last_name = VALUES(last_name),
+          updated_at = CURRENT_TIMESTAMP
+      `, [userId, telegramId, username, firstName, lastName]);
+      
+      // Get the user data after insert/update
+      const [userResultArray] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+      userResult = userResultArray[0];
+    }
+    
+    res.status(201).json(userResult);
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ error: 'Failed to create user' });

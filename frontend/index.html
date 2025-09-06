@@ -17,6 +17,20 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="manifest" href="/manifest.json" />
     
+    <!-- Content Security Policy для Telegram WebApp -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://telegram.org;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: blob:;
+      connect-src 'self' https://aots-production-9a30.up.railway.app;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    ">
+    
     <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon" href="/vite.svg" />
     <link rel="apple-touch-icon" sizes="152x152" href="/vite.svg" />
