@@ -21,18 +21,24 @@ export interface TimerData {
 
 export class TimerApi {
   private static getUserId(): string {
-    // Получаем ID пользователя из Telegram WebApp или localStorage
+    // Получаем ID пользователя из Telegram WebApp
     if (window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
       return window.Telegram.WebApp.initDataUnsafe.user.id.toString();
     }
     
-    // Fallback для разработки
-    let userId = localStorage.getItem('shadow_quest_user_id');
-    if (!userId) {
-      userId = `dev_user_${Date.now()}`;
-      localStorage.setItem('shadow_quest_user_id', userId);
+    // Fallback только для локальной разработки (не в продакшене)
+    const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+    if (!isProduction) {
+      let userId = localStorage.getItem('shadow_quest_user_id');
+      if (!userId) {
+        userId = `dev_user_${Date.now()}`;
+        localStorage.setItem('shadow_quest_user_id', userId);
+      }
+      return userId;
     }
-    return userId;
+    
+    // В продакшене без Telegram WebApp - возвращаем ошибку
+    throw new Error('Telegram WebApp не инициализирован');
   }
 
   static async saveTimer(dayNumber: number, startTime: number): Promise<void> {
