@@ -1,9 +1,13 @@
 // Определяем базовый URL API в зависимости от окружения
 const getApiBaseUrl = () => {
-  // В Telegram WebApp используем относительный путь
-  if (window.Telegram?.WebApp) {
+  // Проверяем, находимся ли мы в Telegram WebApp
+  const isTelegramWebApp = window.Telegram?.WebApp && window.location.hostname !== 'localhost';
+  
+  if (isTelegramWebApp) {
+    // В Telegram WebApp используем относительный путь
     return import.meta.env.VITE_API_URL || '';
   }
+  
   // Для локальной разработки
   return import.meta.env.VITE_API_URL || 'http://localhost:4000';
 };
