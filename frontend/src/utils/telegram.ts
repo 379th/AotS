@@ -54,24 +54,29 @@ export async function initTelegram() {
           console.log('Failed to hide MainButton:', error);
         }
         
-        try { 
-          window.Telegram.WebApp?.BackButton?.hide?.(); 
-        } catch (error) {
-          console.log('Failed to hide BackButton:', error);
+        // BackButton не поддерживается в версии 6.0 - проверяем версию
+        const version = (window.Telegram.WebApp as any)?.version;
+        if (version && parseFloat(version) >= 7.0) {
+          try { 
+            window.Telegram.WebApp?.BackButton?.hide?.(); 
+          } catch (error) {
+            console.log('Failed to hide BackButton:', error);
+          }
         }
         
-        // В версиях < 7.0 не поддерживаются смена цветов — вызываем только когда доступно и нет предупреждений
-        try { 
-          window.Telegram.WebApp?.setBackgroundColor?.('#120a22'); 
-        } catch (error) {
-          console.log('Failed to set background color:', error);
-        }
-        
-        // Пытаемся установить прозрачный заголовок (если поддерживается)
-        try { 
-          window.Telegram.WebApp?.setHeaderColor?.('transparent'); 
-        } catch (error) {
-          console.log('Failed to set header color:', error);
+        // Цвета не поддерживаются в версии 6.0 - проверяем версию
+        if (version && parseFloat(version) >= 7.0) {
+          try { 
+            window.Telegram.WebApp?.setBackgroundColor?.('#120a22'); 
+          } catch (error) {
+            console.log('Failed to set background color:', error);
+          }
+          
+          try { 
+            window.Telegram.WebApp?.setHeaderColor?.('transparent'); 
+          } catch (error) {
+            console.log('Failed to set header color:', error);
+          }
         }
         
       } catch (error) {
