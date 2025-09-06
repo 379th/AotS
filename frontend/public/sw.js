@@ -24,13 +24,23 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
+  // Пропускаем внешние ресурсы - они не должны кэшироваться
+  if (event.request.url.includes('fonts.googleapis.com') || 
+      event.request.url.includes('telegram.org') ||
+      event.request.url.includes('googleapis.com')) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         if (response) {
           return response;
         }
-        return fetch(event.request);
+        return fetch(event.request).catch(() => {
+          // Если fetch не удался, возвращаем пустой ответ
+          return new Response('', { status: 404, statusText: 'Not Found' });
+        });
       })
   );
 });
