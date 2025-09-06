@@ -27,7 +27,8 @@ self.addEventListener('fetch', (event) => {
   // Пропускаем внешние ресурсы - они не должны кэшироваться
   if (event.request.url.includes('fonts.googleapis.com') || 
       event.request.url.includes('telegram.org') ||
-      event.request.url.includes('googleapis.com')) {
+      event.request.url.includes('googleapis.com') ||
+      event.request.url.includes('fonts.gstatic.com')) {
     return;
   }
   
@@ -37,7 +38,8 @@ self.addEventListener('fetch', (event) => {
         if (response) {
           return response;
         }
-        return fetch(event.request).catch(() => {
+        return fetch(event.request).catch((error) => {
+          console.log('SW: Fetch failed for', event.request.url, error);
           // Если fetch не удался, возвращаем пустой ответ
           return new Response('', { status: 404, statusText: 'Not Found' });
         });

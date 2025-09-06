@@ -8,15 +8,25 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
+// CSP настройки для разных окружений
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 app.use(helmet({
-  contentSecurityPolicy: {
+  contentSecurityPolicy: isDevelopment ? false : {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://telegram.org"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "blob:"],
-      connectSrc: ["'self'", "https://aots-production-9a30.up.railway.app"],
+      connectSrc: [
+        "'self'", 
+        "https://aots-production-9a30.up.railway.app",
+        "https://www.shadow-quest.online",
+        "https://telegram.org",
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com"
+      ],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
