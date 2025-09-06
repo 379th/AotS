@@ -42,18 +42,36 @@ if (process.env.DATABASE_URL) {
     connectionLimit: 10,
     queueLimit: 0,
     acquireTimeout: 60000, // 60 seconds
-    timeout: 60000, // 60 seconds
-    reconnect: true,
     idleTimeout: 300000, // 5 minutes
-    charset: 'utf8mb4'
+    charset: 'utf8mb4',
+    timezone: 'Z'
   };
   
-  pool = mysql.createPool(config);
+  console.log('🔧 MySQL config:', {
+    host: config.host,
+    port: config.port,
+    user: config.user,
+    database: config.database,
+    ssl: !!config.ssl
+  });
+  
+  try {
+    pool = mysql.createPool(config);
+    console.log('✅ MySQL connection pool created');
+  } catch (err) {
+    console.error('❌ Failed to create MySQL connection pool:', err);
+    pool = null;
+  }
   
   // Test the connection with retry logic
   const testConnection = async (retries = 3) => {
     for (let i = 0; i < retries; i++) {
       try {
+        if (!pool) {
+          console.error('❌ Connection pool is null, cannot test connection');
+          return;
+        }
+        
         const connection = await pool.getConnection();
         console.log('✅ MySQL connection successful');
         connection.release();
@@ -71,7 +89,12 @@ if (process.env.DATABASE_URL) {
     }
   };
   
-  testConnection();
+  // Запускаем тест подключения асинхронно
+  if (pool) {
+    testConnection().catch(err => {
+      console.error('❌ Connection test failed:', err);
+    });
+  }
 } else {
   console.log('⚠️  No DATABASE_URL provided');
 }
@@ -85,6 +108,10 @@ async function initDatabase() {
 
   try {
     console.log('🔄 Testing MySQL connection...');
+    
+    // Ждем немного перед тестом подключения
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
     await pool.query('SELECT NOW()');
     console.log('✅ MySQL connection successful');
     
