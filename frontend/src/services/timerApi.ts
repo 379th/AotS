@@ -20,7 +20,7 @@ export interface TimerData {
 // Типы Telegram WebApp уже объявлены в utils/telegram.ts
 
 export class TimerApi {
-  private static getUserId(): string {
+  private static getUserId(): string | null {
     // Получаем ID пользователя из Telegram WebApp
     if (window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
       return window.Telegram.WebApp.initDataUnsafe.user.id.toString();
@@ -37,13 +37,21 @@ export class TimerApi {
       return userId;
     }
     
-    // В продакшене без Telegram WebApp - возвращаем ошибку
-    throw new Error('Telegram WebApp не инициализирован');
+    // В продакшене без Telegram WebApp - возвращаем null
+    console.warn('Telegram WebApp не инициализирован, пропускаем API вызов');
+    return null;
   }
 
   static async saveTimer(dayNumber: number, startTime: number): Promise<void> {
     try {
       const userId = this.getUserId();
+      
+      // Если userId null, значит Telegram WebApp не инициализирован
+      if (!userId) {
+        console.log('Skipping timer save - Telegram WebApp not initialized');
+        return;
+      }
+      
       const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}/timer`, {
         method: 'POST',
         headers: {
@@ -70,6 +78,13 @@ export class TimerApi {
   static async loadTimer(dayNumber: number): Promise<TimerData | null> {
     try {
       const userId = this.getUserId();
+      
+      // Если userId null, значит Telegram WebApp не инициализирован
+      if (!userId) {
+        console.log('Skipping timer load - Telegram WebApp not initialized');
+        return null;
+      }
+      
       const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}/timer/${dayNumber}`);
 
       if (!response.ok) {
@@ -88,9 +103,15 @@ export class TimerApi {
     }
   }
 
-  static async createUser(): Promise<string> {
+  static async createUser(): Promise<string | null> {
     try {
       const userId = this.getUserId();
+      
+      // Если userId null, значит Telegram WebApp не инициализирован
+      if (!userId) {
+        console.log('Skipping user creation - Telegram WebApp not initialized');
+        return null;
+      }
       
       // Получаем данные пользователя из Telegram
       const userData = window.Telegram?.WebApp?.initDataUnsafe?.user;
@@ -117,7 +138,7 @@ export class TimerApi {
       return userId;
     } catch (error) {
       console.error('Error creating user:', error);
-      return this.getUserId(); // Возвращаем ID даже при ошибке
+      return null;
     }
   }
 }

@@ -54,8 +54,9 @@ export class UserApi {
       return userId;
     }
     
-    // В продакшене без Telegram WebApp - возвращаем ошибку
-    throw new Error('Telegram WebApp не инициализирован');
+    // В продакшене без Telegram WebApp - ждем инициализации или возвращаем null
+    console.warn('Telegram WebApp не инициализирован, пропускаем API вызов');
+    return null;
   }
 
   /**
@@ -64,6 +65,12 @@ export class UserApi {
   static async createOrUpdateUser(): Promise<UserData | null> {
     try {
       const userId = this.getUserId();
+      
+      // Если userId null, значит Telegram WebApp не инициализирован
+      if (!userId) {
+        console.log('Skipping user creation - Telegram WebApp not initialized');
+        return null;
+      }
       
       // Получаем данные пользователя из Telegram
       const telegramUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
@@ -100,6 +107,13 @@ export class UserApi {
   static async getUser(): Promise<UserData | null> {
     try {
       const userId = this.getUserId();
+      
+      // Если userId null, значит Telegram WebApp не инициализирован
+      if (!userId) {
+        console.log('Skipping user loading - Telegram WebApp not initialized');
+        return null;
+      }
+      
       const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}`);
 
       if (!response.ok) {
@@ -124,6 +138,13 @@ export class UserApi {
   static async updateProgress(progress: Partial<UserData>): Promise<UserData | null> {
     try {
       const userId = this.getUserId();
+      
+      // Если userId null, значит Telegram WebApp не инициализирован
+      if (!userId) {
+        console.log('Skipping progress update - Telegram WebApp not initialized');
+        return null;
+      }
+      
       const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}`, {
         method: 'PUT',
         headers: {
