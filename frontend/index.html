@@ -18,18 +18,7 @@
     <link rel="manifest" href="/manifest.json" />
     
     <!-- Content Security Policy для Telegram WebApp -->
-    <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' https://telegram.org;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src 'self' https://fonts.gstatic.com;
-      img-src 'self' data: blob:;
-      connect-src 'self' https://aots-production-9a30.up.railway.app;
-      frame-src 'none';
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self';
-    ">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://telegram.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://aots-production-9a30.up.railway.app; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
     
     <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon" href="/vite.svg" />
@@ -43,7 +32,6 @@
     <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     
     <!-- Предзагрузка критических ресурсов -->
-    <link rel="preload" href="/Sorce/Preloader.png" as="image" type="image/png" fetchpriority="high">
     <link rel="preload" href="/Sorce/background/Background.png" as="image" type="image/png">
   </head>
   <body>
