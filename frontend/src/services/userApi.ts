@@ -8,8 +8,6 @@ const getApiBaseUrl = () => {
   return import.meta.env.VITE_API_URL || 'http://localhost:4000';
 };
 
-const API_BASE_URL = getApiBaseUrl();
-
 export interface UserData {
   id: string;
   telegramId: string;
@@ -60,7 +58,7 @@ export class UserApi {
       // Получаем данные пользователя из Telegram
       const telegramUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
       
-      const response = await fetch(`${API_BASE_URL}/api/users`, {
+      const response = await fetch(`${getApiBaseUrl()}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +90,7 @@ export class UserApi {
   static async getUser(): Promise<UserData | null> {
     try {
       const userId = this.getUserId();
-      const response = await fetch(`${API_BASE_URL}/api/users/${userId}`);
+      const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}`);
 
       if (!response.ok) {
         if (response.status === 404) {
@@ -116,7 +114,7 @@ export class UserApi {
   static async updateProgress(progress: Partial<UserData>): Promise<UserData | null> {
     try {
       const userId = this.getUserId();
-      const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
+      const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

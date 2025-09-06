@@ -8,8 +8,6 @@ const getApiBaseUrl = () => {
   return import.meta.env.VITE_API_URL || 'http://localhost:4000';
 };
 
-const API_BASE_URL = getApiBaseUrl();
-
 export interface TimerData {
   startTime: number;
   lastUpdated: number;
@@ -36,7 +34,7 @@ export class TimerApi {
   static async saveTimer(dayNumber: number, startTime: number): Promise<void> {
     try {
       const userId = this.getUserId();
-      const response = await fetch(`${API_BASE_URL}/api/users/${userId}/timer`, {
+      const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}/timer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +60,7 @@ export class TimerApi {
   static async loadTimer(dayNumber: number): Promise<TimerData | null> {
     try {
       const userId = this.getUserId();
-      const response = await fetch(`${API_BASE_URL}/api/users/${userId}/timer/${dayNumber}`);
+      const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}/timer/${dayNumber}`);
 
       if (!response.ok) {
         if (response.status === 404) {
@@ -87,7 +85,7 @@ export class TimerApi {
       // Получаем данные пользователя из Telegram
       const userData = window.Telegram?.WebApp?.initDataUnsafe?.user;
       
-      const response = await fetch(`${API_BASE_URL}/api/users`, {
+      const response = await fetch(`${getApiBaseUrl()}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
