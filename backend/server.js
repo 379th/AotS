@@ -39,7 +39,7 @@ if (process.env.DATABASE_URL) {
       user: url.username,
       password: url.password,
       database: url.pathname.slice(1), // Remove leading slash
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      ssl: process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT ? { rejectUnauthorized: false } : false,
       max: 10,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 60000
@@ -56,6 +56,16 @@ if (process.env.DATABASE_URL) {
     try {
       pool = new Pool(config);
       console.log('✅ PostgreSQL connection pool created');
+      
+      // Test the connection
+      pool.query('SELECT NOW()', (err, result) => {
+        if (err) {
+          console.error('❌ PostgreSQL connection test failed:', err);
+          pool = null;
+        } else {
+          console.log('✅ PostgreSQL connection test successful:', result.rows[0]);
+        }
+      });
     } catch (err) {
       console.error('❌ Failed to create PostgreSQL connection pool:', err);
       pool = null;
