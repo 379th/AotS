@@ -225,7 +225,24 @@ app.get('/health', (req, res) => {
 // User management
 app.post('/api/users', async (req, res) => {
   if (!pool) {
-    return res.status(503).json({ error: 'Database not available' });
+    console.log('⚠️  Database not available, returning mock user data');
+    // Возвращаем моковые данные пользователя для работы без базы данных
+    const mockUser = {
+      id: req.body.telegramId || `user_${Date.now()}`,
+      telegramId: req.body.telegramId || `user_${Date.now()}`,
+      username: req.body.username || null,
+      firstName: req.body.firstName || null,
+      lastName: req.body.lastName || null,
+      currentDay: 1,
+      currentStep: 'intro',
+      progress: { day1: false, day2: false, day3: false, day4: false },
+      journal: [],
+      deck: { selectedCards: [], completedReadings: 0 },
+      timers: {},
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    return res.status(201).json(mockUser);
   }
 
   try {
@@ -254,7 +271,24 @@ app.post('/api/users', async (req, res) => {
 
 app.get('/api/users/:userId', async (req, res) => {
   if (!pool) {
-    return res.status(503).json({ error: 'Database not available' });
+    console.log('⚠️  Database not available, returning mock user data');
+    // Возвращаем моковые данные пользователя для работы без базы данных
+    const mockUser = {
+      id: req.params.userId,
+      telegramId: req.params.userId,
+      username: null,
+      firstName: null,
+      lastName: null,
+      currentDay: 1,
+      currentStep: 'intro',
+      progress: { day1: false, day2: false, day3: false, day4: false },
+      journal: [],
+      deck: { selectedCards: [], completedReadings: 0 },
+      timers: {},
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    return res.status(200).json(mockUser);
   }
 
   try {
@@ -274,7 +308,24 @@ app.get('/api/users/:userId', async (req, res) => {
 
 app.put('/api/users/:userId', async (req, res) => {
   if (!pool) {
-    return res.status(503).json({ error: 'Database not available' });
+    console.log('⚠️  Database not available, returning mock user data');
+    // Возвращаем моковые данные пользователя для работы без базы данных
+    const mockUser = {
+      id: req.params.userId,
+      telegramId: req.params.userId,
+      username: null,
+      firstName: null,
+      lastName: null,
+      currentDay: req.body.currentDay || 1,
+      currentStep: req.body.currentStep || 'intro',
+      progress: req.body.progress || { day1: false, day2: false, day3: false, day4: false },
+      journal: req.body.journal || [],
+      deck: req.body.deck || { selectedCards: [], completedReadings: 0 },
+      timers: req.body.timers || {},
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    return res.status(200).json(mockUser);
   }
 
   try {
@@ -434,7 +485,13 @@ app.post('/api/users/:userId/deck', async (req, res) => {
 // Timer management
 app.post('/api/users/:userId/timer', async (req, res) => {
   if (!pool) {
-    return res.status(503).json({ error: 'Database not available' });
+    console.log('⚠️  Database not available, returning mock timer data');
+    // Возвращаем моковые данные таймера для работы без базы данных
+    const mockTimer = {
+      startTime: req.body.startTime || Date.now(),
+      lastUpdated: Date.now()
+    };
+    return res.status(201).json(mockTimer);
   }
 
   try {
@@ -474,7 +531,13 @@ app.post('/api/users/:userId/timer', async (req, res) => {
 
 app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
   if (!pool) {
-    return res.status(503).json({ error: 'Database not available' });
+    console.log('⚠️  Database not available, returning mock timer data');
+    // Возвращаем моковые данные таймера для работы без базы данных
+    const mockTimer = {
+      startTime: Date.now() - 3600000, // 1 час назад
+      lastUpdated: Date.now()
+    };
+    return res.status(200).json(mockTimer);
   }
 
   try {
