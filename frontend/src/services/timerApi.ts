@@ -1,7 +1,7 @@
 // Определяем базовый URL API в зависимости от окружения
 const getApiBaseUrl = () => {
   // Проверяем, находимся ли мы в Telegram WebApp
-  const isTelegramWebApp = window.Telegram?.WebApp && window.location.hostname !== 'localhost';
+  const isTelegramWebApp = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
   
   if (isTelegramWebApp) {
     // В Telegram WebApp используем относительный путь
