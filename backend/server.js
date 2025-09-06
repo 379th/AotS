@@ -350,6 +350,11 @@ app.get('/api/users/:userId', async (req, res) => {
 });
 
 app.put('/api/users/:userId', async (req, res) => {
+  console.log('📝 PUT /api/users/:userId called');
+  console.log('🔍 Pool status:', pool ? 'available' : 'null');
+  console.log('🔍 User ID:', req.params.userId);
+  console.log('🔍 Request body:', req.body);
+  
   if (!pool) {
     console.log('⚠️  Database not available, returning mock user data');
     // Возвращаем моковые данные пользователя для работы без базы данных
@@ -368,6 +373,7 @@ app.put('/api/users/:userId', async (req, res) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
+    console.log('✅ Returning mock user:', mockUser.id);
     return res.status(200).json(mockUser);
   }
 
@@ -375,34 +381,71 @@ app.put('/api/users/:userId', async (req, res) => {
     const { userId } = req.params;
     const updates = req.body;
     
-    const result = await pool.query(`
-      UPDATE users 
-      SET 
-        current_day = COALESCE(?, current_day),
-        current_step = COALESCE(?, current_step),
-        progress = COALESCE(?, progress),
-        journal = COALESCE(?, journal),
-        deck = COALESCE(?, deck),
-        timers = COALESCE(?, timers),
-        updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
-    `, [
-      updates.currentDay,
-      updates.currentStep,
-      updates.progress ? JSON.stringify(updates.progress) : null,
-      updates.journal ? JSON.stringify(updates.journal) : null,
-      updates.deck ? JSON.stringify(updates.deck) : null,
-      updates.timers ? JSON.stringify(updates.timers) : null,
-      userId
-    ]);
+    // Определяем тип базы данных для правильного SQL
+    const isPostgreSQL = process.env.DATABASE_URL && (
+      process.env.DATABASE_URL.includes('postgres') || 
+      process.env.DATABASE_URL.includes('postgresql')
+    );
     
-    // Get updated user data
-    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
-    if (updatedUser.length === 0) {
+    let result, updatedUser;
+    
+    if (isPostgreSQL) {
+      // PostgreSQL синтаксис
+      result = await pool.query(`
+        UPDATE users 
+        SET 
+          current_day = COALESCE($1, current_day),
+          current_step = COALESCE($2, current_step),
+          progress = COALESCE($3, progress),
+          journal = COALESCE($4, journal),
+          deck = COALESCE($5, deck),
+          timers = COALESCE($6, timers),
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = $7
+        RETURNING *
+      `, [
+        updates.currentDay,
+        updates.currentStep,
+        updates.progress ? JSON.stringify(updates.progress) : null,
+        updates.journal ? JSON.stringify(updates.journal) : null,
+        updates.deck ? JSON.stringify(updates.deck) : null,
+        updates.timers ? JSON.stringify(updates.timers) : null,
+        userId
+      ]);
+      
+      updatedUser = result.rows[0];
+    } else {
+      // MySQL синтаксис
+      result = await pool.query(`
+        UPDATE users 
+        SET 
+          current_day = COALESCE(?, current_day),
+          current_step = COALESCE(?, current_step),
+          progress = COALESCE(?, progress),
+          journal = COALESCE(?, journal),
+          deck = COALESCE(?, deck),
+          timers = COALESCE(?, timers),
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+      `, [
+        updates.currentDay,
+        updates.currentStep,
+        updates.progress ? JSON.stringify(updates.progress) : null,
+        updates.journal ? JSON.stringify(updates.journal) : null,
+        updates.deck ? JSON.stringify(updates.deck) : null,
+        updates.timers ? JSON.stringify(updates.timers) : null,
+        userId
+      ]);
+      
+      // Get updated user data
+      const [updatedUserArray] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+      updatedUser = updatedUserArray[0];
+    }
+    if (!updatedUser) {
       return res.status(404).json({ error: 'User not found' });
     }
     
-    res.json(updatedUser[0]);
+    res.json(updatedUser);
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ error: 'Failed to update user' });
