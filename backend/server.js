@@ -24,18 +24,21 @@ console.log('🔒 CSP настройки:', {
 app.use(helmet({
   contentSecurityPolicy: isDevelopment ? false : {
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://telegram.org"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "blob:"],
+      defaultSrc: ["'self'", "https://telegram.org", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://telegram.org", "https://fonts.googleapis.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://telegram.org"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://fonts.googleapis.com", "data:"],
+      imgSrc: ["'self'", "data:", "blob:", "https://telegram.org", "https://fonts.googleapis.com"],
       connectSrc: [
         "'self'", 
         "https://aots-production-9a30.up.railway.app",
         "https://www.shadow-quest.online",
         "https://telegram.org",
         "https://fonts.googleapis.com",
-        "https://fonts.gstatic.com"
+        "https://fonts.gstatic.com",
+        "https://*.telegram.org",
+        "https://*.googleapis.com",
+        "https://*.gstatic.com"
       ],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],
@@ -697,6 +700,7 @@ app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
   console.log('🔍 Pool status:', pool ? 'available' : 'null');
   console.log('🔍 User ID:', req.params.userId);
   console.log('🔍 Day Number:', req.params.dayNumber);
+  console.log('🔍 DATABASE_URL:', process.env.DATABASE_URL ? 'set' : 'not set');
   
   if (!pool) {
     console.log('⚠️  Database not available, returning mock timer data');
@@ -717,41 +721,58 @@ app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
       process.env.DATABASE_URL.includes('postgresql')
     );
     
+    console.log('🔍 Database type:', isPostgreSQL ? 'PostgreSQL' : 'MySQL');
+    
     let result;
     
     if (isPostgreSQL) {
       // PostgreSQL синтаксис
+      console.log('🔍 Executing PostgreSQL query for user:', userId);
       result = await pool.query('SELECT timers FROM users WHERE id = $1', [userId]);
+      console.log('🔍 PostgreSQL result rows:', result.rows.length);
+      
       if (result.rows.length === 0) {
+        console.log('⚠️  User not found in PostgreSQL database');
         return res.status(404).json({ error: 'User not found' });
       }
       
       const timers = result.rows[0].timers || {};
+      console.log('🔍 User timers:', timers);
       const timer = timers[`day${dayNumber}`];
+      console.log('🔍 Timer for day', dayNumber, ':', timer);
       
       if (!timer) {
+        console.log('⚠️  Timer not found for day', dayNumber);
         return res.status(404).json({ error: 'Timer not found' });
       }
       
       res.json(timer);
     } else {
       // MySQL синтаксис
+      console.log('🔍 Executing MySQL query for user:', userId);
       const [resultArray] = await pool.query('SELECT timers FROM users WHERE id = ?', [userId]);
+      console.log('🔍 MySQL result rows:', resultArray.length);
+      
       if (resultArray.length === 0) {
+        console.log('⚠️  User not found in MySQL database');
         return res.status(404).json({ error: 'User not found' });
       }
       
       const timers = resultArray[0].timers || {};
+      console.log('🔍 User timers:', timers);
       const timer = timers[`day${dayNumber}`];
+      console.log('🔍 Timer for day', dayNumber, ':', timer);
       
       if (!timer) {
+        console.log('⚠️  Timer not found for day', dayNumber);
         return res.status(404).json({ error: 'Timer not found' });
       }
       
       res.json(timer);
     }
   } catch (error) {
-    console.error('Error getting timer:', error);
+    console.error('❌ Error getting timer:', error);
+    console.error('❌ Error details:', error.message);
     res.status(500).json({ error: 'Failed to get timer' });
   }
 });
