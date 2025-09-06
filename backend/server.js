@@ -584,31 +584,66 @@ app.post('/api/users/:userId/timer', async (req, res) => {
     const { userId } = req.params;
     const { dayNumber, startTime } = req.body;
     
-    // Get current user data
-    const [userResult] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
-    if (userResult.length === 0) {
-      return res.status(404).json({ error: 'User not found' });
+    // Определяем тип базы данных для правильного SQL
+    const isPostgreSQL = process.env.DATABASE_URL && (
+      process.env.DATABASE_URL.includes('postgres') || 
+      process.env.DATABASE_URL.includes('postgresql')
+    );
+    
+    let userResult, result, updatedUser;
+    
+    if (isPostgreSQL) {
+      // PostgreSQL синтаксис
+      userResult = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+      if (userResult.rows.length === 0) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      
+      const user = userResult.rows[0];
+      const timers = user.timers || {};
+      timers[`day${dayNumber}`] = {
+        startTime,
+        lastUpdated: Date.now()
+      };
+      
+      result = await pool.query(`
+        UPDATE users 
+        SET 
+          timers = $1,
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = $2
+        RETURNING *
+      `, [JSON.stringify(timers), userId]);
+      
+      updatedUser = result.rows[0];
+    } else {
+      // MySQL синтаксис
+      const [userResultArray] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+      if (userResultArray.length === 0) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      
+      const user = userResultArray[0];
+      const timers = user.timers || {};
+      timers[`day${dayNumber}`] = {
+        startTime,
+        lastUpdated: Date.now()
+      };
+      
+      await pool.query(`
+        UPDATE users 
+        SET 
+          timers = ?,
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+      `, [JSON.stringify(timers), userId]);
+      
+      // Get updated user data
+      const [updatedUserArray] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
+      updatedUser = updatedUserArray[0];
     }
     
-    const user = userResult[0];
-    const timers = user.timers || {};
-    timers[`day${dayNumber}`] = {
-      startTime,
-      lastUpdated: Date.now()
-    };
-    
-    const result = await pool.query(`
-      UPDATE users 
-      SET 
-        timers = ?,
-        updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
-      RETURNING *
-    `, [JSON.stringify(timers), userId]);
-    
-    // Get updated user data
-    const [updatedUser] = await pool.query('SELECT * FROM users WHERE id = ?', [userId]);
-    res.json(updatedUser[0]);
+    res.json(updatedUser);
   } catch (error) {
     console.error('Error updating timer:', error);
     res.status(500).json({ error: 'Failed to update timer' });
