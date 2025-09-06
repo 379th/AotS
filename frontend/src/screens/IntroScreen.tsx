@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { getImageUrl, EXTERNAL_ASSETS } from '../config/externalAssets';
 
 interface IntroScreenProps {
-  onStart: () => void;
+  onStart: () => Promise<void>;
   onAboutCreator: () => void;
   onAboutQuest: () => void;
   onOpenFaq: () => void;

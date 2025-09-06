@@ -3,6 +3,7 @@ import { useShadowArchetypePair } from './hooks/useShadowArchetypePair';
 import { RouteType } from './config/constants';
 import { initTelegram } from './utils/telegram';
 import { TimerApi } from './services/timerApi';
+import { UserApi } from './services/userApi';
 import { IntroScreen } from './screens/IntroScreen';
 import { RequestScreen } from './screens/RequestScreen';
 import { Day1Screen } from './screens/Day1Screen';
@@ -40,8 +41,18 @@ function App() {
         // Инициализация Telegram
         await initTelegram();
         
-        // Создаем пользователя на сервере
-        await TimerApi.createUser();
+        // Создаем или обновляем пользователя на сервере
+        const user = await UserApi.createOrUpdateUser();
+        
+        if (user) {
+          console.log('Пользователь создан/обновлен:', user);
+          
+          // Восстанавливаем прогресс пользователя
+          if (user.currentStep && user.currentStep !== 'intro') {
+            setRoute(user.currentStep as RouteType);
+            console.log('Восстановлен прогресс пользователя:', user.currentStep);
+          }
+        }
         
         console.log('Приложение инициализировано успешно');
       } catch (error) {
@@ -52,9 +63,16 @@ function App() {
     initializeApp();
   }, []);
 
-  const navigateTo = (newRoute: RouteType) => {
+  const navigateTo = async (newRoute: RouteType) => {
     setPreviousRoute(route);
     setRoute(newRoute);
+    
+    // Сохраняем текущий шаг в базе данных
+    try {
+      await UserApi.saveCurrentStep(newRoute);
+    } catch (error) {
+      console.error('Ошибка сохранения шага:', error);
+    }
   };
 
   const goBack = () => {
@@ -84,8 +102,16 @@ function App() {
       console.log(`Таймер для дня ${dayNumber} уже запущен:`, new Date(parseInt(existingStartTime)).toLocaleTimeString());
     }
     
+    // Сохраняем текущий день в базе данных
+    try {
+      await UserApi.saveCurrentDay(dayNumber);
+      console.log(`День ${dayNumber} сохранен в базе данных`);
+    } catch (error) {
+      console.error('Ошибка сохранения дня:', error);
+    }
+    
     // Переходим к следующему экрану
-    navigateTo(nextRoute);
+    await navigateTo(nextRoute);
   };
 
   const renderScreen = () => {
@@ -93,7 +119,16 @@ function App() {
               case "intro":
           return (
             <IntroScreen
-              onStart={() => navigateTo("request")}
+              onStart={async () => {
+                // Сохраняем начало квеста в базе данных
+                try {
+                  await UserApi.saveCurrentStep("request");
+                  console.log('Начало квеста сохранено в базе данных');
+                } catch (error) {
+                  console.error('Ошибка сохранения начала квеста:', error);
+                }
+                await navigateTo("request");
+              }}
               onAboutCreator={() => navigateTo("creator")}
               onAboutQuest={() => navigateTo("quest")}
               onOpenFaq={() => navigateTo("faq")}
