@@ -40,21 +40,38 @@ if (process.env.DATABASE_URL) {
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    acquireTimeout: 60000, // 60 seconds
+    timeout: 60000, // 60 seconds
+    reconnect: true,
+    idleTimeout: 300000, // 5 minutes
+    charset: 'utf8mb4'
   };
   
   pool = mysql.createPool(config);
   
-  // Test the connection
-  pool.getConnection()
-    .then(connection => {
-      console.log('✅ MySQL connection successful');
-      connection.release();
-    })
-    .catch(err => {
-      console.error('❌ MySQL connection failed:', err);
-      pool = null;
-    });
+  // Test the connection with retry logic
+  const testConnection = async (retries = 3) => {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const connection = await pool.getConnection();
+        console.log('✅ MySQL connection successful');
+        connection.release();
+        return;
+      } catch (err) {
+        console.error(`❌ MySQL connection attempt ${i + 1} failed:`, err.message);
+        if (i === retries - 1) {
+          console.error('❌ MySQL connection failed after all retries:', err);
+          pool = null;
+        } else {
+          console.log(`⏳ Retrying connection in 5 seconds...`);
+          await new Promise(resolve => setTimeout(resolve, 5000));
+        }
+      }
+    }
+  };
+  
+  testConnection();
 } else {
   console.log('⚠️  No DATABASE_URL provided');
 }
@@ -108,6 +125,25 @@ async function initDatabase() {
 
 // Initialize database on startup
 initDatabase();
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('🔄 Shutting down gracefully...');
+  if (pool) {
+    await pool.end();
+    console.log('✅ Database connection closed');
+  }
+  process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+  console.log('🔄 Shutting down gracefully...');
+  if (pool) {
+    await pool.end();
+    console.log('✅ Database connection closed');
+  }
+  process.exit(0);
+});
 
 // Health check
 app.get('/health', (req, res) => {
