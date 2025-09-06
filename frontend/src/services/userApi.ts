@@ -37,7 +37,7 @@ export interface UserData {
 }
 
 export class UserApi {
-  private static getUserId(): string {
+  private static getUserId(): string | null {
     // Получаем ID пользователя из Telegram WebApp
     if (window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
       return window.Telegram.WebApp.initDataUnsafe.user.id.toString();
