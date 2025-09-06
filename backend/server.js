@@ -28,8 +28,8 @@ let pool = null;
 if (process.env.DATABASE_URL) {
   const url = new URL(process.env.DATABASE_URL);
   
-  // Determine database type based on URL
-  if (url.protocol === 'postgres:' || url.protocol === 'postgresql:') {
+  // Determine database type based on URL or hostname
+  if (url.protocol === 'postgres:' || url.protocol === 'postgresql:' || url.hostname.includes('postgres')) {
     console.log('🔗 DATABASE_URL found, attempting to connect to PostgreSQL...');
     const { Pool } = require('pg');
     
@@ -107,7 +107,7 @@ if (process.env.DATABASE_URL) {
         }
         
         // Test connection based on database type
-        if (url.protocol === 'postgres:' || url.protocol === 'postgresql:') {
+        if (url.protocol === 'postgres:' || url.protocol === 'postgresql:' || url.hostname.includes('postgres')) {
           const client = await pool.connect();
           console.log('✅ PostgreSQL connection successful');
           client.release();
