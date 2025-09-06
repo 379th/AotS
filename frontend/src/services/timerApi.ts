@@ -1,4 +1,14 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+// Определяем базовый URL API в зависимости от окружения
+const getApiBaseUrl = () => {
+  // В Telegram WebApp используем относительный путь
+  if (window.Telegram?.WebApp) {
+    return import.meta.env.VITE_API_URL || '';
+  }
+  // Для локальной разработки
+  return import.meta.env.VITE_API_URL || 'http://localhost:4000';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export interface TimerData {
   startTime: number;
