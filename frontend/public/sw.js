@@ -19,19 +19,34 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+  
   // Пропускаем API запросы - они не должны кэшироваться
-  if (event.request.url.includes('/api/')) {
+  if (url.pathname.startsWith('/api/')) {
     return;
   }
   
-  // Пропускаем внешние ресурсы - они не должны кэшироваться
-  if (event.request.url.includes('fonts.googleapis.com') || 
-      event.request.url.includes('telegram.org') ||
-      event.request.url.includes('googleapis.com') ||
-      event.request.url.includes('fonts.gstatic.com')) {
+  // Пропускаем все внешние ресурсы - они не должны кэшироваться
+  if (url.hostname !== location.hostname) {
+    console.log('SW: Skipping external resource:', url.href);
     return;
   }
   
+  // Дополнительная проверка на внешние домены
+  const externalDomains = [
+    'fonts.googleapis.com',
+    'telegram.org', 
+    'googleapis.com',
+    'fonts.gstatic.com',
+    'gstatic.com'
+  ];
+  
+  if (externalDomains.some(domain => url.hostname.includes(domain))) {
+    console.log('SW: Skipping external domain:', url.hostname);
+    return;
+  }
+  
+  // Обрабатываем только локальные ресурсы
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
