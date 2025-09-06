@@ -23,44 +23,78 @@ app.use(limiter);
 
 app.use(express.json());
 
-// MySQL connection (only if DATABASE_URL is provided)
+// Database connection (PostgreSQL or MySQL based on DATABASE_URL)
 let pool = null;
 if (process.env.DATABASE_URL) {
-  console.log('🔗 DATABASE_URL found, attempting to connect to MySQL...');
-  const mysql = require('mysql2/promise');
-  
-  // Parse DATABASE_URL for MySQL
   const url = new URL(process.env.DATABASE_URL);
-  const config = {
-    host: url.hostname,
-    port: url.port || 3306,
-    user: url.username,
-    password: url.password,
-    database: url.pathname.slice(1), // Remove leading slash
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-    acquireTimeout: 60000, // 60 seconds
-    idleTimeout: 300000, // 5 minutes
-    charset: 'utf8mb4',
-    timezone: 'Z'
-  };
   
-  console.log('🔧 MySQL config:', {
-    host: config.host,
-    port: config.port,
-    user: config.user,
-    database: config.database,
-    ssl: !!config.ssl
-  });
-  
-  try {
-    pool = mysql.createPool(config);
-    console.log('✅ MySQL connection pool created');
-  } catch (err) {
-    console.error('❌ Failed to create MySQL connection pool:', err);
-    pool = null;
+  // Determine database type based on URL
+  if (url.protocol === 'postgres:' || url.protocol === 'postgresql:') {
+    console.log('🔗 DATABASE_URL found, attempting to connect to PostgreSQL...');
+    const { Pool } = require('pg');
+    
+    const config = {
+      host: url.hostname,
+      port: url.port || 5432,
+      user: url.username,
+      password: url.password,
+      database: url.pathname.slice(1), // Remove leading slash
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 60000
+    };
+    
+    console.log('🔧 PostgreSQL config:', {
+      host: config.host,
+      port: config.port,
+      user: config.user,
+      database: config.database,
+      ssl: !!config.ssl
+    });
+    
+    try {
+      pool = new Pool(config);
+      console.log('✅ PostgreSQL connection pool created');
+    } catch (err) {
+      console.error('❌ Failed to create PostgreSQL connection pool:', err);
+      pool = null;
+    }
+  } else {
+    console.log('🔗 DATABASE_URL found, attempting to connect to MySQL...');
+    const mysql = require('mysql2/promise');
+    
+    const config = {
+      host: url.hostname,
+      port: url.port || 3306,
+      user: url.username,
+      password: url.password,
+      database: url.pathname.slice(1), // Remove leading slash
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+      acquireTimeout: 60000, // 60 seconds
+      idleTimeout: 300000, // 5 minutes
+      charset: 'utf8mb4',
+      timezone: 'Z'
+    };
+    
+    console.log('🔧 MySQL config:', {
+      host: config.host,
+      port: config.port,
+      user: config.user,
+      database: config.database,
+      ssl: !!config.ssl
+    });
+    
+    try {
+      pool = mysql.createPool(config);
+      console.log('✅ MySQL connection pool created');
+    } catch (err) {
+      console.error('❌ Failed to create MySQL connection pool:', err);
+      pool = null;
+    }
   }
   
   // Test the connection with retry logic
@@ -72,14 +106,21 @@ if (process.env.DATABASE_URL) {
           return;
         }
         
-        const connection = await pool.getConnection();
-        console.log('✅ MySQL connection successful');
-        connection.release();
+        // Test connection based on database type
+        if (url.protocol === 'postgres:' || url.protocol === 'postgresql:') {
+          const client = await pool.connect();
+          console.log('✅ PostgreSQL connection successful');
+          client.release();
+        } else {
+          const connection = await pool.getConnection();
+          console.log('✅ MySQL connection successful');
+          connection.release();
+        }
         return;
       } catch (err) {
-        console.error(`❌ MySQL connection attempt ${i + 1} failed:`, err.message);
+        console.error(`❌ Database connection attempt ${i + 1} failed:`, err.message);
         if (i === retries - 1) {
-          console.error('❌ MySQL connection failed after all retries:', err);
+          console.error('❌ Database connection failed after all retries:', err);
           pool = null;
         } else {
           console.log(`⏳ Retrying connection in 5 seconds...`);
@@ -107,13 +148,13 @@ async function initDatabase() {
   }
 
   try {
-    console.log('🔄 Testing MySQL connection...');
+    console.log('🔄 Testing database connection...');
     
     // Ждем немного перед тестом подключения
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     await pool.query('SELECT NOW()');
-    console.log('✅ MySQL connection successful');
+    console.log('✅ Database connection successful');
     
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -124,12 +165,12 @@ async function initDatabase() {
         last_name VARCHAR(255),
         current_day INTEGER DEFAULT 1,
         current_step VARCHAR(50) DEFAULT 'intro',
-        progress JSON DEFAULT ('{"day1": false, "day2": false, "day3": false, "day4": false}'),
-        journal JSON DEFAULT ('[]'),
-        deck JSON DEFAULT ('{"selectedCards": [], "completedReadings": 0}'),
-        timers JSON DEFAULT ('{}'),
+        progress JSONB DEFAULT '{"day1": false, "day2": false, "day3": false, "day4": false}',
+        journal JSONB DEFAULT '[]',
+        deck JSONB DEFAULT '{"selectedCards": [], "completedReadings": 0}',
+        timers JSONB DEFAULT '{}',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
 
