@@ -37,6 +37,24 @@ export interface UserData {
 }
 
 export class UserApi {
+  private static debounceTimers: Map<string, NodeJS.Timeout> = new Map();
+
+  private static debounce(key: string, fn: () => void, delay: number = 1000): void {
+    // Очищаем предыдущий таймер
+    const existingTimer = this.debounceTimers.get(key);
+    if (existingTimer) {
+      clearTimeout(existingTimer);
+    }
+
+    // Устанавливаем новый таймер
+    const timer = setTimeout(() => {
+      fn();
+      this.debounceTimers.delete(key);
+    }, delay);
+
+    this.debounceTimers.set(key, timer);
+  }
+
   private static getUserId(): string | null {
     // Получаем ID пользователя из Telegram WebApp
     if (window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
@@ -170,22 +188,40 @@ export class UserApi {
    * Сохраняет текущий шаг пользователя
    */
   static async saveCurrentStep(step: string): Promise<void> {
-    try {
-      await this.updateProgress({ currentStep: step });
-    } catch (error) {
-      console.error('Error saving current step:', error);
+    const userId = this.getUserId();
+    if (!userId) {
+      console.log('Skipping saveCurrentStep - Telegram WebApp not initialized');
+      return;
     }
+
+    // Используем debouncing для предотвращения слишком частых запросов
+    this.debounce(`saveCurrentStep_${userId}`, async () => {
+      try {
+        await this.updateProgress({ currentStep: step });
+      } catch (error) {
+        console.error('Error saving current step:', error);
+      }
+    }, 500); // 500ms задержка
   }
 
   /**
    * Сохраняет текущий день пользователя
    */
   static async saveCurrentDay(day: number): Promise<void> {
-    try {
-      await this.updateProgress({ currentDay: day });
-    } catch (error) {
-      console.error('Error saving current day:', error);
+    const userId = this.getUserId();
+    if (!userId) {
+      console.log('Skipping saveCurrentDay - Telegram WebApp not initialized');
+      return;
     }
+
+    // Используем debouncing для предотвращения слишком частых запросов
+    this.debounce(`saveCurrentDay_${userId}`, async () => {
+      try {
+        await this.updateProgress({ currentDay: day });
+      } catch (error) {
+        console.error('Error saving current day:', error);
+      }
+    }, 500); // 500ms задержка
   }
 
   /**

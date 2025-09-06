@@ -20,6 +20,24 @@ export interface TimerData {
 // Типы Telegram WebApp уже объявлены в utils/telegram.ts
 
 export class TimerApi {
+  private static debounceTimers: Map<string, NodeJS.Timeout> = new Map();
+
+  private static debounce(key: string, fn: () => void, delay: number = 1000): void {
+    // Очищаем предыдущий таймер
+    const existingTimer = this.debounceTimers.get(key);
+    if (existingTimer) {
+      clearTimeout(existingTimer);
+    }
+
+    // Устанавливаем новый таймер
+    const timer = setTimeout(() => {
+      fn();
+      this.debounceTimers.delete(key);
+    }, delay);
+
+    this.debounceTimers.set(key, timer);
+  }
+
   private static getUserId(): string | null {
     // Получаем ID пользователя из Telegram WebApp
     if (window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
@@ -43,36 +61,39 @@ export class TimerApi {
   }
 
   static async saveTimer(dayNumber: number, startTime: number): Promise<void> {
-    try {
-      const userId = this.getUserId();
-      
-      // Если userId null, значит Telegram WebApp не инициализирован
-      if (!userId) {
-        console.log('Skipping timer save - Telegram WebApp not initialized');
-        return;
-      }
-      
-      const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}/timer`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          dayNumber,
-          startTime
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to save timer: ${response.statusText}`);
-      }
-
-      console.log(`Timer saved for day ${dayNumber}:`, { startTime });
-    } catch (error) {
-      console.error('Error saving timer:', error);
-      // Не выбрасываем ошибку, чтобы приложение продолжало работать
-      // даже если сервер недоступен
+    const userId = this.getUserId();
+    
+    // Если userId null, значит Telegram WebApp не инициализирован
+    if (!userId) {
+      console.log('Skipping timer save - Telegram WebApp not initialized');
+      return;
     }
+
+    // Используем debouncing для предотвращения слишком частых запросов
+    this.debounce(`saveTimer_${userId}_${dayNumber}`, async () => {
+      try {
+        const response = await fetch(`${getApiBaseUrl()}/api/users/${userId}/timer`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            dayNumber,
+            startTime
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to save timer: ${response.statusText}`);
+        }
+
+        console.log(`Timer saved for day ${dayNumber}:`, { startTime });
+      } catch (error) {
+        console.error('Error saving timer:', error);
+        // Не выбрасываем ошибку, чтобы приложение продолжало работать
+        // даже если сервер недоступен
+      }
+    }, 1000); // 1 секунда задержка
   }
 
   static async loadTimer(dayNumber: number): Promise<TimerData | null> {
