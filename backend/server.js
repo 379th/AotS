@@ -616,6 +616,11 @@ app.post('/api/users/:userId/timer', async (req, res) => {
 });
 
 app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
+  console.log('⏰ GET /api/users/:userId/timer/:dayNumber called');
+  console.log('🔍 Pool status:', pool ? 'available' : 'null');
+  console.log('🔍 User ID:', req.params.userId);
+  console.log('🔍 Day Number:', req.params.dayNumber);
+  
   if (!pool) {
     console.log('⚠️  Database not available, returning mock timer data');
     // Возвращаем моковые данные таймера для работы без базы данных
@@ -629,19 +634,45 @@ app.get('/api/users/:userId/timer/:dayNumber', async (req, res) => {
   try {
     const { userId, dayNumber } = req.params;
     
-    const [result] = await pool.query('SELECT timers FROM users WHERE id = ?', [userId]);
-    if (result.length === 0) {
-      return res.status(404).json({ error: 'User not found' });
+    // Определяем тип базы данных для правильного SQL
+    const isPostgreSQL = process.env.DATABASE_URL && (
+      process.env.DATABASE_URL.includes('postgres') || 
+      process.env.DATABASE_URL.includes('postgresql')
+    );
+    
+    let result;
+    
+    if (isPostgreSQL) {
+      // PostgreSQL синтаксис
+      result = await pool.query('SELECT timers FROM users WHERE id = $1', [userId]);
+      if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      
+      const timers = result.rows[0].timers || {};
+      const timer = timers[`day${dayNumber}`];
+      
+      if (!timer) {
+        return res.status(404).json({ error: 'Timer not found' });
+      }
+      
+      res.json(timer);
+    } else {
+      // MySQL синтаксис
+      const [resultArray] = await pool.query('SELECT timers FROM users WHERE id = ?', [userId]);
+      if (resultArray.length === 0) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      
+      const timers = resultArray[0].timers || {};
+      const timer = timers[`day${dayNumber}`];
+      
+      if (!timer) {
+        return res.status(404).json({ error: 'Timer not found' });
+      }
+      
+      res.json(timer);
     }
-    
-    const timers = result[0].timers || {};
-    const timer = timers[`day${dayNumber}`];
-    
-    if (!timer) {
-      return res.status(404).json({ error: 'Timer not found' });
-    }
-    
-    res.json(timer);
   } catch (error) {
     console.error('Error getting timer:', error);
     res.status(500).json({ error: 'Failed to get timer' });
