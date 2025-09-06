@@ -9,7 +9,17 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 // CSP настройки для разных окружений
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== 'production' || 
+                     process.env.PORT === '4000' || 
+                     !process.env.RAILWAY_ENVIRONMENT;
+
+console.log('🔒 CSP настройки:', {
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: process.env.PORT,
+  RAILWAY_ENVIRONMENT: process.env.RAILWAY_ENVIRONMENT,
+  isDevelopment: isDevelopment,
+  cspEnabled: !isDevelopment
+});
 
 app.use(helmet({
   contentSecurityPolicy: isDevelopment ? false : {
