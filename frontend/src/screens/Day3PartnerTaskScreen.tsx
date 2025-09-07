@@ -44,7 +44,7 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-white/20 bg-[#1a0b2e]' 
               : 'border-[#5c4032]/50 bg-[#e2d0b6]'
@@ -145,7 +145,7 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
           </div>
 
           {/* Кнопки и панель навигации */}
-          <div className="mx-auto mt-0.5 w-[92%]">
+          <div className="mx-auto mt-0.5 w-full max-w-[90vw] sm:max-w-[92%] px-2 sm:px-0">
             {/* Панель кнопок */}
             <BottomButtonPanel
               onBack={onBack}

@@ -19,7 +19,7 @@ export const QuestScreen: React.FC<QuestScreenProps> = ({ onBack }) => {
         imagePath={EXTERNAL_ASSETS.NAVIGATION.QUEST_TITLE}
       />
       
-      <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-4 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-4 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e] text-white' 
           : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
@@ -70,7 +70,7 @@ export const QuestScreen: React.FC<QuestScreenProps> = ({ onBack }) => {
         </div>
       </div>
       
-      <div className="mx-auto mt-3 w-[521px] text-right mb-4">
+      <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-0 text-right mb-4">
         <button 
           onClick={onBack}
           className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"

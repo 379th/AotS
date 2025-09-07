@@ -244,7 +244,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
           </div>
 
           {/* Кнопки и панель навигации */}
-          <div className="mx-auto mt-0.5 w-[92%]">
+          <div className="mx-auto mt-0.5 w-full max-w-[90vw] sm:max-w-[92%] px-2 sm:px-0">
             {/* Панель кнопок */}
             <BottomButtonPanel
               onBack={onBack}

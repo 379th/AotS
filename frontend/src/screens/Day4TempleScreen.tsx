@@ -31,7 +31,7 @@ export const Day4TempleScreen: React.FC<Day4TempleScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark'
               ? 'border-amber-900/30'
               : 'border-amber-900/50'
@@ -44,7 +44,7 @@ export const Day4TempleScreen: React.FC<Day4TempleScreenProps> = ({
           </div>
 
           {/* Кнопки и панель навигации */}
-          <div className="mx-auto mt-0.5 w-[92%]">
+          <div className="mx-auto mt-0.5 w-full max-w-[90vw] sm:max-w-[92%] px-2 sm:px-0">
             {/* Панель кнопок */}
             <BottomButtonPanel
               onBack={onBack}
