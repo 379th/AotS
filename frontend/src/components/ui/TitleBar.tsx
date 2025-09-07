@@ -13,7 +13,7 @@ export const TitleBar: React.FC<TitleBarProps> = ({ text = "ПРИНЯТИЕ Т�
   // Если передан путь к изображению, отображаем изображение
   if (imagePath) {
     return (
-      <div className="mx-auto mt-3 w-[523px]">
+      <div className="mx-auto mt-3 w-full max-w-[523px] px-4">
         <img 
           src={getImageUrl(imagePath)} 
           alt={text} 
@@ -25,12 +25,12 @@ export const TitleBar: React.FC<TitleBarProps> = ({ text = "ПРИНЯТИЕ Т�
   
   // Иначе отображаем текстовый TitleBar
   return (
-    <div className={`mx-auto mt-3 w-[523px] min-h-[112px] rounded-xl border p-2 text-center shadow-[inset_0_2px_0_rgba(255,255,255,.35),0_10px_40px_rgba(0,0,0,.35)] transition-colors duration-300 flex items-center justify-center ${
+    <div className={`mx-auto mt-3 w-full max-w-[523px] min-h-[112px] rounded-xl border p-2 text-center shadow-[inset_0_2px_0_rgba(255,255,255,.35),0_10px_40px_rgba(0,0,0,.35)] transition-colors duration-300 flex items-center justify-center ${
       theme === 'dark' 
         ? 'border-white/20 bg-[#1a0b2e] text-white' 
                   : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
     }`}>
-      <h1 className={`select-none font-gothic text-[20px] tracking-[.06em] drop-shadow transition-colors duration-300 ${
+      <h1 className={`select-none font-gothic text-lg sm:text-xl md:text-2xl tracking-[.06em] drop-shadow transition-colors duration-300 ${
         theme === 'dark' ? 'text-white' : 'text-amber-900'
       }`}>
         {text}

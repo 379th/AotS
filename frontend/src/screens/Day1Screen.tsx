@@ -33,8 +33,8 @@ export const Day1Screen: React.FC<Day1ScreenProps> = ({
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
           <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
-            theme === 'dark' 
-              ? 'border-amber-900/30' 
+            theme === 'dark'
+              ? 'border-amber-900/30'
               : 'border-amber-900/50'
           }`}>
             <img 
