@@ -39,7 +39,7 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
           {/* Центральная картинка */}
-          <div className={`mx-auto mt-3 w-full max-w-[523px] px-4 rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[523px] px-2 sm:px-4 rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-amber-900/30' 
               : 'border-amber-900/50'
@@ -52,7 +52,7 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
           </div>
 
           {/* Кнопки в 2 ряда */}
-          <div className="mx-auto mt-4 w-full max-w-[521px] px-4 flex flex-col sm:flex-row sm:justify-between gap-3">
+          <div className="mx-auto mt-4 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4 flex flex-col sm:flex-row sm:justify-between gap-3">
             <button onClick={onAboutCreator} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_CREATOR)} alt={t.intro.aboutCreator} className="w-full h-full object-cover" />
             </button>
@@ -63,7 +63,7 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_QUEST)} alt={t.intro.aboutQuest} className="w-full h-full object-cover" />
             </button>
           </div>
-          <div className="mx-auto mt-3 w-full max-w-[521px] px-4 flex flex-col sm:flex-row sm:justify-center gap-3">
+          <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4 flex flex-col sm:flex-row sm:justify-center gap-3">
             <button onClick={onOpenFaq} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.FAQ)} alt={t.intro.faq} className="w-full h-full object-cover" />
             </button>

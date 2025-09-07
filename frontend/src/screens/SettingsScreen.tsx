@@ -22,7 +22,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
         imagePath={EXTERNAL_ASSETS.NAVIGATION.SETTINGS_TITLE}
       />
 
-      <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-2 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark'
           ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))]'
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
@@ -176,7 +176,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
       </div>
 
       {/* Кнопка назад - под основным блоком */}
-      <div className="mx-auto mt-3 w-[521px] text-right mb-4">
+      <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-0 text-right mb-4">
         <button 
           onClick={onBack}
           className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
