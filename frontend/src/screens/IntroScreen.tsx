@@ -52,22 +52,22 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
           </div>
 
           {/* Кнопки в 2 ряда */}
-          <div className="mx-auto mt-4 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4 flex flex-col sm:flex-row sm:justify-between gap-3">
-            <button onClick={onAboutCreator} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+          <div className="mx-auto mt-4 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4 flex flex-col sm:flex-row sm:justify-between gap-3 justify-center items-center">
+            <button onClick={onAboutCreator} className="w-full max-w-[140px] sm:w-[158px] h-[60px] sm:h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_CREATOR)} alt={t.intro.aboutCreator} className="w-full h-full object-cover" />
             </button>
-            <button onClick={onStart} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+            <button onClick={onStart} className="w-full max-w-[140px] sm:w-[158px] h-[60px] sm:h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.START)} alt={t.intro.start} className="w-full h-full object-cover" />
             </button>
-            <button onClick={onAboutQuest} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+            <button onClick={onAboutQuest} className="w-full max-w-[140px] sm:w-[158px] h-[60px] sm:h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_QUEST)} alt={t.intro.aboutQuest} className="w-full h-full object-cover" />
             </button>
           </div>
-          <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4 flex flex-col sm:flex-row sm:justify-center gap-3">
-            <button onClick={onOpenFaq} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+          <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4 flex flex-col sm:flex-row sm:justify-center gap-3 justify-center items-center">
+            <button onClick={onOpenFaq} className="w-full max-w-[140px] sm:w-[158px] h-[60px] sm:h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.FAQ)} alt={t.intro.faq} className="w-full h-full object-cover" />
             </button>
-            <button onClick={onOpenSettings} className="w-full sm:w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+            <button onClick={onOpenSettings} className="w-full max-w-[140px] sm:w-[158px] h-[60px] sm:h-[80px] transition-transform active:scale-95 hover:scale-105">
               <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.SETTINGS)} alt={t.intro.settings} className="w-full h-full object-cover" />
             </button>
           </div>
