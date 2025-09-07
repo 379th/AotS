@@ -75,12 +75,12 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-white/20 bg-[#1a0b2e]' 
               : 'border-[#5c4032]/50 bg-[#e2d0b6]'
           }`}>
-            <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
+            <div className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
               theme === 'dark' 
                 ? 'border-white/20 bg-[#2d1b4e]' 
                 : 'border-[#5c4032]/40 bg-[#f7f0e6]'
@@ -91,8 +91,8 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
                 }`}>
                   <div>
-                    <div className="text-lg font-medium mb-2">Сначала выберите пару</div>
-                    <div className="text-sm">Перейдите на экраны Тень и Архетип для выбора пары</div>
+                    <div className="text-[27px] font-medium mb-2">Сначала выберите пару</div>
+                    <div className="text-[17px]">Перейдите на экраны Тень и Архетип для выбора пары</div>
                   </div>
                 </div>
               ) : loading ? (
@@ -100,8 +100,8 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
                 }`}>
                   <div>
-                    <div className="text-lg font-medium mb-2">Загрузка данных тени...</div>
-                    <div className="text-sm">Пожалуйста, подождите</div>
+                    <div className="text-[27px] font-medium mb-2">Загрузка данных тени...</div>
+                    <div className="text-[17px]">Пожалуйста, подождите</div>
                   </div>
                 </div>
               ) : error ? (
@@ -109,20 +109,20 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   theme === 'dark' ? 'text-red-400' : 'text-red-700'
                 }`}>
                   <div>
-                    <div className="text-lg font-medium mb-2">Ошибка загрузки</div>
-                    <div className="text-sm">{error}</div>
+                    <div className="text-[27px] font-medium mb-2">Ошибка загрузки</div>
+                    <div className="text-[17px]">{error}</div>
                   </div>
                 </div>
               ) : shadowData ? (
                 <div className="space-y-6">
                   {/* Заголовок с названием тени */}
                   <div className="text-center">
-                    <h2 className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                    <h2 className={`text-[27px] font-bold mb-2 transition-colors duration-300 ${
                       theme === 'dark' ? 'text-white' : 'text-amber-900'
                     }`}>
                       {shadowData.title_ru}
                     </h2>
-                    <p className={`text-sm transition-colors duration-300 ${
+                    <p className={`text-[17px] transition-colors duration-300 ${
                       theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
                     }`}>
                       {shadowData.title_en}
@@ -132,7 +132,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   {/* Конфликт или ресурс */}
                   {shadowData.conflict_or_resource && (
                     <div>
-                      <h3 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
                         theme === 'dark' ? 'text-white' : 'text-amber-900'
                       }`}>
                         Конфликт
@@ -142,7 +142,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                           ? 'bg-red-500/10 border-red-500/20' 
                           : 'bg-red-50 border-red-200'
                       }`}>
-                        <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                        <p className={`text-[17px] leading-relaxed transition-colors duration-300 ${
                           theme === 'dark' ? 'text-white/90' : 'text-amber-900/90'
                         }`}>
                           {shadowData.conflict_or_resource}
@@ -154,7 +154,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   {/* Полное описание */}
                   {shadowData.desc_full && (
                     <div>
-                      <h3 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
                         theme === 'dark' ? 'text-white' : 'text-amber-900'
                       }`}>
                         Описание
@@ -164,7 +164,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                           ? 'bg-blue-500/10 border-blue-500/20' 
                           : 'bg-blue-50 border-blue-200'
                       }`}>
-                        <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                        <p className={`text-[17px] leading-relaxed transition-colors duration-300 ${
                           theme === 'dark' ? 'text-white/90' : 'text-amber-900/90'
                         }`}>
                           {shadowData.desc_full}
@@ -176,7 +176,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   {/* Шлока на деванагари */}
                   {shadowData.shloka_dev && (
                     <div>
-                      <h3 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
                         theme === 'dark' ? 'text-white' : 'text-amber-900'
                       }`}>
                         Шлока (деванагари)
@@ -186,7 +186,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                           ? 'bg-purple-500/10 border-purple-500/20' 
                           : 'bg-purple-50 border-purple-200'
                       }`}>
-                        <p className={`text-lg leading-relaxed transition-colors duration-300 ${
+                        <p className={`text-[27px] leading-relaxed transition-colors duration-300 ${
                           theme === 'dark' ? 'text-white/90' : 'text-amber-900/90'
                         }`}>
                           {shadowData.shloka_dev}
@@ -198,7 +198,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   {/* Ссылка на шлоку */}
                   {shadowData.shloka_ref && (
                     <div>
-                      <h3 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
                         theme === 'dark' ? 'text-white' : 'text-amber-900'
                       }`}>
                         Источник
@@ -208,7 +208,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                           ? 'bg-green-500/10 border-green-500/20' 
                           : 'bg-green-50 border-green-200'
                       }`}>
-                        <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                        <p className={`text-[17px] leading-relaxed transition-colors duration-300 ${
                           theme === 'dark' ? 'text-white/90' : 'text-amber-900/90'
                         }`}>
                           {shadowData.shloka_ref}
@@ -220,7 +220,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   {/* Перевод шлоки */}
                   {shadowData.shloka_tr && (
                     <div>
-                      <h3 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
                         theme === 'dark' ? 'text-white' : 'text-amber-900'
                       }`}>
                         Перевод
@@ -230,7 +230,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                           ? 'bg-orange-500/10 border-orange-500/20' 
                           : 'bg-orange-50 border-orange-200'
                       }`}>
-                        <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                        <p className={`text-[17px] leading-relaxed transition-colors duration-300 ${
                           theme === 'dark' ? 'text-white/90' : 'text-amber-900/90'
                         }`}>
                           {shadowData.shloka_tr}
@@ -242,7 +242,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   {/* Значение шлоки */}
                   {shadowData.shloka_meaning && (
                     <div>
-                      <h3 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
                         theme === 'dark' ? 'text-white' : 'text-amber-900'
                       }`}>
                         Значение
@@ -252,7 +252,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                           ? 'bg-indigo-500/10 border-indigo-500/20' 
                           : 'bg-indigo-50 border-indigo-200'
                       }`}>
-                        <p className={`text-sm leading-relaxed transition-colors duration-300 ${
+                        <p className={`text-[17px] leading-relaxed transition-colors duration-300 ${
                           theme === 'dark' ? 'text-white/90' : 'text-amber-900/90'
                         }`}>
                           {shadowData.shloka_meaning}
@@ -266,8 +266,8 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
                 }`}>
                   <div>
-                    <div className="text-lg font-medium mb-2">Данные тени не найдены</div>
-                    <div className="text-sm">Попробуйте выбрать другую пару</div>
+                    <div className="text-[27px] font-medium mb-2">Данные тени не найдены</div>
+                    <div className="text-[17px]">Попробуйте выбрать другую пару</div>
                   </div>
                 </div>
               )}

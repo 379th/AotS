@@ -22,12 +22,12 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
         imagePath={EXTERNAL_ASSETS.NAVIGATION.SETTINGS_TITLE}
       />
 
-      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-2 transition-colors duration-300 ${
         theme === 'dark'
           ? 'border-amber-900/30 bg-[radial-gradient(circle_at_50%_28%,rgba(255,255,255,.10),transparent_55%),linear-gradient(180deg,rgba(20,24,30,.75),rgba(36,48,56,.75))]'
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
-        <div className={`relative h-[66svh] overflow-hidden rounded-xl border p-4 transition-colors duration-300 ${
+        <div className={`relative h-full overflow-hidden rounded-xl border p-4 transition-colors duration-300 ${
           theme === 'dark'
             ? 'border-teal-700/30 bg-[radial-gradient(circle_at_center,rgba(78,120,120,.35),transparent_70%)]'
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
@@ -35,7 +35,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
           
           <div className="h-full flex flex-col">
             <div className="flex-1 overflow-y-auto space-y-4 pr-2">
-              <h2 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
+              <h2 className={`text-[27px] font-semibold mb-4 transition-colors duration-300 ${
                 theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
               }`}>
                 {t.settings.title}
@@ -47,10 +47,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
               }`}>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className={`text-sm font-medium transition-colors duration-300 ${
+                    <h3 className={`text-[27px] font-medium transition-colors duration-300 ${
                       theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
                     }`}>Уведомления</h3>
-                    <p className={`text-xs transition-colors duration-300 ${
+                    <p className={`text-[17px] transition-colors duration-300 ${
                       theme === 'dark' ? 'text-amber-200/70' : 'text-amber-900/70'
                     }`}>Получать напоминания о квесте</p>
                   </div>
@@ -73,10 +73,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
               }`}>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className={`text-sm font-medium transition-colors duration-300 ${
+                    <h3 className={`text-[27px] font-medium transition-colors duration-300 ${
                       theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
                     }`}>Звуковые эффекты</h3>
-                    <p className={`text-xs transition-colors duration-300 ${
+                    <p className={`text-[17px] transition-colors duration-300 ${
                       theme === 'dark' ? 'text-amber-200/70' : 'text-amber-900/70'
                     }`}>Включить звуки в приложении</p>
                   </div>
@@ -97,13 +97,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
               <div className={`rounded-lg p-3 transition-colors duration-300 ${
                 theme === 'dark' ? 'bg-white/5' : 'bg-[#f7f0e6]'
               }`}>
-                <h3 className={`text-sm font-medium mb-2 transition-colors duration-300 ${
+                <h3 className={`text-[27px] font-medium mb-2 transition-colors duration-300 ${
                   theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
                 }`}>{t.settings.language}</h3>
                 <div className="flex gap-2">
                                       <button
                       onClick={() => changeLanguage('ru')}
-                      className={`px-3 py-1 rounded text-xs transition-colors ${
+                      className={`px-3 py-1 rounded text-[15px] transition-colors ${
                         language === 'ru' 
                           ? 'bg-amber-500 text-white' 
                           : theme === 'dark' ? 'bg-white/10 text-amber-200' : 'bg-[#e2d0b6] text-amber-900'
@@ -113,7 +113,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
                     </button>
                                       <button
                       onClick={() => changeLanguage('en')}
-                      className={`px-3 py-1 rounded text-xs transition-colors ${
+                      className={`px-3 py-1 rounded text-[15px] transition-colors ${
                         language === 'en' 
                           ? 'bg-amber-500 text-white' 
                           : theme === 'dark' ? 'bg-white/10 text-amber-200' : 'bg-[#e2d0b6] text-amber-900'
@@ -128,7 +128,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
               <div className={`rounded-lg p-3 transition-colors duration-300 ${
                 theme === 'dark' ? 'bg-white/5' : 'bg-[#f7f0e6]'
               }`}>
-                <h3 className={`text-sm font-medium mb-2 transition-colors duration-300 ${
+                <h3 className={`text-[27px] font-medium mb-2 transition-colors duration-300 ${
                   theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
                 }`}>Тема оформления</h3>
                 <div className="flex gap-2">
@@ -159,10 +159,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
               <div className={`rounded-lg p-3 transition-colors duration-300 ${
                 theme === 'dark' ? 'bg-white/5' : 'bg-[#f7f0e6]'
               }`}>
-                <h3 className={`text-sm font-medium mb-2 transition-colors duration-300 ${
+                <h3 className={`text-[27px] font-medium mb-2 transition-colors duration-300 ${
                   theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
                 }`}>О приложении</h3>
-                <div className={`text-xs space-y-1 transition-colors duration-300 ${
+                <div className={`text-[17px] space-y-1 transition-colors duration-300 ${
                   theme === 'dark' ? 'text-amber-200/70' : 'text-amber-900/70'
                 }`}>
                   <p>Версия: 1.0.0</p>
@@ -175,8 +175,8 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ onBack }) => {
         </div>
       </div>
 
-      {/* Кнопка назад - внизу справа */}
-      <div className="absolute bottom-4 right-4">
+      {/* Кнопка назад - под основным блоком */}
+      <div className="mx-auto mt-3 w-[521px] text-right mb-4">
         <button 
           onClick={onBack}
           className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"

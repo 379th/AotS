@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === "undefined") {
       return initialValue;
@@ -9,25 +9,24 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.log('Ошибка чтения из localStorage:', error);
       return initialValue;
     }
   });
 
-  const setValue = (value: T) => {
+  const setValue = (value: T | ((prev: T) => T)) => {
     try {
-      console.log('useLocalStorage: установка значения', key, '=', value);
+      // Если value - это функция, вызываем её с текущим значением
+      const newValue = typeof value === 'function' ? (value as (prev: T) => T)(storedValue) : value;
       
       // Сначала обновляем состояние
-      setStoredValue(value);
+      setStoredValue(newValue);
       
       // Затем сохраняем в localStorage
       if (typeof window !== "undefined") {
-        window.localStorage.setItem(key, JSON.stringify(value));
-        console.log('useLocalStorage: сохранено в localStorage', key, '=', value);
+        window.localStorage.setItem(key, JSON.stringify(newValue));
       }
     } catch (error) {
-      console.log('Ошибка сохранения в localStorage:', error);
+      // Ошибка сохранения в localStorage
     }
   };
 
@@ -43,25 +42,21 @@ export function useLocalStorageString(key: string, initialValue: string = ""): [
       const item = window.localStorage.getItem(key);
       return item !== null ? item : initialValue;
     } catch (error) {
-      console.log('Ошибка чтения строки из localStorage:', error);
       return initialValue;
     }
   });
 
   const setValue = (value: string) => {
     try {
-      console.log('useLocalStorageString: установка значения', key, '=', value);
-      
       // Сначала обновляем состояние
       setStoredValue(value);
       
       // Затем сохраняем в localStorage
       if (typeof window !== "undefined") {
         window.localStorage.setItem(key, value);
-        console.log('useLocalStorageString: сохранено в localStorage', key, '=', value);
       }
     } catch (error) {
-      console.log('Ошибка сохранения строки в localStorage:', error);
+      // Ошибка сохранения строки в localStorage
     }
   };
 

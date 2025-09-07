@@ -21,12 +21,12 @@ export const CompletionScreen: React.FC<CompletionScreenProps> = ({
         text="Завершение" 
         imagePath={EXTERNAL_ASSETS.NAVIGATION.COMPLETION_TITLE}
       />
-      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-[521px] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e]' 
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
-        <div className={`h-[20svh] overflow-hidden rounded-xl border p-4 text-sm transition-colors duration-300 ${
+        <div className={`h-[20svh] overflow-hidden rounded-xl border p-4 text-[23px] transition-colors duration-300 ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e] text-white' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6] text-amber-900'

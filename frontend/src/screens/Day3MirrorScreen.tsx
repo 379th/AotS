@@ -31,7 +31,7 @@ export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark'
               ? 'border-amber-900/30'
               : 'border-amber-900/50'
@@ -39,7 +39,7 @@ export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({
             <img 
               src={getImageUrl(EXTERNAL_ASSETS.SCREENS.DAY3_MIRROR)} 
               alt="Зеркало Перехода" 
-              className="w-full h-[75svh] object-cover" 
+              className="w-full h-full object-cover" 
             />
           </div>
 

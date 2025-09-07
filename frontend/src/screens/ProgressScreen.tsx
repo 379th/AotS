@@ -36,7 +36,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
         imagePath={EXTERNAL_ASSETS.NAVIGATION.PROGRESS_TITLE}
       />
       
-      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-[521px] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e]' 
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
@@ -49,7 +49,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
           
           {/* Общий прогресс */}
           <div className="text-center">
-            <div className={`text-lg font-bold mb-2 transition-colors duration-300 ${
+            <div className={`text-[27px] font-bold mb-2 transition-colors duration-300 ${
                               theme === 'dark' ? 'text-white' : 'text-amber-900'
             }`}>
               Прогресс: {totalCompleted} из {days.length} дней
@@ -60,7 +60,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
-            <div className={`text-sm transition-colors duration-300 ${
+            <div className={`text-[17px] transition-colors duration-300 ${
                               theme === 'dark' ? 'text-white/80' : 'text-amber-900/70'
             }`}>
               {progressPercentage.toFixed(0)}% завершено
@@ -91,7 +91,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
                     }`}>
                       {day.completed ? '✓' : index + 1}
                     </div>
-                    <span className={`text-sm transition-colors duration-300 ${
+                    <span className={`text-[17px] transition-colors duration-300 ${
                       day.completed 
                         ? theme === 'dark' ? 'text-white' : 'text-amber-900'
                         : theme === 'dark' ? 'text-white/70' : 'text-amber-900/80'
@@ -101,11 +101,11 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
                   </div>
                   <Pill 
                     onClick={() => onNavigateToDay(day.id)}
-                    className={`text-xs px-3 py-1 ${
+                    className={`text-[15px] px-3 py-1 ${
                       day.completed ? 'bg-amber-600/80' : 'bg-amber-900/50'
                     }`}
                   >
-                    {day.completed ? 'Повторить' : 'Начать'}
+                    {day.completed ? 'Повторить' : 'Вернуться'}
                   </Pill>
                 </div>
               </div>

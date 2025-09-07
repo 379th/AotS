@@ -34,12 +34,12 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-2 transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-2 transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-white/20 bg-[#1a0b2e]'
               : 'border-[#5c4032]/50 bg-[#e2d0b6]'
           }`}>
-            <div className={`relative h-[55svh] overflow-y-auto rounded-xl border p-4 transition-colors duration-300 ${
+            <div className={`relative h-full overflow-y-auto rounded-xl border p-4 transition-colors duration-300 ${
               theme === 'dark' 
                 ? 'border-white/20 bg-[#2d1b4e]'
                 : 'border-[#5c4032]/40 bg-[#f7f0e6]'
@@ -48,13 +48,13 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
               {/* Основной контент */}
               <div className="h-full flex flex-col">
                 <div className="flex-1">
-                  <h2 className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
+                  <h2 className={`text-[27px] font-semibold mb-3 transition-colors duration-300 ${
             theme === 'dark' ? 'text-white' : 'text-amber-900'
           }`}>
                     Второй день путешествия
                   </h2>
                   
-                  <div className={`text-sm mb-4 space-y-2 transition-colors duration-300 ${
+                  <div className={`text-[17px] mb-4 space-y-2 transition-colors duration-300 ${
             theme === 'dark' ? 'text-white/80' : 'text-amber-900/80'
           }`}>
                     <p>
@@ -69,8 +69,8 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
 
                   {/* Поле для размышлений */}
                   <div className="mb-4">
-                    <label className={`block text-xs mb-2 transition-colors duration-300 ${
-                theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
+                    <label className={`block text-[27px] font-bold mb-2 transition-colors duration-300 ${
+                theme === 'dark' ? 'text-white' : 'text-amber-900'
               }`}>
                       Ваши размышления:
                     </label>
@@ -78,7 +78,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                       value={reflection}
                       onChange={(e) => setReflection(e.target.value)}
                       placeholder="Запишите свои мысли о встрече с тенью..."
-                      className={`w-full h-24 px-3 py-2 text-sm border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200 ${
+                      className={`w-full h-24 px-3 py-2 text-[15px] border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200 ${
                 theme === 'dark' 
                   ? 'bg-white/10 border-white/20 text-white placeholder-white/50' 
                                     : 'bg-[#f7f0e6] border-[#5c4032]/40 text-amber-900 placeholder-amber-900/50'
@@ -90,12 +90,12 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                                     <div className={`rounded-lg p-3 mb-4 transition-colors duration-300 ${
                       theme === 'dark' ? 'bg-white/5' : 'bg-[#f7f0e6]'
                     }`}>
-                    <h3 className={`text-xs font-medium mb-2 transition-colors duration-300 ${
+                    <h3 className={`text-[27px] font-medium mb-2 transition-colors duration-300 ${
             theme === 'dark' ? 'text-white' : 'text-amber-900'
           }`}>
                       Вопросы для размышления:
                     </h3>
-                    <ul className={`text-xs space-y-1 transition-colors duration-300 ${
+                    <ul className={`text-[17px] space-y-1 transition-colors duration-300 ${
             theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
           }`}>
                       <li>• Что вызывает у вас стыд?</li>

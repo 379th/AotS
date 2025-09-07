@@ -77,7 +77,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
     };
 
     initializeTimer();
-  }, [dayNumber, startTime, setStartTime, setTimeLeft]);
+  }, [dayNumber]); // Убираем зависимости, которые вызывают бесконечный цикл
 
   // Таймер НЕ сбрасывается при навигации - работает как настоящий таймер
 
@@ -158,12 +158,12 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
         imagePath={EXTERNAL_ASSETS.NAVIGATION.TIMER_TITLE}
       />
       
-      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e]' 
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
-        <div className={`h-[66svh] overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
+        <div className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e]' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
@@ -171,12 +171,12 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
           
           {/* Заголовок */}
           <div className="text-center">
-            <div className={`text-lg font-bold mb-2 transition-colors duration-300 ${
+            <div className={`text-[27px] font-bold mb-2 transition-colors duration-300 ${
                               theme === 'dark' ? 'text-white' : 'text-amber-900'
             }`}>
               Время для интеграции
             </div>
-            <div className={`text-sm transition-colors duration-300 ${
+            <div className={`text-[17px] transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/80' : 'text-amber-900/70'
             }`}>
               День {dayNumber} завершен. Отдохните и подготовьтесь к следующему дню.
@@ -201,7 +201,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
               ></div>
             </div>
             
-            <div className={`text-sm transition-colors duration-300 ${
+            <div className={`text-[17px] transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/80' : 'text-amber-900/70'
             }`}>
               {isTestMode ? 'Тестовый режим (разработка)' : `${progressPercentage.toFixed(1)}% времени прошло`}
@@ -209,7 +209,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             
             {/* Информация о времени запуска */}
             {startTime > 0 && (
-              <div className={`text-xs transition-colors duration-300 ${
+              <div className={`text-[15px] transition-colors duration-300 ${
                 theme === 'dark' ? 'text-white/60' : 'text-amber-900/50'
               }`}>
                 Таймер запущен: {new Date(startTime).toLocaleString()}
@@ -221,12 +221,12 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
           <div className={`rounded-lg p-4 space-y-3 transition-colors duration-300 ${
             theme === 'dark' ? 'bg-white/5' : 'bg-[#f7f0e6]'
           }`}>
-            <div className={`text-sm transition-colors duration-300 ${
+            <div className={`text-[17px] transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/90' : 'text-amber-900'
             }`}>
               <strong>Рекомендации:</strong>
             </div>
-            <ul className={`text-sm space-y-2 list-disc list-inside transition-colors duration-300 ${
+            <ul className={`text-[17px] space-y-2 list-disc list-inside transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
             }`}>
               <li>Отдохните и дайте время для интеграции опыта</li>

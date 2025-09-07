@@ -25,7 +25,7 @@ export const RoundButton: React.FC<RoundButtonProps> = ({
     return (
       <button 
         onClick={onClick}
-        className="group relative flex h-16 w-16 md:h-20 md:w-20 rounded-full transition-transform active:scale-95 hover:scale-105 overflow-hidden"
+        className="group relative flex h-20 w-20 md:h-24 md:w-24 rounded-full transition-transform active:scale-95 hover:scale-105 overflow-hidden"
         style={{
           backgroundImage: `url(${imageSrc})`,
           backgroundSize: 'cover',
@@ -40,7 +40,7 @@ export const RoundButton: React.FC<RoundButtonProps> = ({
   return (
     <button 
       onClick={onClick}
-      className={`group relative flex h-16 w-16 md:h-20 md:w-20 flex-col items-center justify-center rounded-full bg-gradient-to-b ${TONE_MAP[tone]} ring-2 transition-transform active:scale-95 hover:scale-105 transition-colors duration-300 ${
+      className={`group relative flex h-20 w-20 md:h-24 md:w-24 flex-col items-center justify-center rounded-full bg-gradient-to-b ${TONE_MAP[tone]} ring-2 transition-transform active:scale-95 hover:scale-105 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'text-amber-100 shadow-[0_8px_30px_rgba(0,0,0,.35)]' 
           : 'text-amber-900 shadow-[0_8px_30px_rgba(0,0,0,.35)]'
@@ -48,9 +48,9 @@ export const RoundButton: React.FC<RoundButtonProps> = ({
     >
       <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,.18),transparent_40%),radial-gradient(circle_at_70%_80%,rgba(0,0,0,.35),transparent_45%)]" />
       {Icon && (
-        <Icon className="relative z-[1] mb-1 h-5 w-5" />
+        <Icon className="relative z-[1] mb-1 h-6 w-6" />
       )}
-      <span className="relative z-[1] text-[10px] tracking-wide md:text-[11px] font-medium">
+      <span className="relative z-[1] text-[11px] tracking-wide md:text-[12px] font-medium">
         {label}
       </span>
     </button>

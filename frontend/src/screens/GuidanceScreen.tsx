@@ -15,12 +15,12 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
         text="Напутствие" 
         imagePath={EXTERNAL_ASSETS.NAVIGATION.GUIDANCE_TITLE}
       />
-      <div className={`mx-auto mt-3 w-[92%] rounded-2xl border p-3 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border p-3 transition-colors duration-300 flex flex-col ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e]' 
           : 'border-[#5c4032]/50 bg-[#e2d0b6]'
       }`}>
-        <div className={`h-[50svh] overflow-y-auto rounded-xl border p-4 text-sm leading-6 transition-colors duration-300 ${
+        <div className={`flex-1 overflow-y-auto rounded-xl border p-4 text-[17px] leading-6 transition-colors duration-300 ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e] text-white' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6] text-amber-900'
@@ -42,7 +42,7 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
             <DataExportImport />
           </div>
         </div>
-        <div className="mt-3">
+        <div className="mt-3 flex-shrink-0">
           <Pill onClick={onBackToHome} className="w-full">На главный</Pill>
         </div>
       </div>

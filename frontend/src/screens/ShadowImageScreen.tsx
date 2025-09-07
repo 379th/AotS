@@ -26,7 +26,9 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
     currentPair, 
     getShadowImage, 
     hasCurrentPair,
-    getNewRandomPair
+    getNewRandomPair,
+    addShadowToDeck,
+    currentPairIndex
   } = useShadowArchetypePair();
 
   // Автоматически загружаем случайную пару при первом входе
@@ -38,6 +40,13 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
     }
   }, [hasCurrentPair, currentPair, getNewRandomPair]);
 
+  // Автоматически добавляем карту Тени в колоду при каждом изменении пары
+  useEffect(() => {
+    if (currentPair && hasCurrentPair && currentPairIndex >= 0) {
+      addShadowToDeck();
+    }
+  }, [currentPairIndex]);
+
   return (
     <ScreenFrame>
       <div className="flex flex-col h-full overflow-y-auto">
@@ -48,18 +57,20 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[95%] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-[521px] h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
             theme === 'dark'
               ? 'border-amber-900/30'
               : 'border-amber-900/50'
           }`}>
-            <div className="relative min-h-[60svh] max-h-[85svh] overflow-hidden">
+            <div className="relative w-full h-full overflow-hidden">
               {currentPair && hasCurrentPair ? (
-                <img 
-                  src={getShadowImage()} 
-                  alt="Образ Тени" 
-                  className="w-full h-auto max-h-[85svh] object-contain" 
-                />
+                <>
+                  <img 
+                    src={getShadowImage()} 
+                    alt="Образ Тени" 
+                    className="w-full h-full object-cover" 
+                  />
+                </>
               ) : (
                 <div className={`flex h-full w-full items-center justify-center text-sm transition-colors duration-300 ${
                   theme === 'dark' 
@@ -74,6 +85,7 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
 
           {/* Кнопки и панель навигации */}
           <div className="mx-auto mt-0.5 w-[92%]">
+            
             {/* Панель кнопок */}
             <BottomButtonPanel
               onBack={onBackToDay1}

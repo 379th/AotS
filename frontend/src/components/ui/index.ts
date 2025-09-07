@@ -7,3 +7,4 @@ export { BottomButtonPanel } from './BottomButtonPanel';
 export { DrawingCanvas } from './DrawingCanvas';
 export { ScrollableScreen } from './ScrollableScreen';
 export { DataExportImport } from './DataExportImport';
+export { CardModal } from './CardModal';

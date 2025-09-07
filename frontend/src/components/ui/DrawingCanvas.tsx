@@ -170,10 +170,10 @@ export const DrawingCanvas: React.FC<DrawingCanvasProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <div className={`text-xs mb-2 text-center transition-colors duration-300 ${
+      <div className={`text-[15px] mb-2 text-center transition-colors duration-300 ${
         theme === 'dark' 
-          ? 'text-amber-200/60' 
-          : 'text-amber-900/60'
+          ? 'text-amber-200' 
+          : 'text-amber-900'
       }`}>
         👆 Рисуй пальцем или мышкой
       </div>

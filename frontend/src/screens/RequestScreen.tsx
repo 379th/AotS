@@ -42,19 +42,19 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
           {/* Основной контентный блок с полем запроса внутри */}
-          <div className="mx-auto mt-3 w-[92%]">
-            <div className={`h-[55svh] rounded-2xl border p-6 text-left shadow-[0_6px_28px_rgba(0,0,0,.35)] transition-colors duration-300 ${
+          <div className="mx-auto mt-3 w-[521px] h-[782px]">
+            <div className={`h-full rounded-2xl border p-6 text-left shadow-[0_6px_28px_rgba(0,0,0,.35)] transition-colors duration-300 ${
               theme === 'dark' 
                 ? 'border-white/20 bg-[#1a0b2e] text-white' 
                 : 'border-[#5c4032]/50 bg-[#e2d0b6] text-amber-900'
             }`}>
               <div className="h-full overflow-y-auto flex flex-col">
-                <h2 className="text-2xl font-extrabold tracking-tight">{t.request.shadows}</h2>
-                <p className="mt-3 text-[15px] leading-relaxed opacity-95">
+                <h2 className="text-[27px] font-extrabold tracking-tight">{t.request.shadows}</h2>
+                <p className="mt-3 text-[17px] leading-relaxed opacity-95">
                   {t.request.shadowsDescription}
                 </p>
-                <h3 className="mt-6 text-xl font-bold">{t.request.innerConflicts}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed opacity-95">
+                <h3 className="mt-6 text-[27px] font-bold">{t.request.innerConflicts}</h3>
+                <p className="mt-3 text-[17px] leading-relaxed opacity-95">
                   {t.request.innerConflictsDescription}
                 </p>
                 
@@ -64,7 +64,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                     ? 'border-white/20 bg-[#2d1b4e] text-white' 
                     : 'border-[#5c4032]/60 bg-[#f7f0e6] text-amber-900'
                 }`}>
-                  <label className="mb-2 block text-sm font-semibold opacity-90">{t.request.yourRequest}</label>
+                  <label className="mb-2 block text-[27px] font-bold">{t.request.yourRequest}</label>
                   <input
                     value={intent}
                     onChange={(e) => setIntent(e.target.value.slice(0, 120))}
@@ -74,7 +74,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                       }
                     }}
                     placeholder="Одна точная фраза"
-                    className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-700/40 transition-colors duration-300 ${
+                    className={`w-full rounded-lg border px-3 py-2 text-[15px] focus:outline-none focus:ring-2 focus:ring-amber-700/40 transition-colors duration-300 ${
                       theme === 'dark' 
                         ? 'border-white/20 bg-[#2d1b4e] text-white placeholder:text-white/50' 
                         : 'border-[#5c4032]/40 bg-white/95 placeholder:text-amber-900/50'
