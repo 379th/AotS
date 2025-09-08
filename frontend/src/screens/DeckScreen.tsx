@@ -73,7 +73,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
         
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-[90%] max-w-2xl rounded-2xl border p-4 transition-colors duration-300 ${
+          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-2xl rounded-2xl border p-2 sm:p-4 transition-colors duration-300 ${
             theme === 'dark' 
               ? 'border-white/20 bg-[#1a0b2e] text-white' 
               : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
@@ -116,7 +116,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             </div>
 
             {/* Сетка карт */}
-            <div className="grid grid-cols-3 gap-4 mb-4 justify-items-center">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 justify-items-center">
               {currentPageCards.map((card, i) => {
                 const cardNumber = startIndex + i + 1;
                 const cardType = (cardNumber - 1) % 2 === 0 ? 'shadow' : 'archetype';
@@ -124,7 +124,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                 return (
                   <div 
                     key={cardNumber} 
-                    className={`w-32 h-48 rounded-xl border overflow-hidden transition-all duration-300 cursor-pointer group ${
+                    className={`w-20 h-28 sm:w-32 sm:h-48 rounded-xl border overflow-hidden transition-all duration-300 cursor-pointer group ${
                       theme === 'dark' 
                         ? 'border-white/20 bg-[#2d1b4e] text-white hover:border-white/40 hover:shadow-lg hover:shadow-white/10' 
                         : 'border-[#5c4032]/40 bg-[#f7f0e6] hover:border-[#5c4032]/60 hover:shadow-lg hover:shadow-[#5c4032]/20'
@@ -169,12 +169,12 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                       </div>
                     ) : (
-                      <div className="h-full flex flex-col items-center justify-center text-sm p-2">
-                        <div className="text-xs font-bold mb-1">#{cardNumber}</div>
-                        <div className="text-xs opacity-60 text-center">
+                      <div className="h-full flex flex-col items-center justify-center text-xs sm:text-sm p-1 sm:p-2">
+                        <div className="text-[10px] sm:text-xs font-bold mb-1">#{cardNumber}</div>
+                        <div className="text-[9px] sm:text-xs opacity-60 text-center">
                           {cardType === 'shadow' ? 'Тень' : 'Архетип'}
                         </div>
-                        <div className="text-xs opacity-40 text-center mt-1">
+                        <div className="text-[8px] sm:text-xs opacity-40 text-center mt-1">
                           Пусто
                         </div>
                       </div>
@@ -185,18 +185,18 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             </div>
 
             {/* Кнопки навигации по страницам */}
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center justify-between gap-1 sm:gap-2">
               <button 
                 onClick={goToPreviousPage}
                 disabled={currentPage === 0}
-                className={`flex items-center justify-center gap-1 rounded-xl border px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
+                className={`flex items-center justify-center gap-1 rounded-xl border px-2 sm:px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
                   theme === 'dark' 
                     ? 'border-white/20 bg-white/70 text-white'
                     : 'border-[#5c4032]/50 bg-white/90 text-amber-900'
                 }`}
               >
-                <ChevronLeft className="h-4 w-4" />
-                <span className="text-sm font-semibold">Предыдущая</span>
+                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm font-semibold">Предыдущая</span>
               </button>
               
               <div className="flex gap-1">
@@ -216,7 +216,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                     <button
                       key={pageIndex}
                       onClick={() => setCurrentPage(pageIndex)}
-                      className={`w-8 h-8 rounded-lg border border-amber-900/30 text-xs font-semibold transition-all hover:scale-105 active:scale-95 ${
+                      className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg border border-amber-900/30 text-[10px] sm:text-xs font-semibold transition-all hover:scale-105 active:scale-95 ${
                         currentPage === pageIndex
                           ? 'bg-amber-600 text-white'
                           : 'bg-white/70 text-amber-900'
@@ -231,14 +231,14 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
               <button 
                 onClick={goToNextPage}
                 disabled={currentPage === totalPages - 1}
-                className={`flex items-center justify-center gap-1 rounded-xl border px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
+                className={`flex items-center justify-center gap-1 rounded-xl border px-2 sm:px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
                   theme === 'dark' 
                     ? 'border-white/20 bg-white/70 text-white' 
                     : 'border-[#5c4032]/40 bg-white/70 text-amber-900'
                 }`}
               >
-                <span className="text-sm font-semibold">Следующая</span>
-                <ChevronRight className="h-4 w-4" />
+                <span className="text-xs sm:text-sm font-semibold">Следующая</span>
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </button>
             </div>
           </div>
