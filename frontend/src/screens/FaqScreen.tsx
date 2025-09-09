@@ -22,7 +22,7 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
           ? 'border-white/20 bg-[#1a0b2e] text-white' 
           : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
       }`}>
-        <div className={`h-full overflow-y-auto rounded-xl border p-4 leading-relaxed text-[17px] transition-colors duration-300 ${
+        <div className={`h-full overflow-y-auto rounded-xl border p-4 leading-relaxed transition-colors duration-300 ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e] text-white' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
@@ -55,7 +55,7 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
               <p className="mb-2">
                 Тень это тоже архетип. Это те наши качества, чувства и желания, которым «не дают место»: злость, страх, стыд, зависть, нужда в поддержке, потребность отдыхать, желание внимания. Они не «плохие» — просто вытеснены и потому управляют нами из-под полы. Мы говорим себе: «не буду злиться», «я не боюсь», «мне не больно», — и вытесняем опыт. Но он не исчезает: уходит в тень и незаметно влияет на выборы, отношения и энергию.
               </p>
-              <p className="text-sm italic">
+              <p className="text-[17px] italic">
                 Важно: Тень — не «плохая часть». Это жизненная сила и сигналы потребностей, которые были проигнорированы.
               </p>
             </div>
@@ -68,7 +68,7 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
               <p className="mb-2">
                 Примеры: Хранитель (границы и забота), Воин (смелость и действие), Мудрец (ясность и наблюдение), Творец (игра и выражение), Любящий (сострадание и контакт).
               </p>
-              <p className="text-sm italic">
+              <p className="text-[17px] italic">
                 Архетип не «маска», а опора: он даёт язык, жесты и практики, через которые мы поддерживаем себя по-взрослому.
               </p>
             </div>
@@ -129,8 +129,8 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
               
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">День 1 — Призыв Тени</h5>
-                <p className="text-sm mb-2">Цель: безопасно увидеть, что прячется.</p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
+                <p className="text-[17px] mb-2">Цель: безопасно увидеть, что прячется.</p>
+                <ul className="list-disc pl-5 text-[17px] space-y-1">
                   <li>Разогрев: 2–3 минуты дыхания (мягкий вдох - 4 счёта, спокойный выдох - 4 счёта).</li>
                   <li>Сканирование: «Где в теле отзывается?», «На что я сейчас злюсь/боюсь/обижен(а)?», «Где в жизни ты это проявляешь?», «Как это защищает тебя?», «Что чувствует твой внутренний ребёнок?».</li>
                   <li>Карта тени: назови/запиши 1–3 чувства, 1–3 триггера, 1 потребность.</li>
@@ -140,8 +140,8 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">День 2 — Диалог</h5>
-                <p className="text-sm mb-2">Цель: наладить контакт и снизить/убрать внутренний конфликт.</p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
+                <p className="text-[17px] mb-2">Цель: наладить контакт и снизить/убрать внутренний конфликт.</p>
+                <ul className="list-disc pl-5 text-[17px] space-y-1">
                   <li>Письмо от Тени (1 страница, от первого лица): «Я злюсь/боюсь… Я хочу… Мне важно… Мне больно...».</li>
                   <li>Письмо от взрослого(ой) себя: признание чувств, границы, поддержка: «Я слышу, спасибо, давай вот так…».</li>
                   <li>Чек-ин тела: какая эмоция сейчас? Мягкая практика (дыхание, ладонь на грудь).</li>
@@ -150,8 +150,8 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">День 3 — Архетипический выбор</h5>
-                <p className="text-sm mb-2">Цель: взять опору светлой стороны.</p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
+                <p className="text-[17px] mb-2">Цель: взять опору светлой стороны.</p>
+                <ul className="list-disc pl-5 text-[17px] space-y-1">
                   <li>Опиши 3 качества архетипа, которые он даёт.</li>
                   <li>Микропрактика: фраза-маячок («Я ставлю мягкую границу»), жест/поза, 1 мини-шаг в реальной ситуации.</li>
                   <li>Условный контракт: «Когда Тень напоминает о боли — Архетип делает Х», где Х = одна фраза + одно действие (≤2 минут), которое переводит сырой импульс в безопасное и полезное русло.</li>
@@ -160,8 +160,8 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">День 4 — Интеграция</h5>
-                <p className="text-sm mb-2">Цель: собрать целостность и назначить дальнейшие шаги.</p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
+                <p className="text-[17px] mb-2">Цель: собрать целостность и назначить дальнейшие шаги.</p>
+                <ul className="list-disc pl-5 text-[17px] space-y-1">
                   <li>Личный символ (знак/талисман/мини-рисунок).</li>
                   <li>План действий на 7 дней: 1 маленький шаг в день (SMART-формат: конкретно, выполнимо, привязано к контексту).</li>
                   <li>Ритуал закрытия: благодарность себе, Тени и Архетипу, 3 повода гордиться. Преподнеси подношение (внутренне вырази благодарность Вселенной и всем существам во всех мирах).</li>
@@ -192,55 +192,46 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
               
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">А если «ничего не чувствую»?</h5>
-                <p className="text-sm">
+                <p className="text-[17px]">
                   Начни с тела: «Где напряжение? Какой размер/температура/фактура?». Пиши 5 минут по таймеру свободным письмом — часто чувства «догоняют» после телесного внимания.
                 </p>
               </div>
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">Можно ли повторять квест?</h5>
-                <p className="text-sm">
+                <p className="text-[17px]">
                   Да. Позволь времени течь — озарение придёт. Новый/уточняющий запрос — под текущее состояние.
                 </p>
               </div>
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">Если стало тяжело?</h5>
-                <p className="text-sm">
+                <p className="text-[17px]">
                   Пауза. Вода, окно, движение/растяжка, несколько циклов дыхания. Вернись к самой мягкой части задания. Если «накрывает» — к родным/близким, специалисту.
                 </p>
               </div>
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">Сколько времени в день?</h5>
-                <p className="text-sm">
+                <p className="text-[17px]">
                   От 10 минут до 24 часов (во сне тоже подсказки) — по состоянию. Лучше коротко и регулярно, чем «героически и редко».
                 </p>
               </div>
 
-              <div className="mb-3">
-                <h5 className="text-[27px] font-semibold">Рекомендации:</h5>
-                <p className="text-sm">
-                  Начинать каждый новый день квеста с утра и «медитировать» (быть сосредоточенным, на уровне подсознания, на образе и заданиях карты) в течении дня. Вести заметки.
-                </p>
-                <p className="text-sm">
-                  Вечером выполнить задания (если есть), записать всё в дневник/тетрадь.
-                </p>
-              </div>
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">Нужно ли делиться записями?</h5>
-                <p className="text-sm">
+                <p className="text-[17px]">
                   Нет. Всё написанное — только для тебя.
                 </p>
               </div>
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">Что, если я злюсь на близких?</h5>
-                <p className="text-sm mb-2">
+                <p className="text-[17px] mb-2">
                   Злость = сигнал границ. Шаги «мягкой силы»:
                 </p>
-                <ol className="list-decimal pl-5 text-sm space-y-1">
+                <ol className="list-decimal pl-5 text-[17px] space-y-1">
                   <li>Контакт с собой: «Сейчас злюсь → мне важно уважение/пауза/тишина».</li>
                   <li>Запрос в формате «конкретика + я-сообщение + малый шаг»:
                     <ul className="list-disc pl-5 mt-1 space-y-1">
@@ -255,25 +246,25 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
 
               <div className="mb-3">
                 <h5 className="text-[27px] font-semibold">Противопоказания и «карта помощи»</h5>
-                <p className="text-sm mb-2">
+                <p className="text-[17px] mb-2">
                   Квест — не психотерапия и не медпомощь.
                 </p>
-                <p className="text-sm mb-2">
+                <p className="text-[17px] mb-2">
                   Не рекомендуется при:
                 </p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
+                <ul className="list-disc pl-5 text-[17px] space-y-1">
                   <li>активном ПТСР с частыми флэшбеками,</li>
                   <li>тяжёлых эпизодах депрессии/мании, острых панических атаках,</li>
                   <li>текущем риске самоповреждения/суицидальных намерениях,</li>
                   <li>активных зависимостях без сопровождения специалиста.</li>
                 </ul>
-                <p className="text-sm mb-2">
+                <p className="text-[17px] mb-2">
                   Если есть любой из пунктов выше — проходи квест только с терапевтом/наставником.
                 </p>
-                <p className="text-sm mb-2">
+                <p className="text-[17px] mb-2">
                   Если ты в опасности или думаешь о самоповреждении — немедленно обратись за помощью:
                 </p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
+                <ul className="list-disc pl-5 text-[17px] space-y-1">
                   <li>местные экстренные службы,</li>
                   <li>национальная горячая линия по психическому здоровью,</li>
                   <li>контакты своего терапевта/наставника.</li>
@@ -286,7 +277,7 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
                 
                 <div className="mb-2">
                   <h6 className="text-[27px] font-medium">Неделя 1 (поддержка символа):</h6>
-                  <ul className="list-disc pl-5 text-sm space-y-1">
+                  <ul className="list-disc pl-5 text-[17px] space-y-1">
                     <li>Носи символ (знак/талисман) или рисунок рядом.</li>
                     <li>Ежедневно 1 мини-шаг из плана (≤10 минут).</li>
                     <li>Вечером отметь: «1 факт, где я был(а) в опоре Архетипа».</li>
@@ -295,7 +286,7 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
 
                 <div>
                   <h6 className="text-[27px] font-medium">Неделя 2–4 (встроить в жизнь):</h6>
-                  <ul className="list-disc pl-5 text-sm space-y-1">
+                  <ul className="list-disc pl-5 text-[17px] space-y-1">
                     <li>«Одна ситуация — один навык»: выбери повторяющийся контекст (работа/дом) и отрепетируй фразу-маячок.</li>
                     <li>1 короткая сессия/нед. «Разговор с Тенью» (10–15 минут).</li>
                   </ul>
