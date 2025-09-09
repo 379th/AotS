@@ -12,6 +12,13 @@ const getApiBaseUrl = () => {
   return import.meta.env.VITE_API_URL || 'http://localhost:4000';
 };
 
+// Проверяем доступность API
+const isApiAvailable = () => {
+  const baseUrl = getApiBaseUrl();
+  // Если нет базового URL, значит API недоступен
+  return baseUrl !== '';
+};
+
 export interface UserData {
   id: string;
   telegramId: string;
@@ -82,6 +89,12 @@ export class UserApi {
    */
   static async createOrUpdateUser(): Promise<UserData | null> {
     try {
+      // Проверяем доступность API
+      if (!isApiAvailable()) {
+        console.log('API not available, skipping user creation');
+        return null;
+      }
+      
       const userId = this.getUserId();
       
       // Если userId null, значит Telegram WebApp не инициализирован
@@ -124,6 +137,12 @@ export class UserApi {
    */
   static async getUser(): Promise<UserData | null> {
     try {
+      // Проверяем доступность API
+      if (!isApiAvailable()) {
+        console.log('API not available, skipping user loading');
+        return null;
+      }
+      
       const userId = this.getUserId();
       
       // Если userId null, значит Telegram WebApp не инициализирован
@@ -155,6 +174,12 @@ export class UserApi {
    */
   static async updateProgress(progress: Partial<UserData>): Promise<UserData | null> {
     try {
+      // Проверяем доступность API
+      if (!isApiAvailable()) {
+        console.log('API not available, skipping progress update');
+        return null;
+      }
+      
       const userId = this.getUserId();
       
       // Если userId null, значит Telegram WebApp не инициализирован
