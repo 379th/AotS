@@ -1,0 +1,8 @@
+# Исключаем backend из сборки Railway
+backend/
+minimal-deploy/
+railway-scripts/
+responsive-reports/
+*.md
+.git/
+node_modules/

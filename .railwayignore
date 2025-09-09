@@ -13,6 +13,10 @@ Thumbs.db
 *.swo
 *~
 
+# Исключаем backend (Railway только для frontend)
+backend/
+minimal-deploy/
+
 # Исключаем скрипты проверки (они не нужны в продакшене)
 railway-scripts/
 responsive-reports/
