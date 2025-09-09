@@ -42,12 +42,12 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
         </div>
       </div>
       
-      <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[60vh] sm:h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
+      <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] rounded-2xl border p-3 transition-colors duration-300 ${
         theme === 'dark' 
           ? 'border-white/20 bg-[#1a0b2e] text-white' 
           : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
       }`}>
-        <div className={`w-full h-full rounded-xl border p-4 leading-relaxed transition-colors duration-300 overflow-y-auto ${
+        <div className={`w-full rounded-xl border p-4 leading-relaxed transition-colors duration-300 ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e] text-white' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
