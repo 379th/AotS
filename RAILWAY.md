@@ -80,14 +80,32 @@ npm run railway:check
 ```json
 {
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "cd frontend && npm ci && npm run build"
+    "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "cd frontend && npm run preview",
+    "startCommand": "npm run start:railway",
     "healthcheckPath": "/"
   }
 }
+```
+
+### `nixpacks.toml`
+```toml
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = [
+  "cd frontend && npm ci"
+]
+
+[phases.build]
+cmds = [
+  "cd frontend && npm run build"
+]
+
+[start]
+cmd = "cd frontend && npm run preview"
 ```
 
 ### `railway-deploy.yml`

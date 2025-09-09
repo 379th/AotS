@@ -1,20 +1,22 @@
 {
-  "name": "shadow-quest-railway",
+  "name": "shadow-quest-app",
   "version": "1.0.0",
-  "description": "Shadow Quest Telegram Mini App on Railway",
+  "description": "Shadow Quest Telegram Mini App",
+  "private": true,
   "scripts": {
-    "build": "cd frontend && npm install && npm run build",
-    "start": "cd backend && npm start",
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
-    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
+    "build": "cd frontend && npm ci && npm run build",
+    "start:railway": "cd frontend && npm run preview",
+    "dev": "cd frontend && npm run dev",
+    "check:responsive": "cd frontend && npm run check:responsive",
+    "railway:deploy": "cd frontend && npm run railway:deploy",
+    "railway:check": "cd frontend && npm run railway:check",
+    "railway:setup": "cd frontend && npm run railway:setup"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   },
-  "dependencies": {
-    "pg": "^8.16.3"
-  }
+  "workspaces": [
+    "frontend"
+  ]
 }
