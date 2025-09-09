@@ -55,13 +55,13 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
           <div className="mx-auto mt-4 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-4">
             {/* Первый ряд: 3 кнопки на мобильных, все 5 на больших экранах */}
             <div className="flex flex-row sm:flex-row sm:justify-between gap-2 sm:gap-3 justify-center items-center">
-              <button onClick={onAboutCreator} className="w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+              <button onClick={onAboutCreator} className="w-[155px] h-[80px] transition-transform active:scale-95 hover:scale-105">
                 <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_CREATOR)} alt={t.intro.aboutCreator} className="w-full h-full object-cover" />
               </button>
-              <button onClick={onStart} className="w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+              <button onClick={onStart} className="w-[155px] h-[80px] transition-transform active:scale-95 hover:scale-105">
                 <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.START)} alt={t.intro.start} className="w-full h-full object-cover" />
               </button>
-              <button onClick={onAboutQuest} className="w-[158px] h-[80px] transition-transform active:scale-95 hover:scale-105">
+              <button onClick={onAboutQuest} className="w-[155px] h-[80px] transition-transform active:scale-95 hover:scale-105">
                 <img src={getImageUrl(EXTERNAL_ASSETS.BUTTONS.ABOUT_QUEST)} alt={t.intro.aboutQuest} className="w-full h-full object-cover" />
               </button>
             </div>
