@@ -238,6 +238,22 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
 
           {/* Кнопки */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <button 
+              onClick={onBack}
+              className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
+              style={{
+                backgroundImage: 'url(/Sorce/buttons/Back.png)',
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                width: 'auto',
+                height: 'auto',
+                minWidth: '120px',
+                minHeight: '60px'
+              }}
+            >
+            </button>
+            
             {isTestMode && (
               <button 
                 onClick={onContinue}
@@ -283,22 +299,6 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
                 Сбросить таймер (тестовый режим)
               </Pill>
             )}
-            
-            <button 
-              onClick={onBack}
-              className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
-              style={{
-                backgroundImage: 'url(/Sorce/buttons/Back.png)',
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                width: 'auto',
-                height: 'auto',
-                minWidth: '120px',
-                minHeight: '60px'
-              }}
-            >
-            </button>
           </div>
         </div>
       </div>
