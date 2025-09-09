@@ -26,13 +26,13 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
           ? 'border-white/20 bg-[#1a0b2e] text-white' 
           : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
       }`}>
-        <div className={`w-full h-full rounded-xl border p-4 transition-colors duration-300 ${
+        <div className={`w-full h-full rounded-xl border p-4 transition-colors duration-300 overflow-y-auto ${
           theme === 'dark' 
             ? 'border-white/20 bg-[#2d1b4e] text-white' 
             : 'border-[#5c4032]/40 bg-[#f7f0e6]'
         }`}>
           <h3 className="text-[27px] font-bold mb-3">{t.creator.acknowledgments}</h3>
-          <div className="h-full overflow-y-auto space-y-2 text-[17px] leading-relaxed">
+          <div className="space-y-2 text-[17px] leading-relaxed">
             {t.creator.acknowledgmentsList.map((line, i) => (
               <div key={i} className="text-left">
                 <span>{line}</span>
