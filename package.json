@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start:railway": "cd frontend && npx serve -s dist -l 3000",
+    "start": "cd frontend && npx serve -s dist -l 3000",
     "dev": "cd frontend && npm run dev",
     "check:responsive": "cd frontend && npm run check:responsive",
     "railway:deploy": "cd frontend && npm run railway:deploy",
