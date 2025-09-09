@@ -3,7 +3,7 @@ nixPkgs = ["nodejs", "npm"]
 
 [phases.install]
 cmds = [
-  "cd frontend && npm ci"
+  "cd frontend && npm install"
 ]
 
 [phases.build]
@@ -12,4 +12,4 @@ cmds = [
 ]
 
 [start]
-cmd = "cd frontend && npm run preview"
+cmd = "cd frontend && npx serve -s dist -l 3000"

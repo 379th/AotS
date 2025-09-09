@@ -27,3 +27,7 @@ frontend/src/utils/responsiveChecker.ts
 # Исключаем документацию
 RAILWAY.md
 README.md
+
+# Исключаем Docker файлы (используем nixpacks)
+Dockerfile*
+docker-compose*
