@@ -13,7 +13,10 @@
     "check:responsive": "node scripts/checkResponsive.cjs",
     "check:responsive:file": "node scripts/checkResponsive.cjs --file",
     "check:all": "npm run lint && npm run check:responsive",
-    "pre-commit": "npm run check:all"
+    "pre-commit": "npm run check:all",
+    "railway:deploy": "..\\railway-scripts\\deploy-with-check.bat",
+    "railway:check": "..\\railway-scripts\\check-responsive.bat",
+    "railway:setup": "..\\railway-scripts\\setup.bat"
   },
   "dependencies": {
     "@telegram-apps/sdk-react": "^3.3.6",
