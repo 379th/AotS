@@ -9,7 +9,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix"
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "check:responsive": "node scripts/checkResponsive.cjs",
+    "check:responsive:file": "node scripts/checkResponsive.cjs --file",
+    "check:all": "npm run lint && npm run check:responsive",
+    "pre-commit": "npm run check:all"
   },
   "dependencies": {
     "@telegram-apps/sdk-react": "^3.3.6",
