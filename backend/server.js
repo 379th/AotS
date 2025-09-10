@@ -8,6 +8,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Настройка trust proxy для Railway и других прокси
+app.set('trust proxy', 1);
+
 // Middleware
 // CSP настройки для разных окружений
 const isDevelopment = process.env.NODE_ENV !== 'production' || 
@@ -64,7 +67,10 @@ app.use(cors({
 if (!isDevelopment) {
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 100, // limit each IP to 100 requests per windowMs
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    trustProxy: true // Trust the proxy for IP detection
   });
   app.use(limiter);
   console.log('🔒 Rate limiting включен для продакшена');
