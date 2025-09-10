@@ -19,7 +19,10 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   dayTitle 
 }) => {
   const { theme } = useTheme();
-  const [isTestMode] = useState(import.meta.env.DEV); // Тестовый режим в разработке
+  const [isTestMode] = useState(true); // Тестовый режим всегда активен в локальной версии
+  
+  // Логируем состояние тестового режима
+  console.log('TimerScreen: isTestMode =', isTestMode, 'dayNumber =', dayNumber);
   
   // Ключи для localStorage
   const timerKey = `timer_day_${dayNumber}`;
@@ -298,27 +301,30 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             )}
             
             {/* Кнопки для тестового режима */}
-            {isTestMode && (
-              <div className="flex flex-col gap-2 w-full">
-                {timeLeft > 0 && (
+            {isTestMode && (() => {
+              console.log('Rendering test buttons: isTestMode =', isTestMode, 'timeLeft =', timeLeft);
+              return (
+                <div className="flex flex-col gap-2 w-full">
+                  {timeLeft > 0 && (
+                    <Pill 
+                      onClick={resetTimer}
+                      className="w-full bg-red-600/80 hover:bg-red-600"
+                    >
+                      Сбросить таймер
+                    </Pill>
+                  )}
                   <Pill 
-                    onClick={resetTimer}
-                    className="w-full bg-red-600/80 hover:bg-red-600"
+                    onClick={() => {
+                      setTimeLeft(0);
+                      onContinue();
+                    }}
+                    className="w-full bg-green-600/80 hover:bg-green-600"
                   >
-                    Сбросить таймер
+                    Пропустить таймер
                   </Pill>
-                )}
-                <Pill 
-                  onClick={() => {
-                    setTimeLeft(0);
-                    onContinue();
-                  }}
-                  className="w-full bg-green-600/80 hover:bg-green-600"
-                >
-                  Пропустить таймер
-                </Pill>
-              </div>
-            )}
+                </div>
+              );
+            })()}
           </div>
         </div>
       </div>
