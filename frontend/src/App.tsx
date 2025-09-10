@@ -346,7 +346,7 @@ function App() {
         case "progress":
           return (
             <ProgressScreen
-              onBack={() => navigateTo("completion")}
+              onBack={goBack}
               onNavigateToDay={(day: string) => navigateTo(day as RouteType)}
             />
           );
