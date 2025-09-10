@@ -100,12 +100,14 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
                     </span>
                   </div>
                   <Pill 
-                    onClick={() => onNavigateToDay(day.id)}
-                    className={`text-[15px] px-3 py-1 ${
-                      day.completed ? 'bg-amber-600/80' : 'bg-amber-900/50'
+                    onClick={day.completed ? () => onNavigateToDay(day.id) : undefined}
+                    className={`text-[15px] px-3 py-1 transition-all duration-200 ${
+                      day.completed 
+                        ? 'bg-amber-600/80 hover:bg-amber-600 cursor-pointer' 
+                        : 'bg-amber-900/30 cursor-not-allowed opacity-50'
                     }`}
                   >
-                    {day.completed ? 'Повторить' : 'Вернуться'}
+                    {day.completed ? 'Повторить' : 'Заблокировано'}
                   </Pill>
                 </div>
               </div>

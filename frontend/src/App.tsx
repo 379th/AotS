@@ -79,6 +79,12 @@ function App() {
     setRoute(previousRoute);
   };
 
+  // Функция для завершения дня
+  const completeDay = (dayNumber: number) => {
+    localStorage.setItem(`day${dayNumber}_completed`, 'true');
+    console.log(`День ${dayNumber} завершен`);
+  };
+
   // Функция для запуска таймера и перехода к следующему дню
   const startTimerAndContinue = async (dayNumber: number, nextRoute: RouteType) => {
     // Проверяем, есть ли уже запущенный таймер
@@ -188,7 +194,10 @@ function App() {
           return (
             <Day1QuestionsScreen
               onBack={() => navigateTo("shadowDetails")}
-              onNext={() => navigateTo("timer1")}
+              onNext={() => {
+                completeDay(1);
+                navigateTo("timer1");
+              }}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
@@ -234,7 +243,10 @@ function App() {
           return (
             <Day2LettersScreen
               onBack={() => navigateTo("day2Screen")}
-              onNext={() => navigateTo("timer2")}
+              onNext={() => {
+                completeDay(2);
+                navigateTo("timer2");
+              }}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
@@ -292,7 +304,10 @@ function App() {
           return (
             <Day3PartnerTaskScreen
               onBack={() => navigateTo("day3Resource")}
-              onNext={() => navigateTo("timer3")}
+              onNext={() => {
+                completeDay(3);
+                navigateTo("timer3");
+              }}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
@@ -326,7 +341,10 @@ function App() {
           return (
             <Day4IntegrationScreen
               onBack={() => navigateTo("day4Temple")}
-              onNext={() => navigateTo("completion")}
+              onNext={() => {
+                completeDay(4);
+                navigateTo("completion");
+              }}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
