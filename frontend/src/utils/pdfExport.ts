@@ -5,6 +5,35 @@ import html2canvas from 'html2canvas';
 import { ExportData } from './dataExport';
 import { getExercisesByPairNumber } from './exercisesData';
 
+// Функция для создания HTML контента с поддержкой изображений
+function createContentWithImage(content: string, title: string, color: string): string {
+  if (!content) return '';
+  
+  let html = `
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #2c3e50; font-size: 16px; margin-bottom: 10px;">${title}:</h3>
+      <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid ${color};">
+  `;
+  
+  // Проверяем, является ли контент base64 изображением
+  if (content.startsWith('data:image')) {
+    html += `
+      <img src="${content}" alt="${title}" style="max-width: 100%; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+    `;
+  } else {
+    html += `
+      <p style="white-space: pre-wrap; margin: 0;">${content}</p>
+    `;
+  }
+  
+  html += `
+      </div>
+    </div>
+  `;
+  
+  return html;
+}
+
 // Функция для экспорта данных в PDF
 export async function exportToPDF(data: ExportData): Promise<void> {
   try {
@@ -325,21 +354,11 @@ async function createHTMLContent(data: ExportData): Promise<string> {
     `;
     
     if (data.data.day4.symbol) {
-      html += `
-        <div style="margin-bottom: 20px;">
-          <h3 style="color: #2c3e50; font-size: 16px; margin-bottom: 10px;">Символ:</h3>
-          <p style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #27ae60; white-space: pre-wrap;">${data.data.day4.symbol}</p>
-        </div>
-      `;
+      html += createContentWithImage(data.data.day4.symbol, 'Символ', '#27ae60');
     }
     
     if (data.data.day4.offering) {
-      html += `
-        <div style="margin-bottom: 20px;">
-          <h3 style="color: #2c3e50; font-size: 16px; margin-bottom: 10px;">Подношение:</h3>
-          <p style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #27ae60; white-space: pre-wrap;">${data.data.day4.offering}</p>
-        </div>
-      `;
+      html += createContentWithImage(data.data.day4.offering, 'Подношение', '#27ae60');
     }
     
     html += `</div>`;
