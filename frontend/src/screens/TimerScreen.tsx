@@ -19,7 +19,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
   dayTitle 
 }) => {
   const { theme } = useTheme();
-  const [isTestMode] = useState(true); // Тестовый режим всегда активен в локальной версии
+  const [isTestMode] = useState(import.meta.env.DEV || window.location.hostname === 'localhost'); // Тестовый режим только в разработке или на localhost
   
   // Логируем состояние тестового режима
   console.log('TimerScreen: isTestMode =', isTestMode, 'dayNumber =', dayNumber);
