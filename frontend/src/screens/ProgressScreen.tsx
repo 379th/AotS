@@ -107,7 +107,7 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
                         : 'bg-amber-900/30 cursor-not-allowed opacity-50'
                     }`}
                   >
-                    {day.completed ? 'Повторить' : 'Заблокировано'}
+                    {day.completed ? 'Вернуться' : 'Заблокировано'}
                   </Pill>
                 </div>
               </div>
