@@ -133,6 +133,7 @@ export const getBackgroundStyle = (path: string): React.CSSProperties => {
 };
 
 // Функция для получения случайной пары изображений Тень/Архетип
+// Обеспечивает равномерное распределение - каждая пара имеет равный шанс выпасть
 export const getRandomShadowArchetypePair = () => {
   const pairs = EXTERNAL_ASSETS.SHADOW_ARCHETYPE_PAIRS;
   const randomIndex = Math.floor(Math.random() * pairs.length);

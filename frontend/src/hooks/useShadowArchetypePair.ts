@@ -25,11 +25,9 @@ export const useShadowArchetypePair = () => {
     const pairs = EXTERNAL_ASSETS.SHADOW_ARCHETYPE_PAIRS;
     const totalPairs = pairs.length;
     
-    // Получаем случайный индекс, отличный от текущего
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * totalPairs);
-    } while (newIndex === currentPairIndex && totalPairs > 1);
+    // Получаем случайный индекс с равномерным распределением
+    // Используем Math.random() для обеспечения равного процента выпадания
+    const newIndex = Math.floor(Math.random() * totalPairs);
     
     const newPair = pairs[newIndex];
     
