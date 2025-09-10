@@ -181,6 +181,13 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             }`}>
               День {dayNumber} завершен. Отдохните и подготовьтесь к следующему дню.
             </div>
+            {isTestMode && (
+              <div className={`text-[15px] font-semibold mt-2 px-3 py-1 rounded-full inline-block transition-colors duration-300 ${
+                theme === 'dark' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-yellow-100 text-yellow-800'
+              }`}>
+                🧪 ТЕСТОВЫЙ РЕЖИМ
+              </div>
+            )}
           </div>
 
           {/* Таймер */}
@@ -290,14 +297,27 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
               </button>
             )}
             
-            {/* Кнопка сброса таймера только в тестовом режиме */}
-            {isTestMode && timeLeft > 0 && (
-              <Pill 
-                onClick={resetTimer}
-                className="w-full bg-red-600/80 hover:bg-red-600"
-              >
-                Сбросить таймер (тестовый режим)
-              </Pill>
+            {/* Кнопки для тестового режима */}
+            {isTestMode && (
+              <div className="flex flex-col gap-2 w-full">
+                {timeLeft > 0 && (
+                  <Pill 
+                    onClick={resetTimer}
+                    className="w-full bg-red-600/80 hover:bg-red-600"
+                  >
+                    Сбросить таймер
+                  </Pill>
+                )}
+                <Pill 
+                  onClick={() => {
+                    setTimeLeft(0);
+                    onContinue();
+                  }}
+                  className="w-full bg-green-600/80 hover:bg-green-600"
+                >
+                  Пропустить таймер
+                </Pill>
+              </div>
             )}
           </div>
         </div>
