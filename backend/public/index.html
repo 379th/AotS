@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadow Quest - Принятие Тени</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Квест принятия тени - интерактивное приложение для самопознания" />
+    <meta name="theme-color" content="#d6ba5b" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Принятие Тен" />
+    <meta name="msapplication-TileColor" content="#d6ba5b" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Content Security Policy отключен для отладки -->
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/vite.svg" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/vite.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/vite.svg" />
+    <link rel="apple-touch-icon" sizes="167x167" href="/vite.svg" />
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    
+    <!-- Предзагрузка критических ресурсов -->
+    <link rel="preload" href="/Sorce/background/Background.png" as="image" type="image/png">
+    <script type="module" crossorigin src="/assets/index-B1Rdr4Xj.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BOGdi6pm.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
+
