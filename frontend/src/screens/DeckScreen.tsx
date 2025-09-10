@@ -185,7 +185,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             </div>
 
             {/* Кнопки навигации по страницам */}
-            <div className="flex items-center justify-between gap-1 sm:gap-2">
+            <div className="flex items-center justify-between gap-1 sm:gap-2 px-2">
               <button 
                 onClick={goToPreviousPage}
                 disabled={currentPage === 0}
@@ -196,7 +196,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                 }`}
               >
                 <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm font-semibold">Предыдущая</span>
+                <span className="text-xs sm:text-sm font-semibold">Назад</span>
               </button>
               
               <div className="flex gap-1">
@@ -237,7 +237,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                     : 'border-[#5c4032]/40 bg-white/70 text-amber-900'
                 }`}
               >
-                <span className="text-xs sm:text-sm font-semibold">Следующая</span>
+                <span className="text-xs sm:text-sm font-semibold">Вперед</span>
                 <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </button>
             </div>
