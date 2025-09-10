@@ -140,7 +140,7 @@ function App() {
           return (
             <RequestScreen
               onBack={() => navigateTo("intro")}
-              onNext={() => navigateTo("day1")}
+              onNext={() => startTimerAndContinue(1, "day1")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
@@ -152,7 +152,7 @@ function App() {
           return (
             <Day1Screen
               onBackToRequest={() => navigateTo("request")}
-              onAccept={() => startTimerAndContinue(1, "shadowImage")}
+              onAccept={() => navigateTo("shadowImage")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
@@ -210,7 +210,7 @@ function App() {
           return (
             <Day2EchoScreen
               onBack={() => navigateTo("timer1")}
-              onNext={() => navigateTo("day2Screen")}
+              onNext={() => startTimerAndContinue(2, "day2Screen")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
@@ -222,7 +222,7 @@ function App() {
           return (
             <Day2Screen
               onBack={() => navigateTo("day2")}
-              onNext={() => startTimerAndContinue(2, "day2Letters")}
+              onNext={() => navigateTo("day2Letters")}
               onAboutQuest={() => navigateTo("quest")}
               onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
