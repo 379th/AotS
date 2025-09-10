@@ -91,6 +91,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onNext}
+              continueDisabled={intent.trim().length === 0}
             />
 
             {/* Панель навигации */}

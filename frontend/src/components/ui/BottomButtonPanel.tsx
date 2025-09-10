@@ -10,6 +10,7 @@ interface BottomButtonPanelProps {
   continueText?: string;
   showBack?: boolean;
   showContinue?: boolean;
+  continueDisabled?: boolean;
 }
 
 export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
@@ -18,7 +19,8 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
   backText,
   continueText,
   showBack = true,
-  showContinue = true
+  showContinue = true,
+  continueDisabled = false
 }) => {
   const { t } = useTranslation();
   
@@ -49,8 +51,13 @@ export const BottomButtonPanel: React.FC<BottomButtonPanelProps> = ({
       )}
       {showContinue && (
         <button 
-          onClick={onContinue} 
-          className="transition-transform duration-200 hover:scale-105 active:scale-95"
+          onClick={continueDisabled ? undefined : onContinue} 
+          disabled={continueDisabled}
+          className={`transition-all duration-200 ${
+            continueDisabled 
+              ? 'opacity-50 cursor-not-allowed' 
+              : 'hover:scale-105 active:scale-95'
+          }`}
         >
           <img 
             src="/Sorce/buttons/Continue.png" 
