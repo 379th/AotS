@@ -142,7 +142,7 @@ function App() {
               onBack={() => navigateTo("intro")}
               onNext={() => navigateTo("day1")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -154,7 +154,7 @@ function App() {
               onBackToRequest={() => navigateTo("request")}
               onAccept={() => startTimerAndContinue(1, "shadowImage")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -166,7 +166,7 @@ function App() {
               onBackToDay1={() => navigateTo("day1")}
               onContinue={() => navigateTo("shadowDetails")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -178,7 +178,7 @@ function App() {
               onBack={() => navigateTo("shadowImage")}
               onNext={() => navigateTo("day1Questions")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -190,7 +190,7 @@ function App() {
               onBack={() => navigateTo("shadowDetails")}
               onNext={() => navigateTo("timer1")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -212,7 +212,7 @@ function App() {
               onBack={() => navigateTo("timer1")}
               onNext={() => navigateTo("day2Screen")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -224,7 +224,7 @@ function App() {
               onBack={() => navigateTo("day2")}
               onNext={() => startTimerAndContinue(2, "day2Letters")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -236,7 +236,7 @@ function App() {
               onBack={() => navigateTo("day2Screen")}
               onNext={() => navigateTo("timer2")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -258,7 +258,7 @@ function App() {
             onBack={() => navigateTo("timer2")}
             onNext={() => startTimerAndContinue(3, "archetype")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("day1")}
+            onGoDay1={() => navigateTo("progress")}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -270,7 +270,7 @@ function App() {
             onBack={() => navigateTo("day3Mirror")}
             onNext={() => navigateTo("day3Resource")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("day1")}
+            onGoDay1={() => navigateTo("progress")}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -282,7 +282,7 @@ function App() {
             onBack={() => navigateTo("archetype")}
             onNext={() => navigateTo("day3PartnerTask")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("day1")}
+            onGoDay1={() => navigateTo("progress")}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -294,7 +294,7 @@ function App() {
               onBack={() => navigateTo("day3Resource")}
               onNext={() => navigateTo("timer3")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -316,7 +316,7 @@ function App() {
             onBack={() => navigateTo("timer3")}
             onNext={() => navigateTo("day4Integration")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("day1")}
+            onGoDay1={() => navigateTo("progress")}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -328,7 +328,7 @@ function App() {
               onBack={() => navigateTo("day4Temple")}
               onNext={() => navigateTo("completion")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -375,7 +375,7 @@ function App() {
             <DeckScreen 
               onBack={goBack}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -386,7 +386,7 @@ function App() {
             <JournalScreen 
               onBack={goBack}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("day1")}
+              onGoDay1={() => navigateTo("progress")}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
