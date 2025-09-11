@@ -17,16 +17,32 @@ export const FaqScreen: React.FC<FaqScreenProps> = ({ onBack }) => {
         imagePath={EXTERNAL_ASSETS.NAVIGATION.FAQ_TITLE}
       />
       
-      <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-4 transition-colors duration-300 ${
-        theme === 'dark' 
-          ? 'border-white/20 bg-[#1a0b2e] text-white' 
-          : 'border-[#5c4032]/60 bg-[#e2d0b6] text-amber-900'
-      }`}>
-        <div className={`h-full overflow-y-auto rounded-xl border p-4 leading-relaxed transition-colors duration-300 ${
+      <div 
+        className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-4 transition-colors duration-300 ${
           theme === 'dark' 
-            ? 'border-white/20 bg-[#2d1b4e] text-white' 
-            : 'border-[#5c4032]/40 bg-[#f7f0e6]'
-        }`}>
+            ? 'border-white/20 text-white' 
+            : 'border-[#5c4032]/60 text-amber-900'
+        }`}
+        style={{
+          backgroundImage: 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div 
+          className={`h-full overflow-y-auto rounded-xl border p-4 leading-relaxed transition-colors duration-300 ${
+            theme === 'dark' 
+              ? 'border-white/20 text-white' 
+              : 'border-[#5c4032]/40'
+          }`}
+          style={{
+            backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
           <h2 className="text-[27px] font-bold mb-4">FAQ «Принятие Тени»</h2>
           
           <h3 className="text-[27px] font-bold mb-3">Техника безопасности!</h3>

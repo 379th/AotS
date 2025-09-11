@@ -44,11 +44,19 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
-            theme === 'dark' 
-              ? 'border-white/20 bg-[#1a0b2e]' 
-              : 'border-[#5c4032]/50 bg-[#e2d0b6]'
-          }`}>
+          <div 
+            className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
+              theme === 'dark' 
+                ? 'border-white/20' 
+                : 'border-[#5c4032]/50'
+            }`}
+            style={{
+              backgroundImage: 'url(/Sorce/windows/external_container.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
             {/* Состояние загрузки */}
             {loading && (
               <div className={`text-center py-8 transition-colors duration-300 ${
@@ -78,11 +86,19 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
 
             {/* Упражнения */}
             {!loading && hasCurrentPair && (
-              <div className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
-                theme === 'dark' 
-                  ? 'border-white/20 bg-[#2d1b4e]' 
-                  : 'border-[#5c4032]/40 bg-[#f7f0e6]'
-              }`}>
+              <div 
+                className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
+                  theme === 'dark' 
+                    ? 'border-white/20' 
+                    : 'border-[#5c4032]/40'
+                }`}
+                style={{
+                  backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              >
                 {exercises.length > 0 ? (
                   exercises.slice(0, 3).map((exercise, index) => (
                     <div key={index} className="flex-1 min-h-0">

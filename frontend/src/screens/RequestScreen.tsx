@@ -43,11 +43,19 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
         <div className="flex-1 flex flex-col">
           {/* Основной контентный блок с полем запроса внутри */}
           <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px]">
-            <div className={`h-full rounded-2xl border p-6 text-left shadow-[0_6px_28px_rgba(0,0,0,.35)] transition-colors duration-300 ${
-              theme === 'dark' 
-                ? 'border-white/20 bg-[#1a0b2e] text-white' 
-                : 'border-[#5c4032]/50 bg-[#e2d0b6] text-amber-900'
-            }`}>
+            <div 
+              className={`h-full rounded-2xl border p-6 text-left shadow-[0_6px_28px_rgba(0,0,0,.35)] transition-colors duration-300 ${
+                theme === 'dark' 
+                  ? 'border-white/20 text-white' 
+                  : 'border-[#5c4032]/50 text-amber-900'
+              }`}
+              style={{
+                backgroundImage: 'url(/Sorce/windows/external_container.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
               <div className="h-full overflow-y-auto flex flex-col">
                 <h2 className="text-[27px] font-extrabold tracking-tight">{t.request.shadows}</h2>
                 <p className="mt-3 text-[17px] leading-relaxed opacity-95">
@@ -59,11 +67,19 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                 </p>
                 
                 {/* Поле ввода запроса внизу основного блока */}
-                <div className={`mt-auto pt-6 rounded-xl border p-4 transition-colors duration-300 ${
-                  theme === 'dark' 
-                    ? 'border-white/20 bg-[#2d1b4e] text-white' 
-                    : 'border-[#5c4032]/60 bg-[#f7f0e6] text-amber-900'
-                }`}>
+                <div 
+                  className={`mt-auto pt-6 rounded-xl border p-4 transition-colors duration-300 ${
+                    theme === 'dark' 
+                      ? 'border-white/20 text-white' 
+                      : 'border-[#5c4032]/60 text-amber-900'
+                  }`}
+                  style={{
+                    backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                >
                   <label className="mb-2 block text-[27px] font-bold">{t.request.yourRequest}</label>
                   <input
                     value={intent}
