@@ -150,6 +150,7 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onNext}
+              continueDisabled={entry1.trim().length === 0 || entry2.trim().length === 0 || entry3.trim().length === 0}
             />
 
             {/* Панель навигации */}

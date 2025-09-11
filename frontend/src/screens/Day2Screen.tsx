@@ -112,6 +112,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onNext}
+              continueDisabled={reflection.trim().length === 0}
             />
 
             {/* Панель навигации */}

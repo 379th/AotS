@@ -89,6 +89,7 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onNext}
+              continueDisabled={symbol.trim().length === 0 || offering.trim().length === 0}
             />
 
             {/* Панель навигации */}

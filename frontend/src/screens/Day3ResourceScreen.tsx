@@ -265,6 +265,7 @@ export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({
           <BottomButtonPanel
             onBack={onBack}
             onContinue={onNext}
+            continueDisabled={resourceDesc.trim().length === 0}
           />
 
           {/* Панель навигации */}

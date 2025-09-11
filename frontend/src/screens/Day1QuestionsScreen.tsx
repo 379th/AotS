@@ -102,6 +102,7 @@ export const Day1QuestionsScreen: React.FC<Day1QuestionsScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onNext}
+              continueDisabled={q1.trim().length === 0 || q2.trim().length === 0 || q3.trim().length === 0}
             />
 
             {/* Панель навигации */}

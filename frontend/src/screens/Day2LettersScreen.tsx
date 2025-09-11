@@ -86,6 +86,7 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
             <BottomButtonPanel
               onBack={onBack}
               onContinue={onNext}
+              continueDisabled={shadowLetter.trim().length === 0 || adultReply.trim().length === 0}
             />
 
             {/* Панель навигации */}
