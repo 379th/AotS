@@ -57,11 +57,19 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
-            theme === 'dark'
-              ? 'border-amber-900/30'
-              : 'border-amber-900/50'
-          }`}>
+          <div 
+            className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border overflow-hidden transition-colors duration-300 ${
+              theme === 'dark'
+                ? 'border-amber-900/30'
+                : 'border-amber-900/50'
+            }`}
+            style={{
+              backgroundImage: 'url(/Sorce/windows/external_container.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
             <div className="relative w-full h-full overflow-hidden">
               {currentPair && hasCurrentPair ? (
                 <>

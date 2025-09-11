@@ -75,16 +75,32 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
 
         {/* Основной контент */}
         <div className="flex-1 flex flex-col">
-          <div className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
-            theme === 'dark' 
-              ? 'border-white/20 bg-[#1a0b2e]' 
-              : 'border-[#5c4032]/50 bg-[#e2d0b6]'
-          }`}>
-            <div className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
+          <div 
+            className={`mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] h-[70vh] sm:h-[782px] rounded-2xl border p-3 transition-colors duration-300 ${
               theme === 'dark' 
-                ? 'border-white/20 bg-[#2d1b4e]' 
-                : 'border-[#5c4032]/40 bg-[#f7f0e6]'
-            }`}>
+                ? 'border-white/20' 
+                : 'border-[#5c4032]/50'
+            }`}
+            style={{
+              backgroundImage: 'url(/Sorce/windows/external_container.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <div 
+              className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
+                theme === 'dark' 
+                  ? 'border-white/20' 
+                  : 'border-[#5c4032]/40'
+              }`}
+              style={{
+                backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
               
               {!hasCurrentPair ? (
                 <div className={`flex items-center justify-center h-full text-center transition-colors duration-300 ${
