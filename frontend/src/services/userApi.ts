@@ -63,19 +63,44 @@ export class UserApi {
   }
 
   private static getUserId(): string | null {
+    console.log('getUserId: Checking environment...', {
+      hostname: window.location.hostname,
+      isDev: import.meta.env.DEV,
+      hasTelegram: !!window.Telegram?.WebApp,
+      telegramUserId: window.Telegram?.WebApp?.initDataUnsafe?.user?.id
+    });
+    
     // Получаем ID пользователя из Telegram WebApp
     if (window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
-      return window.Telegram.WebApp.initDataUnsafe.user.id.toString();
+      const telegramUserId = window.Telegram.WebApp.initDataUnsafe.user.id.toString();
+      console.log('Using Telegram userId:', telegramUserId);
+      return telegramUserId;
     }
     
     // Fallback только для локальной разработки (не в продакшене)
-    const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+    const isProduction = window.location.hostname !== 'localhost' && 
+                        window.location.hostname !== '127.0.0.1' &&
+                        !window.location.hostname.includes('192.168.') &&
+                        !window.location.hostname.includes('26.84.') &&
+                        !import.meta.env.DEV;
+    
+    console.log('isProduction check:', {
+      hostname: window.location.hostname,
+      isLocalhost: window.location.hostname === 'localhost',
+      is127: window.location.hostname === '127.0.0.1',
+      has192: window.location.hostname.includes('192.168.'),
+      has26: window.location.hostname.includes('26.84.'),
+      isDev: import.meta.env.DEV,
+      isProduction
+    });
+    
     if (!isProduction) {
       let userId = localStorage.getItem('shadow_quest_user_id');
       if (!userId) {
         userId = `dev_user_${Date.now()}`;
         localStorage.setItem('shadow_quest_user_id', userId);
       }
+      console.log('Using fallback userId for development:', userId);
       return userId;
     }
     
