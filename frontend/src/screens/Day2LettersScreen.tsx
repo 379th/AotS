@@ -64,7 +64,7 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
               <div className="flex-1 min-h-0 p-4">
                 <div className={`text-[27px] font-medium mb-3 transition-colors duration-300 ${
                   theme === 'dark' ? 'text-white' : 'text-amber-900'
-                }`}>Ответь на него от лица взрослого тебя. Заверши фразой: «Я вижу тебя. Я готов быть с тобой».</div>
+                }`}>Ответь на него от лица взрослого тебя. Заверши фразой: «Я вижу тебя. Я готов стать целостным».</div>
                 <textarea
                   value={adultReply}
                   onChange={(e) => setAdultReply(e.target.value)}
