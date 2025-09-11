@@ -177,12 +177,18 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             <div className={`text-[27px] font-bold mb-2 transition-colors duration-300 ${
                               theme === 'dark' ? 'text-white' : 'text-amber-900'
             }`}>
-              Время для интеграции
+              {dayNumber === 1 ? 'Отдохни и подготовься' : 
+               dayNumber === 2 ? 'Отдохни и дай время для интеграции опыта' :
+               dayNumber === 3 ? 'Практикуй осознанность и медитацию' :
+               'Время для интеграции'}
             </div>
             <div className={`text-[17px] transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/80' : 'text-amber-900/70'
             }`}>
-              День {dayNumber} завершен. Отдохните и подготовьтесь к следующему дню.
+              День {dayNumber} завершен. {dayNumber === 1 ? 'Отдохните и подготовьтесь к следующему дню.' : 
+                                        dayNumber === 2 ? 'Дайте время для интеграции опыта.' :
+                                        dayNumber === 3 ? 'Практикуйте осознанность и медитацию.' :
+                                        'Подготовьтесь к завершению квеста.'}
             </div>
             {isTestMode && (
               <div className={`text-[15px] font-semibold mt-2 px-3 py-1 rounded-full inline-block transition-colors duration-300 ${
@@ -239,10 +245,35 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             <ul className={`text-[17px] space-y-2 list-disc list-inside transition-colors duration-300 ${
               theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
             }`}>
-              <li>Отдохните и дайте время для интеграции опыта</li>
-              <li>Практикуйте осознанность и медитацию</li>
-              <li>Записывайте свои мысли и чувства</li>
-              <li>Поддерживайте связь с природой</li>
+              {dayNumber === 1 ? (
+                <>
+                  <li>Отдохните и подготовьтесь</li>
+                  <li>Практикуйте осознанность и медитацию</li>
+                  <li>Записывайте свои мысли и чувства</li>
+                  <li>Поддерживайте связь с природой</li>
+                </>
+              ) : dayNumber === 2 ? (
+                <>
+                  <li>Отдохните и дай время для интеграции опыта</li>
+                  <li>Практикуйте осознанность и медитацию</li>
+                  <li>Записывайте свои мысли и чувства</li>
+                  <li>Поддерживайте связь с природой</li>
+                </>
+              ) : dayNumber === 3 ? (
+                <>
+                  <li>Практикуй осознанность и медитацию</li>
+                  <li>Записывай свои мысли и чувства</li>
+                  <li>Поддерживай связь с природой</li>
+                  <li>Отдохни и подготовься к завершению</li>
+                </>
+              ) : (
+                <>
+                  <li>Отдохните и дайте время для интеграции опыта</li>
+                  <li>Практикуйте осознанность и медитацию</li>
+                  <li>Записывайте свои мысли и чувства</li>
+                  <li>Поддерживайте связь с природой</li>
+                </>
+              )}
             </ul>
           </div>
 
