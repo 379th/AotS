@@ -15,6 +15,10 @@ echo "📁 Copying frontend build to backend..."
 rm -rf public
 cp -r ../frontend/dist public
 
+# Копируем папку Sorce с ресурсами
+echo "📁 Copying Sorce resources..."
+cp -r ../frontend/public/Sorce public/
+
 # Устанавливаем зависимости backend
 echo "📦 Installing backend dependencies..."
 npm install
