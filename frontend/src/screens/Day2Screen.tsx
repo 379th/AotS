@@ -56,11 +56,11 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                   theme === 'dark' ? 'text-white/80' : 'text-amber-900/80'
                 }`}>
                   <p>
-                    Сегодня мы углубимся в исследование вашей тени. 
-                    Какие качества вы обычно скрываете от других?
+                    Сегодня углубись в исследование своей тени. 
+                    Какие качества ты обычно скрываешь от себя и других?
                   </p>
                   <p>
-                    Подумайте о моментах, когда вы чувствовали стыд, 
+                    Подумай о моментах, когда ты чувствовал(а) стыд, 
                     гнев или другие &quot;негативные&quot; эмоции.
                   </p>
                 </div>
@@ -70,7 +70,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                   <label className={`block text-[27px] font-bold mb-2 transition-colors duration-300 ${
                     theme === 'dark' ? 'text-white' : 'text-amber-900'
                   }`}>
-                    Ваши размышления:
+                    Размышления:
                   </label>
                   <textarea
                     value={reflection}
@@ -96,10 +96,10 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                   <ul className={`text-[17px] space-y-1 transition-colors duration-300 ${
                     theme === 'dark' ? 'text-white/70' : 'text-amber-900/70'
                   }`}>
-                    <li>• Что вызывает у вас стыд?</li>
-                    <li>• Какие качества вы считаете &quot;плохими&quot;?</li>
-                    <li>• Что вы скрываете от других?</li>
-                    <li>• Как ваша тень защищает вас?</li>
+                    <li>• Что вызывает у тебя &quot;негативные&quot; эмоции?</li>
+                    <li>• Какие качества ты считаешь &quot;плохими&quot;?</li>
+                    <li>• Что ты скрываешь от других?</li>
+                    <li>• Как твоя тень защищает тебя?</li>
                   </ul>
                 </div>
               </div>
