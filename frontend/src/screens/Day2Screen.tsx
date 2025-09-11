@@ -75,7 +75,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                   <textarea
                     value={reflection}
                     onChange={(e) => setReflection(e.target.value)}
-                    placeholder="Запишите свои мысли о встрече с тенью..."
+                    placeholder="Запиши свои мысли о встрече с тенью..."
                     className={`w-full h-24 px-3 py-2 text-[15px] border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-200 ${
                       theme === 'dark' 
                         ? 'bg-white/10 border-white/20 text-white placeholder-white/50' 
