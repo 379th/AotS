@@ -51,7 +51,9 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
                 : 'border-[#5c4032]/50'
             }`}
         style={{
-          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundImage: theme === 'dark' 
+            ? 'linear-gradient(135deg, rgba(45, 55, 45, 0.8) 0%, rgba(35, 45, 35, 0.9) 100%)' 
+            : 'url(/Sorce/windows/external_container.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -93,7 +95,9 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
                     : 'border-[#5c4032]/40'
                 }`}
           style={{
-            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+            backgroundImage: theme === 'dark' 
+              ? 'linear-gradient(135deg, rgba(30, 40, 30, 0.9) 0%, rgba(20, 30, 20, 0.95) 100%)' 
+              : 'url(/Sorce/windows/internal_container.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'

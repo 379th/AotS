@@ -80,7 +80,9 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                 : 'border-[#5c4032]/60 text-amber-900'
             }`}
         style={{
-          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundImage: theme === 'dark' 
+            ? 'linear-gradient(135deg, rgba(45, 55, 45, 0.8) 0%, rgba(35, 45, 35, 0.9) 100%)' 
+            : 'url(/Sorce/windows/external_container.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
