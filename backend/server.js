@@ -67,10 +67,14 @@ app.use(cors({
 if (!isDevelopment) {
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
+    max: 1000, // limit each IP to 1000 requests per windowMs (увеличено с 100)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    trustProxy: true // Trust the proxy for IP detection
+    trustProxy: true, // Trust the proxy for IP detection
+    message: {
+      error: 'Слишком много запросов, попробуйте позже',
+      retryAfter: '15 минут'
+    }
   });
   app.use(limiter);
   console.log('🔒 Rate limiting включен для продакшена');
@@ -79,6 +83,23 @@ if (!isDevelopment) {
 }
 
 app.use(express.json());
+
+// Более мягкий rate limiting для API endpoints
+if (!isDevelopment) {
+  const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 2000, // limit each IP to 2000 API requests per windowMs
+    standardHeaders: true,
+    legacyHeaders: false,
+    trustProxy: true,
+    message: {
+      error: 'Слишком много API запросов, попробуйте позже',
+      retryAfter: '15 минут'
+    }
+  });
+  app.use('/api', apiLimiter);
+  console.log('🔒 API Rate limiting включен для продакшена');
+}
 
 // Database connection (PostgreSQL or MySQL based on DATABASE_URL)
 let pool = null;
