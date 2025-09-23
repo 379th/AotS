@@ -39,12 +39,12 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
                 ? 'border-white/20 text-white' 
                 : 'border-[#5c4032]/60 text-amber-900'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             <div className="h-full min-h-0 w-full overflow-auto space-y-4">
               <div 
@@ -53,12 +53,12 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
                     ? 'border-white/20 text-white' 
                     : 'border-[#5c4032]/40'
                 }`}
-                style={{
-                  backgroundImage: 'url(/Sorce/windows/internal_container.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
+            style={{
+              backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
               >
                 <label className={`mb-1 block text-[27px] font-bold transition-colors duration-300 ${
                   theme === 'dark' ? 'text-white' : 'text-amber-900'
@@ -81,12 +81,12 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
                     ? 'border-white/20 text-white' 
                     : 'border-[#5c4032]/40'
                 }`}
-                style={{
-                  backgroundImage: 'url(/Sorce/windows/internal_container.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
+            style={{
+              backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
               >
                 <label className={`mb-1 block text-[27px] font-bold transition-colors duration-300 ${
                   theme === 'dark' ? 'text-white' : 'text-amber-900'

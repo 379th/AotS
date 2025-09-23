@@ -41,12 +41,12 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
                 ? 'border-white/20' 
                 : 'border-[#5c4032]/50'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             <div 
               className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
@@ -54,12 +54,12 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
                   ? 'border-white/20' 
                   : 'border-[#5c4032]/40'
               }`}
-              style={{
-                backgroundImage: 'url(/Sorce/windows/internal_container.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
+          style={{
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
             >
               <div className="flex-1 min-h-0">
                 <div className={`text-[27px] font-medium mb-3 transition-colors duration-300 ${

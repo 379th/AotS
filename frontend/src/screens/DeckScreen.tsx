@@ -79,12 +79,12 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
                 ? 'border-white/20 text-white' 
                 : 'border-[#5c4032]/60 text-amber-900'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             {/* Информация о странице */}
             <div className="mb-3 text-center">

@@ -22,7 +22,7 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
             : 'border-[#5c4032]/50'
         }`}
         style={{
-          backgroundImage: 'url(/Sorce/windows/external_container.png)',
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -35,7 +35,7 @@ export const GuidanceScreen: React.FC<GuidanceScreenProps> = ({ onBackToHome }) 
               : 'border-[#5c4032]/40 text-amber-900'
           }`}
           style={{
-            backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'

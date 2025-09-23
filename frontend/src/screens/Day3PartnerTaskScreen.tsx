@@ -50,12 +50,12 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
                 ? 'border-white/20' 
                 : 'border-[#5c4032]/50'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             {/* Состояние загрузки */}
             {loading && (
@@ -92,12 +92,12 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
                     ? 'border-white/20' 
                     : 'border-[#5c4032]/40'
                 }`}
-                style={{
-                  backgroundImage: 'url(/Sorce/windows/internal_container.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
+          style={{
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
               >
                 {exercises.length > 0 ? (
                   exercises.slice(0, 3).map((exercise, index) => (

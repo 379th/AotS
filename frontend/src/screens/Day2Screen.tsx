@@ -40,12 +40,12 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                 ? 'border-white/20'
                 : 'border-[#5c4032]/50'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             <div 
               className={`h-full overflow-y-auto rounded-xl border space-y-6 transition-colors duration-300 ${
@@ -53,12 +53,12 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
                   ? 'border-white/20'
                   : 'border-[#5c4032]/40'
               }`}
-              style={{
-                backgroundImage: 'url(/Sorce/windows/internal_container.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
+          style={{
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
             >
               
               <div className="flex-1 min-h-0 p-4">

@@ -168,7 +168,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
             : 'border-[#5c4032]/50'
         }`}
         style={{
-          backgroundImage: 'url(/Sorce/windows/external_container.png)',
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -181,7 +181,7 @@ export const TimerScreen: React.FC<TimerScreenProps> = ({
               : 'border-[#5c4032]/40'
           }`}
           style={{
-            backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'

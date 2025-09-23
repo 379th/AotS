@@ -49,12 +49,12 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                   ? 'border-white/20 text-white' 
                   : 'border-[#5c4032]/50 text-amber-900'
               }`}
-              style={{
-                backgroundImage: 'url(/Sorce/windows/external_container.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
             >
               <div className="h-full overflow-y-auto flex flex-col">
                 <h2 className="text-[27px] font-extrabold tracking-tight">{t.request.shadows}</h2>
@@ -73,12 +73,12 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
                       ? 'border-white/20 text-white' 
                       : 'border-[#5c4032]/60 text-amber-900'
                   }`}
-                  style={{
-                    backgroundImage: 'url(/Sorce/windows/internal_container.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                  }}
+          style={{
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
                 >
                   <label className="mb-2 block text-[27px] font-bold">{t.request.yourRequest}</label>
                   <input

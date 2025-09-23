@@ -45,7 +45,7 @@ export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({
             : 'border-[#5c4032]/50'
         }`}
         style={{
-          backgroundImage: 'url(/Sorce/windows/external_container.png)',
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -58,7 +58,7 @@ export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({
               : 'border-[#5c4032]/40'
           }`}
           style={{
-            backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+            backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'

@@ -81,12 +81,12 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                 ? 'border-white/20' 
                 : 'border-[#5c4032]/50'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             <div 
               className={`h-full overflow-y-auto rounded-xl border p-4 space-y-6 transition-colors duration-300 ${
@@ -95,7 +95,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
                   : 'border-[#5c4032]/40'
               }`}
               style={{
-                backgroundImage: 'url(/Sorce/windows/internal_container.png)',
+                backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/internal_container.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'

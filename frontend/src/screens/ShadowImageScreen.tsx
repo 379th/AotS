@@ -63,12 +63,12 @@ export const ShadowImageScreen: React.FC<ShadowImageScreenProps> = ({
                 ? 'border-amber-900/30'
                 : 'border-amber-900/50'
             }`}
-            style={{
-              backgroundImage: 'url(/Sorce/windows/external_container.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
+        style={{
+          backgroundImage: theme === 'dark' ? 'none' : 'url(/Sorce/windows/external_container.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
           >
             <div className="relative w-full h-full overflow-hidden">
               {currentPair && hasCurrentPair ? (
