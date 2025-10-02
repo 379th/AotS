@@ -9,6 +9,7 @@ interface Day4IntegrationScreenProps {
   onNext: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -18,6 +19,7 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
   onNext,
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -117,6 +119,7 @@ export const Day4IntegrationScreen: React.FC<Day4IntegrationScreenProps> = ({
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
                 onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

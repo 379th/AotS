@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { ScreenFrame, TitleBar } from '../components/ui';
 import { useTheme } from '../contexts/ThemeContext';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
@@ -53,16 +53,45 @@ export const CompletionScreen: React.FC<CompletionScreenProps> = ({
         >
           Круг пройден. Сохрани свои ответы в дневнике. Если хочешь, вернись к любому дню и дополни.
         </div>
-        <div className="mt-3 space-y-2">
-          <Pill onClick={onOpenProgress} className="w-full">
-            Прогресс
-          </Pill>
-          <Pill onClick={onOpenJournal} className="w-full">
-            Дневник
-          </Pill>
-          <Pill onClick={onNext} className="w-full">
-            К напутствию
-          </Pill>
+        <div className="mt-3 space-y-2 flex flex-col items-center">
+          {/* Прогресс и Дневник на одной линии */}
+          <div className="flex gap-3">
+            <button 
+              onClick={onOpenProgress} 
+              className="transition-transform active:scale-95 hover:scale-105"
+              style={{ width: '160px' }}
+            >
+              <img 
+                src="/Sorce/buttons/Progress.png" 
+                alt="Прогресс" 
+                className="w-full h-auto"
+              />
+            </button>
+            <button 
+              onClick={onOpenJournal} 
+              className="transition-transform active:scale-95 hover:scale-105"
+              style={{ width: '160px' }}
+            >
+              <img 
+                src="/Sorce/buttons/Daiary_01.png" 
+                alt="Дневник" 
+                className="w-full h-auto"
+              />
+            </button>
+          </div>
+          
+          {/* Кнопка "К напутствию" отдельно */}
+          <button 
+            onClick={onNext} 
+            className="transition-transform active:scale-95 hover:scale-105"
+            style={{ width: '160px' }}
+          >
+            <img 
+              src="/Sorce/buttons/Botton_to.png" 
+              alt="К напутствию" 
+              className="w-full h-auto"
+            />
+          </button>
         </div>
       </div>
     </ScreenFrame>

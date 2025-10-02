@@ -11,6 +11,7 @@ interface RequestScreenProps {
   onNext: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -20,6 +21,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
   onNext,
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -119,6 +121,7 @@ export const RequestScreen: React.FC<RequestScreenProps> = ({
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
                 onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

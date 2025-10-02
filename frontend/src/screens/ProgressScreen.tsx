@@ -135,10 +135,22 @@ export const ProgressScreen: React.FC<ProgressScreenProps> = ({
           </div>
 
           {/* Кнопка назад */}
-          <div className="mt-6">
-            <Pill onClick={onBack} className="w-full">
-              Назад
-            </Pill>
+          <div className="mt-6 flex justify-center">
+            <button 
+              onClick={onBack}
+              className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
+              style={{
+                backgroundImage: 'url(/Sorce/buttons/Back.png)',
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                width: '120px',
+                height: '60px',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+            </button>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ interface Day2EchoScreenProps {
   onNext: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -17,6 +18,7 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
   onNext,
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -56,6 +58,7 @@ export const Day2EchoScreen: React.FC<Day2EchoScreenProps> = ({
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
                 onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

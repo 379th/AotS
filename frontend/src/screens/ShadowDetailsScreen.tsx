@@ -10,6 +10,7 @@ interface ShadowDetailsScreenProps {
   onNext: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -19,6 +20,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
   onNext,
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -307,6 +309,7 @@ export const ShadowDetailsScreen: React.FC<ShadowDetailsScreenProps> = ({
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
                 onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Send } from 'lucide-react';
-import { ScreenFrame, TitleBar, Pill } from '../components/ui';
+import { ScreenFrame, TitleBar } from '../components/ui';
 import { openTelegramLink } from '../utils/telegram';
 import { useTranslation } from '../i18n';
 import { useTheme } from '../contexts/ThemeContext';
@@ -99,11 +98,21 @@ export const CreatorScreen: React.FC<CreatorScreenProps> = ({ onBack }) => {
       </div>
       
       <div className="mx-auto mt-3 w-full max-w-[90vw] sm:max-w-[521px] px-2 sm:px-0 flex items-center justify-between mb-4">
-        <Pill onClick={() => openTelegramLink('https://t.me/SantoshaClub')}>
-          <span className="inline-flex items-center gap-2">
-            <Send className="h-4 w-4"/> @SantoshaClub
-          </span>
-        </Pill>
+        <button 
+          onClick={() => openTelegramLink('https://t.me/SantoshaClub')}
+          className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"
+          style={{
+            backgroundImage: 'url(/Sorce/buttons/Telega_botton.png)',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            width: '160px',
+            height: '60px',
+            border: 'none',
+            cursor: 'pointer'
+          }}
+        >
+        </button>
         <button 
           onClick={onBack}
           className="inline-flex items-center justify-center transition-transform active:scale-95 hover:scale-105"

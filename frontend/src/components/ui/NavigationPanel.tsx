@@ -5,6 +5,7 @@ import { closeTelegramApp } from '../../utils/telegram';
 interface NavigationPanelProps {
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -12,6 +13,7 @@ interface NavigationPanelProps {
 export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -36,9 +38,12 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
           />
           <RoundButton 
             label="" 
-            imageSrc="/Sorce/navigation_panel/02_Quest.png" 
+            imageSrc="/Sorce/navigation_panel/02_Progress.png" 
             tone="teal" 
-            onClick={onGoDay1} 
+            onClick={() => {
+              console.log('Кнопка Прогресс нажата!');
+              onOpenProgress();
+            }} 
           />
           <RoundButton 
             label="" 

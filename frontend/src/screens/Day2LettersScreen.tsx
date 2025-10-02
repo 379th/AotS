@@ -9,6 +9,7 @@ interface Day2LettersScreenProps {
   onNext: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -18,6 +19,7 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
   onNext,
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -114,6 +116,7 @@ export const Day2LettersScreen: React.FC<Day2LettersScreenProps> = ({
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
                 onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

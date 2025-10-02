@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../components/ui';
 import { CardModal } from '../components/ui/CardModal';
 import { useDeckCards } from '../hooks/useDeckCards';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
@@ -10,6 +9,7 @@ interface DeckScreenProps {
   onBack: () => void;
   onAboutQuest: () => void;
   onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -18,6 +18,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
   onBack,
   onAboutQuest,
   onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -199,14 +200,14 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
               <button 
                 onClick={goToPreviousPage}
                 disabled={currentPage === 0}
-                className={`flex items-center justify-center gap-1 rounded-xl border px-2 sm:px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
-                  theme === 'dark' 
-                    ? 'border-white/20 bg-white/70 text-white'
-                    : 'border-[#5c4032]/50 bg-white/90 text-amber-900'
-                }`}
+                className="transition-transform active:scale-95 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ width: '120px' }}
               >
-                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm font-semibold">Назад</span>
+                <img 
+                  src="/Sorce/buttons/Back_deck.png" 
+                  alt="Назад" 
+                  className="w-full h-auto"
+                />
               </button>
               
               <div className="flex gap-1">
@@ -241,14 +242,14 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
               <button 
                 onClick={goToNextPage}
                 disabled={currentPage === totalPages - 1}
-                className={`flex items-center justify-center gap-1 rounded-xl border px-2 sm:px-3 py-2 backdrop-blur-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-colors duration-300 ${
-                  theme === 'dark' 
-                    ? 'border-white/20 bg-white/70 text-white' 
-                    : 'border-[#5c4032]/40 bg-white/70 text-amber-900'
-                }`}
+                className="transition-transform active:scale-95 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ width: '120px' }}
               >
-                <span className="text-xs sm:text-sm font-semibold">Вперед</span>
-                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
+                <img 
+                  src="/Sorce/buttons/Forvard_deck.png" 
+                  alt="Вперед" 
+                  className="w-full h-auto"
+                />
               </button>
             </div>
           </div>
@@ -267,6 +268,7 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
                 onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

@@ -15,7 +15,7 @@ export const EXTERNAL_ASSETS = {
     
     // Иконки для RoundButton
     TRAINING_ICON: '/images/navigation panel/01_Learning.png',
-    QUEST_ICON: '/images/navigation panel/02_Quest.png',
+    QUEST_ICON: '/images/navigation panel/02_Progress.png',
     DECK_ICON: '/images/navigation panel/04_Deck.png',
     JOURNAL_ICON: '/images/navigation panel/03_Diary.png',
     EXIT_ICON: '/images/navigation panel/05_Exit.png',
