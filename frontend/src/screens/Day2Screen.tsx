@@ -8,7 +8,7 @@ interface Day2ScreenProps {
   onNext: () => void;
   onBack: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -17,7 +17,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
   onNext,
   onBack,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -139,7 +139,7 @@ export const Day2Screen: React.FC<Day2ScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

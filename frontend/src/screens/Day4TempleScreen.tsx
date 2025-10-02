@@ -3,20 +3,20 @@ import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../co
 import { useTheme } from '../contexts/ThemeContext';
 import { getImageUrl, EXTERNAL_ASSETS } from '../config/externalAssets';
 
-interface Day4TempleScreenProps {
+interface Day4TempleProps {
   onBack: () => void;
   onNext: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
 
-export const Day4TempleScreen: React.FC<Day4TempleScreenProps> = ({ 
-  onBack, 
+export const Day4TempleScreen: React.FC<Day4TempleProps> = ({
+  onBack,
   onNext,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -55,7 +55,7 @@ export const Day4TempleScreen: React.FC<Day4TempleScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

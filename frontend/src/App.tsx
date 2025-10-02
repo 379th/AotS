@@ -148,7 +148,6 @@ function App() {
               onBack={() => navigateTo("intro")}
               onNext={() => startTimerAndContinue(1, "day1")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
               onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -164,7 +163,10 @@ function App() {
               onBackToRequest={() => navigateTo("request")}
               onAccept={() => navigateTo("shadowImage")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
+              onOpenProgress={() => {
+                console.log('Переход на страницу прогресса');
+                navigateTo("progress");
+              }}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -176,7 +178,10 @@ function App() {
               onBackToDay1={() => navigateTo("day1")}
               onContinue={() => navigateTo("shadowDetails")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
+              onOpenProgress={() => {
+                console.log('Переход на страницу прогресса');
+                navigateTo("progress");
+              }}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -188,7 +193,6 @@ function App() {
               onBack={() => navigateTo("shadowImage")}
               onNext={() => navigateTo("day1Questions")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
               onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -207,7 +211,6 @@ function App() {
                 navigateTo("timer1");
               }}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
               onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -233,7 +236,6 @@ function App() {
               onBack={() => navigateTo("timer1")}
               onNext={() => startTimerAndContinue(2, "day2Screen")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
               onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -249,7 +251,10 @@ function App() {
               onBack={() => navigateTo("day2")}
               onNext={() => navigateTo("day2Letters")}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
+              onOpenProgress={() => {
+                console.log('Переход на страницу прогресса');
+                navigateTo("progress");
+              }}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -264,7 +269,6 @@ function App() {
                  navigateTo("timer2");
                }}
                onAboutQuest={() => navigateTo("quest")}
-               onGoDay1={() => navigateTo("progress")}
                onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -286,14 +290,17 @@ function App() {
 
       case "day3Mirror":
         return (
-          <Day3MirrorScreen
-            onBack={() => navigateTo("timer2")}
-            onNext={() => startTimerAndContinue(3, "archetype")}
-            onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("progress")}
-            onOpenDeck={() => navigateTo("deck")}
-            onOpenJournal={() => navigateTo("journal")}
-          />
+            <Day3MirrorScreen
+              onBack={() => navigateTo("timer2")}
+              onNext={() => startTimerAndContinue(3, "archetype")}
+              onAboutQuest={() => navigateTo("quest")}
+              onOpenProgress={() => {
+                console.log('Переход на страницу прогресса');
+                navigateTo("progress");
+              }}
+              onOpenDeck={() => navigateTo("deck")}
+              onOpenJournal={() => navigateTo("journal")}
+            />
         );
 
       case "archetype":
@@ -302,7 +309,10 @@ function App() {
             onBack={() => navigateTo("day3Mirror")}
             onNext={() => navigateTo("day3Resource")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("progress")}
+            onOpenProgress={() => {
+              console.log('Переход на страницу прогресса');
+              navigateTo("progress");
+            }}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -314,7 +324,10 @@ function App() {
             onBack={() => navigateTo("archetype")}
             onNext={() => navigateTo("day3PartnerTask")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("progress")}
+            onOpenProgress={() => {
+              console.log('Переход на страницу прогресса');
+              navigateTo("progress");
+            }}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -329,7 +342,10 @@ function App() {
                 navigateTo("timer3");
               }}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
+              onOpenProgress={() => {
+                console.log('Переход на страницу прогресса');
+                navigateTo("progress");
+              }}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />
@@ -351,7 +367,10 @@ function App() {
             onBack={() => navigateTo("timer3")}
             onNext={() => navigateTo("day4Integration")}
             onAboutQuest={() => navigateTo("quest")}
-            onGoDay1={() => navigateTo("progress")}
+            onOpenProgress={() => {
+              console.log('Переход на страницу прогресса');
+              navigateTo("progress");
+            }}
             onOpenDeck={() => navigateTo("deck")}
             onOpenJournal={() => navigateTo("journal")}
           />
@@ -366,7 +385,6 @@ function App() {
                 navigateTo("completion");
               }}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
               onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -420,7 +438,6 @@ function App() {
             <DeckScreen 
               onBack={goBack}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
               onOpenProgress={() => {
                 console.log('Переход на страницу прогресса');
                 navigateTo("progress");
@@ -435,7 +452,10 @@ function App() {
             <JournalScreen 
               onBack={goBack}
               onAboutQuest={() => navigateTo("quest")}
-              onGoDay1={() => navigateTo("progress")}
+              onOpenProgress={() => {
+                console.log('Переход на страницу прогресса');
+                navigateTo("progress");
+              }}
               onOpenDeck={() => navigateTo("deck")}
               onOpenJournal={() => navigateTo("journal")}
             />

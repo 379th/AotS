@@ -8,7 +8,6 @@ import { EXTERNAL_ASSETS } from '../config/externalAssets';
 interface DeckScreenProps {
   onBack: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
   onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
@@ -17,7 +16,6 @@ interface DeckScreenProps {
 export const DeckScreen: React.FC<DeckScreenProps> = ({ 
   onBack,
   onAboutQuest,
-  onGoDay1,
   onOpenProgress,
   onOpenDeck,
   onOpenJournal
@@ -267,7 +265,6 @@ export const DeckScreen: React.FC<DeckScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
                 onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}

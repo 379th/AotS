@@ -3,20 +3,20 @@ import { ScreenFrame, TitleBar, NavigationPanel, BottomButtonPanel } from '../co
 import { useTheme } from '../contexts/ThemeContext';
 import { getImageUrl, EXTERNAL_ASSETS } from '../config/externalAssets';
 
-interface Day3MirrorScreenProps {
+interface Day3MirrorProps {
   onBack: () => void;
   onNext: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
 
-export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({ 
-  onBack, 
+export const Day3MirrorScreen: React.FC<Day3MirrorProps> = ({
+  onBack,
   onNext,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -56,7 +56,7 @@ export const Day3MirrorScreen: React.FC<Day3MirrorScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

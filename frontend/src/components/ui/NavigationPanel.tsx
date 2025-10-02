@@ -4,7 +4,6 @@ import { closeTelegramApp } from '../../utils/telegram';
 
 interface NavigationPanelProps {
   onAboutQuest: () => void;
-  onGoDay1: () => void;
   onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
@@ -12,7 +11,6 @@ interface NavigationPanelProps {
 
 export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   onAboutQuest,
-  onGoDay1,
   onOpenProgress,
   onOpenDeck,
   onOpenJournal

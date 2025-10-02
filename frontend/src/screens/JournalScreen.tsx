@@ -7,7 +7,7 @@ import { EXTERNAL_ASSETS } from '../config/externalAssets';
 interface JournalScreenProps {
   onBack: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -15,7 +15,7 @@ interface JournalScreenProps {
 export const JournalScreen: React.FC<JournalScreenProps> = ({ 
   onBack,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -124,7 +124,7 @@ export const JournalScreen: React.FC<JournalScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

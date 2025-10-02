@@ -8,7 +8,7 @@ interface ArchetypeScreenProps {
   onBack: () => void;
   onNext: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
@@ -17,7 +17,7 @@ export const ArchetypeScreen: React.FC<ArchetypeScreenProps> = ({
   onBack, 
   onNext,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -96,7 +96,7 @@ export const ArchetypeScreen: React.FC<ArchetypeScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />

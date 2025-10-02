@@ -5,20 +5,20 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useArchetypeResource } from '../hooks/useArchetypeResource';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 
-interface Day3ResourceScreenProps {
+interface Day3ResourceProps {
   onBack: () => void;
   onNext: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
 
-export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({ 
-  onBack, 
+export const Day3ResourceScreen: React.FC<Day3ResourceProps> = ({
+  onBack,
   onNext,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -301,11 +301,11 @@ export const Day3ResourceScreen: React.FC<Day3ResourceScreenProps> = ({
           {/* Панель навигации */}
             <div className="mt-0.5">
           <NavigationPanel
-            onAboutQuest={onAboutQuest}
-            onGoDay1={onGoDay1}
-            onOpenDeck={onOpenDeck}
-            onOpenJournal={onOpenJournal}
-          />
+                onAboutQuest={onAboutQuest}
+                onOpenProgress={onOpenProgress}
+                onOpenDeck={onOpenDeck}
+                onOpenJournal={onOpenJournal}
+              />
             </div>
           </div>
         </div>

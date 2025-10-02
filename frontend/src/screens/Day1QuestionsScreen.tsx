@@ -8,7 +8,6 @@ interface Day1QuestionsScreenProps {
   onBack: () => void;
   onNext: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
   onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
@@ -18,7 +17,6 @@ export const Day1QuestionsScreen: React.FC<Day1QuestionsScreenProps> = ({
   onBack, 
   onNext,
   onAboutQuest,
-  onGoDay1,
   onOpenProgress,
   onOpenDeck,
   onOpenJournal
@@ -131,7 +129,6 @@ export const Day1QuestionsScreen: React.FC<Day1QuestionsScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
                 onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}

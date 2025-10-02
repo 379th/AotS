@@ -6,20 +6,20 @@ import { useCurrentPair } from '../hooks/useCurrentPair';
 import { EXTERNAL_ASSETS } from '../config/externalAssets';
 import { testCardsData } from '../utils/testCardsData';
 
-interface Day3PartnerTaskScreenProps {
+interface Day3PartnerTaskProps {
   onBack: () => void;
   onNext: () => void;
   onAboutQuest: () => void;
-  onGoDay1: () => void;
+  onOpenProgress: () => void;
   onOpenDeck: () => void;
   onOpenJournal: () => void;
 }
 
-export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({ 
-  onBack, 
+export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskProps> = ({
+  onBack,
   onNext,
   onAboutQuest,
-  onGoDay1,
+  onOpenProgress,
   onOpenDeck,
   onOpenJournal
 }) => {
@@ -177,7 +177,7 @@ export const Day3PartnerTaskScreen: React.FC<Day3PartnerTaskScreenProps> = ({
             <div className="mt-0.5">
               <NavigationPanel
                 onAboutQuest={onAboutQuest}
-                onGoDay1={onGoDay1}
+                onOpenProgress={onOpenProgress}
                 onOpenDeck={onOpenDeck}
                 onOpenJournal={onOpenJournal}
               />
